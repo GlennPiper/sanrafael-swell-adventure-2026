@@ -16,7 +16,6 @@ The trip companion is a small offline web app -- install it on your phone once
 on cell signal and it works in the Swell with no internet.
 
 **Site:** https://glennpiper.github.io/sanrafael-swell-adventure-2026/
-*(replace with your final Pages URL once the repo is created and deployed)*
 
 **Scan to install:** see `assets/qr.png` after the first deploy generates it
 (the landing page also displays the QR).
