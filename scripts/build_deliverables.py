@@ -360,7 +360,10 @@ def poi_row(p, day_id=None, allow_focus=False, scheduled=False, idx=0, day_mph=2
         f'data-status="{esc(p["status"])}" '
         f'data-default-checked="{str(default_checked).lower()}" '
         f'data-default-duration="{default_min}">'
-        f'<td class="num td-include" data-label="Include"><input type="checkbox" class="poi-include"{checked_attr}></td>'
+        f'<td class="num td-include" data-label="Include">'
+        f'<label class="poi-include-wrap" aria-label="Include this stop">'
+        f'<input type="checkbox" class="poi-include"{checked_attr}>'
+        f'</label></td>'
         f'<td class="num" data-label="Mile">{p["mile"]:.1f}</td>'
         f'<td class="td-name" data-label="Name">{name_html}{spur_hint}</td>'
         f'<td data-label="Status">{badge_html(p["status"])}</td>'
@@ -624,7 +627,11 @@ a.focus-map:hover{color:var(--accent);text-decoration:none}
 .sched-summary{font-size:13px;color:var(--text)}
 .sched-summary strong{color:var(--accent)}
 .sched-hint{margin-top:6px;font-size:11.5px;line-height:1.4}
-input.poi-include{transform:scale(1.15);cursor:pointer}
+/* Default (desktop) checkbox styling. The wrapping <label> is rendered
+   inline-flex so the tap area equals the visible checkbox; mobile gets
+   a much larger touch target via the @media block below. */
+label.poi-include-wrap{display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+input.poi-include{transform:scale(1.15);cursor:pointer;margin:0}
 input.poi-duration{width:56px;background:#1b1f23;color:var(--text);border:1px solid var(--border);
   border-radius:4px;padding:2px 4px;font:inherit;font-size:12px;text-align:right}
 td.poi-eta strong{color:var(--accent)}
@@ -715,11 +722,22 @@ tr.skipped-row .spur-hint::before{content:"[Saving] "}
     margin:0 0 6px;padding-right:52px /* reserve space for .td-include float */ }
   table.stops-table td.td-name::before{display:none}
   table.stops-table td.td-name .focus-map{color:var(--text)}
-  /* Checkbox floats to top-right corner of the card for easy thumb reach. */
-  table.stops-table td.td-include{position:absolute;top:10px;right:12px;
-    width:auto;padding:0;margin:0}
+  /* Checkbox floats to top-right corner of the card for easy thumb reach.
+     The cell carries explicit 44x44 dimensions (Apple HIG / Material
+     touch-target minimum) and the input lives inside a <label> that fills
+     the cell, so tapping anywhere in the corner toggles the checkbox.
+     z-index keeps it above any sibling that gets opacity:0.45 (which on
+     iOS Safari can promote a new stacking context that occludes
+     absolutely-positioned siblings). No transform-scale here -- iOS
+     Safari can mis-size the tap hit-box vs. the visual when transform
+     is combined with width:auto + position:absolute. Explicit width on
+     the input keeps the hit-box honest. */
+  table.stops-table td.td-include{position:absolute;top:0;right:0;
+    width:44px;height:44px;padding:0;margin:0;z-index:2}
   table.stops-table td.td-include::before{display:none}
-  table.stops-table td.td-include input{transform:scale(1.4)}
+  table.stops-table td.td-include label.poi-include-wrap{
+    width:100%;height:100%;display:inline-flex;align-items:center;justify-content:center}
+  table.stops-table td.td-include input.poi-include{transform:none;width:22px;height:22px;margin:0}
   /* Duration input stays inline with its label, but a touch bigger. */
   table.stops-table td.td-duration input{width:72px;font-size:14px;padding:4px 6px}
   /* Empty cells (no value) -> hide entirely on mobile to reduce noise. */
