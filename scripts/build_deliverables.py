@@ -511,6 +511,16 @@ header{padding:16px 24px;background:#0d1117;border-bottom:1px solid var(--border
 header h1{margin:0 0 4px 0;font-size:22px}
 header .meta{color:var(--muted);font-size:13px}
 main{max-width:1400px;margin:0 auto;padding:12px}
+/* Mobile-only native day picker. Hidden on desktop where the .tabs strip
+   shines; promoted to display:block on phones so users get a familiar
+   "tap to choose a day" affordance instead of a subtle horizontal scroll.
+   font-size:16px is required to stop iOS Safari from zooming on focus. */
+.day-picker{display:none;width:100%;margin:8px 0 12px;padding:10px 36px 10px 12px;
+  background:var(--card) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%23f5c252' d='M3 5l5 6 5-6z'/></svg>") no-repeat right 10px center / 14px;
+  color:var(--text);border:1px solid var(--border);border-radius:8px;
+  font:600 16px/1.2 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer}
+.day-picker:focus{outline:2px solid var(--accent);outline-offset:1px}
 .tabs{display:flex;flex-wrap:wrap;gap:2px;border-bottom:1px solid var(--border);
   margin-bottom:16px;background:var(--panel);padding:4px;border-radius:6px;}
 .tab-btn{background:transparent;color:var(--muted);border:0;padding:9px 14px;cursor:pointer;
@@ -675,13 +685,13 @@ tr.skipped-row .spur-hint::before{content:"[Saving] "}
   .card h2{font-size:17px}
   .card h3{font-size:14px;margin-top:14px}
 
-  /* Tab strip: single horizontally scrollable row instead of 3 wrap rows.
-     Subtle right-edge mask hints that more tabs exist off-screen. */
-  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
-    scrollbar-width:thin;padding-bottom:2px;gap:1px;
-    mask-image:linear-gradient(to right,#000 calc(100% - 20px),transparent);
-    -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 20px),transparent)}
-  .tab-btn{flex:none;white-space:nowrap;padding:8px 11px;font-size:12px}
+  /* Day navigation on phones: swap the easy-to-miss horizontal scroll
+     strip for a native <select>. The picker shows the current day in
+     full and opens the OS-native list of all days on tap. Scroll-strip
+     CSS is kept (overflow-x:auto + edge mask) for the rare case the
+     select is unavailable, but it's hidden by default at this width. */
+  .tabs{display:none}
+  .day-picker{display:block}
 
   /* POI tables: table -> stacked cards. We hide the <thead>, convert each
      <tr> into a card, and each <td> becomes a "Label: value" row using
@@ -742,7 +752,7 @@ tr.skipped-row .spur-hint::before{content:"[Saving] "}
 }
 
 @media print{
-  .tabs,.tab-btn{display:none}
+  .tabs,.tab-btn,.day-picker{display:none}
   .tab-pane{display:block!important;page-break-before:always}
   .tab-pane:first-child{page-break-before:auto}
   body{background:#fff;color:#000}
@@ -757,14 +767,22 @@ tr.skipped-row .spur-hint::before{content:"[Saving] "}
 def build_itinerary_html():
     days = data['days']
 
-    # Tab buttons
+    # Tab buttons (desktop scroll strip) + native <option> list (mobile picker).
+    # Both are emitted; CSS at <=700px hides .tabs and shows .day-picker. The
+    # JS keeps both in sync so a user resizing across the breakpoint never
+    # sees a stale "active" indicator.
     tabs = []
+    options = []
     panes = []
 
     for i, d in enumerate(days):
         active = ' active' if i == 0 else ''
+        selected = ' selected' if i == 0 else ''
         tabs.append(
             f'<button class="tab-btn{active}" data-tgt="pane-{d["id"]}">{esc(d["label"])}</button>'
+        )
+        options.append(
+            f'<option value="{d["id"]}"{selected}>{esc(d["label"])}</option>'
         )
 
         # POIs split by status for visibility
@@ -1020,6 +1038,7 @@ def build_itinerary_html():
 <a href="trip-plan.gpx" download>Download GPX</a></div>
 </header>
 <main>
+<select class="day-picker" id="day-picker" aria-label="Select trip day">{''.join(options)}</select>
 <div class="tabs" role="tablist">{''.join(tabs)}</div>
 {''.join(panes)}
 <section class="card" style="margin-top:24px">
@@ -1032,6 +1051,7 @@ def build_itinerary_html():
 <script>
 const TAB_BTNS = document.querySelectorAll('.tab-btn');
 const PANES = document.querySelectorAll('.tab-pane');
+const DAY_PICKER = document.getElementById('day-picker');
 function activateTab(dayId) {{
   const btn = document.querySelector('.tab-btn[data-tgt="pane-' + dayId + '"]');
   const pane = document.getElementById('pane-' + dayId);
@@ -1040,12 +1060,27 @@ function activateTab(dayId) {{
   PANES.forEach(x => x.classList.remove('active'));
   btn.classList.add('active');
   pane.classList.add('active');
+  // Mirror the active day into the mobile picker so a window resize across
+  // the desktop/mobile breakpoint never leaves the two controls disagreeing.
+  if (DAY_PICKER && DAY_PICKER.value !== dayId) DAY_PICKER.value = dayId;
   return true;
 }}
 TAB_BTNS.forEach(b => b.addEventListener('click', () => {{
-  activateTab(b.dataset.tgt.replace('pane-',''));
-  setTimeout(() => ensureMap(b.dataset.tgt.replace('pane-','')), 30);
+  const dayId = b.dataset.tgt.replace('pane-','');
+  activateTab(dayId);
+  setTimeout(() => ensureMap(dayId), 30);
 }}));
+if (DAY_PICKER) {{
+  DAY_PICKER.addEventListener('change', () => {{
+    const dayId = DAY_PICKER.value;
+    activateTab(dayId);
+    setTimeout(() => ensureMap(dayId), 30);
+    // Scroll the page back to the top of the day so the user lands at the
+    // start of the new day's content rather than wherever they were in the
+    // previous day's pane.
+    window.scrollTo({{top: 0, behavior: 'smooth'}});
+  }});
+}}
 
 const MAP_DATA = {map_json};
 const MAPS = {{}};
