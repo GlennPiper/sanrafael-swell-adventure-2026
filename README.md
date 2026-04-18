@@ -1,6 +1,6 @@
 # 2026 San Rafael Swell Adventure + Moab
 
-Trip planning workspace for the **May 2 - 10, 2026** overlanding trip.
+Trip planning workspace for the **May 2 - 10, 2026** overlanding trip to Utah.
 
 - **11 overlanders** do the San Rafael Swell route (May 2-6)
 - **7 of those continue** to Moab (May 6-10); rest head back to Boise May 6
