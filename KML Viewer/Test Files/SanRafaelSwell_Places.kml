@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>San Rafael Swell Places</name>
+    <Placemark>
+      <name>Behind the Reef Trail</name>
+      <description>OSM/Nominatim: Behind The Reef 4x4 Trail (BLM 851), Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.798462,38.617948,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Black Dragon Canyon</name>
+      <description>OSM/Nominatim: Black Dragon Trailhead, Ferron Canyon Campground Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-111.264150,39.129166,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Black Dragon Canyon petroglyphs</name>
+      <description>OSM/Nominatim: Black Dragon Pictographs (OSM)
+method: overpass
+Mapped in OSM as &quot;Black Dragon Pictographs&quot;.</description>
+      <Point>
+        <coordinates>-110.424205,38.942909,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Block Mountain</name>
+      <description>OSM/Nominatim: Block Mountain, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.737624,38.803936,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Block Mountain vicinity</name>
+      <description>OSM/Nominatim: Block Mountain, Emery County, Utah, United States
+method: derived
+Used same coordinates as Block Mountain.</description>
+      <Point>
+        <coordinates>-110.737624,38.803936,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Buckhorn Draw Road</name>
+      <description>OSM/Nominatim: Buckhorn Draw Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.659534,38.881676,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Buckhorn Wash</name>
+      <description>OSM/Nominatim: Buckhorn Wash, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.712550,39.151506,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Buckhorn Wash petroglyphs</name>
+      <description>OSM/Nominatim: Buckhorn Draw Pictograph Panel (OSM)
+method: overpass
+Mapped in OSM as &quot;Buckhorn Draw Pictograph Panel&quot;; used as proxy for Buckhorn Wash petroglyphs corridor.</description>
+      <Point>
+        <coordinates>-110.694057,39.123451,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Castle Dale, UT</name>
+      <description>OSM/Nominatim: Castle Dale, Emery County, Utah, 84513, United States</description>
+      <Point>
+        <coordinates>-111.019613,39.212192,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Chute Canyon</name>
+      <description>OSM/Nominatim: Lower Chute Canyon, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.754948,38.605986,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Chute Canyon Vicinity</name>
+      <description>OSM/Nominatim: Lower Chute Canyon, Emery County, Utah, United States
+method: derived
+Used same coordinates as Chute Canyon.</description>
+      <Point>
+        <coordinates>-110.754948,38.605986,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Circa Loan Warrior petroglyph</name>
+      <description>OSM/Nominatim: Lone Warrior Pictograph (OSM)
+method: derived
+Used same coordinates as Lone Warrior Pictograph.</description>
+      <Point>
+        <coordinates>-110.803685,38.853431,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Coal Wash</name>
+      <description>OSM/Nominatim: Coal Wash, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.897157,39.011403,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Crack Canyon</name>
+      <description>OSM/Nominatim: Crack Canyon, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.726778,38.608739,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Devil&#x27;s Racetrack</name>
+      <description>OSM/Nominatim: BLM 641 (Devil&#x27;s Racetrack), Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.813820,38.917733,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Dinosaur Footprint</name>
+      <description>OSM/Nominatim: Dinosaur Footprint, Buckhorn Dinosaur Track Trail, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.729278,39.160491,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Dutch Flat</name>
+      <description>OSM/Nominatim: Dutch Flat Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-111.083747,39.072105,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Dutch Flat Road</name>
+      <description>OSM/Nominatim: Dutch Flat Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-111.083747,39.072105,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Dutchman Arch</name>
+      <description>OSM/Nominatim: Dutchman Arch, I 70;US 50, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.787830,38.872485,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Eagle Canyon</name>
+      <description>OSM/Nominatim: Eagle Canyon, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.912516,38.895282,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Eagle Canyon Arch</name>
+      <description>OSM/Nominatim: Eagle Canyon Arch, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.833129,38.848051,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Eagle Canyon Bridges</name>
+      <description>OSM/Nominatim: I-70 bridge segments near Eagle Canyon (OSM)
+method: overpass
+Approximate: I-70 bridge=yes segments in Eagle Canyon area. Represents the under/overpass &quot;Canyon Bridges&quot;.</description>
+      <Point>
+        <coordinates>-110.864991,38.859839,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Eagle Canyon Overlook</name>
+      <description>OSM/Nominatim: Eagle Canyon Overlook, BLM 820 (Eagle Canyon Trail), Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.867898,38.863089,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Eagle Canyon Trail</name>
+      <description>OSM/Nominatim: BLM 820 (Eagle Canyon Trail), Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.851714,38.857636,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Emery, UT</name>
+      <description>OSM/Nominatim: Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.803855,38.984477,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Eva Conover Trail</name>
+      <description>OSM/Nominatim: BLM 639 (Eva Conover Trail), Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.879425,38.949515,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Family Butte</name>
+      <description>OSM/Nominatim: Family Butte, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.844005,38.765266,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Family Butte area</name>
+      <description>OSM/Nominatim: Family Butte, Emery County, Utah, United States
+method: derived
+Used same coordinates as Family Butte.</description>
+      <Point>
+        <coordinates>-110.844005,38.765266,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Fuller Bottom Road</name>
+      <description>OSM/Nominatim: Fuller Bottom Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.825597,39.144346,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Green River</name>
+      <description>OSM/Nominatim: Green River, Emery County, Utah, 84525, United States</description>
+      <Point>
+        <coordinates>-110.161725,38.995229,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Green River, UT</name>
+      <description>OSM/Nominatim: Green River, Utah (proxy from Green River)
+method: derived
+Corrected: earlier geocode was wrong; using same coordinates as Green River (town near the Swell).</description>
+      <Point>
+        <coordinates>-110.161725,38.995229,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hanksville, UT</name>
+      <description>OSM/Nominatim: Hanksville, Wayne County, Utah, 84734, United States</description>
+      <Point>
+        <coordinates>-110.706401,38.373776,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Head of Sinbad</name>
+      <description>OSM/Nominatim: Head of Sinbad (OSM locality)
+method: overpass</description>
+      <Point>
+        <coordinates>-110.766174,38.875484,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hidden Splendor</name>
+      <description>OSM/Nominatim: Hidden Splendor Overlook (OSM)
+method: overpass
+Corrected: earlier geocode matched a different Hidden Splendor in northern Utah; using OSM Hidden Splendor Overlook in the Swell.</description>
+      <Point>
+        <coordinates>-110.953676,38.565821,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hidden Splendor Overlook</name>
+      <description>OSM/Nominatim: Hidden Splendor Overlook, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.952781,38.566386,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hidden Splendor Road</name>
+      <description>OSM/Nominatim: Hidden Splendor Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.908542,38.611040,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hondu Arch</name>
+      <description>OSM/Nominatim: Hondu Arch, Pasture Track, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-111.015726,38.672116,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Little Grand Canyon</name>
+      <description>OSM/Nominatim: Little Grand Canyon San Rafael River, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.783218,39.083206,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Loan Warrior Petroglyph</name>
+      <description>OSM/Nominatim: Lone Warrior Pictograph (OSM)
+method: overpass
+Trip text says &quot;Loan Warrior&quot;; OSM has &quot;Lone Warrior Pictograph&quot;.</description>
+      <Point>
+        <coordinates>-110.803685,38.853431,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>McKay Flat Road</name>
+      <description>OSM/Nominatim: McKay Flat Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.844644,38.734108,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mexican Mountain</name>
+      <description>OSM/Nominatim: Mexican Mountain, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.470672,39.006063,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mexican Mountain Road</name>
+      <description>OSM/Nominatim: Mexican Mountain Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.569939,39.032067,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Miner&#x27;s Cabin</name>
+      <description>OSM/Nominatim: Miner&#x27;s Cabin, Behind The Reef 4x4 Trail (BLM 851), Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.821965,38.607245,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Moore Cutoff Road</name>
+      <description>OSM/Nominatim: Moore Cutoff Road, Moore, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-111.038747,38.919237,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>North Temple Mountain Wash</name>
+      <description>OSM/Nominatim: North Temple Wash (proxy)
+method: derived
+Used North Temple Wash coordinates (closest named wash in dataset).</description>
+      <Point>
+        <coordinates>-110.673949,38.698731,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>North Temple Wash</name>
+      <description>OSM/Nominatim: North Temple Wash, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.673949,38.698731,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Old San Rafael Swinging Bridge</name>
+      <description>OSM/Nominatim: Buckhorn Draw corridor (approx; needs refinement)
+method: approx
+Overpass bridge search timed out; set to Buckhorn Draw corridor (near river corridor). If you want, we can refine later by searching a known &quot;Swinging Bridge&quot; POI source.</description>
+      <Point>
+        <coordinates>-110.694057,39.123451,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Petroglyph Canyon</name>
+      <description>OSM/Nominatim: Petroglyph Canyon Panel, Petroglyph Panel Trail, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.433211,38.927560,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Petroglyph Canyon Panel</name>
+      <description>OSM/Nominatim: Petroglyph Canyon Panel, Petroglyph Panel Trail, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.433211,38.927560,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Red Canyon</name>
+      <description>OSM/Nominatim: Red Canyon, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.732479,38.504388,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>San Rafael River</name>
+      <description>OSM/Nominatim: San Rafael River, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.125969,38.761366,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>San Rafael River Road</name>
+      <description>OSM/Nominatim: Mexican Mountain Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.569939,39.032067,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Sinbad&#x27;s Head</name>
+      <description>OSM/Nominatim: Head of Sinbad (OSM locality)
+method: derived
+Used same coordinates as Head of Sinbad.</description>
+      <Point>
+        <coordinates>-110.766174,38.875484,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Spirit Arch</name>
+      <description>OSM/Nominatim: Spirit Arch, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.434494,38.929484,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Swasey Cabins</name>
+      <description>OSM/Nominatim: BLM 820 (Swasey Cabin Trail), Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.819008,38.837071,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Temple Mountain</name>
+      <description>OSM/Nominatim: Temple Mountain, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.679177,38.688319,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Temple Mountain Road</name>
+      <description>OSM/Nominatim: Temple Mountain Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.738022,38.690415,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Temple Mountain Wash</name>
+      <description>OSM/Nominatim: Temple Mountain Wash Pictograph Panel, Temple Mountain Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.668658,38.660807,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Temple Wash</name>
+      <description>OSM/Nominatim: Temple Wash, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.617264,38.643095,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Temple Wash Petroglyphs</name>
+      <description>OSM/Nominatim: Temple Mountain Wash Pictograph Panel (proxy)
+method: derived
+Trip label likely refers to petroglyph/pictograph panel in Temple Mountain Wash; used that known panel location.</description>
+      <Point>
+        <coordinates>-110.668658,38.660807,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>The Drips</name>
+      <description>OSM/Nominatim: The Drips, BLM 638 (North Fork Coal Wash), Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.899885,39.013994,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>The Sinkhole</name>
+      <description>OSM/Nominatim: The Sinkhole, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.600965,38.921780,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>The Wedge (San Rafael Swell)</name>
+      <description>OSM/Nominatim: Wedge Overlook (proxy)
+method: derived
+Used Wedge Overlook coordinates.</description>
+      <Point>
+        <coordinates>-110.758868,39.093041,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Tomsich Butte</name>
+      <description>OSM/Nominatim: Tomsich Butte, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.986548,38.686255,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Tomsich Butte Uranium Mine</name>
+      <description>OSM/Nominatim: Tomsich Butte, Emery County, Utah, United States
+method: nominatim_retry</description>
+      <Point>
+        <coordinates>-110.986548,38.686255,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Tomsich Butte vicinity</name>
+      <description>OSM/Nominatim: Tomsich Butte, Emery County, Utah, United States
+method: derived
+Used same coordinates as Tomsich Butte.</description>
+      <Point>
+        <coordinates>-110.986548,38.686255,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wedge Overlook</name>
+      <description>OSM/Nominatim: Wedge Overlook, Wedge Road, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.758868,39.093041,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Wild Horse Window</name>
+      <description>OSM/Nominatim: Wild Horse Window, Wild Horse Window Trail, Emery County, Utah, United States</description>
+      <Point>
+        <coordinates>-110.676460,38.653012,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

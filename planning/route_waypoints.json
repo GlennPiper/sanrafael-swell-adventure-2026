@@ -1,0 +1,1199 @@
+[
+  {
+    "name": "Camp",
+    "lat": 39.0055352041,
+    "lon": -110.5541636977,
+    "ele": 1685.0,
+    "time": "2024-10-28T15:35:08Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Little Wild Horse Slot Canyon",
+    "lat": 38.6078020911,
+    "lon": -110.792877126,
+    "ele": 1645.0,
+    "time": "2024-10-28T16:18:21Z",
+    "sym": "cliff",
+    "desc": null
+  },
+  {
+    "name": "Dispersed Camping",
+    "lat": 38.8948280948,
+    "lon": -110.6488173205,
+    "ele": 2040.0,
+    "time": "2024-10-25T21:35:53Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Family Butte Dispersed Camping",
+    "lat": 38.768678,
+    "lon": -110.832171,
+    "ele": 2088.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Loan Warrior Petroglyph",
+    "lat": 38.853001,
+    "lon": -110.803194,
+    "ele": 2189.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "petroglyph",
+    "desc": null
+  },
+  {
+    "name": "Green River",
+    "lat": 38.995615,
+    "lon": -110.160736,
+    "ele": 1241.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "city-24",
+    "desc": null
+  },
+  {
+    "name": "Wild Horse Window Trailhead",
+    "lat": 38.648019,
+    "lon": -110.662622,
+    "ele": 1607.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "known-route",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.8932206755,
+    "lon": -110.7678508759,
+    "ele": 2060.0,
+    "time": "2024-10-26T00:46:57Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - North Temple Wash",
+    "lat": 38.666217,
+    "lon": -110.6478182,
+    "ele": 1607.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "cliff",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsites 20",
+    "lat": 39.1317580165,
+    "lon": -110.697491169,
+    "ele": 1650.0,
+    "time": "2024-10-28T15:37:15Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Eagle Canyon Bridges",
+    "lat": 38.860725,
+    "lon": -110.864991,
+    "ele": 2067.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "bridge",
+    "desc": null
+  },
+  {
+    "name": "Wedge Overlook Campsite #7",
+    "lat": 39.1256325204,
+    "lon": -110.755212307,
+    "ele": 1841.0,
+    "time": "2024-10-25T21:44:14Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Wedge Overlook Campsite #3",
+    "lat": 39.1242342347,
+    "lon": -110.7449769974,
+    "ele": 1840.0,
+    "time": "2024-10-25T21:43:52Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Wedge Overlook Campsite #5",
+    "lat": 39.1244506379,
+    "lon": -110.7513284683,
+    "ele": 1825.0,
+    "time": "2024-10-25T21:44:01Z",
+    "sym": "campsite-24",
+    "desc": "Wedge Overlook Campsite #5 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite"
+  },
+  {
+    "name": "Petroglyph Panel Trail",
+    "lat": 38.9318197489,
+    "lon": -110.422791735,
+    "ele": 1307.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "known-route",
+    "desc": null
+  },
+  {
+    "name": "Wedge Overlook Campsite #8",
+    "lat": 39.1167429457,
+    "lon": -110.7552337646,
+    "ele": 1843.0,
+    "time": "2024-10-25T21:43:13Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.8898971226,
+    "lon": -110.7542681694,
+    "ele": 2177.0,
+    "time": "2024-10-26T00:46:50Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "The Twin Priests",
+    "lat": 38.9231089598,
+    "lon": -110.8207440376,
+    "ele": 2044.0,
+    "time": "2024-10-28T15:42:20Z",
+    "sym": "stone",
+    "desc": null
+  },
+  {
+    "name": "DP - Eagle Canyon Trail",
+    "lat": 38.8578051481,
+    "lon": -110.8513368592,
+    "ele": 2025.0,
+    "time": "2024-10-25T21:47:16Z",
+    "sym": "off-road",
+    "desc": "Eagle Canyon, located within Utah’s San Rafael Swell, is a dramatic and rugged canyon known for its towering sandstone cliffs, natural arches, and challenging off-road trails. The canyon cuts deeply into the Swell, offering impressive views of sheer rock walls and unique formations, such as the Eagle Canyon Arch and other natural rock spans. These arches are popular attractions, giving the canyon a distinctive character and showcasing the area’s geological complexity. The canyon’s diverse terrain is shaped by layers of ancient sedimentary rock that have been exposed by wind and water erosion, creating a landscape that feels both wild and timeless."
+  },
+  {
+    "name": "DP - Dutchman Arch",
+    "lat": 38.872668,
+    "lon": -110.787818,
+    "ele": 2135.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "stone",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsite 16",
+    "lat": 39.1359856296,
+    "lon": -110.7048296928,
+    "ele": 1645.0,
+    "time": "2024-10-28T15:37:29Z",
+    "sym": "campsite-24",
+    "desc": "Buckhorn Draw Campsite 16 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
+  },
+  {
+    "name": "Dispersed Camping",
+    "lat": 38.7823707453,
+    "lon": -110.8322985195,
+    "ele": 2109.0,
+    "time": "2024-10-26T15:35:07Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Dispersed Camping",
+    "lat": 38.883713756,
+    "lon": -110.7776329445,
+    "ele": 2146.0,
+    "time": "2024-10-25T21:53:00Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.6771679669,
+    "lon": -110.7381105423,
+    "ele": 1877.0,
+    "time": "2024-10-26T00:50:08Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Buckhorn Wash Petroglyphs",
+    "lat": 39.123613,
+    "lon": -110.693904,
+    "ele": 1647.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "petroglyph",
+    "desc": "The Buckhorn Wash Petroglyphs are among the most impressive and accessible rock art sites in Utah’s San Rafael Swell. This extensive panel stretches over 130 feet along a sandstone cliff, showcasing an array of petroglyphs created by the Fremont people, and possibly even earlier cultures like the Barrier Canyon Culture. The images include intricate anthropomorphic figures, animals, geometric shapes, and symbols that reflect the beliefs and daily lives of the people who once inhabited this remote desert area. Some figures are tall, ghostly forms with elaborate headdresses, while others are smaller, simpler shapes, possibly representing animals or spirits. The Buckhorn Wash Petroglyphs offer a rare window into the ancient cultural expressions of the region."
+  },
+  {
+    "name": "DP - Black Dragon Petroglyph",
+    "lat": 38.943193,
+    "lon": -110.425124,
+    "ele": 1357.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "petroglyph",
+    "desc": "Black Dragon Canyon, located in the eastern part of Utah’s San Rafael Swell, is a striking desert canyon named after one of its most famous rock art panels: the Black Dragon petroglyph. The petroglyph, which some say resembles a dragon or other mythical creature, was likely created by the Fremont or Barrier Canyon cultures thousands of years ago. The canyon itself is a narrow, scenic passage with sheer sandstone walls that display layers of geological history, making it popular for both its ancient artwork and dramatic natural beauty."
+  },
+  {
+    "name": "Dispersed Camping",
+    "lat": 38.8941705945,
+    "lon": -110.6521343501,
+    "ele": 2040.0,
+    "time": "2024-10-25T21:36:07Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "San Rafael Reef Viewpoint",
+    "lat": 38.9277997767,
+    "lon": -110.40122509,
+    "ele": 1363.0,
+    "time": "2024-10-26T15:50:07Z",
+    "sym": "binoculars",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.8849031501,
+    "lon": -110.7491183281,
+    "ele": 2138.0,
+    "time": "2024-10-26T00:47:09Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsite 17",
+    "lat": 39.1367013028,
+    "lon": -110.6994009018,
+    "ele": 1646.0,
+    "time": "2024-10-28T15:37:22Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsite 23",
+    "lat": 39.1256491665,
+    "lon": -110.6955814362,
+    "ele": 1644.0,
+    "time": "2024-10-25T21:41:50Z",
+    "sym": "campsite-24",
+    "desc": "Buckhorn Draw Campsite 23 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
+  },
+  {
+    "name": "Dispersed Camping",
+    "lat": 38.778588816,
+    "lon": -110.838080346,
+    "ele": 2193.0,
+    "time": "2024-10-26T15:34:50Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.8890954383,
+    "lon": -110.743432045,
+    "ele": 2182.0,
+    "time": "2024-10-26T00:47:15Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Cedar Mountain Campground",
+    "lat": 39.1760022208,
+    "lon": -110.6389760971,
+    "ele": 2315.0,
+    "time": "2024-10-25T21:41:08Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Copper Globe Mine",
+    "lat": 38.803154,
+    "lon": -110.910712,
+    "ele": 2134.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "mine",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsite 1",
+    "lat": 39.1675349116,
+    "lon": -110.7376599312,
+    "ele": 1698.0,
+    "time": "2024-10-25T21:42:10Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Eagle Canyon Arch",
+    "lat": 38.848106,
+    "lon": -110.833328,
+    "ele": 2074.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "stone",
+    "desc": null
+  },
+  {
+    "name": "Horizon Arch",
+    "lat": 38.7361928713,
+    "lon": -110.9866333008,
+    "ele": 2147.0,
+    "time": "2024-10-26T15:35:52Z",
+    "sym": "stone",
+    "desc": "Horizon Arch is an attraction inside of Muddy Creek Wilderness."
+  },
+  {
+    "name": "Campsite",
+    "lat": 38.8483433212,
+    "lon": -110.8339755962,
+    "ele": 2054.0,
+    "time": "2025-05-27T17:51:54Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp",
+    "lat": 38.794152,
+    "lon": -110.748817,
+    "ele": 2083.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Dispersed Camping",
+    "lat": 38.6442287699,
+    "lon": -110.7377136665,
+    "ele": 1706.0,
+    "time": "2024-10-26T00:49:35Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Coal Wash",
+    "lat": 38.9919917011,
+    "lon": -110.8912784504,
+    "ele": 1752.0,
+    "time": "2024-10-25T21:46:31Z",
+    "sym": "attraction",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.8806772069,
+    "lon": -110.7884716988,
+    "ele": 2158.0,
+    "time": "2024-10-25T21:53:15Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsite 15",
+    "lat": 39.1408287642,
+    "lon": -110.7086062431,
+    "ele": 1657.0,
+    "time": "2024-10-28T15:38:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Wild Horse Canyon",
+    "lat": 38.6503198742,
+    "lon": -110.6760708959,
+    "ele": 1599.0,
+    "time": "2024-10-28T15:16:40Z",
+    "sym": "cliff",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsite 14",
+    "lat": 39.1439741267,
+    "lon": -110.7122755051,
+    "ele": 1665.0,
+    "time": "2024-10-28T15:38:17Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.6599955536,
+    "lon": -110.7325315475,
+    "ele": 1796.0,
+    "time": "2024-10-26T15:41:32Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Old Mining Sites",
+    "lat": 38.6712675,
+    "lon": -110.6789374,
+    "ele": 1705.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "mine",
+    "desc": null
+  },
+  {
+    "name": "Gas Station",
+    "lat": 38.924186,
+    "lon": -111.248525,
+    "ele": 1908.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "fuel-24",
+    "desc": null
+  },
+  {
+    "name": "Hamburger Rocks",
+    "lat": 39.1501146676,
+    "lon": -110.8547973633,
+    "ele": 1700.0,
+    "time": "2024-10-25T21:44:45Z",
+    "sym": "attraction",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.9314053183,
+    "lon": -110.4216313362,
+    "ele": 1305.0,
+    "time": "2024-10-25T21:34:25Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Wedge Overlook Campsite #4",
+    "lat": 39.1274802126,
+    "lon": -110.7478094101,
+    "ele": 1836.0,
+    "time": "2024-10-25T21:44:08Z",
+    "sym": "campsite-24",
+    "desc": "Wedge Overlook Campsite #4 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite"
+  },
+  {
+    "name": "DP - Buckhorn Wash",
+    "lat": 39.1070200727,
+    "lon": -110.6736846668,
+    "ele": 1596.0,
+    "time": "2025-05-27T17:41:09Z",
+    "sym": "cliff",
+    "desc": null
+  },
+  {
+    "name": "Camp",
+    "lat": 38.6923707774,
+    "lon": -110.9990368104,
+    "ele": 1543.0,
+    "time": "2025-05-07T22:14:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Dispersed camping",
+    "lat": 38.6654929951,
+    "lon": -110.6926705875,
+    "ele": 1680.0,
+    "time": "2025-05-29T16:04:40Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Miner's Cabin",
+    "lat": 38.6072463252,
+    "lon": -110.8219671249,
+    "ele": 1660.0,
+    "time": "2025-05-07T22:16:44Z",
+    "sym": "building-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Red Canyon",
+    "lat": 39.0498649802,
+    "lon": -110.5927856597,
+    "ele": 1562.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "attraction",
+    "desc": null
+  },
+  {
+    "name": "Dispersed Camping",
+    "lat": 38.6795357321,
+    "lon": -110.7293193426,
+    "ele": 1981.0,
+    "time": "2024-10-26T00:49:54Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp",
+    "lat": 39.1083932124,
+    "lon": -110.6673038833,
+    "ele": 1605.0,
+    "time": "2025-05-27T17:39:52Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Miner's Cabin",
+    "lat": 38.6072463252,
+    "lon": -110.8219671249,
+    "ele": 1660.0,
+    "time": "2025-03-31T23:34:30Z",
+    "sym": "building-24",
+    "desc": null
+  },
+  {
+    "name": "Little Wild Horse Canyon Trail",
+    "lat": 38.6149456972,
+    "lon": -110.8025986551,
+    "ele": 1673.0,
+    "time": "2024-10-28T16:18:43Z",
+    "sym": "known-route",
+    "desc": null
+  },
+  {
+    "name": "Campsite",
+    "lat": 38.8535990445,
+    "lon": -110.8002170554,
+    "ele": 2158.0,
+    "time": "2025-05-27T17:55:53Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "River crossing",
+    "lat": 39.1155539228,
+    "lon": -110.854119549,
+    "ele": 1603.0,
+    "time": "2024-10-25T21:45:27Z",
+    "sym": "water",
+    "desc": null
+  },
+  {
+    "name": "Wedge Overlook Camp #1",
+    "lat": 39.108568,
+    "lon": -110.702228,
+    "ele": 1955.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Dispersed Camping",
+    "lat": 38.5667582079,
+    "lon": -110.959131127,
+    "ele": 1465.0,
+    "time": "2025-05-27T18:00:33Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Temple Mount East Campground",
+    "lat": 38.657705,
+    "lon": -110.662236,
+    "ele": 1618.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - The Icebox",
+    "lat": 38.8348605461,
+    "lon": -110.8108091354,
+    "ele": 2206.0,
+    "time": "2025-05-27T17:52:20Z",
+    "sym": "cave",
+    "desc": "Tucked within a narrow sandstone alcove, the Icebox is a natural refrigerator—an unusual rock formation where cool air and shade combine to preserve lower temperatures, even in the heat of summer. This shaded crevice collects cold air overnight, and because it sees very little direct sunlight, the interior remains noticeably cooler than the surrounding desert. In the past, cowboys and ranchers discovered they could use the Icebox to store perishable supplies like meat and dairy, taking advantage of its natural insulation.\n\nThe Icebox isn’t just a practical feature; it’s also a striking example of how geology and microclimate interact. The walls are high and close, creating a sense of enclosure, and the cool, damp air contrasts sharply with the dry heat just a few feet outside. Water sometimes seeps through the rock, encouraging moss or lichen growth along the walls. For those who stumble upon it today, the Icebox offers a welcome and surprising reprieve from the desert sun—a hidden pocket of coolness carved by time and preserved by shade."
+  },
+  {
+    "name": "DP - Old San Rafael Swinging Bridge",
+    "lat": 39.081287,
+    "lon": -110.6661,
+    "ele": 1554.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "bridge",
+    "desc": "The Old San Rafael Swinging Bridge is an iconic historical landmark in the San Rafael Swell, spanning the San Rafael River just west of the town of Green River, Utah. Built in 1937 by the Civilian Conservation Corps (CCC), this suspension bridge was designed to support vehicles crossing the river, providing vital access for ranchers, travelers, and local communities. The bridge stretches roughly 160 feet across and hangs suspended between two sturdy concrete towers, showcasing the engineering capabilities of its time. Although it no longer supports vehicle traffic, the bridge has been preserved as a pedestrian walkway and historical site, allowing visitors to experience a piece of the area’s history while enjoying views of the river and surrounding landscape.\n\nToday, the Old San Rafael Swinging Bridge serves as a popular spot for photography and exploration. Its rustic, weathered structure against the backdrop of the Swell’s rugged terrain makes it a charming relic of the past, linking modern-day visitors to the region’s pioneering days. The bridge’s construction was an important accomplishment during the Great Depression, providing jobs and improving access to the isolated San Rafael Swell. As a rare remaining example of Depression-era suspension bridges in Utah, it’s now a cherished part of the Swell’s heritage, offering both a scenic and historical highlight for those traveling through this remote desert region."
+  },
+  {
+    "name": "DP - Hondu Arch",
+    "lat": 38.6721088156,
+    "lon": -111.0157299042,
+    "ele": 2014.0,
+    "time": "2025-05-27T17:57:31Z",
+    "sym": "stone",
+    "desc": "Hondu Arch is an attraction inside of Muddy Creek Wilderness."
+  },
+  {
+    "name": "DP - The Sinkhole",
+    "lat": 38.921673,
+    "lon": -110.600985,
+    "ele": 1983.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "attraction",
+    "desc": "Formed by a natural collapse of limestone bedrock, the Sinkhole is a wide, deep depression with steep, rocky walls, offering visitors a fascinating look at the power of erosion and subsurface water movement. It’s believed to have been created when water eroded an underground cavern, eventually causing the surface to collapse and form a massive pit. Over time, rain and sediment have altered its shape slightly, but it remains a dramatic example of the Swell’s dynamic geology."
+  },
+  {
+    "name": "Camp",
+    "lat": 38.579119,
+    "lon": -110.921585,
+    "ele": 1660.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Reds Canyon",
+    "lat": 38.7544645783,
+    "lon": -110.9243170904,
+    "ele": 1787.0,
+    "time": "2024-10-26T15:35:30Z",
+    "sym": "cliff",
+    "desc": null
+  },
+  {
+    "name": "DP - Eva Conover Trail",
+    "lat": 38.9544738175,
+    "lon": -110.886052603,
+    "ele": 1792.0,
+    "time": "2024-10-25T21:46:17Z",
+    "sym": "off-road",
+    "desc": "The Eva Conover Trail was originally constructed as an access route in the 1960s during the building of the I-70 bridges over Eagle Canyon. Carved through the rugged heart of the San Rafael, the trail allowed construction crews to transport equipment and materials into one of the most remote and challenging segments of the new interstate. It wasn’t built with recreation in mind, but rather as a practical solution to a massive engineering problem—how to bridge deep sandstone canyons in an untamed desert.\n\nThe trail was later named after Eva Conover, a longtime Emery County supervisor who played a key role during this period of development. She was known for her deep knowledge of the land and strong advocacy for her community. Conover worked closely with state and federal agencies to ensure local needs were represented during the I-70 project, and her name became associated with the access route used during construction. Naming the trail after her was a tribute to her leadership and service during a transformative time for the region."
+  },
+  {
+    "name": "Campsite",
+    "lat": 39.0780771229,
+    "lon": -110.6542674932,
+    "ele": 1550.0,
+    "time": "2025-05-27T17:44:43Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsites",
+    "lat": 39.159731637,
+    "lon": -110.7304661554,
+    "ele": 1686.0,
+    "time": "2024-10-28T15:39:32Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.6422994723,
+    "lon": -110.7451915741,
+    "ele": 1669.0,
+    "time": "2025-05-27T18:02:49Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.8799422345,
+    "lon": -110.7655119896,
+    "ele": 2164.0,
+    "time": "2024-10-25T21:52:57Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - San Rafael River",
+    "lat": 39.078932,
+    "lon": -110.661934,
+    "ele": 1552.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "water",
+    "desc": "The San Rafael River is a lifeline within the arid landscape of Utah’s San Rafael Swell, winding through deep canyons and supporting a surprising amount of plant and animal life along its banks. Originating in the Wasatch Plateau, the river flows southeast through rugged terrain, cutting canyons and gorges into the rock over millions of years. This carving has created scenic landmarks like the Little Grand Canyon, a dramatic and picturesque stretch where the river flows between towering sandstone cliffs. For visitors, the river’s lush riparian zones stand in stark contrast to the surrounding desert, providing a refreshing oasis in an otherwise dry environment.\n\nThe San Rafael River is popular among adventurers for kayaking, canoeing, and hiking along its canyons. During the spring runoff, the river’s flow can swell, creating opportunities for paddlers to navigate its scenic but remote waterway. Wildlife, such as mule deer, beavers, and various bird species, thrives along the river, drawn to the water and greenery. While the river is relatively small compared to major Western rivers, its scenic beauty and role in shaping the Swell make it a cherished natural feature, adding to the area’s rugged appeal and allure for outdoor enthusiasts."
+  },
+  {
+    "name": "Buckhorn Draw Campsite 30",
+    "lat": 39.098577425,
+    "lon": -110.6657123566,
+    "ele": 1576.0,
+    "time": "2024-10-25T21:40:38Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.8833831757,
+    "lon": -110.790746212,
+    "ele": 2149.0,
+    "time": "2024-10-26T00:47:04Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsite 26",
+    "lat": 39.1223698106,
+    "lon": -110.6903672218,
+    "ele": 1632.0,
+    "time": "2024-10-25T21:41:42Z",
+    "sym": "campsite-24",
+    "desc": "Buckhorn Draw Campsite 26 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
+  },
+  {
+    "name": "DP - Behind the Reef trail",
+    "lat": 38.6174483344,
+    "lon": -110.8121358239,
+    "ele": 1733.0,
+    "time": "2025-05-27T18:01:50Z",
+    "sym": "off-road",
+    "desc": null
+  },
+  {
+    "name": "Calf Canyon",
+    "lat": 39.1183371127,
+    "lon": -110.6589062301,
+    "ele": 1625.0,
+    "time": "2025-05-27T17:40:36Z",
+    "sym": "cliff",
+    "desc": null
+  },
+  {
+    "name": "DP - Wild Horse Window Arch",
+    "lat": 38.653784,
+    "lon": -110.676269,
+    "ele": 1722.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "stone",
+    "desc": "The Wild Horse Window is a captivating natural rock arch located in the San Rafael Swell, known for its impressive size and unique shape. This geological feature is formed from layers of sandstone that have been eroded over time, creating a large, open window-like opening in the rock. The arch stands out against the surrounding rugged landscape, making it a popular spot for photographers and hikers seeking stunning views."
+  },
+  {
+    "name": "Untitled Waypoint",
+    "lat": 39.1513642994,
+    "lon": -110.7181219805,
+    "ele": 1670.0,
+    "time": "2024-10-25T21:42:00Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "San Rafael Bridge Campground",
+    "lat": 39.079717,
+    "lon": -110.666071,
+    "ele": 1555.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Head of Sinbad Petroglyph",
+    "lat": 38.8807455,
+    "lon": -110.7710685212,
+    "ele": 2169.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "petroglyph",
+    "desc": "The Head of Sinbad Petroglyphs is a fascinating archaeological site located in the San Rafael Swell, showcasing ancient rock art created by the Fremont culture. The petroglyphs are etched into the sandstone cliff faces at the Head of Sinbad, which is named for its distinctive rock formation that resembles a mythological figure. This site features a remarkable collection of petroglyphs, including human figures, animals, and geometric designs, many of which are believed to hold cultural and spiritual significance for the ancient peoples who inhabited the region.\n\nAccessing the Head of Sinbad Petroglyphs involves a short hike, making it a popular destination for visitors interested in both history and outdoor exploration. The petroglyphs are well-preserved and provide valuable insight into the daily lives, beliefs, and artistic expressions of the Fremont people. The area's striking desert landscape, with its towering cliffs and expansive views, enhances the experience, creating a striking backdrop for the ancient art. Visitors are encouraged to approach the site with respect, preserving its integrity for future generations and appreciating the cultural heritage captured in these timeless carvings."
+  },
+  {
+    "name": "Hanksville",
+    "lat": 38.373229,
+    "lon": -110.71468,
+    "ele": 1307.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "city-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Little Grand Canyon",
+    "lat": 39.0985168307,
+    "lon": -110.7359099575,
+    "ele": 1583.0,
+    "time": "2025-05-27T17:46:49Z",
+    "sym": "cliff",
+    "desc": null
+  },
+  {
+    "name": "DP - Black Dragon Canyon",
+    "lat": 38.9459627007,
+    "lon": -110.4330221305,
+    "ele": 1368.0,
+    "time": "2024-10-25T21:34:48Z",
+    "sym": "cliff",
+    "desc": "Black Dragon Canyon, located in the eastern part of Utah’s San Rafael Swell, is a striking desert canyon named after one of its most famous rock art panels: the Black Dragon petroglyph. The petroglyph, which some say resembles a dragon or other mythical creature, was likely created by the Fremont or Barrier Canyon cultures thousands of years ago. The canyon itself is a narrow, scenic passage with sheer sandstone walls that display layers of geological history, making it popular for both its ancient artwork and dramatic natural beauty."
+  },
+  {
+    "name": "Maverik",
+    "lat": 39.2123551427,
+    "lon": -111.0055375099,
+    "ele": 1720.0,
+    "time": "2024-10-28T16:58:00Z",
+    "sym": "fuel-24",
+    "desc": null
+  },
+  {
+    "name": "Wedge Overlook Camp #2",
+    "lat": 39.112209,
+    "lon": -110.733415,
+    "ele": 1885.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Dispersed camping",
+    "lat": 38.6649954353,
+    "lon": -110.67680854,
+    "ele": 1641.0,
+    "time": "2025-05-29T16:04:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Tomsich Butte Uranium Mine",
+    "lat": 38.683909739,
+    "lon": -110.9917396426,
+    "ele": 1579.0,
+    "time": "2025-05-27T17:58:37Z",
+    "sym": "mine",
+    "desc": "The Tomsich Butte uranium mine is a relic of the uranium boom that swept through the American Southwest in the mid-20th century. During the 1950s and early 1960s, prospectors fanned out across the desert searching for carnotite and other uranium-bearing minerals, driven by Cold War demand for nuclear fuel and weapons. Tomsich Butte became one of many remote sites where mining operations were hastily set up to extract ore from the sandstone layers of the Morrison Formation.\n\nThough modest in scale compared to larger operations, the Tomsich Butte mine featured a network of adits, tailings piles, and rusted machinery that remain visible today. Ore was hauled out by truck or mule, sometimes stockpiled nearby for later transport. Like many such sites, the operation was short-lived—once the market collapsed and federal subsidies dried up, the mine was abandoned, leaving behind a scatter of equipment and scarred rock."
+  },
+  {
+    "name": "DP - Petroglyph Canyon Panel",
+    "lat": 38.9275660778,
+    "lon": -110.4332184792,
+    "ele": 1361.0,
+    "time": "2024-10-25T21:34:04Z",
+    "sym": "petroglyph",
+    "desc": "Petroglyph Canyon Panel in the San Rafael Swell is a remarkable testament to the ancient peoples who once inhabited the area, particularly the Fremont and possibly the earlier Barrier Canyon Culture. Located within the maze of sandstone canyons, these petroglyphs represent unique images etched onto cliff faces and rock surfaces, depicting anthropomorphic and zoomorphic figures, geometric designs, and symbolic motifs. The artwork here is more than just visually striking; it offers insights into the cultural practices, beliefs, and daily lives of those who lived in this rugged landscape. The panels serve as a reminder of the deep connection between the land and its early inhabitants, capturing both their artistic expression and spiritual connections to their surroundings.\n\nThe San Rafael Swell’s geologic formations, with their towering red rock walls and narrow canyons, provide the perfect natural canvas for these ancient artists. Over centuries, wind and weather have left their mark on the petroglyphs, but many images remain remarkably well-preserved. Visitors to Petroglyph Canyon Panel are often struck by the contrast between the intricate artwork and the vast, isolated desert landscape. To protect and preserve this cultural site, it’s important for modern-day explorers to approach with respect, ensuring that future generations can experience the mystery and beauty of these ancient etchings."
+  },
+  {
+    "name": "Camp",
+    "lat": 38.653775,
+    "lon": -110.717571,
+    "ele": 1697.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp site",
+    "lat": 38.6252360442,
+    "lon": -110.7661128044,
+    "ele": 1557.0,
+    "time": "2024-10-26T15:40:52Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Campsite",
+    "lat": 38.8526501296,
+    "lon": -110.8007786742,
+    "ele": 2163.0,
+    "time": "2025-05-27T17:56:23Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Tomsich Butte Camp",
+    "lat": 38.682824,
+    "lon": -110.989002,
+    "ele": 1585.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Swasey's Cabin",
+    "lat": 38.835759,
+    "lon": -110.807499,
+    "ele": 2195.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "building-24",
+    "desc": "Swasey’s Canyon is a stunning and rugged canyon located in the San Rafael Swell, known for its striking scenery and rich geological features. Named after the Swasey family, early pioneers who settled in the area, the canyon is characterized by its colorful rock layers, towering cliffs, and narrow passageways that draw visitors into its depths. The canyon is easily accessible via a well-maintained dirt road, making it a popular destination for hikers, photographers, and those looking to explore the natural beauty of the Swell."
+  },
+  {
+    "name": "Camp",
+    "lat": 39.0590449724,
+    "lon": -110.6341036139,
+    "ele": 1549.0,
+    "time": "2024-10-25T21:37:35Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Freeway Access",
+    "lat": 38.8802428188,
+    "lon": -110.6580508072,
+    "ele": 2024.0,
+    "time": "2024-10-25T21:52:08Z",
+    "sym": "attraction",
+    "desc": null
+  },
+  {
+    "name": "Camp",
+    "lat": 38.819212,
+    "lon": -110.76945,
+    "ele": 2123.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Lucky Strike Mine",
+    "lat": 38.755407,
+    "lon": -110.948559,
+    "ele": 1767.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "mine",
+    "desc": null
+  },
+  {
+    "name": "Goblin Valley State Park",
+    "lat": 38.5763923,
+    "lon": -110.7102433,
+    "ele": 1511.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "attraction",
+    "desc": "The rock formations within the park are characterized by their whimsical and otherworldly appearance, featuring an array of hoodoos, spires, and goblin-like shapes that seem to emerge from the landscape. These formations are primarily composed of soft, sedimentary rock, which has been sculpted by wind and water erosion over thousands of years. The unique shapes vary widely, with some resembling creatures or characters, leading to the park's playful name.\n\nThe colors of the rock formations range from vibrant reds and oranges to soft yellows and browns, creating striking contrasts against the blue sky and surrounding desert environment. Some formations stand tall and narrow, while others are more bulbous or rounded, adding to the diversity of the landscape. The terrain is often interspersed with stretches of smooth, flat rock and sandy washes, providing a dynamic backdrop for exploration and photography. The surreal shapes and vivid colors of the rock formations make this area a popular destination for outdoor enthusiasts, photographers, and those seeking a unique connection with nature's artistry."
+  },
+  {
+    "name": "Wedge Overlook Campsite #6",
+    "lat": 39.122536279,
+    "lon": -110.7520365715,
+    "ele": 1838.0,
+    "time": "2024-10-25T21:44:22Z",
+    "sym": "campsite-24",
+    "desc": "Wedge Overlook Campsite #6 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite"
+  },
+  {
+    "name": "Temple Mountain Viewpoint",
+    "lat": 38.6994105876,
+    "lon": -110.734269619,
+    "ele": 1939.0,
+    "time": "2024-10-28T15:17:10Z",
+    "sym": "binoculars",
+    "desc": "Temple Mountain Viewpoint is a viewpoint inside of San Rafael Swell Recreation Area.\n\nAmenities: viewpoint"
+  },
+  {
+    "name": "Swinging Bridge Equestrian Campground",
+    "lat": 39.0801906844,
+    "lon": -110.662214756,
+    "ele": 1561.0,
+    "time": "2024-10-25T21:37:09Z",
+    "sym": "campsite-24",
+    "desc": "Swinging Bridge Equestrian Campground is a campsite inside of San Rafael Swell Recreation Area.\n\nActivities: , \nAmenities: campsite"
+  },
+  {
+    "name": "DP - Chute Canyon",
+    "lat": 38.6187227373,
+    "lon": -110.7610813765,
+    "ele": 1538.0,
+    "time": "2024-10-26T15:40:07Z",
+    "sym": "cliff",
+    "desc": "Chute Canyon is characterized by its dramatic, narrow passageways and steep, towering sandstone walls. The canyon is a striking example of erosion at work, with its walls exhibiting a range of colors, from deep reds to golden hues, shaped by the geological processes of wind and water over millions of years. The canyon floor is often rocky and uneven, leading to a series of natural features such as small alcoves, rock outcroppings, and interesting geological formations.\n\nAs you traverse Chute Canyon, you'll notice the varying widths of the canyon, which can narrow significantly in some sections, creating a sense of enclosure and intimacy with the surrounding landscape. Sunlight filtering through the canyon creates dynamic light patterns on the walls, enhancing the visual appeal of this rugged environment. The area is also dotted with desert vegetation, including sagebrush and scrub, which adds to the natural beauty and biodiversity of the canyon. Overall, Chute Canyon presents a striking mix of geological diversity and natural beauty, making it a captivating destination for outdoor enthusiasts."
+  },
+  {
+    "name": "Buckhorn Draw Campsite 7",
+    "lat": 39.1657381805,
+    "lon": -110.7349777222,
+    "ele": 1696.0,
+    "time": "2024-10-28T15:39:57Z",
+    "sym": "campsite-24",
+    "desc": "Buckhorn Draw Campsite 7 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
+  },
+  {
+    "name": "DP - Wedge Overlook",
+    "lat": 39.0955288221,
+    "lon": -110.7490264424,
+    "ele": 1917.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "binoculars",
+    "desc": "The Wedge Overlook, often referred to as the “Little Grand Canyon,” offers one of the most breathtaking viewpoints in the San Rafael Swell. From this overlook, visitors are treated to sweeping views of the San Rafael River carving its way through deep, rugged canyon walls that stretch as far as the eye can see. The canyon resembles a miniature version of the Grand Canyon with its layered cliffs, winding river, and expansive desert backdrop. The Wedge Overlook is especially popular at sunrise and sunset when the sunlight bathes the rock formations in shades of red, orange, and purple, creating a striking and unforgettable landscape.\n\nThe area around the Little Grand Canyon is ideal for hiking, camping, and photography, and the relatively easy access by vehicle makes it a favorite destination for outdoor enthusiasts exploring the Swell. Several hiking trails lead down into the canyon, allowing for closer encounters with the San Rafael River and the vibrant desert flora and fauna that thrive along its banks. With its blend of natural beauty, geological intrigue, and remote solitude, the Wedge Overlook and Little Grand Canyon capture the essence of the San Rafael Swell and offer visitors a unique desert experience."
+  },
+  {
+    "name": "Hondu Arch Viewpoint",
+    "lat": 38.6845382759,
+    "lon": -110.9988212585,
+    "ele": 1543.0,
+    "time": "2024-10-26T15:36:18Z",
+    "sym": "binoculars",
+    "desc": "Hondoo Arch Viewpoint is a viewpoint inside of San Rafael Swell Recreation Area.\n\nAmenities: viewpoint"
+  },
+  {
+    "name": "Site 1 (Group Site)",
+    "lat": 38.6560578834,
+    "lon": -110.6601548195,
+    "ele": 1612.0,
+    "time": "2025-05-29T16:03:54Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Crack Canyon Trailhead",
+    "lat": 38.643607,
+    "lon": -110.745181,
+    "ele": 1678.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "known-route",
+    "desc": null
+  },
+  {
+    "name": "Buckhorn Draw Campsite 32",
+    "lat": 39.0968955039,
+    "lon": -110.66614151,
+    "ele": 1571.0,
+    "time": "2024-10-25T21:40:32Z",
+    "sym": "campsite-24",
+    "desc": "Buckhorn Draw Campsite 32 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
+  },
+  {
+    "name": "DP - Dinosaur Footprint",
+    "lat": 39.1604974527,
+    "lon": -110.7292699814,
+    "ele": 1693.0,
+    "time": "2024-10-28T15:38:37Z",
+    "sym": "attraction",
+    "desc": "The dinosaur footprint in Buckhorn Draw, part of Utah’s San Rafael Swell, is a remarkable glimpse into the area’s prehistoric past. Preserved in sandstone, the footprint is believed to be from a large theropod dinosaur, possibly a relative of Allosaurus, that roamed this landscape approximately 150 million years ago during the Jurassic period. The single footprint is large and distinct, displaying three clawed toes typical of theropod tracks. The fossilized print provides a vivid reminder of the time when dinosaurs roamed what is now a rugged desert, and it stands out as an unexpected piece of ancient history amid the Swell’s human-made petroglyphs and natural formations."
+  },
+  {
+    "name": "DP - Temple Wash Petroglpyphs",
+    "lat": 38.661013,
+    "lon": -110.669472,
+    "ele": 1633.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "petroglyph",
+    "desc": "The Temple Wash Petroglyphs are an impressive collection of ancient rock art located in the San Rafael Swell, Utah. This site features numerous petroglyphs carved into the canyon walls, primarily attributed to the Fremont culture, which inhabited the area from approximately 600 to 1300 AD. The petroglyphs include a variety of anthropomorphic figures, animal representations, and geometric designs, showcasing the artistic expressions and cultural beliefs of the people who lived in this region.\n\nThe petroglyphs are situated in a scenic wash surrounded by stunning sandstone cliffs, providing a striking backdrop for these ancient carvings. Visitors to Temple Wash can explore the area through a short hike that leads to the petroglyph panels, where interpretive signs help provide context about the artwork and its significance. The site is also notable for its preservation efforts, as it has been protected from vandalism and weathering, allowing the intricate designs to be appreciated by modern audiences. The Temple Wash Petroglyphs serve as a vital link to the past, offering insights into the lives and beliefs of the early inhabitants of the San Rafael Swell while highlighting the region's rich archaeological heritage."
+  },
+  {
+    "name": "DP - Crack Canyon",
+    "lat": 38.6323158128,
+    "lon": -110.7394259487,
+    "ele": 1632.0,
+    "time": "2024-10-26T15:41:02Z",
+    "sym": "cliff",
+    "desc": "Crack Canyon is known for its dramatic geological features and narrow, winding passageways. The canyon is characterized by deep, narrow slots flanked by towering sandstone walls that can reach heights of over 200 feet. The rock formations exhibit striking striations and layered patterns, showcasing the different geological eras and the erosional processes that have shaped the landscape over time.\n\nThe canyon floor is typically rocky and can vary from sandy stretches to more challenging, uneven terrain. Crack Canyon also features a series of small alcoves and overhangs, which provide unique perspectives and enhance the visual drama of the environment. As visitors make their way through the canyon, they may encounter interesting rock formations and natural sculptures created by years of weathering. The interplay of light and shadow throughout the day further accentuates the canyon’s rugged beauty, making it a compelling destination for those seeking to explore the diverse geological characteristics of the San Rafael Swell."
+  },
+  {
+    "name": "DP - Hidden Splendor Overlook",
+    "lat": 38.565817619,
+    "lon": -110.9536743164,
+    "ele": 1466.0,
+    "time": "2024-10-26T15:36:54Z",
+    "sym": "binoculars",
+    "desc": null
+  },
+  {
+    "name": "Toilets",
+    "lat": 39.174754646,
+    "lon": -110.7892870903,
+    "ele": 1713.0,
+    "time": "2024-10-28T15:40:47Z",
+    "sym": "toilets-24",
+    "desc": null
+  },
+  {
+    "name": "Dispersed Camping",
+    "lat": 38.6737250574,
+    "lon": -110.7131471241,
+    "ele": 1806.0,
+    "time": "2024-10-26T00:50:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Swinging Bridge North Campground",
+    "lat": 39.0816065005,
+    "lon": -110.6650686264,
+    "ele": 1559.0,
+    "time": "2024-10-25T21:37:03Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - The Drips",
+    "lat": 39.0139987505,
+    "lon": -110.8998799324,
+    "ele": 1719.0,
+    "time": "2025-05-27T17:47:53Z",
+    "sym": "natural-spring",
+    "desc": "Towering walls of Navajo Sandstone encase a narrow side canyon where “The Drips” come to life. Here, countless mineral-stained rivulets trickle down from seeps high above, leaving behind dark streaks that paint the rock face in mesmerizing patterns. During wetter seasons, the constant dripping forms hanging gardens of moss and ferns, a vivid contrast to the otherwise arid environment. The steady rhythm of water hitting rock creates a serene, echoing soundtrack that amplifies the sense of isolation and stillness.\n\nOver time, the slow movement of water has carved delicate alcoves and overhangs into the canyon walls. The mineral deposits left behind—shades of deep red, brown, black, and green—tell a story of geologic patience, each layer a marker of past flows and chemical reactions. While the main draw is the visual beauty, there’s also something tactile about the place; the air is cooler and damper, and the rock surfaces are smooth to the touch where water has polished them for centuries. It’s a hidden, almost meditative spot—a place where time feels suspended and the desert reveals a softer side."
+  },
+  {
+    "name": "Gas Station",
+    "lat": 38.9946473122,
+    "lon": -110.1847156402,
+    "ele": 1255.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "fuel-24",
+    "desc": null
+  },
+  {
+    "name": "Chute Canyon Trailhead",
+    "lat": 38.629651,
+    "lon": -110.763442,
+    "ele": 1567.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "known-route",
+    "desc": null
+  },
+  {
+    "name": "DP - Spirit Arch",
+    "lat": 38.929849,
+    "lon": -110.434566,
+    "ele": 1404.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "stone",
+    "desc": null
+  },
+  {
+    "name": "Camp",
+    "lat": 39.0673018655,
+    "lon": -110.6414891067,
+    "ele": 1549.0,
+    "time": "2024-10-25T21:37:53Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp",
+    "lat": 38.6607543,
+    "lon": -110.6426342,
+    "ele": 1602.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Gas Station",
+    "lat": 38.375062,
+    "lon": -110.708736,
+    "ele": 1311.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "fuel-24",
+    "desc": null
+  },
+  {
+    "name": "Temple Mountain Campground",
+    "lat": 38.668351,
+    "lon": -110.685222,
+    "ele": 1658.0,
+    "time": "2024-10-25T21:30:39Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Split Rock",
+    "lat": 39.108821338,
+    "lon": -110.666389351,
+    "ele": 1604.0,
+    "time": "2025-05-27T17:40:12Z",
+    "sym": "stone",
+    "desc": null
+  },
+  {
+    "name": "Tunnel / Freeway Underpass",
+    "lat": 38.8681032783,
+    "lon": -110.7791170217,
+    "ele": 2115.0,
+    "time": "2024-10-25T21:51:36Z",
+    "sym": "attraction",
+    "desc": "Large/tall vehicles may have issues fitting through the tunnel"
+  },
+  {
+    "name": "DP - Eagle Canyon Overlook",
+    "lat": 38.8630858974,
+    "lon": -110.8679080009,
+    "ele": 2089.0,
+    "time": "2024-10-25T21:46:58Z",
+    "sym": "binoculars",
+    "desc": "Eagle Canyon Overlook is a viewpoint inside of San Rafael Swell Recreation Area.\n\nAmenities: viewpoint"
+  }
+]

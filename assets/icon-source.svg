@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  PWA app icon for the 2026 San Rafael Swell Adventure trip site.
+  Source-of-truth SVG; rasterized to 192/512/maskable + apple-touch-icon
+  PNGs by scripts/build_pwa_icons.py.
+
+  Design: rising sun over the iconic San Rafael Reef silhouette, with a
+  thin mustard route line tracing the loop. Square 512 viewport with all
+  meaningful content inside the inner ~80% so it survives the maskable
+  safe-zone crop on Android.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c2330"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="reef" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d2691e"/>
+      <stop offset="100%" stop-color="#8b3a0f"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffd56b"/>
+      <stop offset="60%" stop-color="#f1a23a"/>
+      <stop offset="100%" stop-color="#c2671a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background fills the whole viewport so the maskable variant has solid
+       paint to the corners; the safe-zone (inner 80%) holds the artwork. -->
+  <rect width="512" height="512" fill="url(#sky)"/>
+
+  <!-- Sun: kept inside the safe zone (centered, radius 70 < 0.4 * 256). -->
+  <circle cx="256" cy="210" r="70" fill="url(#sun)"/>
+
+  <!-- Reef silhouette: jagged sandstone fins. Single polygon for crisp
+       rasterization at every output size. -->
+  <polygon
+    fill="url(#reef)"
+    points="56,400 110,300 150,360 200,250 240,330 280,220 320,310 360,260 400,340 456,300 456,470 56,470"/>
+
+  <!-- Route line: thin mustard stroke tracing across the reef -->
+  <path
+    d="M70 420 C 130 380, 170 360, 210 350 S 290 320, 330 330 S 410 360, 450 380"
+    fill="none"
+    stroke="#f5c252"
+    stroke-width="9"
+    stroke-linecap="round"
+    stroke-linejoin="round"/>
+
+  <!-- Year tag at the base, well inside the safe zone -->
+  <text x="256" y="455" text-anchor="middle"
+        font-family="Helvetica, Arial, sans-serif"
+        font-size="34" font-weight="700"
+        fill="#f5c252" letter-spacing="3">2026</text>
+</svg>

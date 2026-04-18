@@ -1,0 +1,152 @@
+﻿
+== Goose Island Group Sites (SR 128) (id=251841) - 2 sites ==
+  2026-05-06: Reserved=2
+  2026-05-07: Reserved=2
+  2026-05-08: Reserved=2
+  2026-05-09: Reserved=2
+
+== Ken's Lake Group Sites (id=251840) - 2 sites ==
+  2026-05-06: Available=2
+      + Kens Lake/B (GROUP STANDARD NONELECTRIC)
+      + Kens Lake/A (GROUP EQUESTRIAN)
+  2026-05-07: Reserved=2
+  2026-05-08: Reserved=2
+  2026-05-09: Reserved=1, Available=1
+      + Kens Lake/A (GROUP EQUESTRIAN)
+
+== Ken's Lake Campground (id=234388) - 1 sites ==
+  2026-05-06: Reserved=1
+  2026-05-07: Reserved=1
+  2026-05-08: Reserved=1
+  2026-05-09: Reserved=1
+-- Big Bend Campground (SR 128) (id=251842) ERROR: <urlopen error [WinError 10054] An existing connection was forcibly closed by the remote host>
+
+== Hittle Bottom (SR 128) (id=233921) - 19 sites ==
+  2026-05-06: Not Reservable=19
+  2026-05-07: Not Reservable=19
+  2026-05-08: Not Reservable=19
+  2026-05-09: Not Reservable=19
+
+== Hal Canyon (SR 128) (id=251843) - 4 sites ==
+  2026-05-06: Reserved=4
+  2026-05-07: Reserved=4
+  2026-05-08: Reserved=4
+  2026-05-09: Reserved=4
+-- Oak Grove (SR 128) (id=234385) ERROR: <urlopen error [WinError 10054] An existing connection was forcibly closed by the remote host>
+-- Grandstaff Campground (SR 128) (id=234386) ERROR: <urlopen error [WinError 10054] An existing connection was forcibly closed by the remote host>
+-- Devils Garden (Arches NP) (id=232508) ERROR: The read operation timed out
+-- Willow Flat (Canyonlands Island in Sky) (id=234044) ERROR: The read operation timed out
+
+== Dead Horse Point SP - Kayenta (id=234045) - 63 sites ==
+  2026-05-06: Available=63
+      + Sites 2-29, 30-49, E1-E6/050 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/002 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/003 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/004 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/005 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/006 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/007 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/008 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/009 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/010 (STANDARD NONELECTRIC)
+  2026-05-07: Available=62, Reserved=1
+      + Sites 2-29, 30-49, E1-E6/050 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/002 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/003 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/004 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/005 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/006 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/007 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/008 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/009 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/010 (STANDARD NONELECTRIC)
+  2026-05-08: Available=59, Reserved=4
+      + Sites 2-29, 30-49, E1-E6/050 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/002 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/003 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/004 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/005 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/006 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/007 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/008 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/009 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/010 (STANDARD NONELECTRIC)
+  2026-05-09: Available=60, Reserved=3
+      + Sites 2-29, 30-49, E1-E6/050 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/002 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/003 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/004 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/005 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/006 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/007 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/008 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/009 (STANDARD NONELECTRIC)
+      + Sites 2-29, 30-49, E1-E6/010 (STANDARD NONELECTRIC)
+
+== Dead Horse Point SP - Wingate (id=234046) - 164 sites ==
+  2026-05-06: Available=159, Reserved=4, Not Reservable=1
+      + Loop 600/615 (STANDARD ELECTRIC)
+      + Loop 600/617 (STANDARD ELECTRIC)
+      + Loop 600/619 (STANDARD ELECTRIC)
+      + Loop 600/620 (STANDARD ELECTRIC)
+      + Loop 600/622 (STANDARD ELECTRIC)
+      + Loop 600/626 (STANDARD ELECTRIC)
+      + Loop 600/627 (STANDARD ELECTRIC)
+      + Loop 800/801 (STANDARD NONELECTRIC)
+      + Loop 800/802 (STANDARD NONELECTRIC)
+      + Loop 800/803 (STANDARD NONELECTRIC)
+  2026-05-07: Available=158, Reserved=5, Not Reservable=1
+      + Loop 600/615 (STANDARD ELECTRIC)
+      + Loop 600/617 (STANDARD ELECTRIC)
+      + Loop 600/619 (STANDARD ELECTRIC)
+      + Loop 600/620 (STANDARD ELECTRIC)
+      + Loop 600/622 (STANDARD ELECTRIC)
+      + Loop 600/626 (STANDARD ELECTRIC)
+      + Loop 600/627 (STANDARD ELECTRIC)
+      + Loop 800/801 (STANDARD NONELECTRIC)
+      + Loop 800/802 (STANDARD NONELECTRIC)
+      + Loop 800/803 (STANDARD NONELECTRIC)
+  2026-05-08: Reserved=13, Available=150, Not Reservable=1
+      + Loop 600/617 (STANDARD ELECTRIC)
+      + Loop 600/619 (STANDARD ELECTRIC)
+      + Loop 600/620 (STANDARD ELECTRIC)
+      + Loop 600/622 (STANDARD ELECTRIC)
+      + Loop 600/626 (STANDARD ELECTRIC)
+      + Loop 800/801 (STANDARD NONELECTRIC)
+      + Loop 800/802 (STANDARD NONELECTRIC)
+      + Loop 800/803 (STANDARD NONELECTRIC)
+      + Loop 800/804 (STANDARD NONELECTRIC)
+      + Loop 800/805 (STANDARD NONELECTRIC)
+  2026-05-09: Reserved=15, Available=148, Not Reservable=1
+      + Loop 600/617 (STANDARD ELECTRIC)
+      + Loop 600/619 (STANDARD ELECTRIC)
+      + Loop 600/620 (STANDARD ELECTRIC)
+      + Loop 600/626 (STANDARD ELECTRIC)
+      + Loop 800/801 (STANDARD NONELECTRIC)
+      + Loop 800/802 (STANDARD NONELECTRIC)
+      + Loop 800/803 (STANDARD NONELECTRIC)
+      + Loop 800/804 (STANDARD NONELECTRIC)
+      + Loop 800/805 (STANDARD NONELECTRIC)
+      + Loop 800/806 (STANDARD NONELECTRIC)
+
+== Jaycee Park (SR 279) (id=251844) - 60 sites ==
+  2026-05-06: 
+  2026-05-07: Reserved=1
+  2026-05-08: Closed=59, Reserved=1
+  2026-05-09: Reserved=2, Not Reservable=24, Available=34
+      + C/27 (STANDARD NONELECTRIC)
+      + F/08 (STANDARD NONELECTRIC)
+      + D/16 (STANDARD NONELECTRIC)
+      + B/36 (STANDARD NONELECTRIC)
+      + E/14 (STANDARD NONELECTRIC)
+      + A/55 (STANDARD NONELECTRIC)
+      + D/17 (STANDARD NONELECTRIC)
+      + B/31 (STANDARD NONELECTRIC)
+      + B/48 (STANDARD NONELECTRIC)
+      + B/42 (STANDARD NONELECTRIC)
+-- Williams Bottom (SR 279) (id=251845) ERROR: <urlopen error _ssl.c:1063: The handshake operation timed out>
+-- Gold Bar (SR 279) (id=251846) ERROR: <urlopen error [Errno 11001] getaddrinfo failed>
+-- Sand Flats Area A (Grand County) (id=251847) ERROR: <urlopen error [Errno 11001] getaddrinfo failed>
+-- Sand Flats Area B (id=251848) ERROR: <urlopen error [Errno 11001] getaddrinfo failed>
+-- Sand Flats Area C (id=251849) ERROR: <urlopen error [Errno 11001] getaddrinfo failed>
+-- Sand Flats Area D (id=251850) ERROR: <urlopen error [Errno 11001] getaddrinfo failed>
