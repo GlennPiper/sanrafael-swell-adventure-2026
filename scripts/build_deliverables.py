@@ -911,7 +911,7 @@ def build_itinerary_html():
                 {'label': 'Swell weather (Wedge)',    'url': 'https://forecast.weather.gov/MapClick.php?lat=39.0985&lon=-110.7850'},
                 {'label': 'SLC flash-flood info',     'url': 'https://www.weather.gov/slc/flashflood'},
                 {'label': 'SLC active warnings',      'url': 'https://www.weather.gov/slc/WWA'},
-                {'label': 'UDOT Region 4',            'url': 'https://x.com/UDOTRegion4'},
+                {'label': 'UDOT Region 4 news',       'url': 'https://udot.utah.gov/connect/category/region-four'},
                 {'label': 'Utah Fire Info',           'url': 'https://utahfireinfo.gov/'},
             ]
         elif d['type'] in ('moab', 'transit'):

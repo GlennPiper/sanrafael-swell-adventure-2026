@@ -27,7 +27,7 @@ Point forecasts for key waypoints - bookmark each:
 ## Road & Route Conditions
 
 - **UDOT Traveler Info** (main road closures, I-70, Hwy 24, Hwy 191): [udottraffic.utah.gov](https://www.udottraffic.utah.gov/)
-- **UDOT Region 4 updates** (covers SE Utah): [twitter.com/UDOTRegion4](https://twitter.com/UDOTRegion4) / [x.com/UDOTRegion4](https://x.com/UDOTRegion4)
+- **UDOT Region 4 news** (covers SE/SW Utah -- Grand, San Juan, Sevier, Emery, etc.): [udot.utah.gov/connect/category/region-four](https://udot.utah.gov/connect/category/region-four) -- official news category page; the legacy `@UDOTRegion4` X account is dead.
 - **UDOT cameras** (live highway views): [udottraffic.utah.gov/map](https://udottraffic.utah.gov/map) - filter by "Cameras", relevant cams: I-70 Green River area, Hwy 191 Moab corridor
 - **Emery County Road Department** (Buckhorn Draw Road, Green River Cutoff Rd, Buckhorn Wash Rd): call (435) 381-5176 before trip
 - **Grand County, UT** (Moab-area county roads): [grandcountyutah.net](https://www.grandcountyutah.net/)

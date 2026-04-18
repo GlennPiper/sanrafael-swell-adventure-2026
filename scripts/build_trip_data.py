@@ -793,7 +793,7 @@ REALTIME_LINKS = [
     {'cat': 'Weather', 'label': 'Radar KICX (Cedar City / Swell)', 'url': 'https://radar.weather.gov/station/KICX/standard'},
     {'cat': 'Weather', 'label': 'Radar KGJX (Moab)', 'url': 'https://radar.weather.gov/station/KGJX/standard'},
     {'cat': 'Roads', 'label': 'UDOT Traveler Info', 'url': 'https://www.udottraffic.utah.gov/'},
-    {'cat': 'Roads', 'label': 'UDOT Region 4 updates', 'url': 'https://x.com/UDOTRegion4'},
+    {'cat': 'Roads', 'label': 'UDOT Region 4 news', 'url': 'https://udot.utah.gov/connect/category/region-four'},
     {'cat': 'Roads', 'label': 'UDOT live cameras map', 'url': 'https://udottraffic.utah.gov/map'},
     {'cat': 'Fire/Smoke', 'label': 'Utah Fire Info (official)', 'url': 'https://utahfireinfo.gov/'},
     # The old /fire-restrictions-2/ path silently 302s to the ArcGIS hub root; use the deep-link to the actual restrictions page.
