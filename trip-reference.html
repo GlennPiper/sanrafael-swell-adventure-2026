@@ -69,7 +69,10 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .map{height:400px;background:#0d1117;border:1px solid var(--border);border-radius:6px;margin:12px 0}
 .map-wrap{position:relative;margin:12px 0}
 .map-wrap .map{margin:0}
-.map-fs-btn{position:absolute;top:10px;right:10px;z-index:1000;display:inline-flex;align-items:center;gap:6px;
+/* Bottom-right corner, lifted ~24px to clear Leaflet's attribution strip
+   (which lives at bottom:0). Top-right is reserved for the layers control
+   and top-left for the zoom buttons, so this is the only free corner. */
+.map-fs-btn{position:absolute;bottom:24px;right:10px;z-index:1000;display:inline-flex;align-items:center;gap:6px;
   background:rgba(13,17,23,0.85);color:var(--fg);border:1px solid var(--border);border-radius:6px;
   padding:6px 10px;font:600 12px/1 system-ui,sans-serif;cursor:pointer;
   box-shadow:0 2px 6px rgba(0,0,0,0.4)}
@@ -82,7 +85,7 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 /* Native :fullscreen pseudo-class makes the wrapper and inner map fill the viewport. */
 .map-wrap:fullscreen,.map-wrap:-webkit-full-screen{width:100vw;height:100vh;background:#0d1117;padding:0;border-radius:0}
 .map-wrap:fullscreen .map,.map-wrap:-webkit-full-screen .map{width:100%;height:100%;border-radius:0;border:0;margin:0}
-.map-wrap:fullscreen .map-fs-btn,.map-wrap:-webkit-full-screen .map-fs-btn{top:14px;right:14px}
+.map-wrap:fullscreen .map-fs-btn,.map-wrap:-webkit-full-screen .map-fs-btn{bottom:28px;right:14px}
 /* Fallback "max" mode when the browser denies native fullscreen. */
 .map-wrap.is-fullscreen-fallback{position:fixed;inset:0;z-index:10000;width:100vw;height:100vh;margin:0;background:#0d1117;border-radius:0}
 .map-wrap.is-fullscreen-fallback .map{width:100%;height:100%;border-radius:0;border:0;margin:0}
