@@ -10,6 +10,47 @@ This README is the "where is everything" index. Read it first any time you come 
 
 ---
 
+## For trip participants
+
+The trip companion is a small offline web app -- install it on your phone once
+on cell signal and it works in the Swell with no internet.
+
+**Site:** https://glennpiper.github.io/sanrafael-swell-adventure-2026/
+*(replace with your final Pages URL once the repo is created and deployed)*
+
+**Scan to install:** see `assets/qr.png` after the first deploy generates it
+(the landing page also displays the QR).
+
+### iPhone / iPad
+
+1. Open the site in **Safari** (must be Safari, not Chrome).
+2. Tap **Share** (the square-with-up-arrow at the bottom).
+3. Tap **Add to Home Screen** -> **Add**.
+4. Open **SRS Trip** from the home screen, then open it once more on cell
+   signal so it can finish caching the maps.
+
+### Android
+
+1. Open the site in **Chrome**.
+2. Tap the menu (three dots) -> **Install app** (or **Add to Home screen**).
+3. Open **SRS Trip** from the home screen, then open it once more on cell
+   signal so it can finish caching the maps.
+
+### Updates
+
+When you make a new release (push to `main`), every installed phone shows a
+small "New trip data available -- tap to reload" toast on its next online
+launch. No app-store review, no manual file shuffling.
+
+### What's in the app
+
+- `trip-itinerary.html` -- daily-tabbed view with maps, POIs, camps, schedule
+- `trip-reference.html` -- single-page knowledge dump (fuel, emergency,
+  decision matrix, every camp + POI including backups, all real-time links)
+- `trip-plan.gpx` -- import into Gaia / CalTopo / Garmin / OnX
+
+---
+
 ## Primary deliverables (what the group actually uses)
 
 These live at the **project root** and are regenerated from scripts. Do NOT hand-edit them.
@@ -66,6 +107,17 @@ First-time setup also requires populating the offline map assets (runs once; ide
 py scripts\download_offline_tiles.py
 ```
 
+### Full publish-style rebuild (matches the CI flow)
+
+```powershell
+py scripts\build_trip_data.py
+py scripts\build_pwa_icons.py        # needs: pip install pillow
+py scripts\build_pwa_assets.py       # set $env:SITE_URL for the QR code; needs: pip install "qrcode[pil]"
+py scripts\build_deliverables.py
+```
+
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs all four build scripts in the same order, runs the secret-scan PII guard over the staged `_publish/` directory, and publishes the result to GitHub Pages.
+
 ### Script-by-script
 
 | Script | Reads | Writes | When to run |
@@ -76,6 +128,8 @@ py scripts\download_offline_tiles.py
 | `scripts/check_moab_availability.py` | (live Recreation.gov API) | `planning/moab_availability_raw.txt` | Anytime we want to re-check Moab camp status |
 | **`scripts/build_trip_data.py`** | `planning/route_analysis.json`, `planning/route_tracks.json` + hardcoded `POI_STATUS` + `CAMPSITES` + `FUEL_PLAN_SUMMARY` + `REALTIME_LINKS` + `GROUP_COUNTS` | `planning/trip_data.json` | Anytime a POI, camp, link, or count changes |
 | **`scripts/build_deliverables.py`** | `planning/trip_data.json` | `trip-itinerary.html`, `trip-reference.html`, `trip-plan.gpx` | After `build_trip_data.py` |
+| `scripts/build_pwa_assets.py` | (env: `SITE_URL`) | `manifest.webmanifest`, `service-worker.js`, `robots.txt`, `assets/qr.png` | Each CI build (PWA shell + cache-bust) |
+| `scripts/build_pwa_icons.py` | `assets/icon-source.svg` | `icons/icon-192.png`, `icon-512.png`, `icon-512-maskable.png`, `apple-touch-icon.png` | Whenever the icon source changes |
 | `scripts/verify_outputs.py` | deliverables | console output | Sanity check (HTML balance, GPX parse, waypoint / track counts) |
 
 The bold scripts are the two you'll touch 95% of the time.
@@ -193,7 +247,11 @@ These must be done by **a human** - they require a real reservation or phone cal
 
 ## Environment & tooling
 
-- Python 3.10+ required. No third-party packages (uses only `json`, `xml.etree.ElementTree`, `urllib.request`, `pathlib`, `math`, `html`, `base64`, `re`).
+- Python 3.10+ required. The core build pipeline (`build_trip_data.py`, `build_deliverables.py`, `download_offline_tiles.py`, `verify_outputs.py`) uses only the stdlib (`json`, `xml.etree.ElementTree`, `urllib.request`, `pathlib`, `math`, `html`, `base64`, `re`).
+- The PWA scripts add two optional deps:
+  - `scripts/build_pwa_icons.py` -- needs `pillow`.
+  - `scripts/build_pwa_assets.py` -- needs `qrcode[pil]` (only for the QR code; manifest / service worker / robots are written without it).
+  - Install both: `pip install pillow "qrcode[pil]"`. CI installs them automatically.
 - Windows PowerShell is the expected shell (all commands use `py` launcher).
 - No virtual env required.
 - **Leaflet + offline tiles are bundled into `trip-itinerary.html`.** See "Offline map assets" below.
@@ -240,12 +298,23 @@ Safe to ignore unless re-doing the raw-data pull:
 ```
 root/
   README.md                         <-- you are here
+  index.html                        <-- LANDING + INSTALL INSTRUCTIONS (PWA entry)
   trip-itinerary.html               <-- DAILY VIEW (primary deliverable)
   trip-reference.html               <-- FULL REFERENCE (primary deliverable)
   trip-plan.gpx                     <-- NAV DATA (primary deliverable)
   Planning prompt.md
   san-rafael-swell-adv-route-2025.gpx  (source GPX from the OTG Crew)
   Utah_Destinations_In_San_Rafael_Area.md
+
+  assets/icon-source.svg            <-- icon source (rasterized by build_pwa_icons.py)
+  manifest.webmanifest              <-- GENERATED (gitignored; built by CI)
+  service-worker.js                 <-- GENERATED (gitignored; built by CI)
+  robots.txt                        <-- GENERATED (gitignored; built by CI)
+  icons/*.png                       <-- GENERATED (gitignored; built by CI)
+  assets/qr.png                     <-- GENERATED (gitignored; built by CI)
+
+  .github/workflows/deploy.yml      <-- Pages deploy + secret-scan on every push to main
+  .github/scripts/secret-scan.sh    <-- PII guard run against the staged publish dir
 
   Participants.md          (gitignored - local-only personal roster)
   Collected Location Info/ (gitignored - raw narrative + research)
@@ -265,6 +334,8 @@ root/
   scripts/
     build_trip_data.py              <-- *** main edit point for data changes ***
     build_deliverables.py           <-- HTML + GPX generator
+    build_pwa_assets.py             <-- manifest + service-worker + robots + QR
+    build_pwa_icons.py              <-- rasterize assets/icon-source.svg -> icons/*.png
     download_offline_tiles.py       <-- one-time: cache OSM tiles + Leaflet locally
     spur_audit.py                   <-- detect out-and-back spurs in the GPX
     verify_outputs.py               <-- sanity check

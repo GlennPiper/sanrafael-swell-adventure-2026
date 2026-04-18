@@ -1,0 +1,97 @@
+name: Build and deploy trip site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Don't queue parallel deploys for the same branch; cancel any in-flight one
+# so the latest push always wins.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pillow "qrcode[pil]"
+
+      # The offline tile cache lives in planning/offline_tiles/ and is committed
+      # to the repo (~250 KB). Cache it across runs anyway so a future bbox
+      # change that re-downloads tiles doesn't repeatedly hammer OSM.
+      - name: Cache offline OSM tiles
+        uses: actions/cache@v4
+        with:
+          path: planning/offline_tiles
+          key: offline-tiles-${{ hashFiles('scripts/download_offline_tiles.py') }}
+
+      - name: Ensure offline tiles + Leaflet vendor are present
+        run: python scripts/download_offline_tiles.py
+
+      - name: Build trip data (planning/trip_data.json)
+        run: python scripts/build_trip_data.py
+
+      - name: Build PWA icons (icons/*.png)
+        run: python scripts/build_pwa_icons.py
+
+      - name: Build PWA assets (manifest, service-worker, robots, QR)
+        env:
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: python scripts/build_pwa_assets.py
+
+      - name: Build HTML + GPX deliverables
+        run: python scripts/build_deliverables.py
+
+      - name: Stage publish directory
+        # Copy only the public site files into _publish/. Source code, raw
+        # planning notes, and KML Viewer dev workspace stay out of the
+        # deployed artifact.
+        run: |
+          set -euxo pipefail
+          rm -rf _publish
+          mkdir -p _publish
+          cp index.html trip-itinerary.html trip-reference.html trip-plan.gpx _publish/
+          cp manifest.webmanifest service-worker.js robots.txt _publish/
+          cp -r icons _publish/
+          mkdir -p _publish/assets
+          cp assets/qr.png _publish/assets/ 2>/dev/null || true
+
+      - name: Secret scan (PII guard on staged publish dir)
+        # Final safety net: fail the deploy if any participant first name,
+        # phone number, or email outside the public-emergency allow-list slips
+        # into the published artifact. Catches accidental copy/paste from
+        # Participants.md or other local-only sources.
+        run: bash .github/scripts/secret-scan.sh _publish
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _publish
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
