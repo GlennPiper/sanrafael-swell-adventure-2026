@@ -44,9 +44,23 @@ NAMES=(
   "Adrian"
 )
 
-# Public agency / emergency contacts that are allowed to appear (these are
-# intentionally published in the trip reference).
-ALLOW_PHONE_RE='\b(435\)?[-. ]?381[-. ]?2404|435\)?[-. ]?259[-. ]?8115|801\)?[-. ]?887[-. ]?3800|435\)?[-. ]?636[-. ]?3600|435\)?[-. ]?259[-. ]?2100)\b'
+# Public agency / emergency contacts (allowed to appear in published HTML).
+# We accept each number in three forms: the tel: URL form (with or without
+# +1), the (NNN) NNN-NNNN display form, and the bare NNN-NNN-NNNN form.
+ALLOW_NUMBERS=(
+  "4353812404"   # Emery County Sheriff / SAR
+  "4352598115"   # Grand County Sheriff
+  "8018873800"   # Utah Highway Patrol
+  "4356363600"   # BLM Price
+  "4352592100"   # BLM Moab
+)
+
+ALLOW_PHONE_RE=""
+for n in "${ALLOW_NUMBERS[@]}"; do
+  a="${n:0:3}"; b="${n:3:3}"; c="${n:6:4}"
+  ALLOW_PHONE_RE+="tel:\\+?1?${n}|\\(${a}\\) ?${b}-${c}|${a}[-. ]${b}[-. ]${c}|"
+done
+ALLOW_PHONE_RE="(${ALLOW_PHONE_RE%|})"
 
 # Build the names regex (word-boundary on both sides, case-sensitive on
 # purpose -- matching first names is signal, lowercase common words aren't).
@@ -56,9 +70,15 @@ for n in "${NAMES[@]}"; do
 done
 NAME_RE="\\b(${NAME_RE%|})\\b"
 
-# Generic phone regex (US): (123) 456-7890, 123-456-7890, 123.456.7890,
-# 1234567890, +11234567890.
-PHONE_RE='\b(\+?1[-. ]?)?(\(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4})\b'
+# Phone regex -- deliberately strict so it doesn't false-match against GPX
+# coordinates or JSON lat/lon values (which contain long runs of digits).
+# A real phone number must be ONE of:
+#   1. tel: URL (with optional +1 prefix), e.g. tel:+14353812404
+#   2. (NNN) NNN-NNNN display form, e.g. (435) 381-2404
+#   3. NNN-NNN-NNNN or NNN.NNN.NNNN -- requires actual separators in BOTH
+#      positions. (NNN.NNNNNNNNN style coordinate strings have only one dot
+#      so they can't match.)
+PHONE_RE='tel:\+?1?[0-9]{10}|\([0-9]{3}\) ?[0-9]{3}[-. ][0-9]{4}|\b[0-9]{3}[-.][0-9]{3}[-.][0-9]{4}\b'
 
 # Email regex.
 EMAIL_RE='[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
