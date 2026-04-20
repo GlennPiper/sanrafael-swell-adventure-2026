@@ -838,7 +838,7 @@ def schedule_controls_html(d):
 # -----------------------------------------------------------------------------
 CSS = """
 :root{
-  --bg:#1b1f23; --panel:#24292f; --text:#e6edf3; --muted:#8b949e;
+  --bg:#1b1f23; --panel:#24292f; --card:#21262d; --text:#e6edf3; --muted:#8b949e;
   --accent:#ff9d45; --border:#30363d;
   --primary:#238636; --backup:#9e6a03; --skip:#57606a;
   --hike:#a371f7; --conditional:#1f6feb; --logistics:#8b949e; --unclassified:#57606a;
@@ -853,15 +853,19 @@ header h1{margin:0 0 4px 0;font-size:22px}
 header .meta{color:var(--muted);font-size:13px}
 main{max-width:1400px;margin:0 auto;padding:12px}
 /* Mobile-only native day picker. Hidden on desktop where the .tabs strip
-   shines; promoted to display:block on phones so users get a familiar
-   "tap to choose a day" affordance instead of a subtle horizontal scroll.
-   font-size:16px is required to stop iOS Safari from zooming on focus. */
-.day-picker{display:none;width:100%;margin:8px 0 12px;padding:10px 36px 10px 12px;
-  background:var(--card) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%23f5c252' d='M3 5l5 6 5-6z'/></svg>") no-repeat right 10px center / 14px;
-  color:var(--text);border:1px solid var(--border);border-radius:8px;
+   shines; promoted on narrow screens so users get a familiar OS picker.
+   Wrapper + label make the control discoverable for first-time visitors;
+   font-size:16px on the <select> stops iOS Safari from zooming on focus. */
+.day-picker-wrap{display:none}
+.day-picker-label{display:block;font-size:11px;font-weight:700;letter-spacing:0.06em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 6px 2px}
+.day-picker{display:none;width:100%;margin:0;padding:12px 40px 12px 14px;
+  background:var(--card) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%23ff9d45' d='M3 5l5 6 5-6z'/></svg>") no-repeat right 12px center / 16px;
+  color:var(--text);border:1px solid #484f58;border-radius:8px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 1px 3px rgba(0,0,0,.35),0 0 0 1px rgba(255,157,69,.12);
   font:600 16px/1.2 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   -webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer}
-.day-picker:focus{outline:2px solid var(--accent);outline-offset:1px}
+.day-picker:focus{outline:2px solid var(--accent);outline-offset:2px;border-color:var(--accent)}
 .tabs{display:flex;flex-wrap:wrap;gap:2px;border-bottom:1px solid var(--border);
   margin-bottom:16px;background:var(--panel);padding:4px;border-radius:6px;}
 .tab-btn{background:transparent;color:var(--muted);border:0;padding:9px 14px;cursor:pointer;
@@ -1036,6 +1040,7 @@ tr.skipped-row .spur-hint::before{content:"[Saving] "}
      CSS is kept (overflow-x:auto + edge mask) for the rare case the
      select is unavailable, but it's hidden by default at this width. */
   .tabs{display:none}
+  .day-picker-wrap{display:block;margin:4px 0 14px}
   .day-picker{display:block}
 
   /* POI tables: table -> stacked cards. We hide the <thead>, convert each
@@ -1108,7 +1113,7 @@ tr.skipped-row .spur-hint::before{content:"[Saving] "}
 }
 
 @media print{
-  .tabs,.tab-btn,.day-picker{display:none}
+  .tabs,.tab-btn,.day-picker-wrap,.day-picker{display:none}
   .tab-pane{display:block!important;page-break-before:always}
   .tab-pane:first-child{page-break-before:auto}
   body{background:#fff;color:#000}
@@ -1519,7 +1524,10 @@ def build_itinerary_html(variant=None):
 <a href="{gpx_href}" download>Download GPX</a></div>
 </header>
 <main>
-<select class="day-picker" id="day-picker" aria-label="Select trip day">{''.join(options)}</select>
+<div class="day-picker-wrap">
+<label class="day-picker-label" id="day-picker-label" for="day-picker">Choose a day</label>
+<select class="day-picker" id="day-picker" aria-labelledby="day-picker-label">{''.join(options)}</select>
+</div>
 <div class="tabs" role="tablist">{''.join(tabs)}</div>
 {''.join(panes)}
 <section class="card" style="margin-top:24px">
