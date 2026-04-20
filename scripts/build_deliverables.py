@@ -1019,9 +1019,10 @@ def build_itinerary_html():
         hike_warn = ''
         if any(p.get('status') == 'hike_candidate' for p in pois):
             hike_warn = (
-                '<div class="warn"><strong>Day 3 hikes:</strong> Default = <strong>Wild Horse Window</strong> (hike candidate). '
-                'Backup slot/wash hikes (Chute Canyon, Crack Canyon, full Little Wild Horse/Bell loop) are listed as bonus stops — '
-                'see <a href="slot-canyon-guide.html">Slot canyon guide</a> (offline in the PWA) and the Reference page &quot;Day 3 Hike&quot; card. '
+                '<div class="warn"><strong>Day 3 hikes (tactical):</strong> <strong>Wild Horse Window</strong>, <strong>Chute Canyon</strong>, and '
+                '<strong>Crack Canyon</strong> are all <strong>checked by default</strong> — uncheck any your group will skip. '
+                'Still read <a href="slot-canyon-guide.html">Slot canyon guide</a> (offline in the PWA) and the Reference &quot;Day 3 Hikes&quot; card. '
+                '<strong>Little Wild Horse / Bell</strong> stays a bonus (backup) unless the whole party wants the full loop. '
                 '<strong>Flash floods:</strong> check forecast before Chute, Crack, or any slot.'
                 '</div>'
             )
@@ -1808,7 +1809,7 @@ def build_reference_html():
     hike_detail = """
 <div class="card" id="day3-hikes">
 <h2>Day 3 Hikes (Tactical)</h2>
-<p class="muted">Full write-up: <a href="slot-canyon-guide.html"><strong>Slot canyon guide</strong></a> (same offline PWA). Default hike = Wild Horse Window; Chute / Crack / LWH-Bell are backup bonus stops on the itinerary.</p>
+<p class="muted">Full write-up: <a href="slot-canyon-guide.html"><strong>Slot canyon guide</strong></a> (same offline PWA). <strong>Wild Horse Window</strong>, <strong>Chute</strong>, and <strong>Crack</strong> are tactical hikes (checked by default on the itinerary; uncheck skips). <strong>LWH / Bell</strong> remains a backup bonus unless the full group wants the loop.</p>
 
 <div class="two-col">
 <div>
@@ -1832,11 +1833,11 @@ def build_reference_html():
 </div>
 
 <div>
-<h3>Backup: Chute, Crack, Little Wild Horse / Bell</h3>
+<h3>Tactical slots: Chute &amp; Crack (plus backup: Little Wild Horse / Bell)</h3>
 <table>
-<tr><th>Chute Canyon</th><td>Easier wash; stays wide ~first mile; flexible turnaround. Area: <a href="https://www.alltrails.com/parks/us/utah/crack-canyon-wilderness" target="_blank" rel="noopener">AllTrails Crack Canyon Wilderness</a></td></tr>
-<tr><th>Crack Canyon</th><td>Stronger slot; ~<strong>10 ft drop</strong> ~1 mi in (~38.6255, -110.7382 WGS84) — down and back up on OAB; camping may exist past trailhead</td></tr>
-<tr><th>Little Wild Horse / Bell</th><td><strong>Default skip</strong> OAB when coming from Behind-the-Reef (long approach before tightest narrows). Consider only <strong>full ~8 mi loop</strong> if whole party accepts scrambling</td></tr>
+<tr><th>Chute Canyon</th><td><strong>Tactical hike</strong> on itinerary (same badge as WHW). Easier wash; stays wide ~first mile; flexible turnaround. Area: <a href="https://www.alltrails.com/parks/us/utah/crack-canyon-wilderness" target="_blank" rel="noopener">AllTrails Crack Canyon Wilderness</a></td></tr>
+<tr><th>Crack Canyon</th><td><strong>Tactical hike</strong> on itinerary. Stronger slot; ~<strong>10 ft drop</strong> ~1 mi in (~38.6255, -110.7382 WGS84) — down and back up on OAB; camping may exist past trailhead</td></tr>
+<tr><th>Little Wild Horse / Bell</th><td><strong>Backup / bonus</strong> — <strong>default skip</strong> OAB when coming from Behind-the-Reef (long approach before tightest narrows). Consider only <strong>full ~8 mi loop</strong> if whole party accepts scrambling</td></tr>
 <tr><th>Wild Horse Canyon</th><td>Separate AllTrails trail near Goblin Valley area; lower priority for this trip</td></tr>
 <tr><th>All slots</th><td><span class="badge badge-hike">FLASH FLOOD RISK</span> — no entry if rain on the Reef. See <a href="slot-canyon-guide.html">Slot canyon guide</a> for BLM + Grand Canyon Trust links</td></tr>
 </table>
@@ -1848,8 +1849,8 @@ def build_reference_html():
 <thead><tr><th>Condition</th><th>Recommendation</th></tr></thead>
 <tbody>
 <tr><td>Default / mixed abilities</td><td><strong>Wild Horse Window</strong></td></tr>
-<tr><td>Want easiest canyon walk</td><td><strong>Chute Canyon</strong> (backup)</td></tr>
-<tr><td>Want slot; party OK with ~10 ft obstacle</td><td><strong>Crack Canyon</strong> (backup)</td></tr>
+<tr><td>Want easiest canyon walk</td><td><strong>Chute Canyon</strong> (tactical; uncheck if not doing)</td></tr>
+<tr><td>Want slot; party OK with ~10 ft obstacle</td><td><strong>Crack Canyon</strong> (tactical; uncheck if not doing)</td></tr>
 <tr><td>Rain / flood risk</td><td>WHW only; skip slots</td></tr>
 <tr><td>Whole group wants LWH + scrambling + time</td><td>Full <strong>LWH/Bell loop</strong> from signed trailhead (backup waypoints)</td></tr>
 <tr><td>Behind schedule</td><td>Skip optional hikes; Temple Mtn camp</td></tr>

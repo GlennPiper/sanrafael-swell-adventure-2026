@@ -63,12 +63,12 @@ Confirmed via chat on the POI triage. `status` values:
 | 184.8 | Miner's Cabin (duplicate) | REMOVED | - | Exact dup of "DP - Miner's Cabin" (same lat/lon) |
 | 186.1 | DP - Behind the Reef trail | primary | ongoing | Technical trail section - slow |
 | 186.6 | Little Wild Horse Canyon Trail | backup | see [slot-canyon-guide.html](../slot-canyon-guide.html) (PWA) / [slot-canyon-guide.md](slot-canyon-guide.md) | Same GPX waypoint as LWH/Bell TH. **Default skip** OAB from Behind-the-Reef (narrows far in). **Full LWH/Bell ~8 mi loop** only if whole party OK with scrambling. |
-| 197.8 | DP - Wild Horse Window Arch | hike_candidate | see below + guide | **Default Day 3 hike.** Not a slot; 2 mi RT; BLM (not inside Goblin Valley SP gate). **Logistics:** set up camp first, then carpool to the trailhead. |
+| 197.8 | DP - Wild Horse Window Arch | hike_candidate | ~1.5 hr scheduler default | **Tactical** — **default Day 3 hike** narrative. Not a slot; ~2 mi RT (1–2 hr typical); BLM (not inside Goblin Valley SP gate). **Logistics:** set up camp first, then carpool to the trailhead. |
 | 197.9 | DP - Temple Wash Petroglpyphs | primary | 20-40 min | Roadside panel (GPX name has a typo; kept verbatim for lookup) |
 | 198.8 | Wild Horse Window Trailhead | skip | - | Trailhead waypoint only; Wild Horse Window Arch is the destination |
 | 187.1 | Little Wild Horse Slot Canyon | backup | see guide | Waypoint on full **LWH/Bell loop** (~8 mi / 4–6 hr). Only with full-party buy-in. |
-| 190.3 | DP - Chute Canyon | backup | 2–4+ hr if hiked | Easier wash; **wide for ~first mile**; see [slot-canyon-guide.html](../slot-canyon-guide.html) / [slot-canyon-guide.md](slot-canyon-guide.md), [AllTrails Crack Canyon Wilderness](https://www.alltrails.com/parks/us/utah/crack-canyon-wilderness) |
-| 192.7 | DP - Crack Canyon | backup | 3–5+ hr if hiked | Strong slot; **~10 ft drop** ~1 mi in (~38.6255, -110.7382); camping may exist past TH. Same AllTrails area link as Chute. |
+| 190.3 | DP - Chute Canyon | hike_candidate | ~2.5 hr scheduler default | **Tactical** (same as WHW): easier wash; **wide for ~first mile**; partial OAB typical (~0.8 mi to first narrowing per GCT). See [slot-canyon-guide.html](../slot-canyon-guide.html) / [slot-canyon-guide.md](slot-canyon-guide.md), [AllTrails Crack Canyon Wilderness](https://www.alltrails.com/parks/us/utah/crack-canyon-wilderness) |
+| 192.7 | DP - Crack Canyon | hike_candidate | ~3.5 hr scheduler default | **Tactical:** ~5 mi RT typical ([Utah.com](https://utah.com/destinations/natural-areas/san-rafael-swell/hiking/crack-canyon/)); **~10 ft drop** ~1 mi in (~38.6255, -110.7382); camping may exist past TH. Same AllTrails area link as Chute. |
 | 190.4 | Goblin Valley State Park | skip | - | Off-route side trip; time budget |
 | 190.5 | Chute Canyon Trailhead | backup | short | Park / start of Chute hike |
 | 192.7 | Crack Canyon Trailhead | backup | short | Park / start of Crack hike; camping nearby possible |
@@ -81,8 +81,8 @@ Confirmed via chat on the POI triage. `status` values:
 
 **Defaults**
 
-- **Hike candidate (checked in scheduler):** **Wild Horse Window** — best fit for mileage, no slot flood risk, famous arch/cave. **Not inside Goblin Valley State Park:** approach from Hwy 24 / Temple Mountain–Goblin Valley roads; trailhead on **BLM** (no park fee unless you enter GSVP separately). **Plan:** set up **Temple Mountain camp** before the hike and **carpool** to the trailhead (small parking footprint).
-- **Backup canyon hikes (uncheck unless time + interest):** **Chute** (easiest; wide early), **Crack** (better slot; **10 ft obstacle**), **Little Wild Horse** only as **full LWH/Bell loop** if everyone accepts **scrambling** and distance.
+- **Hike candidates (tactical; checked in scheduler by default):** **Wild Horse Window** — best fit for mileage, no slot flood risk, famous arch/cave; **Chute Canyon** — easiest canyon walk (wide early); **Crack Canyon** — stronger slot with **~10 ft obstacle**. **Uncheck** any tactical row the group will not do (scheduler still assumes all three until you trim). **WHW:** **Not inside Goblin Valley State Park** — trailhead/arch on **BLM**; set up **Temple Mountain camp** first and **carpool** to WHW (small parking).
+- **Backup canyon hikes:** **Little Wild Horse** only as **full LWH/Bell loop** if everyone accepts **scrambling** and distance (starts **unchecked**).
 
 **Tactical factors on the day**
 
@@ -124,8 +124,8 @@ Confirmed via chat on the POI triage. `status` values:
 | Condition | Recommendation |
 |---|---|
 | Default / mixed abilities | **Wild Horse Window** |
-| Want easiest canyon walk, OK with wide wash first | **Chute Canyon** (backup) |
-| Want real slot, party OK with **~10 ft** obstacle | **Crack Canyon** (backup) |
+| Want easiest canyon walk, OK with wide wash first | **Chute Canyon** (tactical; uncheck if not doing) |
+| Want real slot, party OK with **~10 ft** obstacle | **Crack Canyon** (tactical; uncheck if not doing) |
 | Rain / flood risk in slots | **Wild Horse Window**; skip slot hikes |
 | Whole group wants **LWH** + scrambling + time | **Full LWH/Bell loop** from trailhead (backup waypoints) |
 | Behind schedule | Skip optional hikes; Temple Mtn camp |
@@ -153,7 +153,7 @@ Verified against source GPX: every POI listed maps 1:1 to a `<wpt>` by name; all
 
 - Day 1: 11 primary POIs + 1 on-route backup + 3 May-2 bonus backups + 2 skips (trailhead/off-route)
 - Day 2: 12 primary POIs (+ River crossing) + 1 backup + 4 skips
-- Day 3: 6 primary POIs + **1 hike candidate** (Wild Horse Window) + **8 backups** (LWH/Bell/Chute/Crack/Wild Horse Canyon + trailheads) + 3 skips — see [slot-canyon-guide.md](slot-canyon-guide.md) / [slot-canyon-guide.html](../slot-canyon-guide.html)
+- Day 3: 6 primary POIs + **3 hike candidates** (Wild Horse Window, Chute, Crack) + **6 backups** (LWH/Bell/Wild Horse Canyon + trailheads + Hondu viewpoint) + 3 skips — see [slot-canyon-guide.md](slot-canyon-guide.md) / [slot-canyon-guide.html](../slot-canyon-guide.html)
 - Day 4 AM: 4 primary POIs + 2 skips (Temple Mountain Viewpoint, Freeway Access anchor)
 
-**Total planned stops (primary + hike_candidate) across the 3.25 overland days: 34.** (Does not include May-2 bonuses or skips.)
+**Total planned stops (primary + hike_candidate) across the 3.25 overland days: 36.** (Does not include May-2 bonuses or skips.)

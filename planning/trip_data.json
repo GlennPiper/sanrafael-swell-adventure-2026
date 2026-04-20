@@ -34948,12 +34948,12 @@
           "mile": 190.32,
           "dist_to_track_m": 1100.8,
           "sym": "cliff",
-          "status": "backup",
-          "note": "Easier wash; wide ~first mi; out-and-back; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness",
+          "status": "hike_candidate",
+          "note": "Tactical slot/wash; easier; wide ~first mi; ~0.8 mi to first narrowing (GCT); partial OAB typical; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness",
           "desc": "Chute Canyon is characterized by its dramatic, narrow passageways and steep, towering sandstone walls. The canyon is a striking example of erosion at work, with its walls exhibiting a range of colors, from deep reds to golden hues, shaped by the geological processes of wind and water over millions of years. The canyon floor is often rocky and uneven, leading to a series of natural features such as small alcoves, rock outcroppings, and interesting geological formations.\n\nAs you traverse Chute Canyon, you'll notice the varying widths of the canyon, which can narrow significantly in some sections, creating a sense of enclosure and intimacy with the surrounding landscape. Sunlight filtering through the canyon creates dynamic light patterns on the walls, enhancing the visual appeal of this rugged environment. The area is also dotted with desert vegetation, including sagebrush and scrub, which adds to the natural beauty and biodiversity of the canyon. Overall, Chute Canyon presents a striking mix of geological diversity and natural beauty, making it a captivating destination for outdoor enthusiasts.",
           "spur_mi": 0.0,
-          "default_minutes": 180,
-          "default_checked": false
+          "default_minutes": 150,
+          "default_checked": true
         },
         {
           "name": "Goblin Valley State Park",
@@ -34993,12 +34993,12 @@
           "mile": 192.67,
           "dist_to_track_m": 1302.9,
           "sym": "cliff",
-          "status": "backup",
-          "note": "~10 ft drop ~1 mi in; strong slot; camping may exist past TH; slot-canyon-guide.html + AllTrails Crack Canyon Wilderness",
+          "status": "hike_candidate",
+          "note": "Tactical slot; ~5 mi RT typical (Utah.com); ~10 ft drop ~1 mi in; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness",
           "desc": "Crack Canyon is known for its dramatic geological features and narrow, winding passageways. The canyon is characterized by deep, narrow slots flanked by towering sandstone walls that can reach heights of over 200 feet. The rock formations exhibit striking striations and layered patterns, showcasing the different geological eras and the erosional processes that have shaped the landscape over time.\n\nThe canyon floor is typically rocky and can vary from sandy stretches to more challenging, uneven terrain. Crack Canyon also features a series of small alcoves and overhangs, which provide unique perspectives and enhance the visual drama of the environment. As visitors make their way through the canyon, they may encounter interesting rock formations and natural sculptures created by years of weathering. The interplay of light and shadow throughout the day further accentuates the canyon’s rugged beauty, making it a compelling destination for those seeking to explore the diverse geological characteristics of the San Rafael Swell.",
           "spur_mi": 0.0,
-          "default_minutes": 240,
-          "default_checked": false
+          "default_minutes": 210,
+          "default_checked": true
         },
         {
           "name": "Crack Canyon Trailhead",

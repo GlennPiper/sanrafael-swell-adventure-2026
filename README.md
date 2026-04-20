@@ -155,7 +155,7 @@ Edit `POI_STATUS` dict in `scripts/build_trip_data.py`. Keys are the exact waypo
 - `'primary'` - scheduled stop
 - `'backup'` - fallback / bonus if time allows
 - `'skip'` - intentionally not stopping (kept documented so we know we considered it)
-- `'hike_candidate'` - on the tactical-decision menu (currently Day 3 only)
+- `'hike_candidate'` - **Hike (tactical)** on the itinerary (Day 3: Wild Horse Window, Chute Canyon, Crack Canyon — checked by default; uncheck skips)
 - `'conditional'` - stop only if a condition is met (rare)
 
 Then rebuild. The status flows to:

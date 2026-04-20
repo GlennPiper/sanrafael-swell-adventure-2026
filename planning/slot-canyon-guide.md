@@ -77,9 +77,13 @@ Use AllTrails for **recent trip reports** and **GPX**; cross-check mileages agai
 
 ## Bottom line for Day 3
 
-1. **Default hike:** **Wild Horse Window** (fits mileage guideline; no slot flood risk).
-2. **Easier “canyon walk” backup:** **Chute Canyon** (mild; wide early).
-3. **Stronger slot backup:** **Crack Canyon** (watch **10 ft obstacle** and party fitness).
+1. **Default hike (narrative):** **Wild Horse Window** (fits mileage guideline; no slot flood risk).
+2. **Easier canyon walk (tactical):** **Chute Canyon** (mild; wide early) — on the itinerary as **Hike (tactical)**, checked by default; **uncheck** if the group skips it.
+3. **Stronger slot (tactical):** **Crack Canyon** (watch **10 ft obstacle** and party fitness) — same badge/checkbox behavior as WHW and Chute.
 4. **Little Wild Horse:** Prefer **skip** on this route direction **unless** committing to **full LWH/Bell loop** and scrambling is OK for everyone.
+
+### Itinerary “Stop (min)” defaults (dwell time seed)
+
+Aligned with the mileage table above and public write-ups: **Wild Horse Window** **90 min** (~2 mi RT, easy, often quoted 1–2 hr). **Chute** **150 min** (~2.5 hr) for a **typical partial** out-and-back (not the full ~7.7 mi GCT day-hike). **Crack** **210 min** (~3.5 hr) for a **typical ~5 mi RT** outing plus obstacle/photo delay ([Utah.com — Crack Canyon](https://utah.com/destinations/natural-areas/san-rafael-swell/hiking/crack-canyon/)). Adjust per group on the day.
 
 POI status in the itinerary and GPX is driven by `scripts/build_trip_data.py` (rebuild after edits).

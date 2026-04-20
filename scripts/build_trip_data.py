@@ -214,15 +214,15 @@ POI_STATUS = {
     "DP - Miner's Cabin":                  ('primary',  'Historic structure'),
     "Miner's Cabin":                       ('skip',     'Exact duplicate of DP version -- removed'),
     'DP - Behind the Reef trail':          ('primary',  'Technical trail section - slow'),
-    # Hike candidates - both primary, pick tactically
+    # Day 3 tactical hikes (Hike (tactical) badge; checked by default; uncheck ones you skip)
     'DP - Wild Horse Window Arch':         ('hike_candidate', 'Default Day 3 hike; route author #1 geology; 2 mi RT; BLM not GSVP gate; set up camp before this hike and carpool to the trailhead; see slot-canyon-guide.html + AllTrails WHW'),
+    'DP - Chute Canyon':                   ('hike_candidate', 'Tactical slot/wash; easier; wide ~first mi; ~0.8 mi to first narrowing (GCT); partial OAB typical; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
+    'DP - Crack Canyon':                   ('hike_candidate', 'Tactical slot; ~5 mi RT typical (Utah.com); ~10 ft drop ~1 mi in; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
     'Little Wild Horse Canyon Trail':      ('backup',       'LWH/Bell TH; skip OAB from Behind-the-Reef unless full ~8 mi LWH/Bell loop + party OK scrambling; FLASH FLOOD RISK — slot-canyon-guide.html'),
     'Little Wild Horse Slot Canyon':       ('backup',       'Full LWH/Bell loop waypoint only; same caveats — slot-canyon-guide.html'),
     'DP - Temple Wash Petroglpyphs':       ('primary',  'Roadside panel (GPX name has a typo, kept exact for lookup)'),
     'Wild Horse Window Trailhead':         ('skip',     'Trailhead reference only; Wild Horse Window Arch is the destination hike'),
     # Day 3 skips
-    'DP - Chute Canyon':                   ('backup',   'Easier wash; wide ~first mi; out-and-back; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
-    'DP - Crack Canyon':                   ('backup',   '~10 ft drop ~1 mi in; strong slot; camping may exist past TH; slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
     'Goblin Valley State Park':            ('skip',     'Off-route side trip; time budget'),
     'Chute Canyon Trailhead':              ('backup',   'Chute Canyon hike parking — slot-canyon-guide.html'),
     'Crack Canyon Trailhead':              ('backup',   'Crack Canyon hike parking; camping nearby possible — slot-canyon-guide.html'),
@@ -574,12 +574,18 @@ def _default_minutes(name, sym, status, note):
     n = (name or '').lower()
     s = (sym or '').lower()
     nl = (note or '').lower()
-    # Specific named stops first
-    if 'wild horse window' in n:                return 90
+    # Specific named stops first (times = suggested on-trail dwell for scheduler; see slot-canyon-guide.md)
+    if 'wild horse window' in n:
+        # Published ~2 mi RT, easy, commonly 1–2 hr — use 90 min as mid estimate
+        return 90
     if 'little wild horse canyon trail' in n:   return 120
     if 'little wild horse slot' in n:           return 0   # loop waypoint reference unless full hike
-    if 'dp - crack canyon' == n:                return 240
-    if 'dp - chute canyon' == n:               return 180
+    if 'dp - crack canyon' == n:
+        # Utah.com ~5 mi RT + 10 ft choke: ~3–4 hr typical; 210 min = 3.5 hr planner default
+        return 210
+    if 'dp - chute canyon' == n:
+        # Partial OAB to first narrowing (~0.8 mi one-way per GCT) / easy wash — ~2–3 hr; not full 7.7 mi day hike
+        return 150
     if 'eva conover' in n:                      return 60  # trail section
     if 'behind the reef' in n:                  return 75  # technical trail
     if 'tomsich butte' in n:                    return 45
