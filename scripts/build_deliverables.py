@@ -18,7 +18,109 @@ OUT_DIR = BASE
 TILE_DIR = PLAN / 'offline_tiles'
 VENDOR_DIR = PLAN / 'vendor' / 'leaflet'
 
-data = json.loads((PLAN / 'trip_data.json').read_text(encoding='utf-8'))
+# -----------------------------------------------------------------------------
+# Variant registry: main itinerary + three alternates. Each variant loads its
+# own trip_data*.json and renders trip-itinerary*.html + trip-plan*.gpx. The
+# main variant is the only one that emits trip-reference.html; alternates share
+# the main reference (same POI catalog, same fuel plan, same emergency info).
+# -----------------------------------------------------------------------------
+MAIN_DATA_PATH = PLAN / 'trip_data.json'
+MAIN_GPX_FILENAME = 'trip-plan.gpx'
+
+VARIANT_MAIN = {
+    'key':                'main',
+    'data_path':          MAIN_DATA_PATH,
+    'html_path':          OUT_DIR / 'trip-itinerary.html',
+    'gpx_path':           OUT_DIR / 'trip-plan.gpx',
+    'gpx_filename':       'trip-plan.gpx',
+    'page_title':         '2026 San Rafael Swell + Moab - Itinerary',
+    'header_h1':          '2026 San Rafael Swell Adventure + Moab',
+    'header_meta':        'May 2 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi',
+    'nav_key':            'itinerary',
+    'show_reference_link': True,
+    'overview_title':     'Full San Rafael Swell route',
+    'overview_desc_html': (
+        'Stitched <strong>GPX driving corridor</strong> (Day 1 through Day 4 AM segments) '
+        'plus <strong>travel + overland POIs and camps</strong> (rows marked <em>skip</em> in data are omitted). '
+        'Highway travel to May 2 staging is not part of this polyline; Moab and the return leg are not drawn \u2014 '
+        'use per-day tabs for those.'
+    ),
+    'gpx_metadata_name':  '2026 San Rafael Swell Trip Plan',
+    'gpx_metadata_desc':  'Day-split tracks, primary POIs, and primary/backup campsites for the May 2-10, 2026 trip.',
+}
+
+VARIANT_ALT_A = {
+    'key':                'alt-a',
+    'data_path':          PLAN / 'trip_data_alt_a.json',
+    'html_path':          OUT_DIR / 'trip-itinerary-alt-a.html',
+    'gpx_path':           OUT_DIR / 'trip-plan-alt-a.gpx',
+    'gpx_filename':       'trip-plan-alt-a.gpx',
+    'page_title':         'Alt A - 2026 SRS Itinerary (forward, 4-day, V2)',
+    'header_h1':          'Alt A - 2026 San Rafael Swell Adventure + Moab',
+    'header_meta':        'May 2 - May 10, 2026 &middot; Variant A-V2 (forward, 4-day Swell lighten) &middot; 11 overlanders + 7 Moab',
+    'nav_key':            'alt-a',
+    'show_reference_link': True,
+    'overview_title':     'Full Swell route (Alt A)',
+    'overview_desc_html': (
+        'Same direction as the main plan but with <strong>Day 2 shortened</strong> to end at Family Butte. '
+        'Reds / Lucky Strike / Hondu / Hidden Splendor roll to Day 3; Chute/Crack/LWH slots and the '
+        'Sinbad cluster move to <strong>May 6</strong> for stay-overs. Extra Swell night, Moab <strong>May 7</strong>.'
+    ),
+    'gpx_metadata_name':  '2026 SRS Trip Plan - Alt A (forward, V2)',
+    'gpx_metadata_desc':  'Day-split tracks, POIs, and camps for Alt A (forward direction, 4-day Swell lighten, Variant V2).',
+}
+
+VARIANT_ALT_B = {
+    'key':                'alt-b',
+    'data_path':          PLAN / 'trip_data_alt_b.json',
+    'html_path':          OUT_DIR / 'trip-itinerary-alt-b.html',
+    'gpx_path':           OUT_DIR / 'trip-plan-alt-b.gpx',
+    'gpx_filename':       'trip-plan-alt-b.gpx',
+    'page_title':         'Alt B - 2026 SRS Itinerary (reverse, V1)',
+    'header_h1':          'Alt B - 2026 San Rafael Swell Adventure + Moab',
+    'header_meta':        'May 2 - May 10, 2026 &middot; Variant B-V1 (reverse, stay-overs Moab May 6) &middot; 11 overlanders + 7 Moab',
+    'nav_key':            'alt-b',
+    'show_reference_link': True,
+    'overview_title':     'Full Swell route (Alt B, reverse)',
+    'overview_desc_html': (
+        'Runs the Swell <strong>west -> east</strong>: Temple Mtn / Sinbad side first, '
+        'Buckhorn / Black Dragon last. Day 1 is the meaty day (fresh group). '
+        'Day 3 ends near the highway at Black Dragon for a clean May 6 split.'
+    ),
+    'gpx_metadata_name':  '2026 SRS Trip Plan - Alt B (reverse, V1)',
+    'gpx_metadata_desc':  'Day-split tracks (reverse direction), POIs, and camps for Alt B (Variant V1, stay-overs reach Moab May 6).',
+}
+
+VARIANT_ALT_D = {
+    'key':                'alt-d',
+    'data_path':          PLAN / 'trip_data_alt_d.json',
+    'html_path':          OUT_DIR / 'trip-itinerary-alt-d.html',
+    'gpx_path':           OUT_DIR / 'trip-plan-alt-d.gpx',
+    'gpx_filename':       'trip-plan-alt-d.gpx',
+    'page_title':         'Alt D - 2026 SRS Itinerary (reverse, BTR split, V1)',
+    'header_h1':          'Alt D - 2026 San Rafael Swell Adventure + Moab',
+    'header_meta':        'May 2 - May 10, 2026 &middot; Variant D-V1 (reverse, BTR split, Crack camp D1) &middot; 11 overlanders + 7 Moab',
+    'nav_key':            'alt-d',
+    'show_reference_link': True,
+    'overview_title':     'Full Swell route (Alt D, reverse, BTR split)',
+    'overview_desc_html': (
+        'Reverse direction with <strong>Behind-the-Reef split across May 3-4</strong>. '
+        'May 3 camps near Crack Canyon trailhead (not mid-BTR); May 4 drives Hidden Splendor + mid-corridor. '
+        'May 6 split is at <strong>Wedge</strong>: early-leavers N via Green River Cutoff; stay-overs finish Buckhorn + Black Dragon and reach Moab same evening.'
+    ),
+    'gpx_metadata_name':  '2026 SRS Trip Plan - Alt D (reverse, BTR split, V1)',
+    'gpx_metadata_desc':  'Day-split tracks (reverse direction, BTR split), POIs, and camps for Alt D (Variant V1).',
+}
+
+ALL_VARIANTS = [VARIANT_MAIN, VARIANT_ALT_A, VARIANT_ALT_B, VARIANT_ALT_D]
+
+
+# Module-level `data`, `overview_track`, `ov_markers` get reassigned per
+# variant inside `render_variant()`. They stay as module globals so the
+# large build_itinerary_html / build_gpx / build_reference_html functions
+# (and their helpers) don't need data threaded through every call site.
+data = json.loads(MAIN_DATA_PATH.read_text(encoding='utf-8'))
+overview_track = []  # filled by prepare_variant_context()
 
 
 # -----------------------------------------------------------------------------
@@ -244,24 +346,10 @@ def write_planning_markdown_pages():
             'Alternate Swell routes (overview) - SRS Trip',
             'overland-alt',
         ),
-        (
-            PLAN / 'trip-itinerary-alt-a.md',
-            OUT_DIR / 'trip-itinerary-alt-a.html',
-            'Alternate itinerary A (forward, 4-day) - SRS Trip',
-            'alt-a',
-        ),
-        (
-            PLAN / 'trip-itinerary-alt-b.md',
-            OUT_DIR / 'trip-itinerary-alt-b.html',
-            'Alternate itinerary B (reverse, V1) - SRS Trip',
-            'alt-b',
-        ),
-        (
-            PLAN / 'trip-itinerary-alt-d.md',
-            OUT_DIR / 'trip-itinerary-alt-d.html',
-            'Alternate itinerary D (reverse split, V1) - SRS Trip',
-            'alt-d',
-        ),
+        # Note: Alt A / B / D itinerary pages are NOT rendered from markdown
+        # anymore -- they're full interactive HTML pages emitted by
+        # render_variant() from planning/trip_data_alt_*.json. The markdown
+        # files in planning/ remain as the authoritative planning notes.
     ]
     for md_path, out_path, title, nav_key in pages:
         if not md_path.exists():
@@ -323,24 +411,33 @@ def decimate(points, every_n):
     return [p for i, p in enumerate(points) if i % every_n == 0 or i == len(points) - 1]
 
 
-# Choose decimation per day to keep HTML size reasonable (~80-120 pts per day map).
-for d in data['days']:
-    n_pts = len(d.get('track_points') or [])
-    if n_pts > 0:
-        every = max(1, n_pts // 120)
-        d['_map_points'] = decimate(d['track_points'], every)
-    else:
-        d['_map_points'] = []
-
-# Overview track (full trip, decimated hard)
-full_track = []
-for d in data['days']:
-    full_track.extend(d.get('track_points') or [])
-every = max(1, len(full_track) // 400) if full_track else 1
-overview_track = decimate(full_track, every)
-
 # First itinerary tab: full Swell GPX corridor + aggregated stops (not a trip_data day).
 ROUTE_OVERVIEW_ID = 'route_overview'
+
+
+def prepare_variant_context(payload):
+    """Decimate per-day and overview track points for HTML rendering.
+
+    Mutates each day dict in `payload` by adding a `_map_points` key (the
+    rendered HTML map uses these downsampled points; full-precision tracks
+    stay available for GPX output). Returns the overview polyline so the
+    caller can assign it to the module global."""
+    for d in payload['days']:
+        n_pts = len(d.get('track_points') or [])
+        if n_pts > 0:
+            every_n = max(1, n_pts // 120)
+            d['_map_points'] = decimate(d['track_points'], every_n)
+        else:
+            d['_map_points'] = []
+    # Overview = full trip, decimated hard (~400 pts total).
+    full_track = []
+    for d in payload['days']:
+        full_track.extend(d.get('track_points') or [])
+    every_n = max(1, len(full_track) // 400) if full_track else 1
+    return decimate(full_track, every_n)
+
+
+overview_track = prepare_variant_context(data)
 
 
 # -----------------------------------------------------------------------------
@@ -1023,7 +1120,13 @@ tr.skipped-row .spur-hint::before{content:"[Saving] "}
 # -----------------------------------------------------------------------------
 # Day-Tabbed ITINERARY HTML
 # -----------------------------------------------------------------------------
-def build_itinerary_html():
+def build_itinerary_html(variant=None):
+    """Render the tabbed itinerary page for the given variant.
+
+    `variant` is a dict (see VARIANT_* at top of module) controlling page
+    title, header strings, GPX download filename, nav highlight, and the
+    route-overview tab header. Defaults to VARIANT_MAIN."""
+    variant = variant or VARIANT_MAIN
     days = data['days']
 
     # ----- Full-route overview (first tab): stitched GPX + aggregated pins -----
@@ -1095,14 +1198,13 @@ def build_itinerary_html():
     else:
         ov_map_html = '<div class="info">No map data for full-route view.</div>'
 
+    ov_intro_html = data.get('intro_html') or ''
     ov_pane = (
         f'<div class="tab-pane active" id="pane-{ROUTE_OVERVIEW_ID}">'
         '<div class="card">'
-        '<h2>Full San Rafael Swell route</h2>'
-        '<div class="muted">Stitched <strong>GPX driving corridor</strong> (Day 1 through Day 4 AM segments) '
-        'plus <strong>travel + overland POIs and camps</strong> (rows marked <em>skip</em> in data are omitted). '
-        'Highway travel to May 2 staging is not part of this polyline; Moab and the return leg are not drawn — '
-        'use per-day tabs for those.</div>'
+        f'<h2>{esc(variant["overview_title"])}</h2>'
+        f'<div class="muted">{variant["overview_desc_html"]}</div>'
+        f'{ov_intro_html}'
         f'<div class="summary-grid">{ov_stat_html}</div>'
         f'{ov_map_html}'
         '<h3>All Swell stops (route mile order)</h3>'
@@ -1232,9 +1334,13 @@ def build_itinerary_html():
             '<div class="info">No mapped track segment for this day (travel/transit/Moab day).</div>'
         )
 
-        # Quick links for this day (weather + alerts)
+        # Quick links for this day (weather + alerts). Day 0 is identified by
+        # the May 2 travel/stage date so the alternates' day-0 IDs
+        # (altA_day0_travel / altB_day0_travel / altD_day0_travel) are treated
+        # as "day 0" too, without hardcoding any specific id.
+        is_day0 = d['type'] == 'travel' and d.get('date_iso') == '2026-05-02'
         quick_links = []
-        if d['type'] in ('overland', 'travel') and d['id'] != 'day0_travel':
+        if d['type'] in ('overland', 'travel') and not is_day0:
             quick_links = [
                 {'label': 'Swell weather (Wedge)',    'url': 'https://forecast.weather.gov/MapClick.php?lat=39.0985&lon=-110.7850'},
                 {'label': 'SLC flash-flood info',     'url': 'https://www.weather.gov/slc/flashflood'},
@@ -1250,7 +1356,7 @@ def build_itinerary_html():
                 {'label': 'UDOT I-70/191',            'url': 'https://www.udottraffic.utah.gov/'},
                 {'label': 'Arches NP alerts',         'url': 'https://www.nps.gov/arch/planyourvisit/conditions.htm'},
             ]
-        elif d['id'] == 'day0_travel':
+        elif is_day0:
             quick_links = [
                 {'label': 'Green River weather',      'url': 'https://forecast.weather.gov/MapClick.php?lat=38.9953&lon=-110.1599'},
                 {'label': 'UDOT I-70',                'url': 'https://www.udottraffic.utah.gov/'},
@@ -1387,10 +1493,15 @@ def build_itinerary_html():
     # downloaded). See scripts/download_offline_tiles.py.
     offline_tiles_json = json.dumps(OFFLINE_TILES)
 
+    reference_link_html = (
+        '<a href="trip-reference.html">Open reference doc</a> &middot;\n'
+        if variant.get('show_reference_link') else ''
+    )
+    gpx_href = esc(variant['gpx_filename'])
     html_out = f"""<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
-<title>2026 San Rafael Swell + Moab - Itinerary</title>
+<title>{esc(variant['page_title'])}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {PWA_HEAD}
 <style>{LEAFLET_CSS}</style>
@@ -1400,13 +1511,12 @@ def build_itinerary_html():
 <script>{LEAFLET_JS}</script>
 </head><body>
 <header>
-<h1>2026 San Rafael Swell Adventure + Moab</h1>
-<div class="meta">May 2 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi &middot;
-<a href="trip-reference.html">Open reference doc</a> &middot;
-{ALT_ROUTES_LINKS_HTML} &middot;
+<h1>{esc(variant['header_h1'])}</h1>
+<div class="meta">{variant['header_meta']} &middot;
+{reference_link_html}{ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="fuel-plan.html">Fuel plan</a> &middot;
-<a href="trip-plan.gpx" download>Download GPX</a></div>
+<a href="{gpx_href}" download>Download GPX</a></div>
 </header>
 <main>
 <select class="day-picker" id="day-picker" aria-label="Select trip day">{''.join(options)}</select>
@@ -2181,12 +2291,21 @@ def _gpx_esc(s):
     return (s or '').replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
 
 
-def build_gpx():
+def build_gpx(variant=None):
+    """Build a GPX file matching the current module-level `data`.
+
+    `variant` only affects the <metadata> <name>/<desc> strings so each
+    alternate's GPX download self-documents its variant. Defaults to
+    VARIANT_MAIN strings for backwards compatibility."""
+    variant = variant or VARIANT_MAIN
+    gpx_name = variant.get('gpx_metadata_name', '2026 San Rafael Swell Trip Plan')
+    gpx_desc = variant.get('gpx_metadata_desc',
+                           'Day-split tracks, primary POIs, and primary/backup campsites for the May 2-10, 2026 trip.')
     out = []
     out.append('<?xml version="1.0" encoding="UTF-8"?>')
     out.append('<gpx version="1.1" creator="build_deliverables.py" xmlns="http://www.topografix.com/GPX/1/1">')
-    out.append(f'<metadata><name>2026 San Rafael Swell Trip Plan</name>'
-               f'<desc>Day-split tracks, primary POIs, and primary/backup campsites for the May 2-10, 2026 trip.</desc>'
+    out.append(f'<metadata><name>{_gpx_esc(gpx_name)}</name>'
+               f'<desc>{_gpx_esc(gpx_desc)}</desc>'
                f'<time>2026-04-16T00:00:00Z</time></metadata>')
 
     # Waypoints: POIs (primary / hike) + campsites (primary/secondary tagged).
@@ -2281,18 +2400,49 @@ def build_gpx():
 
 
 # -----------------------------------------------------------------------------
-# Emit all
+# Render driver: one variant = one HTML itinerary + one GPX file.
 # -----------------------------------------------------------------------------
-itin = build_itinerary_html()
-(OUT_DIR / 'trip-itinerary.html').write_text(itin, encoding='utf-8')
-print(f'Wrote trip-itinerary.html ({len(itin) / 1024:.1f} KB)')
+def render_variant(variant):
+    """Render a single variant's itinerary HTML + GPX from its trip_data JSON.
 
-ref = build_reference_html()
-(OUT_DIR / 'trip-reference.html').write_text(ref, encoding='utf-8')
-print(f'Wrote trip-reference.html ({len(ref) / 1024:.1f} KB)')
+    Reassigns the module-level `data` and `overview_track` globals so the
+    existing build_itinerary_html / build_gpx helpers (which read from them)
+    operate on the new variant without having to thread `data` through every
+    nested call."""
+    global data, overview_track
+    payload_path = variant['data_path']
+    if not payload_path.exists():
+        print(f'Skipping {variant["key"]}: {payload_path.relative_to(BASE)} missing '
+              f'(run scripts/alts/alt_*.py first)')
+        return
+    data = json.loads(payload_path.read_text(encoding='utf-8'))
+    overview_track = prepare_variant_context(data)
 
-gpx = build_gpx()
-(OUT_DIR / 'trip-plan.gpx').write_text(gpx, encoding='utf-8')
-print(f'Wrote trip-plan.gpx ({len(gpx) / 1024:.1f} KB)')
+    html_out = build_itinerary_html(variant)
+    variant['html_path'].write_text(html_out, encoding='utf-8')
+    print(f'Wrote {variant["html_path"].name} ({len(html_out) / 1024:.1f} KB)')
 
-write_planning_markdown_pages()
+    gpx_out = build_gpx(variant)
+    variant['gpx_path'].write_text(gpx_out, encoding='utf-8')
+    print(f'Wrote {variant["gpx_path"].name} ({len(gpx_out) / 1024:.1f} KB)')
+
+
+def main():
+    # Main itinerary + reference (reference only for main, since POI catalog,
+    # fuel plan, and emergency info are shared across variants).
+    render_variant(VARIANT_MAIN)
+
+    ref = build_reference_html()
+    (OUT_DIR / 'trip-reference.html').write_text(ref, encoding='utf-8')
+    print(f'Wrote trip-reference.html ({len(ref) / 1024:.1f} KB)')
+
+    # Alternates: HTML + GPX per variant.
+    for variant in (VARIANT_ALT_A, VARIANT_ALT_B, VARIANT_ALT_D):
+        render_variant(variant)
+
+    # Standalone markdown -> HTML PWA pages (slot guide, fuel plan, alt overview).
+    write_planning_markdown_pages()
+
+
+if __name__ == '__main__':
+    main()

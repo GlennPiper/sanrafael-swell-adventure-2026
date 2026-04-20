@@ -6,35 +6,25 @@ Inputs:
 
 Output:
   planning/trip_data.json
+
+The heavy lifting (POI catalog, track slicing, payload assembly) lives in
+``scripts/trip_core.py`` so alternate itineraries under ``scripts/alts/`` can
+share the same POI metadata and scheduler defaults while defining their own
+day boundaries.
 """
 from __future__ import annotations
-import json
-import math
 import pathlib
+
+from trip_core import (
+    build_payload,
+    load_route,
+    print_payload_summary,
+    write_payload,
+)
 
 BASE = pathlib.Path(__file__).resolve().parent.parent
 PLAN = BASE / 'planning'
 
-analysis = json.loads((PLAN / 'route_analysis.json').read_text(encoding='utf-8'))
-tracks = json.loads((PLAN / 'route_tracks.json').read_text(encoding='utf-8'))
-
-main_track = next(t for t in tracks if t['name'] == 'San Rafael Swell Adventure Route')
-freeway_access = next((t for t in tracks if t['name'] == 'Freeway Access'), None)
-devils_racetrack = next((t for t in tracks if t['name'] == 'Devils Racetrack Alternate Route'), None)
-
-ORDERED = analysis['waypoints_ordered']
-TOTAL_MI = analysis['track_miles']
-
-# Build a quick lookup by name (original GPX names) and by name-and-mile for duplicates.
-by_name = {}
-for w in ORDERED:
-    nm = w.get('name') or ''
-    by_name.setdefault(nm, []).append(w)
-
-def find(name):
-    """Find a waypoint by exact name; returns first match or None."""
-    lst = by_name.get(name)
-    return lst[0] if lst else None
 
 # ---------------------------------------------------------------------------
 # Day split windows (miles)
@@ -162,84 +152,6 @@ DAYS = [
     },
 ]
 
-# ---------------------------------------------------------------------------
-# Explicit POI status map from poi_decisions.md (manual transcription)
-# status: primary | backup | skip | conditional | hike_candidate
-# ---------------------------------------------------------------------------
-POI_STATUS = {
-    # Day 0 / May 2 staging POIs and bonuses
-    'DP - Petroglyph Canyon Panel':        ('backup',   'Bonus if arrive with daylight on May 2'),
-    'DP - Spirit Arch':                    ('backup',   'Bonus if arrive with daylight on May 2'),
-
-    # Day 1
-    'DP - Black Dragon Petroglyph':        ('primary',  ''),
-    'DP - Black Dragon Canyon':            ('primary',  ''),
-    'DP - The Sinkhole':                   ('primary',  ''),
-    'DP - Old San Rafael Swinging Bridge': ('primary',  'Drive-by photo only'),
-    'DP - San Rafael River':               ('backup',   ''),
-    'DP - Red Canyon':                     ('primary',  ''),
-    'DP - Split Rock':                     ('primary',  'Drive-by photo only'),
-    'DP - Buckhorn Wash':                  ('primary',  'The canyon drive itself'),
-    'DP - Buckhorn Wash Petroglyphs':      ('primary',  'Famous 130-ft panel'),
-    'DP - Dinosaur Footprint':             ('primary',  ''),
-    'DP - Little Grand Canyon':            ('primary',  'Combined with Wedge Overlook'),
-    'DP - Wedge Overlook':                 ('primary',  'End-of-day highlight'),
-    'Petroglyph Panel Trail':              ('skip',     'Trailhead reference only; Black Dragon Petroglyph is the destination'),
-    'Calf Canyon':                         ('skip',     '1.7 km off-route cliff viewpoint; not on plan'),
-
-    # Day 2
-    'DP - The Drips':                      ('primary',  'Natural spring, on-route'),
-    'River crossing':                      ('primary',  'Early Day-2 river crossing (on-route, 1 m off). Added per group request -- water crossings desirable for overlanders.'),
-    'Coal Wash':                           ('backup',   ''),
-    'DP - Eva Conover Trail':              ('primary',  'Trail section (blue rating)'),
-    'DP - Eagle Canyon Overlook':          ('primary',  ''),
-    'DP - Eagle Canyon Bridges':           ('primary',  'I-70 bridges from below'),
-    'DP - Eagle Canyon Trail':             ('primary',  'Trail section; full-size caution'),
-    'DP - Eagle Canyon Arch':              ('primary',  'Short walk'),
-    'DP - The Icebox':                     ('primary',  'Short walk into cool grotto'),
-    "DP - Swasey's Cabin":                 ('primary',  'Historic cabin'),
-    'DP - Loan Warrior Petroglyph':        ('primary',  'Short hike; panel sits ~1.5 mi off the main trail (spur drive budgeted in stop time)'),
-    'DP - Reds Canyon':                    ('primary',  'Scenic drive-through'),
-    'Lucky Strike Mine':                   ('primary',  'Mine of interest -- added to the route as a primary stop.'),
-    'Copper Globe Mine':                   ('skip',     '4.1 km off-route; Lucky Strike covers mine interest'),
-    'The Twin Priests':                    ('skip',     '3.7 km off-route'),
-    'Hamburger Rocks':                     ('skip',     '2.1 km off-route'),
-    'Horizon Arch':                        ('skip',     '2.2 km off-route'),
-
-    # Day 3
-    'DP - Tomsich Butte Uranium Mine':     ('primary',  'Mine ruins + equipment'),
-    'Hondu Arch Viewpoint':                ('backup',   ''),
-    'DP - Hondu Arch':                     ('primary',  ''),
-    'DP - Hidden Splendor Overlook':       ('primary',  ''),
-    "DP - Miner's Cabin":                  ('primary',  'Historic structure'),
-    "Miner's Cabin":                       ('skip',     'Exact duplicate of DP version -- removed'),
-    'DP - Behind the Reef trail':          ('primary',  'Technical trail section - slow'),
-    # Day 3 tactical hikes (Hike (tactical) badge; checked by default; uncheck ones you skip)
-    'DP - Wild Horse Window Arch':         ('hike_candidate', 'Default Day 3 hike; route author #1 geology; 2 mi RT; BLM not GSVP gate; set up camp before this hike and carpool to the trailhead; see slot-canyon-guide.html + AllTrails WHW'),
-    'DP - Chute Canyon':                   ('hike_candidate', 'Tactical slot/wash; easier; wide ~first mi; ~0.8 mi to first narrowing (GCT); partial OAB typical; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
-    'DP - Crack Canyon':                   ('hike_candidate', 'Tactical slot; ~5 mi RT typical (Utah.com); ~10 ft drop ~1 mi in; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
-    'Little Wild Horse Canyon Trail':      ('backup',       'LWH/Bell TH; skip OAB from Behind-the-Reef unless full ~8 mi LWH/Bell loop + party OK scrambling; FLASH FLOOD RISK — slot-canyon-guide.html'),
-    'Little Wild Horse Slot Canyon':       ('backup',       'Full LWH/Bell loop waypoint only; same caveats — slot-canyon-guide.html'),
-    'DP - Temple Wash Petroglpyphs':       ('primary',  'Roadside panel (GPX name has a typo, kept exact for lookup)'),
-    'Wild Horse Window Trailhead':         ('skip',     'Trailhead reference only; Wild Horse Window Arch is the destination hike'),
-    # Day 3 skips
-    'Goblin Valley State Park':            ('skip',     'Off-route side trip; time budget'),
-    'Chute Canyon Trailhead':              ('backup',   'Chute Canyon hike parking — slot-canyon-guide.html'),
-    'Crack Canyon Trailhead':              ('backup',   'Crack Canyon hike parking; camping nearby possible — slot-canyon-guide.html'),
-    'Wild Horse Canyon':                   ('backup',   'AllTrails Wild Horse Canyon trail; lower priority — slot-canyon-guide.html'),
-    'Old Mining Sites':                    ('skip',     'Generic waypoint'),
-
-    # Day 4 AM
-    'DP - North Temple Wash':              ('primary',  'Scenic narrows drive-through'),
-    'Tunnel / Freeway Underpass':          ('primary',  'HEIGHT CHECK for tall rigs; Freeway Access bypass if too tall'),
-    'DP - Head of Sinbad Petroglyph':      ('primary',  ''),
-    'DP - Dutchman Arch':                  ('primary',  ''),
-    'Temple Mountain Viewpoint':           ('skip',     '2.7 km off-route'),
-    'Freeway Access':                      ('skip',     'Alt-route anchor waypoint for tunnel bypass (tall rigs); rendered as alternate track on map'),
-
-    # Camping waypoints (handled separately below)
-    # Logistics (fuel / toilets) - not POIs
-}
 
 # ---------------------------------------------------------------------------
 # Campsite plan (hand-curated from campsite_plan.md)
@@ -247,7 +159,6 @@ POI_STATUS = {
 CAMPSITES = {
     # NOTE: All Swell overnight coordinates below are SNAPPED to actual
     # `<sym>campsite-24</sym>` waypoints in san-rafael-swell-adv-route-2025.gpx.
-    # See docstring of scripts/build_trip_data.py's CAMPSITES section for rationale.
     'day0_travel': {  # May 2 night -- stage for Day 1 kickoff at Black Dragon
         'primary': {
             'name': 'Black Dragon Canyon - "Camp site" (GPX-verified)',
@@ -261,8 +172,6 @@ CAMPSITES = {
             'access': 'I-70 mm 147 westbound; gated side road on N side; sandy, high-clearance recommended.',
         },
         'secondary': {
-            # User-identified highway-side BLM flats at the mouth of Black Dragon.
-            # 221 m from the Day-1 track start; ideal overflow/late-arrival spot.
             'name': 'Black Dragon Trailhead Flats (BLM dispersed, highway-adjacent)',
             'lat': 38.92676, 'lon': -110.41852,
             'status': 'secondary',
@@ -277,11 +186,6 @@ CAMPSITES = {
             'access': 'I-70 Exit 145 (Black Dragon); pull onto the flats just past the cattleguard.',
         },
         'tertiary': {
-            # San Rafael Reef View Area -- signed BLM pullout on the south side of I-70
-            # about 1 mi south of the Black Dragon trailhead. User-identified replacement
-            # for the old Ranch Exit (14 mi west) option, which was too far from the
-            # Day-1 kickoff.
-            # Source: https://maps.app.goo.gl/UfmZrtjhDtXHCEjD6
             'name': 'San Rafael Reef View Area (BLM pullout on I-70)',
             'lat': 38.92111, 'lon': -110.43187,
             'status': 'tertiary',
@@ -300,15 +204,7 @@ CAMPSITES = {
         },
     },
     'day1_swell': {  # May 3 night -- Wedge Overlook (Day-1 track end 39.09642, -110.75111)
-        # The Wedge is a designated-site-only area: we MUST camp in a numbered site.
-        # Eight sites exist (GPX-verified). Our target is the tight #3-#7 cluster on
-        # the west rim; the three outlier sites (#1, #2 east; #8 south) serve as
-        # equivalent backups that keep us in designated territory before we bail
-        # to Buckhorn Draw.
         'primary': {
-            # Pin at Wedge Overlook Campsite #5 (center of the #3-#7 cluster, all within 150 m).
-            # cluster_members is consumed by build_deliverables to add the other 4
-            # cluster sites as additional primary-tier map markers (no separate cards).
             'name': 'Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)',
             'lat': 39.12445, 'lon': -110.75133,
             'status': 'primary',
@@ -328,9 +224,6 @@ CAMPSITES = {
                 {'name': 'Wedge Overlook Campsite #7', 'lat': 39.12563, 'lon': -110.75521},
             ],
         },
-        # The Wedge is designated-only, so every remaining numbered site is a
-        # valid secondary. All three are at the same price/kind as primary, just
-        # further from the western overlook cluster.
         'secondary': [
             {
                 'name': 'Wedge Overlook Camp #1 (GPX) - east-rim site',
@@ -370,7 +263,6 @@ CAMPSITES = {
             },
         ],
         'tertiary': {
-            # If the entire Wedge rim is full, fall back to Buckhorn Draw (developed FCFS).
             'name': 'Buckhorn Draw Campsite 1 (GPX) - developed loop',
             'lat': 39.16753, 'lon': -110.73766,
             'status': 'tertiary',
@@ -408,7 +300,6 @@ CAMPSITES = {
             'access': 'Tomsich Butte Rd, 1 km past primary',
         },
         'tertiary': {
-            # Bail-earlier option: stop at Family Butte Dispersed mid-route on Day 2.
             'name': 'Family Butte Dispersed Camping (GPX) - BAIL EARLY option',
             'lat': 38.76868, 'lon': -110.83217,
             'status': 'tertiary',
@@ -531,10 +422,10 @@ CAMPSITES = {
     'day7_moab': {'inherit': 'day5_moab'},
 }
 
+
 # ---------------------------------------------------------------------------
 # Per-day scheduling defaults (only overland days get the on-page scheduler).
 # break_camp = HH:MM local; moving_mph = pure driving speed (no stops folded in).
-# Speed bias: Day 2 / Day 3 are slower because of Eva Conover, Behind-the-Reef, etc.
 # ---------------------------------------------------------------------------
 SCHEDULE_DEFAULTS = {
     'day1_swell': {'break_camp': '09:00', 'moving_mph': 20},
@@ -543,213 +434,9 @@ SCHEDULE_DEFAULTS = {
     'day4_swell': {'break_camp': '09:00', 'moving_mph': 22},
 }
 
-# Per-POI "spur miles saved if skipped" overrides. These are round-trip miles
-# that would be avoided if the stop is un-checked in the scheduler (e.g., an
-# out-and-back detour that the main track drives to reach the POI). Values
-# were derived from scripts/_spur_audit.py and hand-reviewed. Only POIs whose
-# skip-savings exceed ~20 min at typical moving speed are worth listing here;
-# anything smaller is noise at the fidelity we care about.
-#
-# When adding a new entry: run `py scripts\spur_audit.py`, confirm the spur
-# mouth and apex look right against the GPX, and paste the "Spur length" value
-# here (rounded to one decimal).
-POI_SPUR_OVERRIDES = {
-    'DP - Red Canyon':                15.3,  # Day 1 spur, mouth miles 29.04 -> 44.33
-    'DP - Hidden Splendor Overlook':  19.7,  # Day 3 spur, mouth miles 146.55 -> 166.28
-}
-
-# Stops that get checked by default in the itinerary scheduler.
-DEFAULT_CHECKED_BY_STATUS = {
-    'primary':         True,
-    'hike_candidate':  True,
-    'conditional':     True,
-    'backup':          False,
-    'skip':            False,
-    'logistics':       False,
-    'unclassified':    False,
-}
-
-# Stop-time defaults. Tunable per-stop in the UI; this just seeds the inputs.
-def _default_minutes(name, sym, status, note):
-    n = (name or '').lower()
-    s = (sym or '').lower()
-    nl = (note or '').lower()
-    # Specific named stops first (times = suggested on-trail dwell for scheduler; see slot-canyon-guide.md)
-    if 'wild horse window' in n:
-        # Published ~2 mi RT, easy, commonly 1–2 hr — use 90 min as mid estimate
-        return 90
-    if 'little wild horse canyon trail' in n:   return 120
-    if 'little wild horse slot' in n:           return 0   # loop waypoint reference unless full hike
-    if 'dp - crack canyon' == n:
-        # Utah.com ~5 mi RT + 10 ft choke: ~3–4 hr typical; 210 min = 3.5 hr planner default
-        return 210
-    if 'dp - chute canyon' == n:
-        # Partial OAB to first narrowing (~0.8 mi one-way per GCT) / easy wash — ~2–3 hr; not full 7.7 mi day hike
-        return 150
-    if 'eva conover' in n:                      return 60  # trail section
-    if 'behind the reef' in n:                  return 75  # technical trail
-    if 'tomsich butte' in n:                    return 45
-    if 'lucky strike' in n:                     return 45
-    if 'icebox' in n:                           return 30
-    if 'loan warrior' in n or 'lone warrior' in n:
-        # Petroglyph panel ~1.5 mi off the main trail; +15 min covers the
-        # out-and-back spur drive on top of the ~20 min dwell at the panel.
-        return 35
-    if 'tunnel / freeway' in n:                 return 10
-    if 'buckhorn wash petroglyphs' in n:        return 30
-    if 'wedge overlook' in n:                   return 30
-    if 'little grand canyon' in n:              return 20
-    if 'head of sinbad' in n:                   return 25
-    # Drive-by overrides take precedence over symbol defaults
-    if 'drive-by' in nl or 'drive by' in nl:    return 5
-    # By symbol type
-    if s in ('mine', 'cave', 'building-24'):    return 30
-    if s == 'natural-spring':                   return 15
-    if s in ('cliff', 'stone', 'arch', 'bridge', 'petroglyph'): return 20
-    if s in ('binoculars', 'attraction'):       return 15
-    if s == 'water':                            return 15
-    if s == 'off-road':                         return 30
-    return 20
-
 
 # ---------------------------------------------------------------------------
-# Slice the main track for each Swell day
-# ---------------------------------------------------------------------------
-def _haversine_m(a, b):
-    R = 6371000.0
-    la1, lo1 = math.radians(a[0]), math.radians(a[1])
-    la2, lo2 = math.radians(b[0]), math.radians(b[1])
-    dlat = la2 - la1
-    dlon = lo2 - lo1
-    s = math.sin(dlat / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin(dlon / 2) ** 2
-    return 2 * R * math.asin(math.sqrt(s))
-
-pts = main_track['points']
-cum_mi = [0.0]
-for i in range(1, len(pts)):
-    cum_mi.append(cum_mi[-1] + _haversine_m(pts[i - 1], pts[i]) / 1609.344)
-
-
-def slice_track(mi_lo, mi_hi):
-    if mi_lo is None or mi_hi is None:
-        return []
-    i_lo = next((i for i, m in enumerate(cum_mi) if m >= mi_lo), 0)
-    i_hi = next((i for i, m in enumerate(cum_mi) if m >= mi_hi), len(cum_mi) - 1)
-    return pts[i_lo:i_hi + 1]
-
-
-# ---------------------------------------------------------------------------
-# Build per-day POI lists
-# ---------------------------------------------------------------------------
-def pois_for_day(mi_lo, mi_hi):
-    if mi_lo is None or mi_hi is None:
-        return []
-    out = []
-    seen = set()  # dedupe by (name, mile rounded)
-    for w in ORDERED:
-        mi = w.get('mile', -1)
-        if mi is None:
-            continue
-        if not (mi_lo <= mi < mi_hi):
-            continue
-        nm = w.get('name') or ''
-        key = (nm, round(mi, 2))
-        if key in seen:
-            continue
-        seen.add(key)
-        status_info = POI_STATUS.get(nm)
-        if not status_info:
-            # Generic handling: logistics, camps, etc.
-            sym = w.get('sym') or ''
-            if sym == 'campsite-24':
-                continue  # camps handled separately
-            if sym in ('fuel-24', 'city-24', 'toilets-24'):
-                status = 'logistics'
-                note = sym
-            else:
-                status = 'unclassified'
-                note = ''
-        else:
-            status, note = status_info
-        out.append({
-            'name': nm,
-            'lat': w['lat'], 'lon': w['lon'], 'ele': w.get('ele'),
-            'mile': round(mi, 2),
-            'dist_to_track_m': round(w.get('dist_to_track_m', 0), 1),
-            'sym': w.get('sym'),
-            'status': status,
-            'note': note,
-            'desc': (w.get('desc') or '').strip(),
-            'spur_mi': POI_SPUR_OVERRIDES.get(nm, 0.0),
-        })
-    return out
-
-
-# Day-0 (travel/staging) gets the pre-mile-0 waypoints (mile 0..2 range + any negatives)
-# Actually our two staging POIs (Petroglyph Canyon Panel, Spirit Arch) are at mi 0.4 so they'll
-# land in Day 1 window. Move them explicitly to Day 0.
-DAY0_STAGE_NAMES = {'DP - Petroglyph Canyon Panel', 'DP - Spirit Arch'}
-# Waypoints in the Day-0/Day-1 vicinity we want to suppress entirely (not shown on
-# either day). 'San Rafael Reef Viewpoint' sits near I-70 but isn't actually
-# accessible from the trip corridor -- drop it everywhere.
-DAY01_SUPPRESS_NAMES = {'San Rafael Reef Viewpoint'}
-ALL_PAYLOAD_DAYS = []
-for d in DAYS:
-    d_copy = dict(d)
-    if d['id'] == 'day0_travel':
-        # Add May 2 bonus POIs
-        poi_list = []
-        for w in ORDERED:
-            if (w.get('name') or '') in DAY0_STAGE_NAMES:
-                poi_list.append({
-                    'name': w['name'],
-                    'lat': w['lat'], 'lon': w['lon'], 'ele': w.get('ele'),
-                    'mile': round(w.get('mile', 0), 2),
-                    'dist_to_track_m': round(w.get('dist_to_track_m', 0), 1),
-                    'sym': w.get('sym'),
-                    'status': 'backup',
-                    'note': 'May 2 bonus if arrive with daylight',
-                    'desc': (w.get('desc') or '').strip(),
-                })
-        d_copy['pois'] = poi_list
-    else:
-        d_copy['pois'] = pois_for_day(d['mi_lo'], d['mi_hi'])
-        # For Day 1, remove day-0 staging POIs (prevent duplication in Day 1 list)
-        # and any globally-suppressed waypoints that live in the same mile window.
-        if d['id'] == 'day1_swell':
-            d_copy['pois'] = [
-                p for p in d_copy['pois']
-                if p['name'] not in DAY0_STAGE_NAMES
-                and p['name'] not in DAY01_SUPPRESS_NAMES
-            ]
-
-    d_copy['track_points'] = slice_track(d.get('mi_lo'), d.get('mi_hi'))
-    # campsite for this day (end-of-day camp for overnight days only)
-    camp_spec = CAMPSITES.get(d['id'])
-    if camp_spec and 'inherit' in camp_spec:
-        camp_spec = CAMPSITES.get(camp_spec['inherit'])
-    d_copy['camps'] = camp_spec or None
-
-    # Scheduling annotations (only for days with SCHEDULE_DEFAULTS).
-    sched = SCHEDULE_DEFAULTS.get(d['id'])
-    if sched and d_copy['track_points']:
-        first_pt = d_copy['track_points'][0]
-        d_copy['schedule'] = {
-            'break_camp_time': sched['break_camp'],
-            'moving_mph':      sched['moving_mph'],
-            'start_lat':       first_pt[0],
-            'start_lon':       first_pt[1],
-            'mi_lo':           d.get('mi_lo') or 0.0,
-        }
-        # Annotate scheduled-day POIs (so the UI has per-stop seeds even for backups).
-        for p in d_copy['pois']:
-            p['default_minutes'] = _default_minutes(p['name'], p.get('sym'), p['status'], p.get('note'))
-            p['default_checked'] = DEFAULT_CHECKED_BY_STATUS.get(p['status'], False)
-
-    ALL_PAYLOAD_DAYS.append(d_copy)
-
-# ---------------------------------------------------------------------------
-# Fuel plan payload (short version embedded; full is in planning/fuel_plan.md → fuel-plan.html)
+# Fuel plan payload (short version embedded; full is in planning/fuel_plan.md)
 # ---------------------------------------------------------------------------
 FUEL_PLAN_SUMMARY = {
     'stations': [
@@ -786,6 +473,7 @@ FUEL_PLAN_SUMMARY = {
     'estimated_swell_gallons_16mpg_baseline': 26,
 }
 
+
 # ---------------------------------------------------------------------------
 # Real-time info links (short version; full in realtime_info_sources.md)
 # ---------------------------------------------------------------------------
@@ -795,7 +483,6 @@ REALTIME_LINKS = [
     {'cat': 'Weather', 'label': 'NWS Temple Mountain', 'url': 'https://forecast.weather.gov/MapClick.php?lat=38.6530&lon=-110.6680'},
     {'cat': 'Weather', 'label': 'NWS Moab', 'url': 'https://forecast.weather.gov/MapClick.php?lat=38.5733&lon=-109.5498'},
     {'cat': 'Weather', 'label': 'NWS Dead Horse Point', 'url': 'https://forecast.weather.gov/MapClick.php?lat=38.4710&lon=-109.7450'},
-    # alerts.weather.gov was retired in late 2023 / early 2024; use the office WWA / hazard pages instead.
     {'cat': 'Weather', 'label': 'NWS SLC active warnings (Swell)', 'url': 'https://www.weather.gov/slc/WWA'},
     {'cat': 'Weather', 'label': 'NWS GJT hazards (Moab)',          'url': 'https://www.weather.gov/gjt/hazards'},
     {'cat': 'Weather', 'label': 'NWS nationwide active alerts',    'url': 'https://www.weather.gov/alerts'},
@@ -808,7 +495,6 @@ REALTIME_LINKS = [
     {'cat': 'Roads', 'label': 'UDOT Region 4 news', 'url': 'https://udot.utah.gov/connect/category/region-four'},
     {'cat': 'Roads', 'label': 'UDOT live cameras map', 'url': 'https://udottraffic.utah.gov/map'},
     {'cat': 'Fire/Smoke', 'label': 'Utah Fire Info (official)', 'url': 'https://utahfireinfo.gov/'},
-    # The old /fire-restrictions-2/ path silently 302s to the ArcGIS hub root; use the deep-link to the actual restrictions page.
     {'cat': 'Fire/Smoke', 'label': 'Utah fire restrictions (active)', 'url': 'https://utah-fire-info-utahdnr.hub.arcgis.com/pages/active-fire-restrictions'},
     {'cat': 'Fire/Smoke', 'label': 'InciWeb (all active fires)', 'url': 'https://inciweb.wildfire.gov/'},
     {'cat': 'Fire/Smoke', 'label': 'AirNow Fire & Smoke map', 'url': 'https://fire.airnow.gov/'},
@@ -827,41 +513,47 @@ REALTIME_LINKS = [
     {'cat': 'Emergency', 'label': 'UT Highway Patrol (I-70)', 'url': 'tel:+18018873800'},
 ]
 
-# ---------------------------------------------------------------------------
-# Group size (counts only -- no names or contact info land in published artifacts)
-# ---------------------------------------------------------------------------
+
 GROUP_COUNTS = {
     'overland': 11,
     'moab': 7,
 }
 
-# ---------------------------------------------------------------------------
-# Emit
-# ---------------------------------------------------------------------------
-payload = {
-    'trip': {
-        'title': '2026 San Rafael Swell Adventure + Moab',
-        'dates': '2026-05-02 through 2026-05-10',
-        'route_gpx_source': 'san-rafael-swell-adv-route-2025.gpx',
-        'route_total_miles': round(TOTAL_MI, 2),
-        'main_track_points': len(pts),
-    },
-    'group_counts': GROUP_COUNTS,
-    'days': ALL_PAYLOAD_DAYS,
-    'alternate_tracks': {
-        'devils_racetrack': devils_racetrack,
-        'freeway_access': freeway_access,
-    },
-    'fuel': FUEL_PLAN_SUMMARY,
-    'realtime_links': REALTIME_LINKS,
-    'generated_at': '2026-04-16',
-}
 
-out_path = PLAN / 'trip_data.json'
-out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding='utf-8')
-print(f'Wrote {out_path} ({out_path.stat().st_size / 1024:.1f} KB)')
-print(f'Days: {len(ALL_PAYLOAD_DAYS)}')
-for d in ALL_PAYLOAD_DAYS:
-    pois = d.get('pois') or []
-    tp = d.get('track_points') or []
-    print(f"  {d['id']:22s} {d['label']:45s} pois={len(pois):3d} track_pts={len(tp):5d}")
+# Day-0 (travel/staging) gets the pre-mile-0 waypoints (mile 0..2 range + any negatives)
+DAY0_STAGE_NAMES = {'DP - Petroglyph Canyon Panel', 'DP - Spirit Arch'}
+# Waypoints we want to suppress entirely.
+DAY01_SUPPRESS_NAMES = {'San Rafael Reef Viewpoint'}
+
+
+def main() -> None:
+    route = load_route(PLAN)
+
+    payload = build_payload(
+        days_spec=DAYS,
+        camp_data=CAMPSITES,
+        schedule_defaults=SCHEDULE_DEFAULTS,
+        route=route,
+        trip_meta={
+            'title': '2026 San Rafael Swell Adventure + Moab',
+            'dates': '2026-05-02 through 2026-05-10',
+            'route_gpx_source': 'san-rafael-swell-adv-route-2025.gpx',
+            'route_total_miles': round(route['total_mi'], 2),
+            'main_track_points': len(route['main_points']),
+        },
+        group_counts=GROUP_COUNTS,
+        fuel_plan=FUEL_PLAN_SUMMARY,
+        realtime_links=REALTIME_LINKS,
+        generated_at='2026-04-16',
+        day0_stage_names=DAY0_STAGE_NAMES,
+        suppress_names=DAY01_SUPPRESS_NAMES,
+    )
+
+    out_path = PLAN / 'trip_data.json'
+    write_payload(payload, out_path)
+    print(f'Wrote {out_path} ({out_path.stat().st_size / 1024:.1f} KB)')
+    print_payload_summary(payload, label='Main trip')
+
+
+if __name__ == '__main__':
+    main()

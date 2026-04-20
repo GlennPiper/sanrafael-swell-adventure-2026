@@ -48,10 +48,16 @@ jobs:
       - name: Build trip data (planning/trip_data.json)
         run: python scripts/build_trip_data.py
 
+      - name: Build alternate-itinerary trip data (planning/trip_data_alt_*.json)
+        run: |
+          python scripts/alts/alt_a.py
+          python scripts/alts/alt_b.py
+          python scripts/alts/alt_d.py
+
       - name: Build PWA icons (icons/*.png)
         run: python scripts/build_pwa_icons.py
 
-      - name: Build HTML + GPX deliverables (includes slot-canyon-guide.html)
+      - name: Build HTML + GPX deliverables (main + alternates, includes slot-canyon-guide.html)
         run: python scripts/build_deliverables.py
 
       - name: Build PWA assets (manifest, service-worker, robots, QR)
@@ -69,7 +75,7 @@ jobs:
           mkdir -p _publish
           cp index.html trip-itinerary.html trip-reference.html slot-canyon-guide.html fuel-plan.html \
             overland-alternates.html trip-itinerary-alt-a.html trip-itinerary-alt-b.html trip-itinerary-alt-d.html \
-            trip-plan.gpx _publish/
+            trip-plan.gpx trip-plan-alt-a.gpx trip-plan-alt-b.gpx trip-plan-alt-d.gpx _publish/
           cp manifest.webmanifest service-worker.js robots.txt _publish/
           cp -r icons _publish/
           mkdir -p _publish/assets

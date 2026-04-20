@@ -52,8 +52,22 @@ SITE_URL = os.environ.get('SITE_URL', '').rstrip('/')
 
 
 def _build_version() -> str:
-    """Cache namespace = trip_data.json + planning markdown sources for standalone pages."""
+    """Cache namespace = trip_data*.json + planning markdown sources for standalone pages.
+
+    Now includes the alternate-itinerary JSON payloads (trip_data_alt_*.json)
+    so edits to any alternate route -- new POIs, camp changes, re-split days --
+    invalidate installed PWAs even when the main trip_data.json is unchanged.
+    """
     raw = TRIP_DATA.read_bytes() if TRIP_DATA.exists() else b'no-data'
+    alt_json_names = (
+        'trip_data_alt_a.json',
+        'trip_data_alt_b.json',
+        'trip_data_alt_d.json',
+    )
+    alt_raw = b''
+    for name in alt_json_names:
+        p = PLAN / name
+        alt_raw += p.read_bytes() if p.exists() else b''
     extra_md_names = (
         'slot-canyon-guide.md',
         'fuel_plan.md',
@@ -66,7 +80,7 @@ def _build_version() -> str:
     for name in extra_md_names:
         p = PLAN / name
         extra_raw += p.read_bytes() if p.exists() else b''
-    short = hashlib.sha1(raw + extra_raw).hexdigest()[:10]
+    short = hashlib.sha1(raw + alt_raw + extra_raw).hexdigest()[:10]
     try:
         gen = json.loads(raw.decode('utf-8')).get('generated_at', '')
     except Exception:
@@ -92,6 +106,9 @@ PRECACHE = [
     'trip-itinerary-alt-b.html',
     'trip-itinerary-alt-d.html',
     'trip-plan.gpx',
+    'trip-plan-alt-a.gpx',
+    'trip-plan-alt-b.gpx',
+    'trip-plan-alt-d.gpx',
     'manifest.webmanifest',
     'icons/icon-192.png',
     'icons/icon-512.png',
