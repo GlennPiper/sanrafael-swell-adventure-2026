@@ -198,7 +198,7 @@ POI_STATUS = {
     'DP - Eagle Canyon Arch':              ('primary',  'Short walk'),
     'DP - The Icebox':                     ('primary',  'Short walk into cool grotto'),
     "DP - Swasey's Cabin":                 ('primary',  'Historic cabin'),
-    'DP - Loan Warrior Petroglyph':        ('primary',  'Short hike'),
+    'DP - Loan Warrior Petroglyph':        ('primary',  'Short hike; panel sits ~1.5 mi off the main trail (spur drive budgeted in stop time)'),
     'DP - Reds Canyon':                    ('primary',  'Scenic drive-through'),
     'Lucky Strike Mine':                   ('primary',  'Mine of interest -- added to the route as a primary stop.'),
     'Copper Globe Mine':                   ('skip',     '4.1 km off-route; Lucky Strike covers mine interest'),
@@ -591,6 +591,10 @@ def _default_minutes(name, sym, status, note):
     if 'tomsich butte' in n:                    return 45
     if 'lucky strike' in n:                     return 45
     if 'icebox' in n:                           return 30
+    if 'loan warrior' in n or 'lone warrior' in n:
+        # Petroglyph panel ~1.5 mi off the main trail; +15 min covers the
+        # out-and-back spur drive on top of the ~20 min dwell at the panel.
+        return 35
     if 'tunnel / freeway' in n:                 return 10
     if 'buckhorn wash petroglyphs' in n:        return 30
     if 'wedge overlook' in n:                   return 30

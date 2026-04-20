@@ -19683,10 +19683,10 @@
           "dist_to_track_m": 1743.9,
           "sym": "petroglyph",
           "status": "primary",
-          "note": "Short hike",
+          "note": "Short hike; panel sits ~1.5 mi off the main trail (spur drive budgeted in stop time)",
           "desc": "",
           "spur_mi": 0.0,
-          "default_minutes": 20,
+          "default_minutes": 35,
           "default_checked": true
         },
         {
