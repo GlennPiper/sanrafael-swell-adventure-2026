@@ -43,7 +43,7 @@ launch. No app-store review, no manual file shuffling.
 
 ### What's in the app
 
-- `trip-itinerary.html` -- daily-tabbed view with maps, POIs, camps, schedule
+- `trip-itinerary.html` -- tabbed view: **Full route (Swell)** (stitched GPX + all overland stops), then one tab per day with maps, POIs, camps, schedule
 - `trip-reference.html` -- single-page knowledge dump (fuel, emergency,
   decision matrix, every camp + POI including backups, all real-time links)
 - `slot-canyon-guide.html` -- Day 3 slot/hike detail + links (offline with the PWA)
@@ -58,7 +58,7 @@ These live at the **project root** and are regenerated from scripts. Do NOT hand
 
 | File | What it is | How to use |
 |---|---|---|
-| `trip-itinerary.html` | Daily-tabbed browser view. One tab per day with map, POIs, camps, quick real-time links. Offline-first (maps degrade gracefully if no internet). | Double-click to open in a browser. Share with group. |
+| `trip-itinerary.html` | Browser view: first tab is the **full Swell route** (combined track + pins); then one tab per day with map, POIs, camps, quick real-time links. Offline-first (maps degrade gracefully if no internet). | Double-click to open in a browser. Share with group. |
 | `trip-reference.html` | Full knowledge dump on one page: overview, fuel, camps (incl. backups), POIs (incl. skips), Day-3 hike decision matrix, emergency info, all real-time sources. | Utilitarian reference; print-friendly. |
 | `slot-canyon-guide.html` | **Generated** from `planning/slot-canyon-guide.md`. Day 3 slot/hike detail + links; precached offline in the PWA. | Linked from itinerary, reference, install page. |
 | `fuel-plan.html` | **Generated** from `planning/fuel_plan.md`. Stations, surface/MPG, per-vehicle worksheet; precached offline in the PWA. | Linked from itinerary, reference, install page. |

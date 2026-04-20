@@ -298,6 +298,9 @@ for d in data['days']:
 every = max(1, len(full_track) // 400) if full_track else 1
 overview_track = decimate(full_track, every)
 
+# First itinerary tab: full Swell GPX corridor + aggregated stops (not a trip_data day).
+ROUTE_OVERVIEW_ID = 'route_overview'
+
 
 # -----------------------------------------------------------------------------
 # Shared helpers
@@ -440,6 +443,10 @@ POI_HEADER = (
     '<thead><tr><th>Mi</th><th>Name</th><th>Status</th><th>Type</th>'
     '<th>Note</th><th>Off-track</th><th>Coords</th></tr></thead>'
 )
+OVERVIEW_STOPS_HEADER = (
+    '<thead><tr><th>Mi</th><th>Day</th><th>Name</th><th>Status</th><th>Type</th>'
+    '<th>Note</th><th>Off-track</th><th>Coords</th></tr></thead>'
+)
 POI_HEADER_SCHEDULED = (
     '<thead><tr><th title="Include in scheduled itinerary">In?</th>'
     '<th>Mi</th><th>Name</th><th>Status</th><th>Type</th>'
@@ -556,6 +563,50 @@ def _tier_label(key, idx, total):
     if total > 1:
         base += f' {chr(ord("A") + idx - 1)}'
     return base
+
+
+def _collect_route_overview_markers(days_list):
+    """POI + camp pins for travel + overland days; deduped; names include day label."""
+    markers = []
+    seen = set()
+
+    def add_marker(mk):
+        key = (round(mk['lat'], 6), round(mk['lon'], 6), mk['name'])
+        if key in seen:
+            return
+        seen.add(key)
+        markers.append(mk)
+
+    for d in days_list:
+        if d.get('type') not in ('travel', 'overland'):
+            continue
+        dl = d['label']
+        for p in d.get('pois') or []:
+            if p.get('status') == 'skip' or not p.get('lat') or not p.get('lon'):
+                continue
+            add_marker({
+                'lat': p['lat'], 'lon': p['lon'],
+                'name': f'{p["name"]} ({dl})',
+                'kind': 'poi',
+            })
+        for key, idx, total, c in _iter_camp_entries(d.get('camps') or {}):
+            if not _camp_has_coords(c):
+                continue
+            label_prefix = _tier_label(key, idx, total)
+            add_marker({
+                'lat': c['lat'], 'lon': c['lon'],
+                'name': f'Camp ({label_prefix.lower()}): {c["name"]} ({dl})',
+                'kind': f'camp_{key}',
+            })
+            if key == 'primary' and isinstance(c.get('cluster_members'), list):
+                for m in c['cluster_members']:
+                    if _camp_has_coords(m):
+                        add_marker({
+                            'lat': m['lat'], 'lon': m['lon'],
+                            'name': f'Camp (primary cluster): {m["name"]} ({dl})',
+                            'kind': 'camp_primary',
+                        })
+    return markers
 
 
 def camp_block(camps, title='Campsites', day_id=None, allow_focus=False, scheduled=False):
@@ -934,22 +985,108 @@ tr.skipped-row .spur-hint::before{content:"[Saving] "}
 def build_itinerary_html():
     days = data['days']
 
+    # ----- Full-route overview (first tab): stitched GPX + aggregated pins -----
+    ov_markers = _collect_route_overview_markers(days)
+    ov_stop_rows = []
+    for d in days:
+        if d.get('type') not in ('travel', 'overland'):
+            continue
+        for p in d.get('pois') or []:
+            if p.get('status') == 'skip':
+                continue
+            ov_stop_rows.append((float(p.get('mile') or 0), d, p))
+    ov_stop_rows.sort(key=lambda x: (x[0], x[1]['id'], x[2]['name']))
+    ov_rows_html = []
+    allow_ov_focus = bool(overview_track or ov_markers)
+    for mile, d, p in ov_stop_rows:
+        lat, lon = p.get('lat'), p.get('lon')
+        name_text = esc(p['name'])
+        if allow_ov_focus and lat is not None and lon is not None:
+            name_html = (
+                f'<a href="#" class="focus-map" data-day="{esc(ROUTE_OVERVIEW_ID)}" '
+                f'data-lat="{lat}" data-lon="{lon}" '
+                f'title="Zoom map to this stop">{name_text}</a>'
+            )
+        else:
+            name_html = name_text
+        name_html += desc_button_html(p['name'], p.get('desc'))
+        if lat is not None and lon is not None:
+            gm = f'https://www.google.com/maps/search/?api=1&query={lat},{lon}'
+            coords_html = (
+                f'<code>{lat:.5f}, {lon:.5f}</code> &middot; '
+                f'<a href="{gm}" target="_blank" rel="noopener">Map It</a>'
+            )
+        else:
+            coords_html = ''
+        ov_rows_html.append(
+            '<tr>'
+            f'<td class="num" data-label="Mi">{mile:.1f}</td>'
+            f'<td data-label="Day">{esc(d["label"])}</td>'
+            f'<td class="td-name" data-label="Name">{name_html}</td>'
+            f'<td data-label="Status">{badge_html(p["status"])}</td>'
+            f'<td data-label="Type">{esc(p.get("sym") or "")}</td>'
+            f'<td data-label="Note">{esc(p.get("note") or "")}</td>'
+            f'<td class="num" data-label="Off-track" title="distance from main route track">{p.get("dist_to_track_m", 0):.0f} m</td>'
+            f'<td class="coords" data-label="Coords">{coords_html}</td>'
+            '</tr>'
+        )
+    ov_table_body = ''.join(ov_rows_html)
+    n_trk_seg = sum(1 for x in days if len(x.get('track_points') or []) > 0)
+    ov_stat_html = ''.join((
+        f'<div class="summary-stat"><div class="val">{n_trk_seg}</div><div class="lab">GPX track segments</div></div>',
+        f'<div class="summary-stat"><div class="val">{len(ov_stop_rows)}</div><div class="lab">POI rows (skips out)</div></div>',
+        f'<div class="summary-stat"><div class="val">{len(ov_markers)}</div><div class="lab">Map pins (POIs + camps)</div></div>',
+    ))
+    ov_has_map = bool(overview_track) or bool(ov_markers)
+    ov_map_id = f'map-{ROUTE_OVERVIEW_ID}'
+    if ov_has_map:
+        ov_map_html = (
+            f'<div class="map-wrap" id="map-wrap-{ROUTE_OVERVIEW_ID}">'
+            f'<button type="button" class="map-fs-btn" data-target="map-wrap-{ROUTE_OVERVIEW_ID}" '
+            f'title="Toggle fullscreen map (Esc to exit)" aria-label="Toggle fullscreen">'
+            f'<span class="fs-icon fs-icon-enter" aria-hidden="true">&#x26F6;</span>'
+            f'<span class="fs-icon fs-icon-exit" aria-hidden="true">&times;</span>'
+            f'<span class="fs-label">Fullscreen</span></button>'
+            f'<div id="{ov_map_id}" class="map" data-day-id="{ROUTE_OVERVIEW_ID}"><div class="map-offline-notice">'
+            'Loading map... (requires internet for tiles; falls back to coordinates list if offline)'
+            '</div></div></div>'
+        )
+    else:
+        ov_map_html = '<div class="info">No map data for full-route view.</div>'
+
+    ov_pane = (
+        f'<div class="tab-pane active" id="pane-{ROUTE_OVERVIEW_ID}">'
+        '<div class="card">'
+        '<h2>Full San Rafael Swell route</h2>'
+        '<div class="muted">Stitched <strong>GPX driving corridor</strong> (Day 1 through Day 4 AM segments) '
+        'plus <strong>travel + overland POIs and camps</strong> (rows marked <em>skip</em> in data are omitted). '
+        'Highway travel to May 2 staging is not part of this polyline; Moab and the return leg are not drawn — '
+        'use per-day tabs for those.</div>'
+        f'<div class="summary-grid">{ov_stat_html}</div>'
+        f'{ov_map_html}'
+        '<h3>All Swell stops (route mile order)</h3>'
+        f'<table class="stops-table">{OVERVIEW_STOPS_HEADER}<tbody>{ov_table_body}</tbody></table>'
+        '</div></div>'
+    )
+
     # Tab buttons (desktop scroll strip) + native <option> list (mobile picker).
     # Both are emitted; CSS at <=700px hides .tabs and shows .day-picker. The
     # JS keeps both in sync so a user resizing across the breakpoint never
     # sees a stale "active" indicator.
-    tabs = []
-    options = []
-    panes = []
+    tabs = [
+        f'<button class="tab-btn active" data-tgt="pane-{ROUTE_OVERVIEW_ID}">Full route (Swell)</button>',
+    ]
+    options = [
+        f'<option value="{ROUTE_OVERVIEW_ID}" selected>Full route (Swell)</option>',
+    ]
+    panes = [ov_pane]
 
-    for i, d in enumerate(days):
-        active = ' active' if i == 0 else ''
-        selected = ' selected' if i == 0 else ''
+    for d in days:
         tabs.append(
-            f'<button class="tab-btn{active}" data-tgt="pane-{d["id"]}">{esc(d["label"])}</button>'
+            f'<button class="tab-btn" data-tgt="pane-{d["id"]}">{esc(d["label"])}</button>'
         )
         options.append(
-            f'<option value="{d["id"]}"{selected}>{esc(d["label"])}</option>'
+            f'<option value="{d["id"]}">{esc(d["label"])}</option>'
         )
 
         # POIs split by status for visibility
@@ -1089,7 +1226,7 @@ def build_itinerary_html():
             )
 
         pane = (
-            f'<div class="tab-pane{active}" id="pane-{d["id"]}">'
+            f'<div class="tab-pane" id="pane-{d["id"]}">'
             f'<div class="card">'
             f'<h2>{esc(d["title"])}</h2>'
             f'<div class="muted">{esc(d.get("descr", ""))}</div>'
@@ -1192,6 +1329,11 @@ def build_itinerary_html():
                 prev_primary_camp = {
                     'lat': prim['lat'], 'lon': prim['lon'], 'name': prim['name'],
                 }
+
+    map_payload[ROUTE_OVERVIEW_ID] = {
+        'track': overview_track,
+        'markers': ov_markers,
+    }
 
     map_json = json.dumps(map_payload)
 
@@ -1730,7 +1872,7 @@ document.querySelectorAll('.schedule-controls').forEach(attachSchedule);
 // Leaflet is inlined in <head>, so `L` is already defined by the time this
 // script runs. Kick off the first-tab map immediately.
 if (typeof L !== 'undefined') {{
-  ensureMap('{days[0]["id"]}');
+  ensureMap('{ROUTE_OVERVIEW_ID}');
 }} else {{
   document.querySelectorAll('.map-offline-notice').forEach(el => {{
     el.textContent = 'Map engine failed to load. Refer to GPX or printed maps. Textual content is fully usable.';
