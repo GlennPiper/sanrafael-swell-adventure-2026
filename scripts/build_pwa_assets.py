@@ -10,8 +10,9 @@
 The ``BUILD_VERSION`` baked into ``service-worker.js`` is the cache namespace.
 Bumping it forces installed clients to re-download on next visit. We derive it
 from ``planning/trip_data.json`` (``generated_at`` + content hash) **and** the
-Markdown sources for ``slot-canyon-guide.md`` / ``fuel_plan.md`` so edits to
-those pages invalidate the cache even when ``trip_data.json`` is unchanged.
+Markdown sources for standalone PWA pages (slot, fuel, overland alternates,
+alt itineraries) so edits invalidate the cache even when ``trip_data.json``
+is unchanged.
 
 The site's public URL is read from the ``SITE_URL`` env var (set by the GitHub
 Actions workflow). For local builds we fall back to a sensible
@@ -53,11 +54,19 @@ SITE_URL = os.environ.get('SITE_URL', '').rstrip('/')
 def _build_version() -> str:
     """Cache namespace = trip_data.json + planning markdown sources for standalone pages."""
     raw = TRIP_DATA.read_bytes() if TRIP_DATA.exists() else b'no-data'
-    slot_md = PLAN / 'slot-canyon-guide.md'
-    fuel_md = PLAN / 'fuel_plan.md'
-    slot_raw = slot_md.read_bytes() if slot_md.exists() else b''
-    fuel_raw = fuel_md.read_bytes() if fuel_md.exists() else b''
-    short = hashlib.sha1(raw + slot_raw + fuel_raw).hexdigest()[:10]
+    extra_md_names = (
+        'slot-canyon-guide.md',
+        'fuel_plan.md',
+        'overland_alternates.md',
+        'trip-itinerary-alt-a.md',
+        'trip-itinerary-alt-b.md',
+        'trip-itinerary-alt-d.md',
+    )
+    extra_raw = b''
+    for name in extra_md_names:
+        p = PLAN / name
+        extra_raw += p.read_bytes() if p.exists() else b''
+    short = hashlib.sha1(raw + extra_raw).hexdigest()[:10]
     try:
         gen = json.loads(raw.decode('utf-8')).get('generated_at', '')
     except Exception:
@@ -78,6 +87,10 @@ PRECACHE = [
     'trip-reference.html',
     'slot-canyon-guide.html',
     'fuel-plan.html',
+    'overland-alternates.html',
+    'trip-itinerary-alt-a.html',
+    'trip-itinerary-alt-b.html',
+    'trip-itinerary-alt-d.html',
     'trip-plan.gpx',
     'manifest.webmanifest',
     'icons/icon-192.png',

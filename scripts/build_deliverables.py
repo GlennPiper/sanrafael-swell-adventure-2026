@@ -118,6 +118,8 @@ a { color: #58a6ff; }
   border-bottom: 1px solid #30363d;
   padding: 12px 18px;
   font-size: 14px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0;
+  line-height: 1.6;
 }
 .top-nav a { margin-right: 14px; }
 .top-nav strong { color: #f0f6fc; margin-right: 14px; }
@@ -179,8 +181,19 @@ article.md-page hr { border: none; border-top: 1px solid #30363d; margin: 22px 0
 """
 
 
+# Linked from itinerary / reference headers and markdown PWA pages.
+ALT_ROUTES_LINKS_HTML = (
+    '<a href="overland-alternates.html">Alt routes</a> &middot; '
+    '<a href="trip-itinerary-alt-a.html">Alt A</a> &middot; '
+    '<a href="trip-itinerary-alt-b.html">Alt B</a> &middot; '
+    '<a href="trip-itinerary-alt-d.html">Alt D</a>'
+)
+
+
 def _top_nav_html(current: str) -> str:
-    """current is 'itinerary' | 'reference' | 'slot' | 'fuel' | 'none'."""
+    """current is 'itinerary' | 'reference' | 'slot' | 'fuel' | 'overland-alt' |
+    'alt-a' | 'alt-b' | 'alt-d' | 'none'.
+    """
     def link(href, label, key):
         if current == key:
             return f'<strong>{label}</strong>'
@@ -189,6 +202,10 @@ def _top_nav_html(current: str) -> str:
     parts = [
         '<nav class="top-nav" aria-label="Trip pages">',
         link('trip-itinerary.html', 'Daily itinerary', 'itinerary'),
+        link('trip-itinerary-alt-a.html', 'Alt A', 'alt-a'),
+        link('trip-itinerary-alt-b.html', 'Alt B', 'alt-b'),
+        link('trip-itinerary-alt-d.html', 'Alt D', 'alt-d'),
+        link('overland-alternates.html', 'Alt overview', 'overland-alt'),
         link('trip-reference.html', 'Full reference', 'reference'),
         link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
         link('fuel-plan.html', 'Fuel plan', 'fuel'),
@@ -220,6 +237,30 @@ def write_planning_markdown_pages():
             OUT_DIR / 'fuel-plan.html',
             'Fuel plan - SRS Trip',
             'fuel',
+        ),
+        (
+            PLAN / 'overland_alternates.md',
+            OUT_DIR / 'overland-alternates.html',
+            'Alternate Swell routes (overview) - SRS Trip',
+            'overland-alt',
+        ),
+        (
+            PLAN / 'trip-itinerary-alt-a.md',
+            OUT_DIR / 'trip-itinerary-alt-a.html',
+            'Alternate itinerary A (forward, 4-day) - SRS Trip',
+            'alt-a',
+        ),
+        (
+            PLAN / 'trip-itinerary-alt-b.md',
+            OUT_DIR / 'trip-itinerary-alt-b.html',
+            'Alternate itinerary B (reverse, V1) - SRS Trip',
+            'alt-b',
+        ),
+        (
+            PLAN / 'trip-itinerary-alt-d.md',
+            OUT_DIR / 'trip-itinerary-alt-d.html',
+            'Alternate itinerary D (reverse split, V1) - SRS Trip',
+            'alt-d',
         ),
     ]
     for md_path, out_path, title, nav_key in pages:
@@ -1362,6 +1403,7 @@ def build_itinerary_html():
 <h1>2026 San Rafael Swell Adventure + Moab</h1>
 <div class="meta">May 2 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi &middot;
 <a href="trip-reference.html">Open reference doc</a> &middot;
+{ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="fuel-plan.html">Fuel plan</a> &middot;
 <a href="trip-plan.gpx" download>Download GPX</a></div>
@@ -2040,6 +2082,7 @@ def build_reference_html():
 <h1>2026 San Rafael Swell Adventure + Moab - Reference</h1>
 <div class="meta">May 2 - May 10, 2026 &middot; Full knowledge dump &middot;
 <a href="trip-itinerary.html">Open daily itinerary</a> &middot;
+{ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="fuel-plan.html">Fuel plan</a> &middot;
 <a href="trip-plan.gpx" download>Download GPX</a></div>
@@ -2092,6 +2135,7 @@ def build_reference_html():
 <li><a href="fuel-plan.html">Fuel plan</a> (full worksheet; offline) &mdash; source <a href="planning/fuel_plan.md">planning/fuel_plan.md</a></li>
 <li><a href="planning/realtime_info_sources.md">planning/realtime_info_sources.md</a></li>
 <li><a href="trip-plan.gpx" download>trip-plan.gpx</a> (derived route with day splits + camps labeled)</li>
+<li><a href="overland-alternates.html">Alternate Swell routes (overview)</a> (offline) — source <a href="planning/overland_alternates.md">planning/overland_alternates.md</a>; daily alts <a href="planning/trip-itinerary-alt-a.md">alt-a</a>, <a href="planning/trip-itinerary-alt-b.md">alt-b</a>, <a href="planning/trip-itinerary-alt-d.md">alt-d</a></li>
 </ul>
 </div>
 
