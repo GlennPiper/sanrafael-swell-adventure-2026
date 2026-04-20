@@ -46,6 +46,8 @@ launch. No app-store review, no manual file shuffling.
 - `trip-itinerary.html` -- daily-tabbed view with maps, POIs, camps, schedule
 - `trip-reference.html` -- single-page knowledge dump (fuel, emergency,
   decision matrix, every camp + POI including backups, all real-time links)
+- `slot-canyon-guide.html` -- Day 3 slot/hike detail + links (offline with the PWA)
+- `fuel-plan.html` -- Full fuel worksheet + stations + MPG notes (offline with the PWA)
 - `trip-plan.gpx` -- import into Gaia / CalTopo / Garmin / OnX
 
 ---
@@ -58,6 +60,8 @@ These live at the **project root** and are regenerated from scripts. Do NOT hand
 |---|---|---|
 | `trip-itinerary.html` | Daily-tabbed browser view. One tab per day with map, POIs, camps, quick real-time links. Offline-first (maps degrade gracefully if no internet). | Double-click to open in a browser. Share with group. |
 | `trip-reference.html` | Full knowledge dump on one page: overview, fuel, camps (incl. backups), POIs (incl. skips), Day-3 hike decision matrix, emergency info, all real-time sources. | Utilitarian reference; print-friendly. |
+| `slot-canyon-guide.html` | **Generated** from `planning/slot-canyon-guide.md`. Day 3 slot/hike detail + links; precached offline in the PWA. | Linked from itinerary, reference, install page. |
+| `fuel-plan.html` | **Generated** from `planning/fuel_plan.md`. Stations, surface/MPG, per-vehicle worksheet; precached offline in the PWA. | Linked from itinerary, reference, install page. |
 | `trip-plan.gpx` | Route + labeled waypoints for Gaia / CalTopo / Garmin / OnX. 5 tracks (4 day splits + Freeway Access bypass). 59 waypoints tagged `[BACKUP]`, `[HIKE]`, `[CAMP PRIMARY]`, `[CAMP BACKUP]`, `[CAMP LAST-RESORT]`. | Import into your nav app before the trip. |
 
 ## Source planning files (the "why" behind each decision)
@@ -66,9 +70,10 @@ All inside `planning/`:
 
 | File | Purpose |
 |---|---|
-| `poi_decisions.md` | Locked POI triage per day (primary / backup / skip / hike). Includes Day-3 Wild Horse Window vs. Little Wild Horse Canyon comparison and tactical decision matrix. |
+| `poi_decisions.md` | Locked POI triage per day (primary / backup / skip / hike). Includes Day-3 hike decision matrix. |
+| `slot-canyon-guide.md` | Slot canyons + Day 3 hikes — source for **slot-canyon-guide.html** (PWA). |
 | `campsite_plan.md` | Primary / secondary / tertiary camps per night. Built from live availability checks (see `check_availability.py`, `check_moab_availability.py`). |
-| `fuel_plan.md` | Per-vehicle fuel worksheet, route surface breakdown, MPG factors, fuel stop locations (Green River, Castle Dale, Emery, Hanksville, Moab), group summary table. |
+| `fuel_plan.md` | Per-vehicle fuel worksheet, route surface breakdown, MPG factors, fuel stops — source for **fuel-plan.html** (PWA). |
 | `realtime_info_sources.md` | NWS point forecasts for each waypoint, UDOT, BLM, fire, water, emergency, and park alert links. |
 | `poi_menu.md` | Original POI candidate list (now superseded by `poi_decisions.md`; retained for context). |
 | `campsite_menu.md` | Original campsite candidate list (now superseded by `campsite_plan.md`). |
@@ -95,10 +100,14 @@ All inside `planning/`:
 ### One-liner (full rebuild + verify)
 
 ```powershell
+py -m pip install markdown
 py scripts\build_trip_data.py
 py scripts\build_deliverables.py
+py scripts\build_pwa_assets.py
 py scripts\verify_outputs.py
 ```
+
+`build_deliverables.py` emits **slot-canyon-guide.html** and **fuel-plan.html** from Markdown in `planning/` (requires the `markdown` package). Run **`build_pwa_assets.py` after** `build_deliverables.py` so the service worker precache includes both pages.
 
 First-time setup also requires populating the offline map assets (runs once; idempotent thereafter):
 
@@ -109,13 +118,15 @@ py scripts\download_offline_tiles.py
 ### Full publish-style rebuild (matches the CI flow)
 
 ```powershell
+py -m pip install pillow "qrcode[pil]" markdown
 py scripts\build_trip_data.py
-py scripts\build_pwa_icons.py        # needs: pip install pillow
-py scripts\build_pwa_assets.py       # set $env:SITE_URL for the QR code; needs: pip install "qrcode[pil]"
+py scripts\build_pwa_icons.py
 py scripts\build_deliverables.py
+$env:SITE_URL = "https://YOURUSER.github.io/YOURREPO"   # optional: for QR
+py scripts\build_pwa_assets.py
 ```
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs all four build scripts in the same order, runs the secret-scan PII guard over the staged `_publish/` directory, and publishes the result to GitHub Pages.
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs these steps (deliverables **before** PWA assets so `slot-canyon-guide.html` and `fuel-plan.html` are precached), then the secret-scan PII guard on `_publish/`, then GitHub Pages.
 
 ### Script-by-script
 
@@ -126,8 +137,8 @@ Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs all four b
 | `scripts/check_availability.py` | (live Recreation.gov API) | `planning/recgov_*.json`, console output | Anytime we want to re-check Swell campground status |
 | `scripts/check_moab_availability.py` | (live Recreation.gov API) | `planning/moab_availability_raw.txt` | Anytime we want to re-check Moab camp status |
 | **`scripts/build_trip_data.py`** | `planning/route_analysis.json`, `planning/route_tracks.json` + hardcoded `POI_STATUS` + `CAMPSITES` + `FUEL_PLAN_SUMMARY` + `REALTIME_LINKS` + `GROUP_COUNTS` | `planning/trip_data.json` | Anytime a POI, camp, link, or count changes |
-| **`scripts/build_deliverables.py`** | `planning/trip_data.json` | `trip-itinerary.html`, `trip-reference.html`, `trip-plan.gpx` | After `build_trip_data.py` |
-| `scripts/build_pwa_assets.py` | (env: `SITE_URL`) | `manifest.webmanifest`, `service-worker.js`, `robots.txt`, `assets/qr.png` | Each CI build (PWA shell + cache-bust) |
+| **`scripts/build_deliverables.py`** | `planning/trip_data.json`, `planning/slot-canyon-guide.md`, `planning/fuel_plan.md` | `trip-itinerary.html`, `trip-reference.html`, `trip-plan.gpx`, **`slot-canyon-guide.html`**, **`fuel-plan.html`** | After `build_trip_data.py`; needs `pip install markdown` |
+| `scripts/build_pwa_assets.py` | `planning/trip_data.json`, those two `.md` files, env `SITE_URL` | `manifest.webmanifest`, `service-worker.js`, `robots.txt`, `assets/qr.png` | **After** `build_deliverables.py` (precache includes both standalone pages) |
 | `scripts/build_pwa_icons.py` | `assets/icon-source.svg` | `icons/icon-192.png`, `icon-512.png`, `icon-512-maskable.png`, `apple-touch-icon.png` | Whenever the icon source changes |
 | `scripts/verify_outputs.py` | deliverables | console output | Sanity check (HTML balance, GPX parse, waypoint / track counts) |
 

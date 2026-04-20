@@ -9,8 +9,9 @@
 
 The ``BUILD_VERSION`` baked into ``service-worker.js`` is the cache namespace.
 Bumping it forces installed clients to re-download on next visit. We derive it
-from ``planning/trip_data.json`` (its ``generated_at`` field plus a short hash
-of the file contents) so any data change automatically invalidates the cache.
+from ``planning/trip_data.json`` (``generated_at`` + content hash) **and** the
+Markdown sources for ``slot-canyon-guide.md`` / ``fuel_plan.md`` so edits to
+those pages invalidate the cache even when ``trip_data.json`` is unchanged.
 
 The site's public URL is read from the ``SITE_URL`` env var (set by the GitHub
 Actions workflow). For local builds we fall back to a sensible
@@ -50,9 +51,13 @@ SITE_URL = os.environ.get('SITE_URL', '').rstrip('/')
 
 
 def _build_version() -> str:
-    """Cache namespace = trip_data.json mtime-stable hash."""
+    """Cache namespace = trip_data.json + planning markdown sources for standalone pages."""
     raw = TRIP_DATA.read_bytes() if TRIP_DATA.exists() else b'no-data'
-    short = hashlib.sha1(raw).hexdigest()[:10]
+    slot_md = PLAN / 'slot-canyon-guide.md'
+    fuel_md = PLAN / 'fuel_plan.md'
+    slot_raw = slot_md.read_bytes() if slot_md.exists() else b''
+    fuel_raw = fuel_md.read_bytes() if fuel_md.exists() else b''
+    short = hashlib.sha1(raw + slot_raw + fuel_raw).hexdigest()[:10]
     try:
         gen = json.loads(raw.decode('utf-8')).get('generated_at', '')
     except Exception:
@@ -71,6 +76,8 @@ PRECACHE = [
     'index.html',
     'trip-itinerary.html',
     'trip-reference.html',
+    'slot-canyon-guide.html',
+    'fuel-plan.html',
     'trip-plan.gpx',
     'manifest.webmanifest',
     'icons/icon-192.png',

@@ -82,7 +82,7 @@ DAYS = [
         'date_iso': '2026-05-05',
         'title': 'Day 3: Tomsich Butte -> Behind-the-Reef -> Temple Mtn',
         'type': 'overland',
-        'descr': 'Technical day: Hidden Splendor, Miner\'s Cabin, then the slow Behind-the-Reef trail. Signature hike choice: Wild Horse Window (route author\'s #1 pick) or Little Wild Horse Canyon narrows (iconic slot). Camp at Temple Mtn.',
+        'descr': 'Technical day: Hidden Splendor, Miner\'s Cabin, then the slow Behind-the-Reef trail. Default hike: Wild Horse Window. Backup slots: Chute / Crack / full LWH-Bell loop — see slot-canyon-guide.html (PWA). Camp at Temple Mtn.',
         'mi_lo': 140.0,
         'mi_hi': 200.0,
         'miles': 60,
@@ -215,18 +215,18 @@ POI_STATUS = {
     "Miner's Cabin":                       ('skip',     'Exact duplicate of DP version -- removed'),
     'DP - Behind the Reef trail':          ('primary',  'Technical trail section - slow'),
     # Hike candidates - both primary, pick tactically
-    'DP - Wild Horse Window Arch':         ('hike_candidate', 'Route author\'s #1 pick; 2 mi RT; 1-2 hrs; Easy; cross-country desert'),
-    'Little Wild Horse Canyon Trail':      ('hike_candidate', 'LWH narrows out-and-back; 2.5-4.5 mi RT; 1.5-2.5 hrs; iconic slot canyon. FLASH FLOOD RISK.'),
-    'Little Wild Horse Slot Canyon':       ('hike_candidate', 'LWH full-loop skipped; waypoint for TH reference'),
+    'DP - Wild Horse Window Arch':         ('hike_candidate', 'Default Day 3 hike; route author #1 geology; 2 mi RT; BLM not GSVP gate; set up camp before this hike and carpool to the trailhead; see slot-canyon-guide.html + AllTrails WHW'),
+    'Little Wild Horse Canyon Trail':      ('backup',       'LWH/Bell TH; skip OAB from Behind-the-Reef unless full ~8 mi LWH/Bell loop + party OK scrambling; FLASH FLOOD RISK — slot-canyon-guide.html'),
+    'Little Wild Horse Slot Canyon':       ('backup',       'Full LWH/Bell loop waypoint only; same caveats — slot-canyon-guide.html'),
     'DP - Temple Wash Petroglpyphs':       ('primary',  'Roadside panel (GPX name has a typo, kept exact for lookup)'),
     'Wild Horse Window Trailhead':         ('skip',     'Trailhead reference only; Wild Horse Window Arch is the destination hike'),
     # Day 3 skips
-    'DP - Chute Canyon':                   ('skip',     '10+ mi / 5-7 hr loop -- too long'),
-    'DP - Crack Canyon':                   ('skip',     '10+ mi / 5-7 hr loop -- too long'),
+    'DP - Chute Canyon':                   ('backup',   'Easier wash; wide ~first mi; out-and-back; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
+    'DP - Crack Canyon':                   ('backup',   '~10 ft drop ~1 mi in; strong slot; camping may exist past TH; slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
     'Goblin Valley State Park':            ('skip',     'Off-route side trip; time budget'),
-    'Chute Canyon Trailhead':              ('skip',     'Trail-head only'),
-    'Crack Canyon Trailhead':              ('skip',     'Trail-head only'),
-    'Wild Horse Canyon':                   ('backup',   'On the way to Wild Horse Window'),
+    'Chute Canyon Trailhead':              ('backup',   'Chute Canyon hike parking — slot-canyon-guide.html'),
+    'Crack Canyon Trailhead':              ('backup',   'Crack Canyon hike parking; camping nearby possible — slot-canyon-guide.html'),
+    'Wild Horse Canyon':                   ('backup',   'AllTrails Wild Horse Canyon trail; lower priority — slot-canyon-guide.html'),
     'Old Mining Sites':                    ('skip',     'Generic waypoint'),
 
     # Day 4 AM
@@ -577,7 +577,9 @@ def _default_minutes(name, sym, status, note):
     # Specific named stops first
     if 'wild horse window' in n:                return 90
     if 'little wild horse canyon trail' in n:   return 120
-    if 'little wild horse slot' in n:           return 0   # waypoint reference only
+    if 'little wild horse slot' in n:           return 0   # loop waypoint reference unless full hike
+    if 'dp - crack canyon' == n:                return 240
+    if 'dp - chute canyon' == n:               return 180
     if 'eva conover' in n:                      return 60  # trail section
     if 'behind the reef' in n:                  return 75  # technical trail
     if 'tomsich butte' in n:                    return 45
@@ -737,7 +739,7 @@ for d in DAYS:
     ALL_PAYLOAD_DAYS.append(d_copy)
 
 # ---------------------------------------------------------------------------
-# Fuel plan payload (short version embedded; full is in fuel_plan.md)
+# Fuel plan payload (short version embedded; full is in planning/fuel_plan.md → fuel-plan.html)
 # ---------------------------------------------------------------------------
 FUEL_PLAN_SUMMARY = {
     'stations': [

@@ -21,6 +21,7 @@ Point forecasts for key waypoints - bookmark each:
 - NWS Salt Lake City (Swell coverage): [weather.gov/slc](https://www.weather.gov/slc)
 - NWS Grand Junction (Moab coverage): [weather.gov/gjt](https://www.weather.gov/gjt)
 - **Flash flood watches (CRITICAL for slot canyons):** [weather.gov/slc](https://www.weather.gov/slc/) -- check before entering Little Wild Horse Canyon, Crack Canyon, Chute Canyon, Black Dragon Canyon, Buckhorn Wash
+- **Trip hike intel:** [slot-canyon-guide.md](slot-canyon-guide.md) — built to **slot-canyon-guide.html** (offline PWA). **Fuel:** [fuel_plan.md](fuel_plan.md) → **fuel-plan.html**. **Crowd-sourced recent reports:** [AllTrails — Crack Canyon Wilderness](https://www.alltrails.com/parks/us/utah/crack-canyon-wilderness) (Chute/Crack area)
 - Radar (Cedar City / Green River area): [radar.weather.gov/station/KCBX](https://radar.weather.gov/station/KICX/standard)
 - Moab-area radar (Grand Junction): [radar.weather.gov/station/KGJX](https://radar.weather.gov/station/KGJX/standard)
 

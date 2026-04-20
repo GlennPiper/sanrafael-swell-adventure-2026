@@ -99,6 +99,155 @@ PWA_REGISTER_JS = """<script>
 </script>"""
 
 
+# Compact styles for standalone markdown pages (slot guide, fuel plan; no map widgets).
+STATIC_MD_PAGE_CSS = """
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  padding: 0 0 48px;
+  min-height: 100vh;
+}
+a { color: #58a6ff; }
+.top-nav {
+  position: sticky; top: 0; z-index: 10;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  padding: 12px 18px;
+  font-size: 14px;
+}
+.top-nav a { margin-right: 14px; }
+.top-nav strong { color: #f0f6fc; margin-right: 14px; }
+article.md-page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 20px 18px 40px;
+}
+article.md-page h1 {
+  font-size: clamp(22px, 4vw, 28px);
+  color: #f0f6fc;
+  margin: 8px 0 12px;
+}
+article.md-page h2 {
+  font-size: 18px;
+  color: #f0f6fc;
+  margin: 28px 0 12px;
+  padding-top: 12px;
+  border-top: 1px solid #21262d;
+}
+article.md-page h2:first-of-type { border-top: none; padding-top: 0; }
+article.md-page h3 { font-size: 16px; color: #f0f6fc; margin: 18px 0 8px; }
+article.md-page p { margin: 10px 0; }
+article.md-page ul { padding-left: 22px; }
+article.md-page li { margin: 6px 0; }
+article.md-page pre {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.45;
+}
+article.md-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 14px;
+}
+article.md-page th, article.md-page td {
+  border: 1px solid #30363d;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+article.md-page th { background: #161b22; color: #f0f6fc; }
+article.md-page code {
+  background: #21262d;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+article.md-page hr { border: none; border-top: 1px solid #30363d; margin: 22px 0; }
+@media (max-width: 640px) {
+  article.md-page { padding-left: 12px; padding-right: 12px; }
+  article.md-page table { display: block; overflow-x: auto; max-width: 100vw; }
+}
+"""
+
+
+def _top_nav_html(current: str) -> str:
+    """current is 'itinerary' | 'reference' | 'slot' | 'fuel' | 'none'."""
+    def link(href, label, key):
+        if current == key:
+            return f'<strong>{label}</strong>'
+        return f'<a href="{href}">{label}</a>'
+
+    parts = [
+        '<nav class="top-nav" aria-label="Trip pages">',
+        link('trip-itinerary.html', 'Daily itinerary', 'itinerary'),
+        link('trip-reference.html', 'Full reference', 'reference'),
+        link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
+        link('fuel-plan.html', 'Fuel plan', 'fuel'),
+        '<a href="trip-plan.gpx" download>GPX</a>',
+        '</nav>',
+    ]
+    return '\n'.join(parts)
+
+
+def write_planning_markdown_pages():
+    """Emit slot-canyon-guide.html and fuel-plan.html from planning/*.md (PWA-offline)."""
+    try:
+        import markdown
+    except ImportError as e:
+        raise SystemExit(
+            'The "markdown" package is required to build standalone markdown HTML pages. '
+            'Install with: pip install markdown'
+        ) from e
+    ext = ['tables', 'fenced_code']
+    pages = [
+        (
+            PLAN / 'slot-canyon-guide.md',
+            OUT_DIR / 'slot-canyon-guide.html',
+            'Slot canyons & Day 3 hikes - SRS Trip',
+            'slot',
+        ),
+        (
+            PLAN / 'fuel_plan.md',
+            OUT_DIR / 'fuel-plan.html',
+            'Fuel plan - SRS Trip',
+            'fuel',
+        ),
+    ]
+    for md_path, out_path, title, nav_key in pages:
+        if not md_path.exists():
+            print(f'Warning: {md_path.relative_to(BASE)} missing; skipping {out_path.name}')
+            continue
+        raw = md_path.read_text(encoding='utf-8')
+        body = markdown.markdown(raw, extensions=ext)
+        nav = _top_nav_html(nav_key)
+        html_page = f"""<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>{title}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{PWA_HEAD}
+<style>{STATIC_MD_PAGE_CSS}</style>
+</head><body>
+{nav}
+<article class="md-page">
+{body}
+</article>
+{PWA_REGISTER_JS}
+</body></html>
+"""
+        out_path.write_text(html_page, encoding='utf-8')
+        print(f'Wrote {out_path.name} ({len(html_page) / 1024:.1f} KB)')
+
+
 # -----------------------------------------------------------------------------
 # Load pre-downloaded OSM tiles (see scripts/download_offline_tiles.py) and
 # encode them as base64 data URIs keyed by "z/x/y". This lets the Leaflet map
@@ -870,10 +1019,10 @@ def build_itinerary_html():
         hike_warn = ''
         if any(p.get('status') == 'hike_candidate' for p in pois):
             hike_warn = (
-                '<div class="warn"><strong>Day 3 hike decision:</strong> Two hikes kept as primary candidates '
-                '(Wild Horse Window and Little Wild Horse Canyon narrows). Pick tactically on the day. '
-                'See the reference doc for full side-by-side comparison and decision matrix. '
-                'CRITICAL: Check flash-flood forecast before entering Little Wild Horse Canyon.'
+                '<div class="warn"><strong>Day 3 hikes:</strong> Default = <strong>Wild Horse Window</strong> (hike candidate). '
+                'Backup slot/wash hikes (Chute Canyon, Crack Canyon, full Little Wild Horse/Bell loop) are listed as bonus stops — '
+                'see <a href="slot-canyon-guide.html">Slot canyon guide</a> (offline in the PWA) and the Reference page &quot;Day 3 Hike&quot; card. '
+                '<strong>Flash floods:</strong> check forecast before Chute, Crack, or any slot.'
                 '</div>'
             )
 
@@ -988,6 +1137,23 @@ def build_itinerary_html():
         for p in pois:
             if p['status'] in show_statuses and p.get('lat') and p.get('lon'):
                 markers.append({'lat': p['lat'], 'lon': p['lon'], 'name': p['name'], 'kind': 'poi'})
+        # Scheduled days with a driven track: bonus/backup rows use the same mile-sorted
+        # merge as the stops table; expose them on the map only when the row checkbox
+        # is checked (see sched_poi_id + syncBackupMarkersForDay in inline JS).
+        if pts and d.get('schedule'):
+            merged_map = sorted(
+                [p for p in pois if p['status'] in (
+                    'primary', 'hike_candidate', 'conditional', 'backup',
+                )],
+                key=lambda p: p['mile'],
+            )
+            for idx, p in enumerate(merged_map):
+                if p['status'] != 'backup' or not p.get('lat') or not p.get('lon'):
+                    continue
+                markers.append({
+                    'lat': p['lat'], 'lon': p['lon'], 'name': p['name'], 'kind': 'poi',
+                    'sched_poi_id': f'{d["id"]}-{idx}',
+                })
 
         # End-of-day camps (primary / backup / last-resort).
         # Tiers can hold either a single dict OR a list of equal-rank sites
@@ -1053,6 +1219,8 @@ def build_itinerary_html():
 <h1>2026 San Rafael Swell Adventure + Moab</h1>
 <div class="meta">May 2 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi &middot;
 <a href="trip-reference.html">Open reference doc</a> &middot;
+<a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
+<a href="fuel-plan.html">Fuel plan</a> &middot;
 <a href="trip-plan.gpx" download>Download GPX</a></div>
 </header>
 <main>
@@ -1102,6 +1270,8 @@ if (DAY_PICKER) {{
 
 const MAP_DATA = {map_json};
 const MAPS = {{}};
+// dayId -> {{ schedPoiId: Leaflet layer }} for backup stops toggled by row checkboxes.
+const BACKUP_MARKER_REGISTRY = {{}};
 
 function esriLayer(name) {{
   // Online Esri tile sources; we mark failed tiles transparent so the
@@ -1168,13 +1338,27 @@ function ensureMap(dayId) {{
     const line = L.polyline(spec.track, {{color:'#ff9d45', weight:3}}).addTo(m);
     bounds.extend(line.getBounds());
   }}
+  if (!BACKUP_MARKER_REGISTRY[dayId]) BACKUP_MARKER_REGISTRY[dayId] = {{}};
   spec.markers.forEach(mk => {{
     const mkr = buildMarker(mk);
-    if (mkr) {{
-      mkr.bindPopup(mk.name).addTo(m);
+    if (!mkr) return;
+    mkr.bindPopup(mk.name);
+    const sid = mk.sched_poi_id;
+    if (sid) {{
+      BACKUP_MARKER_REGISTRY[dayId][sid] = mkr;
+      const pane = document.getElementById('pane-' + dayId);
+      const tr = pane && pane.querySelector('tr[data-poi-id="' + sid + '"]');
+      const on = tr && tr.querySelector('.poi-include') && tr.querySelector('.poi-include').checked;
+      if (on) {{
+        mkr.addTo(m);
+        bounds.extend([mk.lat, mk.lon]);
+      }}
+    }} else {{
+      mkr.addTo(m);
       bounds.extend([mk.lat, mk.lon]);
     }}
   }});
+  syncBackupMarkersForDay(dayId);
   if (bounds.isValid()) {{
     m.fitBounds(bounds, {{padding:[30,30], maxZoom: 14}});
   }} else {{
@@ -1182,6 +1366,21 @@ function ensureMap(dayId) {{
   }}
   addLegend(m);
   MAPS[dayId] = m;
+}}
+
+function syncBackupMarkersForDay(dayId) {{
+  const reg = BACKUP_MARKER_REGISTRY[dayId];
+  const m = MAPS[dayId];
+  if (!reg || !m) return;
+  const pane = document.getElementById('pane-' + dayId);
+  if (!pane) return;
+  Object.keys(reg).forEach(sid => {{
+    const layer = reg[sid];
+    const tr = pane.querySelector('tr[data-poi-id="' + sid + '"]');
+    const on = tr && tr.querySelector('.poi-include') && tr.querySelector('.poi-include').checked;
+    if (on) {{ if (!m.hasLayer(layer)) layer.addTo(m); }}
+    else {{ if (m.hasLayer(layer)) m.removeLayer(layer); }}
+  }});
 }}
 
 // ----- Custom marker shapes -----
@@ -1488,6 +1687,7 @@ function recomputeSchedule(dayId) {{
     }};
   }});
   _saveSched(dayId, state);
+  syncBackupMarkersForDay(dayId);
 }}
 
 function attachSchedule(ctrl) {{
@@ -1576,7 +1776,7 @@ def build_reference_html():
 <tr><td><strong>Total route</strong></td><td class="num"><strong>{sb["total_mi"]}</strong></td><td></td></tr>
 </tbody>
 </table>
-<p>Estimated Swell fuel burn (baseline 16 MPG): <strong>~{fp["estimated_swell_gallons_16mpg_baseline"]} gallons</strong>. Plan aux fuel or detours accordingly; see the detailed <a href="planning/fuel_plan.md">fuel_plan.md</a> for per-vehicle worksheet.</p>
+<p>Estimated Swell fuel burn (baseline 16 MPG): <strong>~{fp["estimated_swell_gallons_16mpg_baseline"]} gallons</strong>. Plan aux fuel or detours accordingly; see the <a href="fuel-plan.html"><strong>Fuel plan</strong></a> (offline PWA; source <code>planning/fuel_plan.md</code>).</p>
 """
 
     # Day-by-day full dump (no tabs here)
@@ -1607,8 +1807,8 @@ def build_reference_html():
     # Day 3 hike detail (critical reference)
     hike_detail = """
 <div class="card" id="day3-hikes">
-<h2>Day 3 Hike Decision (Tactical)</h2>
-<p class="muted">Both hikes are kept in the plan as primary candidates. Pick on the day based on schedule, weather, group energy, and interest.</p>
+<h2>Day 3 Hikes (Tactical)</h2>
+<p class="muted">Full write-up: <a href="slot-canyon-guide.html"><strong>Slot canyon guide</strong></a> (same offline PWA). Default hike = Wild Horse Window; Chute / Crack / LWH-Bell are backup bonus stops on the itinerary.</p>
 
 <div class="two-col">
 <div>
@@ -1624,24 +1824,21 @@ def build_reference_html():
 <tr><th>Trail</th><td>None - cross-country slickrock with cairns</td></tr>
 <tr><th>Shade</th><td>Zero; carry >=1 L water/person</td></tr>
 <tr><th>Dogs</th><td>Allowed (leash recommended)</td></tr>
+<tr><th>Access / fees</th><td><strong>BLM</strong> — not inside Goblin Valley State Park gate (no park fee for this hike unless you enter GSVP separately)</td></tr>
+<tr><th>Links</th><td><a href="https://www.alltrails.com/trail/us/utah/wild-horse-window" target="_blank" rel="noopener">AllTrails</a> &middot; <a href="https://www.hikinginutah.com/wildhorsewindow.htm" target="_blank" rel="noopener">HikingInUtah</a> &middot; <a href="https://utah.com/destinations/natural-areas/san-rafael-swell/hiking/wild-horse-window/" target="_blank" rel="noopener">Utah.com</a></td></tr>
 <tr><th>Why go</th><td>Route author's explicit "#1 geological site"; unique cave-bridge hybrid; petroglyphs on R wall (some fake)</td></tr>
 <tr><th>Hazards</th><td>Heat/no shade; loose slickrock; faint trail -> carry GPS</td></tr>
 </table>
 </div>
 
 <div>
-<h3>Little Wild Horse Canyon (narrows out-and-back)</h3>
+<h3>Backup: Chute, Crack, Little Wild Horse / Bell</h3>
 <table>
-<tr><th>Type</th><td>Iconic Utah slot canyon with 400 ft walls</td></tr>
-<tr><th>Trailhead</th><td>Standard LWH/Bell lot (signed)</td></tr>
-<tr><th>Distance</th><td>2.5-4.5 mi RT (turn around when satisfied)</td></tr>
-<tr><th>Time</th><td>1.5-2.5 hrs</td></tr>
-<tr><th>Difficulty</th><td>Easy-moderate; one dryfall 0.4 mi in (scramble or bypass L slickrock)</td></tr>
-<tr><th>Trail</th><td>Wash bottom; scrambles through narrows</td></tr>
-<tr><th>Shade</th><td>Canyon walls = partial shade; cooler than open desert</td></tr>
-<tr><th>Dogs</th><td>Allowed; must lift over a couple of obstacles</td></tr>
-<tr><th>Why go</th><td>Most famous slot canyon in the Swell; dramatic scale</td></tr>
-<tr><th>Hazards</th><td><span class="badge badge-hike">EXTREME FLASH FLOOD RISK</span> - do NOT enter if any rain forecast on the Reef. Fatal May 2020 event killed 21.</td></tr>
+<tr><th>Chute Canyon</th><td>Easier wash; stays wide ~first mile; flexible turnaround. Area: <a href="https://www.alltrails.com/parks/us/utah/crack-canyon-wilderness" target="_blank" rel="noopener">AllTrails Crack Canyon Wilderness</a></td></tr>
+<tr><th>Crack Canyon</th><td>Stronger slot; ~<strong>10 ft drop</strong> ~1 mi in (~38.6255, -110.7382 WGS84) — down and back up on OAB; camping may exist past trailhead</td></tr>
+<tr><th>Little Wild Horse / Bell</th><td><strong>Default skip</strong> OAB when coming from Behind-the-Reef (long approach before tightest narrows). Consider only <strong>full ~8 mi loop</strong> if whole party accepts scrambling</td></tr>
+<tr><th>Wild Horse Canyon</th><td>Separate AllTrails trail near Goblin Valley area; lower priority for this trip</td></tr>
+<tr><th>All slots</th><td><span class="badge badge-hike">FLASH FLOOD RISK</span> — no entry if rain on the Reef. See <a href="slot-canyon-guide.html">Slot canyon guide</a> for BLM + Grand Canyon Trust links</td></tr>
 </table>
 </div>
 </div>
@@ -1650,12 +1847,12 @@ def build_reference_html():
 <table>
 <thead><tr><th>Condition</th><th>Recommendation</th></tr></thead>
 <tbody>
-<tr><td>On schedule, good weather, energetic</td><td>Do LWH narrows; skip WHW</td></tr>
-<tr><td>Any rain forecast (on Reef or upstream)</td><td>Do WHW (no flood exposure); skip LWH</td></tr>
-<tr><td>Ahead of schedule + perfect weather</td><td>Do both - WHW morning, LWH after Behind-the-Reef</td></tr>
-<tr><td>Behind schedule</td><td>Skip both, go straight to Temple Mtn camp</td></tr>
-<tr><td>Want the signature "slot canyon" photo</td><td>LWH narrows</td></tr>
-<tr><td>Want the route author's #1 pick</td><td>WHW</td></tr>
+<tr><td>Default / mixed abilities</td><td><strong>Wild Horse Window</strong></td></tr>
+<tr><td>Want easiest canyon walk</td><td><strong>Chute Canyon</strong> (backup)</td></tr>
+<tr><td>Want slot; party OK with ~10 ft obstacle</td><td><strong>Crack Canyon</strong> (backup)</td></tr>
+<tr><td>Rain / flood risk</td><td>WHW only; skip slots</td></tr>
+<tr><td>Whole group wants LWH + scrambling + time</td><td>Full <strong>LWH/Bell loop</strong> from signed trailhead (backup waypoints)</td></tr>
+<tr><td>Behind schedule</td><td>Skip optional hikes; Temple Mtn camp</td></tr>
 </tbody>
 </table>
 </div>
@@ -1700,6 +1897,8 @@ def build_reference_html():
 <h1>2026 San Rafael Swell Adventure + Moab - Reference</h1>
 <div class="meta">May 2 - May 10, 2026 &middot; Full knowledge dump &middot;
 <a href="trip-itinerary.html">Open daily itinerary</a> &middot;
+<a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
+<a href="fuel-plan.html">Fuel plan</a> &middot;
 <a href="trip-plan.gpx" download>Download GPX</a></div>
 </header>
 <main>
@@ -1730,7 +1929,7 @@ def build_reference_html():
 {stations_html}
 <h3>Route surface breakdown & MPG factors</h3>
 {surface_html}
-<p>Per-vehicle worksheet: see <a href="planning/fuel_plan.md">fuel_plan.md</a>. Each driver should fill in their baseline MPG, tank capacity, and aux fuel before the trip.</p>
+<p>Per-vehicle worksheet: <a href="fuel-plan.html">Fuel plan</a> (same offline PWA). Source file for editors: <code>planning/fuel_plan.md</code>.</p>
 </div>
 
 {''.join(day_sections)}
@@ -1745,8 +1944,9 @@ def build_reference_html():
 <li><a href="san-rafael-swell-adv-route-2025.gpx">Original route GPX (OTG Crew)</a></li>
 <li><a href="Utah_Destinations_In_San_Rafael_Area.md">Utah_Destinations_In_San_Rafael_Area.md</a> (raw POI list)</li>
 <li><a href="planning/poi_decisions.md">planning/poi_decisions.md</a> (locked POI triage)</li>
+<li><a href="slot-canyon-guide.html">Slot canyon guide</a> (Day 3 hikes + links; offline) &mdash; source <a href="planning/slot-canyon-guide.md">planning/slot-canyon-guide.md</a></li>
 <li><a href="planning/campsite_plan.md">planning/campsite_plan.md</a> (camps + live availability check)</li>
-<li><a href="planning/fuel_plan.md">planning/fuel_plan.md</a> (full fuel worksheet)</li>
+<li><a href="fuel-plan.html">Fuel plan</a> (full worksheet; offline) &mdash; source <a href="planning/fuel_plan.md">planning/fuel_plan.md</a></li>
 <li><a href="planning/realtime_info_sources.md">planning/realtime_info_sources.md</a></li>
 <li><a href="trip-plan.gpx" download>trip-plan.gpx</a> (derived route with day splits + camps labeled)</li>
 </ul>
@@ -1907,3 +2107,5 @@ print(f'Wrote trip-reference.html ({len(ref) / 1024:.1f} KB)')
 gpx = build_gpx()
 (OUT_DIR / 'trip-plan.gpx').write_text(gpx, encoding='utf-8')
 print(f'Wrote trip-plan.gpx ({len(gpx) / 1024:.1f} KB)')
+
+write_planning_markdown_pages()

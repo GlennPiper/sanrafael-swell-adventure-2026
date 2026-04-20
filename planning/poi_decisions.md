@@ -62,27 +62,34 @@ Confirmed via chat on the POI triage. `status` values:
 | 184.8 | DP - Miner's Cabin | primary | 15-30 min | Historic structure |
 | 184.8 | Miner's Cabin (duplicate) | REMOVED | - | Exact dup of "DP - Miner's Cabin" (same lat/lon) |
 | 186.1 | DP - Behind the Reef trail | primary | ongoing | Technical trail section - slow |
-| 186.6 | Little Wild Horse Canyon TH | primary | see hike notes | Trailhead for LWH narrows hike (see Day 3 hike decision below) |
-| 197.8 | DP - Wild Horse Window Arch | primary | see hike notes | Route author's #1 geological pick (see Day 3 hike decision below) |
+| 186.6 | Little Wild Horse Canyon Trail | backup | see [slot-canyon-guide.html](../slot-canyon-guide.html) (PWA) / [slot-canyon-guide.md](slot-canyon-guide.md) | Same GPX waypoint as LWH/Bell TH. **Default skip** OAB from Behind-the-Reef (narrows far in). **Full LWH/Bell ~8 mi loop** only if whole party OK with scrambling. |
+| 197.8 | DP - Wild Horse Window Arch | hike_candidate | see below + guide | **Default Day 3 hike.** Not a slot; 2 mi RT; BLM (not inside Goblin Valley SP gate). **Logistics:** set up camp first, then carpool to the trailhead. |
 | 197.9 | DP - Temple Wash Petroglpyphs | primary | 20-40 min | Roadside panel (GPX name has a typo; kept verbatim for lookup) |
-| 198.8 | Wild Horse Window Trailhead | skip | - | Trailhead waypoint only; Wild Horse Window Arch (see hike candidates) is the destination |
-| 187.1 | Little Wild Horse Slot Canyon (full 8 mi loop) | skip | - | Full 8 mi / 4-6 hr loop = too long. We'll do narrows out-and-back instead. |
-| 190.3 | DP - Chute Canyon | skip | - | 10+ mi / 5-7 hr loop -- too long |
-| 192.7 | DP - Crack Canyon | skip | - | 10+ mi / 5-7 hr loop -- too long |
+| 198.8 | Wild Horse Window Trailhead | skip | - | Trailhead waypoint only; Wild Horse Window Arch is the destination |
+| 187.1 | Little Wild Horse Slot Canyon | backup | see guide | Waypoint on full **LWH/Bell loop** (~8 mi / 4–6 hr). Only with full-party buy-in. |
+| 190.3 | DP - Chute Canyon | backup | 2–4+ hr if hiked | Easier wash; **wide for ~first mile**; see [slot-canyon-guide.html](../slot-canyon-guide.html) / [slot-canyon-guide.md](slot-canyon-guide.md), [AllTrails Crack Canyon Wilderness](https://www.alltrails.com/parks/us/utah/crack-canyon-wilderness) |
+| 192.7 | DP - Crack Canyon | backup | 3–5+ hr if hiked | Strong slot; **~10 ft drop** ~1 mi in (~38.6255, -110.7382); camping may exist past TH. Same AllTrails area link as Chute. |
 | 190.4 | Goblin Valley State Park | skip | - | Off-route side trip; time budget |
-| 186.6 | Little Wild Horse Canyon Trail | skip | - | Trail-head only (we are not hiking it) |
-| 190.5 | Chute Canyon Trailhead | skip | - | Trail-head only |
-| 192.7 | Crack Canyon Trailhead | skip | - | Trail-head only |
-| 197.9 | Wild Horse Canyon | backup | - | On the way to Wild Horse Window |
+| 190.5 | Chute Canyon Trailhead | backup | short | Park / start of Chute hike |
+| 192.7 | Crack Canyon Trailhead | backup | short | Park / start of Crack hike; camping nearby possible |
+| 197.9 | Wild Horse Canyon | backup | see guide | [AllTrails — Wild Horse Canyon](https://www.alltrails.com/trail/us/utah/wild-horse-canyon); lower priority vs Chute/Crack/WHW |
 | 197.1 | Old Mining Sites | skip | - | Generic waypoint |
 
-### Day 3 HIKE DECISION: Wild Horse Window vs. Little Wild Horse narrows
+### Day 3 HIKE DECISION (updated 2026-04-18)
 
-**Both hikes are kept in the plan as primary candidates. The group will make a tactical decision on the day based on:**
-- Current schedule vs. plan (are we ahead or behind?)
-- Weather forecast (especially for LWH -- flash flood risk)
-- Group energy level after Behind-the-Reef technical trail
-- Individual preferences (geological curiosity vs. iconic slot canyon)
+**Canonical narrative:** [slot-canyon-guide.html](../slot-canyon-guide.html) in the PWA (source [slot-canyon-guide.md](slot-canyon-guide.md) in this folder).
+
+**Defaults**
+
+- **Hike candidate (checked in scheduler):** **Wild Horse Window** — best fit for mileage, no slot flood risk, famous arch/cave. **Not inside Goblin Valley State Park:** approach from Hwy 24 / Temple Mountain–Goblin Valley roads; trailhead on **BLM** (no park fee unless you enter GSVP separately). **Plan:** set up **Temple Mountain camp** before the hike and **carpool** to the trailhead (small parking footprint).
+- **Backup canyon hikes (uncheck unless time + interest):** **Chute** (easiest; wide early), **Crack** (better slot; **10 ft obstacle**), **Little Wild Horse** only as **full LWH/Bell loop** if everyone accepts **scrambling** and distance.
+
+**Tactical factors on the day**
+
+- Schedule vs. plan after Behind-the-Reef
+- **Crack / Chute / LWH:** flash-flood forecast ([realtime_info_sources.md](realtime_info_sources.md))
+- Party comfort with **Crack** downclimb / **LWH** scrambling
+- Prefer **easy** walk → **Chute**; prefer **slot** + fit group → **Crack**
 
 #### Wild Horse Window (aka "Eye of Sinbad" / "Eyes of Sinbad")
 
@@ -99,39 +106,31 @@ Confirmed via chat on the POI triage. `status` values:
 | **Shade** | Zero -- carry water (>= 1 L/person) |
 | **Dogs** | Allowed, leash recommended; navigable for most dogs |
 | **Access** | Hwy 24 S from I-70 exit 149, 24 mi -> Goblin Valley Rd 5.2 mi -> Temple Junction -> S 0.3 mi -> unsigned dirt R 0.3 mi. Very limited parking -- park close to road, don't create new spots. |
+| **Group logistics** | Set up **camp** (Temple Mountain area) **before** the hike, then **carpool** to the trailhead. |
+| **References** | [AllTrails — Wild Horse Window](https://www.alltrails.com/trail/us/utah/wild-horse-window); [HikingInUtah — Wild Horse Window](https://www.hikinginutah.com/wildhorsewindow.htm); [Utah.com](https://utah.com/destinations/natural-areas/san-rafael-swell/hiking/wild-horse-window/) |
 | **Why it's special** | Route author's explicit "#1 one geological site on this trip"; petroglyphs on right side wall (some believed fake); the window is a rare "cave-bridge" hybrid |
 | **Hazards** | Heat/no shade. Loose slickrock. Faint trail -- carry GPS. |
 
-#### Little Wild Horse Canyon (narrows out-and-back)
+#### Little Wild Horse / Bell Canyon (conditional backup)
 
 | Attribute | Value |
 |---|---|
-| **Type** | Iconic San Rafael Swell slot canyon with walls to 400 ft; walls often < 5 ft apart in the narrows |
-| **Trailhead** | Standard LWH trailhead, ~1.1 km south of route near mi 186-187 |
-| **Distance (out-and-back)** | 4.5 mi total if to end of narrows and back; 2.5-3 mi if turn around after main narrows section |
-| **Time** | 1.5-2.5 hrs for the out-and-back through narrows; full 8 mi Bell Canyon loop = 4-6 hrs (SKIPPED) |
-| **Difficulty** | Easy-moderate |
-| **Trail** | Wash-bottom; one dryfall ~0.4 mi from TH requiring scramble or bypass up slickrock shelf on left; additional minor scrambles |
-| **Narrows** | Best narrows are in the second half of the canyon; first 0.4-0.75 mi is wider wash |
-| **Turn-around strategy** | Go in until group satisfied; most group members can tap out at any point (flat wash, easy retrace) |
-| **Dogs** | Allowed; owner must lift dogs over a couple of scramble obstacles |
-| **Shade** | High canyon walls provide partial shade; canyon is cooler than open desert |
-| **Access** | Continue past Goblin Valley State Park 5 more mi to signed LWH/Bell TH parking lot |
-| **Why it's special** | Most famous slot canyon in the Swell; iconic narrow walls; dramatic scale |
-| **Hazards** | **EXTREME flash flood risk** -- do NOT enter if rain forecast anywhere on San Rafael Reef (storm can be miles away). Fatal flood May 2020 killed 21. Check NOAA weather before entering. |
+| **Type** | Iconic slot (LWH) + milder Bell fork; shared signed trailhead |
+| **When to consider** | **Full ~8 mi LWH/Bell loop** only if **entire** party is good with **scrambling** and time. **Narrows OAB** is a poor match when approaching mileage from **Behind the Reef** first (long approach before tightest walls). |
+| **Hazards** | **EXTREME flash flood risk** in slots — do NOT enter if rain on the Reef. Fatal flood May 2020. |
 
-#### Decision matrix (use on the day)
+#### Field decision matrix (use on the day)
 
 | Condition | Recommendation |
 |---|---|
-| On schedule, good weather, group energetic | Do LWH narrows (signature experience); skip WHW |
-| On schedule, rain forecast anywhere | Do WHW (no flood risk); skip LWH |
-| Ahead of schedule, perfect weather | Do both -- WHW first (morning), LWH after Behind-the-Reef |
-| Behind schedule, any weather | Skip both, go straight to Temple Mtn camp |
-| First-timers in group, want the "wow" slot photo | LWH narrows |
-| Route author in group (he hasn't done it), wants his #1 pick | WHW |
+| Default / mixed abilities | **Wild Horse Window** |
+| Want easiest canyon walk, OK with wide wash first | **Chute Canyon** (backup) |
+| Want real slot, party OK with **~10 ft** obstacle | **Crack Canyon** (backup) |
+| Rain / flood risk in slots | **Wild Horse Window**; skip slot hikes |
+| Whole group wants **LWH** + scrambling + time | **Full LWH/Bell loop** from trailhead (backup waypoints) |
+| Behind schedule | Skip optional hikes; Temple Mtn camp |
 
-**Order if doing both:** WHW first (cross-country, needs clear route-finding light) in morning or early afternoon near mi 197; LWH second (wash bottom, easier even later in day) but be OUT before sunset. Reverse if LWH narrows are the signature goal. The two are ~10 mi apart on the route so doing both adds a short backtrack.
+**Order if stacking WHW + a Behind-the-Reef slot:** finish driving **Behind the Reef** first, then **branch** to Chute/Crack/LWH trailheads as needed; **Wild Horse Window** stays near **mi ~197** (Temple Wash area).
 
 ---
 
@@ -148,13 +147,13 @@ Confirmed via chat on the POI triage. `status` values:
 
 ---
 
-## Summary totals (post POI audit, 2026-04-17)
+## Summary totals (post POI audit, 2026-04-18)
 
 Verified against source GPX: every POI listed maps 1:1 to a `<wpt>` by name; all lat/lon values used in deliverables are the GPX's exact coordinates (0 m drift); no POIs are fabricated.
 
 - Day 1: 11 primary POIs + 1 on-route backup + 3 May-2 bonus backups + 2 skips (trailhead/off-route)
 - Day 2: 12 primary POIs (+ River crossing) + 1 backup + 4 skips
-- Day 3: 6 primary POIs + 3 hike candidates (Wild Horse Window and Little Wild Horse narrows; tactical pick on the day) + 2 backups + 8 skips
+- Day 3: 6 primary POIs + **1 hike candidate** (Wild Horse Window) + **8 backups** (LWH/Bell/Chute/Crack/Wild Horse Canyon + trailheads) + 3 skips — see [slot-canyon-guide.md](slot-canyon-guide.md) / [slot-canyon-guide.html](../slot-canyon-guide.html)
 - Day 4 AM: 4 primary POIs + 2 skips (Temple Mountain Viewpoint, Freeway Access anchor)
 
-**Total planned stops (primary + hike_candidate) across the 3.25 overland days: 36.** (Does not include May-2 bonuses or skips.)
+**Total planned stops (primary + hike_candidate) across the 3.25 overland days: 34.** (Does not include May-2 bonuses or skips.)

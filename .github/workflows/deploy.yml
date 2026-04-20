@@ -31,7 +31,7 @@ jobs:
       - name: Install Python build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install pillow "qrcode[pil]"
+          python -m pip install pillow "qrcode[pil]" markdown
 
       # The offline tile cache lives in planning/offline_tiles/ and is committed
       # to the repo (~250 KB). Cache it across runs anyway so a future bbox
@@ -51,13 +51,13 @@ jobs:
       - name: Build PWA icons (icons/*.png)
         run: python scripts/build_pwa_icons.py
 
+      - name: Build HTML + GPX deliverables (includes slot-canyon-guide.html)
+        run: python scripts/build_deliverables.py
+
       - name: Build PWA assets (manifest, service-worker, robots, QR)
         env:
           SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
         run: python scripts/build_pwa_assets.py
-
-      - name: Build HTML + GPX deliverables
-        run: python scripts/build_deliverables.py
 
       - name: Stage publish directory
         # Copy only the public site files into _publish/. Source code, raw
@@ -67,7 +67,7 @@ jobs:
           set -euxo pipefail
           rm -rf _publish
           mkdir -p _publish
-          cp index.html trip-itinerary.html trip-reference.html trip-plan.gpx _publish/
+          cp index.html trip-itinerary.html trip-reference.html slot-canyon-guide.html fuel-plan.html trip-plan.gpx _publish/
           cp manifest.webmanifest service-worker.js robots.txt _publish/
           cp -r icons _publish/
           mkdir -p _publish/assets
