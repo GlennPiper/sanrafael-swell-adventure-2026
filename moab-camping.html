@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Moab camping options - SRS Trip</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d1117">
+<meta name="description" content="Moab-area camping reference: Sand Flats, BLM dispersed, developed BLM, NPS, state parks, and USFS near Moab, Utah.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  padding: 0 0 48px;
+  min-height: 100vh;
+}
+a { color: #58a6ff; }
+.top-nav {
+  position: sticky; top: 0; z-index: 1000;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  padding: 12px 18px;
+  font-size: 14px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0;
+  line-height: 1.6;
+}
+.top-nav a { margin-right: 14px; }
+.top-nav strong { color: #f0f6fc; margin-right: 14px; }
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px 18px 40px;
+}
+h1 {
+  font-size: clamp(22px, 4vw, 28px);
+  color: #f0f6fc;
+  margin: 8px 0 12px;
+}
+h2 {
+  font-size: 18px;
+  color: #f0f6fc;
+  margin: 28px 0 12px;
+  padding-top: 12px;
+  border-top: 1px solid #21262d;
+}
+h2:first-of-type { border-top: none; padding-top: 0; }
+h3 { font-size: 16px; color: #f0f6fc; margin: 18px 0 8px; }
+p { margin: 10px 0; }
+ul { padding-left: 22px; }
+li { margin: 6px 0; }
+.muted { color: #8b949e; font-size: 14px; }
+.callout {
+  background: #1f2a3a;
+  border: 1px solid #2d4a6e;
+  border-left: 4px solid #f5c252;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 16px 0;
+}
+.callout strong { color: #f5c252; }
+.warn {
+  border-left-color: #f85149;
+  background: #251a1a;
+  border-color: #442929;
+}
+.warn strong { color: #ff7b72; }
+#map {
+  height: min(62vh, 520px);
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #30363d;
+  margin: 16px 0;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  margin: 12px 0 8px;
+  font-size: 13px;
+}
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 14px;
+}
+th, td {
+  border: 1px solid #30363d;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th { background: #161b22; color: #f0f6fc; }
+code {
+  background: #21262d;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+@media (max-width: 640px) {
+  .wrap { padding-left: 12px; padding-right: 12px; }
+  table { display: block; overflow-x: auto; max-width: 100vw; }
+}
+</style>
+</head><body>
+<nav class="top-nav" aria-label="Trip pages">
+<a href="trip-itinerary.html">Daily itinerary</a>
+<a href="overland-alternates.html">Alt routes</a>
+<a href="trip-reference.html">Full reference</a>
+<a href="slot-canyon-guide.html">Slot canyon guide</a>
+<a href="fuel-plan.html">Fuel plan</a>
+<strong>Moab camping</strong>
+<a href="trip-plan.gpx" download>GPX</a>
+</nav>
+
+<div class="wrap">
+<h1>Moab-area camping reference</h1>
+<p class="muted">Working list for May 2026. Fees, reservation rules, and closures change often—confirm with land managers before you go.</p>
+
+<div class="callout warn">
+<strong>Grandstaff Campground (SR 128):</strong> The BLM announced a partial closure of Grandstaff Campground (and related riverfront staging) from <strong>March 9 through October 31, 2026</strong> for Colorado River Trail Gap construction. Verify current status before counting on those sites.
+<a href="https://www.blm.gov/visit/grandstaff-campground">BLM: Grandstaff Campground</a>
+</div>
+
+<div class="callout">
+<strong>Primitive camping near town:</strong> On BLM-managed lands, camping outside developed campgrounds is generally restricted within about <strong>20 miles of Moab city limits</strong> except in specifically designated dispersed-site areas (signed posts). Always use marked sites, pack out human waste where required, and check the official camping map.
+<a href="https://www.blm.gov/sites/default/files/documents/files/BLMUtahMoabCamping.pdf">BLM Moab camping map (PDF)</a>
+&middot;
+<a href="http://discovermoab.com/blm-campgrounds">Discover Moab: BLM campgrounds summary</a>
+</div>
+
+<h2>Map</h2>
+<p class="muted">Pins are approximate centers for areas with many sites; in the field, follow signed posts and fee stations.</p>
+<div class="legend" id="legend"></div>
+<div id="map" role="img" aria-label="Map of Moab camping locations"></div>
+
+<h2>This trip (reserved anchor)</h2>
+<table>
+<thead><tr><th>Site</th><th>Manager</th><th>Notes</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>Ken’s Lake — Group Site B</strong></td>
+<td>BLM (book via Recreation.gov)</td>
+<td>Primary Moab hold for the group itinerary. Standard group site; vault toilets; no hookups. <a href="https://www.recreation.gov/camping/campgrounds/251840">Recreation.gov</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2>Sand Flats Recreation Area (BLM + Grand County)</h2>
+<p>Sand Flats is its own fee program: day-use pass plus per-night camping. <strong>National park passes usually do not cover Sand Flats</strong> (Access Pass is an exception per Recreation.gov). Phone <strong>(435) 259-2444</strong>.</p>
+
+<h3>Camping areas inside Sand Flats</h3>
+<p>Developed camping is in <strong>designated loops only</strong> (not random slickrock). Recreation.gov and Grand County describe <strong>nine individual campgrounds</strong> labeled <strong>A through H</strong> plus <strong>Juniper</strong>, with about <strong>140 first-come, first-served</strong> vehicle sites total, plus an overflow area when open. Expect busy spring weekends; many campers report turnover mid-morning.</p>
+<ul>
+<li><strong>Loops A–D:</strong> Mix of RV-friendly and smaller sites; juniper and slickrock settings; pit toilets.</li>
+<li><strong>Loop E (“Echo”):</strong> Smaller loop; includes two reservable <strong>group</strong> sites (E-1, E-10) alongside individual FCFS sites.</li>
+<li><strong>Loops F &amp; G (tent / high-clearance):</strong> More exposed fins; loop F often cited as 4×4 recommended for some spurs—scout first.</li>
+<li><strong>Loop H:</strong> Additional FCFS sites (often referenced as tent-biased in visitor write-ups).</li>
+<li><strong>Juniper loop:</strong> Separate loop name inside Sand Flats (distinct from the BLM “Juniper” campground on the Colorado Riverway list).</li>
+<li><strong>Overflow:</strong> Opens seasonally when demand is high; same fee structure when staffed.</li>
+</ul>
+
+<h3>Reservable group sites (six total)</h3>
+<p>All six are booked on Recreation.gov (typically shown as <strong>$80/night</strong> in gateway materials). Sites are clustered in <strong>Datura</strong> (A, B, C, D) and <strong>Echo</strong> (E-1, E-10). Parking limits differ by site (smaller lots on C and E-10).</p>
+<ul>
+<li><a href="https://www.recreation.gov/gateways/2160">Sand Flats gateway (Recreation.gov)</a></li>
+<li><a href="https://www.blm.gov/visit/sand-flats-recreation-area-group-campgrounds">BLM: Sand Flats group campgrounds</a></li>
+<li><a href="https://www.grandcountyutah.net/287/Sand-Flats-Recreation-Area">Grand County: Sand Flats Recreation Area</a></li>
+</ul>
+
+<h2>Designated dispersed camping (BLM, signed sites)</h2>
+<p>These are <strong>not</strong> developed campgrounds. Camp only at signed posts (brown markers with tent symbols). Unless a toilet is provided, you need a <strong>portable toilet or approved waste-containment</strong> and must pack out waste. Popular pods fill fast.</p>
+<table>
+<thead><tr><th>Area</th><th>Sites (per BLM map / Moab office)</th><th>Access / notes</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>Mill Canyon / Cotter Mine / Dubinky Well</strong></td>
+<td>~40 designated sites combined</td>
+<td>North of town off US-191 / SR-313 corridor. Cotter Mine Road and Dubinky Well Road spur clusters; rough rock on some spurs.</td>
+</tr>
+<tr>
+<td><strong>Gemini Bridges — Bride Canyon</strong></td>
+<td>6</td>
+<td>Along Gemini Bridges Road.</td>
+</tr>
+<tr>
+<td><strong>Picture Frame Arch / Behind the Rocks</strong></td>
+<td>4</td>
+<td>BLM materials cite ~6 miles southwest of Moab on US-191.</td>
+</tr>
+<tr>
+<td><strong>Dubinky Well Road (east side pods)</strong></td>
+<td>12 (Discover Moab summary)</td>
+<td>Often grouped with Lone Mesa / Canyon Rims travel; canyon-edge pods past group sites.</td>
+</tr>
+<tr>
+<td><strong>Black Ridge</strong></td>
+<td>6</td>
+<td>Signed camping pods in BLM map legend.</td>
+</tr>
+<tr>
+<td><strong>Dripping Spring / Tenmile Wash</strong></td>
+<td>Several large sites</td>
+<td>Riparian fencing—stay inside signed boundaries.</td>
+</tr>
+<tr>
+<td><strong>Mineral Point (BLM 340)</strong></td>
+<td>Many informal pullouts past Horsethief</td>
+<td>North/west of Horsethief Campground on BLM 340 toward Canyonlands views; verify current signing.</td>
+</tr>
+</tbody>
+</table>
+<p>Closed to camping: <strong>Shafer Basin</strong> (Dead Horse viewshed / bighorn), <strong>Long Canyon</strong> (flood + wildlife), immediate <strong>Mill Creek</strong> corridor east of Moab, and Spanish Valley west side—see BLM PDF legend.</p>
+
+<h2>Utahraptor State Park (incl. Willow Springs / Fossil Flats corridor)</h2>
+<p>Formerly informal BLM camping along Willow Springs Road is now inside <strong>Utahraptor State Park</strong>. The park operates two camping products: <strong>Gastonia Campground</strong> (partial hookups, showers, reservable) and <strong>Fossil Flats</strong> improved primitive camping (Willow Springs and Dalton Wells access per park signage—camp only in designated rings). <strong>Fees change by season and site type</strong>; use the official fee page before budgeting.</p>
+<ul>
+<li><a href="https://stateparks.utah.gov/parks/utahraptor/">Utahraptor State Park</a></li>
+<li><a href="https://stateparks.utah.gov/parks/utahraptor/park-fees/">Camping &amp; park fees</a></li>
+<li><a href="https://stateparks.utah.gov/parks/utahraptor/gastonia-campground/">Gastonia Campground</a></li>
+<li><a href="https://stateparks.utah.gov/parks/utahraptor/fossil-flats-improved-primitive-campground/">Fossil Flats improved primitive</a></li>
+</ul>
+
+<h2>Developed BLM campgrounds (Moab Field Office)</h2>
+<p>All have tables &amp; fire rings and vault toilets unless noted; potable water is rare—plan to haul from Moab. Most are FCFS; some have reservable group loops. Official site counts come from the BLM Moab camping PDF.</p>
+<table>
+<thead><tr><th>Campground</th><th>Sites (PDF)</th><th>Corridor</th></tr></thead>
+<tbody>
+<tr><td>Big Bend</td><td>23</td><td>SR 128 Colorado River</td></tr>
+<tr><td>Upper Big Bend</td><td>8</td><td>SR 128</td></tr>
+<tr><td>Cowboy Camp</td><td>7</td><td>SR 128</td></tr>
+<tr><td>Cowskin</td><td>5</td><td>SR 128</td></tr>
+<tr><td>Dewey Bridge*</td><td>7</td><td>SR 128 (farther out)</td></tr>
+<tr><td>Drinks Canyon</td><td>17</td><td>SR 128</td></tr>
+<tr><td>Fisher Towers</td><td>5</td><td>SR 128</td></tr>
+<tr><td>Gold Bar</td><td>9</td><td>SR 128</td></tr>
+<tr><td>Goose Island</td><td>19</td><td>SR 128</td></tr>
+<tr><td>Grandstaff</td><td>16</td><td>SR 128 (see 2026 closure callout)</td></tr>
+<tr><td>Hal Canyon</td><td>11</td><td>SR 128</td></tr>
+<tr><td>Hatch Point*</td><td>10</td><td>Canyon Rims / south</td></tr>
+<tr><td>Hittle Bottom</td><td>15</td><td>SR 128</td></tr>
+<tr><td>Horsethief</td><td>56 individual + 5 group</td><td>SR 313 mesa</td></tr>
+<tr><td>Hunter Canyon</td><td>12</td><td>Kane Creek Rd</td></tr>
+<tr><td>Jaycee Park</td><td>7</td><td>SR 279 Potash</td></tr>
+<tr><td>Juniper</td><td>17</td><td>BLM map (not Sand Flats Juniper loop)</td></tr>
+<tr><td>Ken’s Lake</td><td>31 + group sites</td><td>Ken’s Lake Rd</td></tr>
+<tr><td>King’s Bottom</td><td>11</td><td>Kane Creek Rd</td></tr>
+<tr><td>Ledge A &amp; B</td><td>74</td><td>Kane Creek Rd</td></tr>
+<tr><td>Ledge C, D &amp; E</td><td>31</td><td>Kane Creek Rd</td></tr>
+<tr><td>Lone Mesa</td><td>5 group</td><td>BLM 313 / Dubinky area</td></tr>
+<tr><td>Lower Onion Creek</td><td>21</td><td>Onion Creek Rd</td></tr>
+<tr><td>Upper Onion Creek</td><td>14</td><td>Onion Creek Rd</td></tr>
+<tr><td>Moonflower Canyon</td><td>8</td><td>Near Moab (pack in)</td></tr>
+<tr><td>Oak Grove</td><td>7</td><td>Kane Creek Rd</td></tr>
+<tr><td>Williams Bottom</td><td>17</td><td>Kane Creek Rd</td></tr>
+<tr><td>Windwhistle</td><td>15</td><td>SR 279 Potash</td></tr>
+<tr><td><strong>Sand Flats A–H + Juniper</strong></td><td>120 (PDF row; Recreation.gov cites ~140 FCFS + 6 group)</td><td>Sand Flats Rd</td></tr>
+</tbody>
+</table>
+<p class="muted">*Dewey Bridge and Hatch Point are farther from downtown Moab but useful if you are staging from the east.</p>
+<p>Office: <a href="https://www.blm.gov/office/moab-field-office">BLM Moab Field Office</a> · (435) 259-2100</p>
+
+<h2>National Park Service</h2>
+<table>
+<thead><tr><th>Campground</th><th>District</th><th>Policy</th><th>Link</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>Devils Garden</strong> (51 sites + groups)</td>
+<td>Arches NP</td>
+<td>Reservations required Mar 1 – Oct 31; winter FCFS.</td>
+<td><a href="https://www.recreation.gov/camping/campgrounds/234059">Recreation.gov</a></td>
+</tr>
+<tr>
+<td><strong>Willow Flat</strong> (12 sites)</td>
+<td>Canyonlands — Island in the Sky</td>
+<td>Year-round FCFS; small rigs only (28 ft); fee at iron ranger.</td>
+<td><a href="https://www.nps.gov/cany/planyourvisit/camp-isky.htm">NPS</a></td>
+</tr>
+</tbody>
+</table>
+<p class="muted">The Needles Campground and backcountry zones in Canyonlands are much farther from Moab but listed on NPS pages if your loop heads south.</p>
+
+<h2>Utah State Parks</h2>
+<table>
+<thead><tr><th>Park</th><th>Camping</th><th>Notes</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>Dead Horse Point</strong></td>
+<td><strong>Kayenta</strong> (21 electric sites) and <strong>Wingate</strong> (20 electric + 11 hike-in tent + yurts)</td>
+<td>Reservations via Reserve America; no RV potable fill at the park; ~32 road miles from Moab.</td>
+</tr>
+<tr>
+<td><strong>Utahraptor State Park</strong></td>
+<td>Gastonia (hookups) + Fossil Flats primitive</td>
+<td>Reservations via Reserve America; includes former Willow Springs dispersed corridor.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a href="https://stateparks.utah.gov/parks/dead-horse/">Dead Horse Point State Park</a></li>
+</ul>
+
+<h2>Manti-La Sal National Forest (Moab Ranger District)</h2>
+<p>Cooler temps in summer; roads can be snow/mud-bound into late spring—call <strong>(435) 259-7155</strong>.</p>
+<table>
+<thead><tr><th>Site</th><th>Type</th><th>Notes</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>Oowah Lake</strong></td>
+<td>11 tent-only FCFS</td>
+<td>~8,800 ft; La Sal Loop / FR 076 spur.</td>
+</tr>
+<tr>
+<td><strong>Warner Lake</strong></td>
+<td>19 sites + group + cabin (reservable)</td>
+<td>~9,400 ft; popular fishing/hiking hub.</td>
+</tr>
+<tr>
+<td><strong>Dispersed</strong></td>
+<td>Various spur roads</td>
+<td>Follow MVUM and district fire orders.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a href="https://www.fs.usda.gov/r04/manti-lasal">Manti-La Sal NF</a></li>
+<li><a href="https://www.fs.usda.gov/r04/manti-lasal/recreation/oowah-campground">Oowah Campground</a></li>
+<li><a href="https://www.fs.usda.gov/r04/manti-lasal/recreation/warner-lake-campground">Warner Lake Campground</a></li>
+</ul>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.blm.gov/sites/default/files/documents/files/BLMUtahMoabCamping.pdf">BLM Utah — Moab camping map (PDF)</a></li>
+<li><a href="https://www.recreation.gov/gateways/2160">Recreation.gov — Sand Flats Recreation Area</a></li>
+<li><a href="http://discovermoab.com/blm-campgrounds">Discover Moab — BLM + dispersed summary</a></li>
+<li><a href="https://www.blm.gov/visit/horsethief-campground">BLM — Horsethief Campground</a></li>
+<li><a href="https://www.blm.gov/visit/goose-island-campground">BLM — Goose Island Campground</a></li>
+</ul>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function () {
+  const CAT = {
+    trip: { label: 'This trip (reserved)', color: '#f5c252' },
+    dispersed: { label: 'Designated dispersed (BLM)', color: '#7ee787' },
+    willow: { label: 'Utahraptor State Park camping', color: '#ffa657' },
+    sandflats: { label: 'Sand Flats (FCFS / group)', color: '#d2a8ff' },
+    blm: { label: 'Developed BLM campground', color: '#58a6ff' },
+    nps: { label: 'National Park Service', color: '#3fb950' },
+    state: { label: 'Utah State Parks', color: '#79c0ff' },
+    usfs: { label: 'Manti-La Sal NF', color: '#56d364' }
+  };
+
+  const sites = [
+    { name: "Ken's Lake Group Site B (2026 hold)", cat: 'trip', lat: 38.4875, lon: -109.4248,
+      note: 'Reserved group site — primary Moab anchor for the trip.',
+      url: 'https://www.recreation.gov/camping/campgrounds/251840' },
+    { name: 'Sand Flats — entrance / fee station', cat: 'sandflats', lat: 38.57563, lon: -109.52401,
+      note: 'Pay day-use + camping fees; FCFS loops A–H + Juniper.',
+      url: 'https://www.recreation.gov/gateways/2160' },
+    { name: 'Sand Flats — Datura group area', cat: 'sandflats', lat: 38.56770, lon: -109.52710,
+      note: 'Reservable group sites Datura A–D; near individual loops.',
+      url: 'https://www.blm.gov/visit/sand-flats-recreation-area-group-campgrounds' },
+    { name: 'Sand Flats — Echo group / Loop E', cat: 'sandflats', lat: 38.5772, lon: -109.5055,
+      note: 'Echo campground; group sites E-1 & E-10 reservable.',
+      url: 'https://www.recreation.gov/camping/campgrounds/266144' },
+    { name: 'Sand Flats — Tent Loop F', cat: 'sandflats', lat: 38.5836, lon: -109.4926,
+      note: 'Exposed fins; scout spurs for clearance.',
+      url: 'https://www.recreation.gov/gateways/2160' },
+    { name: 'Sand Flats — Tent Loop G', cat: 'sandflats', lat: 38.5832, lon: -109.4854,
+      note: 'Similar setting to Loop F; busy on weekends.',
+      url: 'https://www.recreation.gov/gateways/2160' },
+    { name: 'Utahraptor SP — Fossil Flats / Willow Springs corridor', cat: 'willow', lat: 38.69683, lon: -109.69810,
+      note: 'Improved primitive; stay in designated fire rings only.',
+      url: 'https://stateparks.utah.gov/parks/utahraptor/fossil-flats-improved-primitive-campground/' },
+    { name: 'Utahraptor SP — Gastonia Campground', cat: 'willow', lat: 38.7044, lon: -109.6925,
+      note: 'Partial hookups; showers + dump; reservable.',
+      url: 'https://stateparks.utah.gov/parks/utahraptor/gastonia-campground/' },
+    { name: 'Mineral Point / BLM 340 dispersed', cat: 'dispersed', lat: 38.59036, lon: -109.84069,
+      note: 'Past Horsethief; Island in the Sky views; verify signed sites.',
+      url: 'https://www.blm.gov/sites/default/files/documents/files/BLMUtahMoabCamping.pdf' },
+    { name: 'Cotter Mine Rd dispersed pods', cat: 'dispersed', lat: 38.70658, lon: -109.71828,
+      note: 'Signed sites off mining road spurs; rocky access.',
+      url: 'https://www.blm.gov/sites/default/files/documents/files/BLMUtahMoabCamping.pdf' },
+    { name: 'Dubinky Well Rd — first pod cluster', cat: 'dispersed', lat: 38.64365, lon: -109.81931,
+      note: 'Additional pods continue toward canyon rim.',
+      url: 'https://www.blm.gov/sites/default/files/documents/files/BLMUtahMoabCamping.pdf' },
+    { name: 'Gemini Bridges / Bride Canyon dispersed', cat: 'dispersed', lat: 38.5820, lon: -109.7050,
+      note: 'Approx. trailhead area — camp only at signed posts.',
+      url: 'https://www.blm.gov/sites/default/files/documents/files/BLMUtahMoabCamping.pdf' },
+    { name: 'Horsethief Campground (developed BLM)', cat: 'blm', lat: 38.58429, lon: -109.81421,
+      note: '83 FCFS individual + 5 group (reservable); no water.',
+      url: 'https://www.blm.gov/visit/horsethief-campground' },
+    { name: "Goose Island Campground (developed BLM)", cat: 'blm', lat: 38.60967, lon: -109.55782,
+      note: 'River shade; fills early; cash/check at site.',
+      url: 'https://www.blm.gov/visit/goose-island-campground' },
+    { name: 'Grandstaff Campground (developed BLM)', cat: 'blm', lat: 38.61020, lon: -109.53390,
+      note: 'Tent-oriented river sites — verify 2026 partial closure.',
+      url: 'https://www.blm.gov/visit/grandstaff-campground' },
+    { name: "Ken's Lake standard loops (developed BLM)", cat: 'blm', lat: 38.4885, lon: -109.4230,
+      note: '31 FCFS sites + additional group sites; reservoir access.',
+      url: 'https://www.recreation.gov/camping/campgrounds/251840' },
+    { name: 'Devils Garden Campground (Arches NP)', cat: 'nps', lat: 38.77694, lon: -109.58917,
+      note: 'Reservations Mar–Oct; iconic but competitive.',
+      url: 'https://www.recreation.gov/camping/campgrounds/234059' },
+    { name: 'Willow Flat — Island in the Sky (Canyonlands)', cat: 'nps', lat: 38.38338, lon: -109.88813,
+      note: '12 FCFS sites; no water at campground.',
+      url: 'https://www.nps.gov/cany/planyourvisit/camp-isky.htm' },
+    { name: 'Dead Horse Point — Kayenta Campground', cat: 'state', lat: 38.51020, lon: -109.73980,
+      note: 'Electric sites; reserve via Reserve America.',
+      url: 'https://stateparks.utah.gov/parks/dead-horse/the-kayenta-campground/' },
+    { name: 'Dead Horse Point — Wingate Campground', cat: 'state', lat: 38.50850, lon: -109.74250,
+      note: 'Electric RV + hike-in tents + yurts.',
+      url: 'https://stateparks.utah.gov/parks/dead-horse/wingate-campground/' },
+    { name: 'Oowah Lake Campground (USFS)', cat: 'usfs', lat: 38.50280, lon: -109.27240,
+      note: 'Tent-only FCFS; high-country access via La Sal Loop.',
+      url: 'https://www.fs.usda.gov/r04/manti-lasal/recreation/oowah-campground' },
+    { name: 'Warner Lake Campground (USFS)', cat: 'usfs', lat: 38.51996, lon: -109.27660,
+      note: 'Reservable sites + group; aspen/lake setting.',
+      url: 'https://www.fs.usda.gov/r04/manti-lasal/recreation/warner-lake-campground' }
+  ];
+
+  const leg = document.getElementById('legend');
+  Object.keys(CAT).forEach(function (k) {
+    const sp = document.createElement('span');
+    const sw = document.createElement('span');
+    sw.className = 'swatch';
+    sw.style.background = CAT[k].color;
+    sp.appendChild(sw);
+    sp.appendChild(document.createTextNode(CAT[k].label));
+    leg.appendChild(sp);
+  });
+
+  const map = L.map('map', { scrollWheelZoom: true });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  const bounds = [];
+  sites.forEach(function (s) {
+    const col = CAT[s.cat].color;
+    const icon = L.divIcon({
+      className: '',
+      html: '<div style="width:14px;height:14px;border-radius:50%;background:' + col +
+        ';border:2px solid #0d1117;box-shadow:0 0 0 1px rgba(255,255,255,0.35);"></div>',
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+    const m = L.marker([s.lat, s.lon], { icon: icon }).addTo(map);
+    const link = s.url ? '<p style="margin:8px 0 0"><a href="' + s.url + '" target="_blank" rel="noopener">Official info</a></p>' : '';
+    m.bindPopup('<strong>' + s.name + '</strong><p style="margin:6px 0 0;font-size:13px">' + s.note + '</p>' + link);
+    bounds.push([s.lat, s.lon]);
+  });
+
+  map.fitBounds(bounds, { padding: [36, 36], maxZoom: 11 });
+})();
+</script>
+</body></html>

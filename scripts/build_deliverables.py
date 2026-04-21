@@ -283,18 +283,14 @@ article.md-page hr { border: none; border-top: 1px solid #30363d; margin: 22px 0
 """
 
 
-# Linked from itinerary / reference headers and markdown PWA pages.
-ALT_ROUTES_LINKS_HTML = (
-    '<a href="overland-alternates.html">Alt routes</a> &middot; '
-    '<a href="trip-itinerary-alt-a.html">Alt A</a> &middot; '
-    '<a href="trip-itinerary-alt-b.html">Alt B</a> &middot; '
-    '<a href="trip-itinerary-alt-d.html">Alt D</a>'
-)
+# Linked from itinerary / reference headers (detail alt pages: overland-alternates.html).
+ALT_ROUTES_LINKS_HTML = '<a href="overland-alternates.html">Alt routes</a>'
 
 
 def _top_nav_html(current: str) -> str:
     """current is 'itinerary' | 'reference' | 'slot' | 'fuel' | 'overland-alt' |
-    'alt-a' | 'alt-b' | 'alt-d' | 'none'.
+    'moab' | 'river' | 'none'. Per-alt itinerary HTML uses the main header template,
+    not this nav.
     """
     def link(href, label, key):
         if current == key:
@@ -304,12 +300,11 @@ def _top_nav_html(current: str) -> str:
     parts = [
         '<nav class="top-nav" aria-label="Trip pages">',
         link('trip-itinerary.html', 'Daily itinerary', 'itinerary'),
-        link('trip-itinerary-alt-a.html', 'Alt A', 'alt-a'),
-        link('trip-itinerary-alt-b.html', 'Alt B', 'alt-b'),
-        link('trip-itinerary-alt-d.html', 'Alt D', 'alt-d'),
-        link('overland-alternates.html', 'Alt overview', 'overland-alt'),
+        link('overland-alternates.html', 'Alt routes', 'overland-alt'),
         link('trip-reference.html', 'Full reference', 'reference'),
         link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
+        link('moab-camping.html', 'Moab camping', 'moab'),
+        link('river-crossing.html', 'River crossing', 'river'),
         link('fuel-plan.html', 'Fuel plan', 'fuel'),
         '<a href="trip-plan.gpx" download>GPX</a>',
         '</nav>',
@@ -1521,6 +1516,7 @@ def build_itinerary_html(variant=None):
 {reference_link_html}{ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="fuel-plan.html">Fuel plan</a> &middot;
+<a href="river-crossing.html">River crossing</a> &middot;
 <a href="{gpx_href}" download>Download GPX</a></div>
 </header>
 <main>
@@ -2203,6 +2199,7 @@ def build_reference_html():
 {ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="fuel-plan.html">Fuel plan</a> &middot;
+<a href="river-crossing.html">River crossing</a> &middot;
 <a href="trip-plan.gpx" download>Download GPX</a></div>
 </header>
 <main>
