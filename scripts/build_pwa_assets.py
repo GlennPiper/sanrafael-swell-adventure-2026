@@ -11,8 +11,8 @@ The ``BUILD_VERSION`` baked into ``service-worker.js`` is the cache namespace.
 Bumping it forces installed clients to re-download on next visit. We derive it
 from ``planning/trip_data.json`` (``generated_at`` + content hash) **and** the
 Markdown sources for standalone PWA pages (slot, fuel, overland alternates,
-alt itineraries) so edits invalidate the cache even when ``trip_data.json``
-is unchanged.
+alt itineraries), plus ``river-crossing.html`` and ``moab-camping.html``, so
+edits invalidate the cache even when ``trip_data.json`` is unchanged.
 
 The site's public URL is read from the ``SITE_URL`` env var (set by the GitHub
 Actions workflow). For local builds we fall back to a sensible
@@ -80,6 +80,11 @@ def _build_version() -> str:
     for name in extra_md_names:
         p = PLAN / name
         extra_raw += p.read_bytes() if p.exists() else b''
+    # Standalone HTML not emitted from markdown (must bump SW when edited).
+    extra_html_names = ('river-crossing.html', 'moab-camping.html')
+    for name in extra_html_names:
+        p = BASE / name
+        extra_raw += p.read_bytes() if p.exists() else b''
     short = hashlib.sha1(raw + alt_raw + extra_raw).hexdigest()[:10]
     try:
         gen = json.loads(raw.decode('utf-8')).get('generated_at', '')
@@ -102,6 +107,8 @@ PRECACHE = [
     'slot-canyon-guide.html',
     'fuel-plan.html',
     'overland-alternates.html',
+    'river-crossing.html',
+    'moab-camping.html',
     'trip-itinerary-alt-a.html',
     'trip-itinerary-alt-b.html',
     'trip-itinerary-alt-d.html',
