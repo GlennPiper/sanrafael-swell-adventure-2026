@@ -53,6 +53,8 @@ ALLOW_NUMBERS=(
   "8018873800"   # Utah Highway Patrol
   "4356363600"   # BLM Price
   "4352592100"   # BLM Moab
+  "4352592444"   # Sand Flats Recreation Area (Grand County / fee program)
+  "4352597155"   # Manti-La Sal NF / La Sal Ranger District (public line on trip pages)
 )
 
 ALLOW_PHONE_RE=""
