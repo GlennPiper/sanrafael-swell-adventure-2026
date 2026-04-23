@@ -128,6 +128,59 @@ article.md-page code {
 .weather-tools ul { margin: 8px 0 0; padding-left: 20px; }
 .weather-tools li { margin: 6px 0; font-size: 14px; }
 .weather-tools .hint { margin: 8px 0 0; font-size: 12px; color: #8b949e; }
+.threshold-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+  gap: 14px;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .threshold-layout { grid-template-columns: 1fr; }
+}
+.live-gauge {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+}
+.live-gauge h4 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: #8b949e;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.live-gauge .reading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #f0f6fc;
+  line-height: 1.1;
+  margin: 2px 0;
+}
+.live-gauge .reading .unit { font-size: 0.7em; color: #8b949e; margin-left: 4px; font-weight: 500; }
+.live-gauge .gage { font-size: 13px; color: #c9d1d9; margin: 2px 0; }
+.live-gauge .band-pill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  margin: 6px 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.band-ok      { background: #1a3b24; color: #7ee29a; border-color: #2ea04344; }
+.band-caution { background: #3a2e0a; color: #e3b341; border-color: #d29e0f44; }
+.band-warn    { background: #3a2410; color: #f0883e; border-color: #db6d2844; }
+.band-danger  { background: #3b1a1a; color: #ff7b72; border-color: #da363344; }
+.band-unknown { background: #21262d; color: #8b949e; border-color: #30363d; }
+.live-gauge .band-desc { font-size: 12px; color: #c9d1d9; margin: 2px 0 8px; }
+.live-gauge .time { font-size: 11px; color: #8b949e; }
+.live-gauge .err { color: #f85149; font-size: 12px; margin: 4px 0; }
+.live-gauge a { font-size: 13px; }
 .usgs-embed-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
@@ -188,13 +241,24 @@ article.md-page code {
 
 <div class="weather-tools">
 <h3>BLM flow thresholds at Fuller Bottom</h3>
+<div class="threshold-layout">
 <ul>
-<li><strong>Hikers</strong>: BLM advises crossing only <strong>below 50 ft³/s</strong>.</li>
-<li><strong>~120 ft³/s</strong>: fording becomes difficult.</li>
-<li><strong>~180 ft³/s</strong>: deepest crossings on the canyon hike reach ~3 ft deep.</li>
-<li><strong>Floating</strong>: BLM suggests small craft only above <strong>~200 ft³/s</strong>, larger craft above <strong>~500 ft³/s</strong> (context only — we are fording, not floating).</li>
+<li><strong>&lt; 50 cfs</strong> — <strong>Hike-friendly</strong>. BLM advises on-foot crossings only below this.</li>
+<li><strong>50–120 cfs</strong> — <strong>Fordable</strong> for vehicles, but getting harder; pick a line.</li>
+<li><strong>120–180 cfs</strong> — <strong>Difficult ford</strong>; deepest crossings on the canyon hike approach ~3 ft near 180.</li>
+<li><strong>&gt; 180 cfs</strong> — <strong>Don’t wade.</strong> For context, BLM suggests small craft only above ~200 cfs, larger craft above ~500 cfs.</li>
 </ul>
-<p class="hint">Compare the numbers you read on the USGS gauges below against these bands. The Castle Dale gauge is the best leading indicator for Fuller Bottom; the Green River gauge mostly confirms what already passed through.</p>
+<div class="live-gauge" id="live-gauge">
+<h4>Live: Castle Dale (USGS 09328000)</h4>
+<div id="live-reading-line" class="reading"><span id="live-reading">— </span><span class="unit">cfs</span></div>
+<div id="live-gage" class="gage"></div>
+<span id="live-band" class="band-pill band-unknown">Loading…</span>
+<div id="live-band-desc" class="band-desc">Fetching latest instantaneous value.</div>
+<div id="live-time" class="time"></div>
+<p style="margin:6px 0 0"><a href="https://waterdata.usgs.gov/monitoring-location/09328000/" target="_blank" rel="noopener noreferrer">Full chart &amp; statistics →</a></p>
+</div>
+</div>
+<p class="hint">Units: <strong>cfs</strong> = <strong>ft³/s</strong> (same number). The Castle Dale gauge is the best <em>leading</em> indicator for Fuller Bottom; the Green River chart below confirms what already passed through.</p>
 </div>
 
 <div class="weather-tools">
@@ -278,12 +342,6 @@ article.md-page code {
 <li><strong>Trip reports</strong> — qualitative only: <a href="https://www.blm.gov/visit/fullers-bottom-trailhead" target="_blank" rel="noopener noreferrer">BLM Fullers Bottom Trailhead</a>, <a href="https://www.trailsoffroad.com/US/utah/trails/2488-fuller-bottom" target="_blank" rel="noopener noreferrer">Trails Offroad — Fuller Bottom</a>, <a href="https://www.nationalriversproject.com/ut/san-rafael-river-fullers-bottom-to-swinging-bridge" target="_blank" rel="noopener noreferrer">NRP — Fullers Bottom to Swinging Bridge</a>, <a href="http://www.crockettclan.org/blog/?p=3032" target="_blank" rel="noopener noreferrer">Crockett run write-up</a>, <a href="https://www.seanryanphotography.com/blog/3/6/2019-san-rafael-swell-50k" target="_blank" rel="noopener noreferrer">Sean Ryan 50k</a>, <a href="https://adventr.co/2019/06/little-grand-canyon-floating-the-san-rafael-river/" target="_blank" rel="noopener noreferrer">ADVENTR Little Grand Canyon</a>.</li>
 </ul>
 
-<h2>USGS San Rafael River (live)</h2>
-<p>Gauges measure the <strong>San Rafael River</strong> main stem. Use the <strong>Castle Dale</strong> reading against the <strong>BLM fording bands</strong> above to decide whether Fuller Bottom is in the <em>hike-friendly</em>, <em>fordable</em>, or <em>don’t cross</em> range.</p>
-<div id="usgs-status" class="usgs-card" aria-live="polite"><p class="err">Loading USGS data…</p></div>
-<div class="usgs-grid" id="usgs-grid"></div>
-<p style="color:#8b949e;font-size:13px">Numbers below are USGS Instantaneous Values. Requires opening this site over <strong>http(s)</strong> (not a saved <code>file://</code> page). If this block fails, use the monitoring links and graphs at the top.</p>
-
 <h2>Limits</h2>
 <ul>
 <li>No public sensor for <strong>ford depth</strong> at Fuller Bottom — BLM bands are <em>indicative</em>, not a substitute for eyes on the water and the bank.</li>
@@ -294,13 +352,17 @@ article.md-page code {
 </article>
 <script>
 (function () {
-  var SITES = ['09328000', '09328500'];
-  var SITE_NAMES = {
-    '09328000': 'San Rafael River near Castle Dale, UT',
-    '09328500': 'San Rafael River near Green River, UT'
-  };
-  var UNITS = { '00060': 'ft³/s', '00065': 'ft' };
+  var SITE = '09328000';
   var USGS_IV = 'https://waterservices.usgs.gov/nwis/iv/';
+
+  // BLM fording bands at Fuller Bottom, keyed off Castle Dale discharge (cfs).
+  // Thresholds: hike <50, fordable 50-120, difficult 120-180, don't wade >180.
+  var BANDS = [
+    { max:  50, cls: 'band-ok',      label: 'Hike-friendly',  desc: 'Below BLM hiker threshold (<50 cfs).' },
+    { max: 120, cls: 'band-caution', label: 'Fordable',       desc: '50–120 cfs: vehicle-friendly ford, harder on foot.' },
+    { max: 180, cls: 'band-warn',    label: 'Difficult',      desc: '120–180 cfs: deepest crossings approach ~3 ft on the canyon hike.' },
+    { max: Infinity, cls: 'band-danger', label: 'Do not wade', desc: '>180 cfs: ford at your own risk; BLM suggests small craft only above ~200, larger craft above ~500 cfs.' }
+  ];
 
   function getTimeSeries(data) {
     if (!data || !data.value) return [];
@@ -318,12 +380,7 @@ article.md-page code {
     var raw = last.value;
     var num = parseFloat(String(raw), 10);
     if (!isFinite(num) || Math.abs(num - noData) < 1e-3 || num <= -999998) return null;
-    return { v: raw, t: last.dateTime };
-  }
-
-  function siteNo(ts) {
-    var codes = ts.sourceInfo && ts.sourceInfo.siteCode;
-    return codes && codes[0] && codes[0].value;
+    return { v: raw, num: num, t: last.dateTime };
   }
 
   function paramCd(ts) {
@@ -339,78 +396,74 @@ article.md-page code {
     return Promise.race([req, timeout]);
   }
 
-  function loadSite(siteId) {
-    var q = USGS_IV + '?sites=' + encodeURIComponent(siteId) + '&parameterCd=00060,00065&format=json';
+  function classify(cfs) {
+    for (var i = 0; i < BANDS.length; i++) {
+      if (cfs < BANDS[i].max) return BANDS[i];
+    }
+    return BANDS[BANDS.length - 1];
+  }
+
+  function fmtTime(iso) {
+    if (!iso) return '';
+    try {
+      var d = new Date(iso);
+      if (!isFinite(d.getTime())) return iso;
+      return d.toLocaleString(undefined, { timeZoneName: 'short' });
+    } catch (e) { return iso; }
+  }
+
+  function setBand(pillEl, descEl, cls, label, desc) {
+    pillEl.className = 'band-pill ' + cls;
+    pillEl.textContent = label;
+    descEl.textContent = desc;
+  }
+
+  function loadSite() {
+    var q = USGS_IV + '?sites=' + SITE + '&parameterCd=00060,00065&format=json';
     return fetchJson(q)
-      .then(function (r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        return r.json();
-      })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (data) {
         var series = getTimeSeries(data);
-        var row = { name: SITE_NAMES[siteId] || siteId, discharge: null, gage: null };
+        var out = { discharge: null, gage: null };
         series.forEach(function (ts) {
-          var sn = siteNo(ts);
           var pc = paramCd(ts);
-          if (sn !== siteId || !pc) return;
-          var obs = latestFromSeries(ts);
-          if (pc === '00060') row.discharge = obs;
-          if (pc === '00065') row.gage = obs;
+          if (pc === '00060') out.discharge = latestFromSeries(ts);
+          if (pc === '00065') out.gage = latestFromSeries(ts);
         });
-        return row;
+        return out;
       });
   }
 
   function render() {
-    var statusEl = document.getElementById('usgs-status');
-    var gridEl = document.getElementById('usgs-grid');
-    Promise.all(SITES.map(loadSite))
-      .then(function (rows) {
-        statusEl.style.display = 'none';
-        rows.forEach(function (row, i) {
-          var sn = SITES[i];
-          var card = document.createElement('div');
-          card.className = 'usgs-card';
-          var h = document.createElement('h3');
-          h.textContent = row.name;
-          card.appendChild(h);
-          function line(label, obs, unit) {
-            if (!obs) return;
-            var p = document.createElement('div');
-            p.className = 'val';
-            p.textContent = label + ': ' + obs.v + ' ' + unit;
-            card.appendChild(p);
-            var m = document.createElement('div');
-            m.className = 'meta';
-            m.textContent = obs.t || '';
-            card.appendChild(m);
-          }
-          line('Discharge', row.discharge, UNITS['00060']);
-          line('Gage height', row.gage, UNITS['00065']);
-          if (!row.discharge && !row.gage) {
-            var e = document.createElement('p');
-            e.className = 'err';
-            e.textContent = 'No valid recent values (ice, equipment, or offline). See USGS chart.';
-            card.appendChild(e);
-          }
-          var link = document.createElement('p');
-          link.style.marginTop = '10px';
-          link.style.fontSize = '13px';
-          link.innerHTML = '<a href="https://waterdata.usgs.gov/monitoring-location/' + sn + '/" target="_blank" rel="noopener noreferrer">Full chart &amp; statistics →</a>';
-          card.appendChild(link);
-          gridEl.appendChild(card);
-        });
+    var readingEl = document.getElementById('live-reading');
+    var gageEl = document.getElementById('live-gage');
+    var bandEl = document.getElementById('live-band');
+    var descEl = document.getElementById('live-band-desc');
+    var timeEl = document.getElementById('live-time');
+
+    loadSite()
+      .then(function (row) {
+        if (row.discharge && isFinite(row.discharge.num)) {
+          readingEl.textContent = row.discharge.num.toLocaleString(undefined, { maximumFractionDigits: 1 }) + ' ';
+          var band = classify(row.discharge.num);
+          setBand(bandEl, descEl, band.cls, band.label, band.desc);
+        } else {
+          readingEl.textContent = '— ';
+          setBand(bandEl, descEl, 'band-unknown', 'No data', 'USGS did not return a valid discharge value (ice, equipment, or offline). Use the chart below.');
+        }
+        if (row.gage && isFinite(row.gage.num)) {
+          gageEl.textContent = 'Gage height: ' + row.gage.num.toLocaleString(undefined, { maximumFractionDigits: 2 }) + ' ft';
+        }
+        var ts = (row.discharge && row.discharge.t) || (row.gage && row.gage.t) || '';
+        timeEl.textContent = ts ? 'USGS instantaneous value · ' + fmtTime(ts) : '';
       })
       .catch(function (err) {
         var msg = err && err.message ? err.message : String(err);
-        var fileHint =
-          window.location.protocol === 'file:'
-            ? ' Opening HTML as a local file (<code>file://</code>) blocks cross-origin fetch in most browsers—serve this folder over <strong>http(s)</strong> (e.g. <code>python -m http.server</code>) or use the links below.'
-            : '';
-        statusEl.innerHTML =
-          '<p class="err">Could not load live USGS data (' + msg + ').' +
-          fileHint +
-          ' Check network or try the monitoring links below.</p>';
+        var fileHint = window.location.protocol === 'file:'
+          ? ' (local file — serve over http(s) to allow USGS fetch)'
+          : '';
+        readingEl.textContent = '— ';
+        setBand(bandEl, descEl, 'band-unknown', 'Fetch failed', 'Could not load live USGS data: ' + msg + fileHint + '. Use the chart below.');
       });
   }
   render();
