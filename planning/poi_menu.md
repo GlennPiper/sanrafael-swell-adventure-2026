@@ -99,7 +99,7 @@
 | Mi | Off (m) | Name | Type | Time estimate | Recommend | Your decision |
 |---:|---:|---|---|---|---|---|
 | 80.5 | 2144 | Hamburger Rocks | attraction | 15-30 min (rock formations) | FAR from route (skip unless planned side trip) |  |
-| 82.4 | 1 | River crossing | water | 5-15 min (river/drainage) | EXTRA - short stop if time |  |
+| 82.4 | 1 | River crossing (Fuller Bottom) | water | 5-15 min (river/drainage) | EXTRA - short stop if time | Fuller Bottom ford, San Rafael River; BLM Fuller Bottom Rd = NF-3516 / BLM 6767 |
 | 95.2 | 1 | DP - The Drips | natural-spring | 10-15 min (natural spring) | RECOMMENDED - short stop |  |
 | 97.4 | 18 | Coal Wash | attraction | 15-20 min (wash crossing / photo) | EXTRA - short stop if time |  |
 | 100.5 | 59 | DP - Eva Conover Trail | off-road | ongoing (blue trail, rocks, views) | RECOMMENDED - short stop |  |

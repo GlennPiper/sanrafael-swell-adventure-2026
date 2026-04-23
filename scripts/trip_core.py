@@ -52,7 +52,7 @@ POI_STATUS: dict[str, tuple[str, str]] = {
 
     # Day 2
     'DP - The Drips':                      ('primary',  'Natural spring, on-route'),
-    'River crossing':                      ('primary',  'Early Day-2 river crossing (on-route, 1 m off). Added per group request -- water crossings desirable for overlanders.'),
+    'River crossing':                      ('primary',  'Fuller Bottom ford of the San Rafael River (Upper San Rafael River WMA, BLM Fuller Bottom road = NF-3516 / BLM 6767, becomes Little Wedge Road / BLM 629 south of the crossing). Added per group request -- water crossings desirable for overlanders.'),
     'Coal Wash':                           ('backup',   ''),
     'DP - Eva Conover Trail':              ('primary',  'Trail section (blue rating)'),
     'DP - Eagle Canyon Overlook':          ('primary',  ''),

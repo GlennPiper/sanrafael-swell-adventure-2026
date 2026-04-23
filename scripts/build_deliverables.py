@@ -304,7 +304,7 @@ def _top_nav_html(current: str) -> str:
         link('trip-reference.html', 'Full reference', 'reference'),
         link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
         link('moab-camping.html', 'Moab camping', 'moab'),
-        link('river-crossing.html', 'River crossing', 'river'),
+        link('river-crossing.html', 'River crossing (Fuller Bottom)', 'river'),
         link('fuel-plan.html', 'Fuel plan', 'fuel'),
         '<a href="trip-plan.gpx" download>GPX</a>',
         '</nav>',
@@ -1516,7 +1516,7 @@ def build_itinerary_html(variant=None):
 {reference_link_html}{ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="fuel-plan.html">Fuel plan</a> &middot;
-<a href="river-crossing.html">River crossing</a> &middot;
+<a href="river-crossing.html">River crossing (Fuller Bottom)</a> &middot;
 <a href="{gpx_href}" download>Download GPX</a></div>
 </header>
 <main>
@@ -2199,7 +2199,7 @@ def build_reference_html():
 {ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="fuel-plan.html">Fuel plan</a> &middot;
-<a href="river-crossing.html">River crossing</a> &middot;
+<a href="river-crossing.html">River crossing (Fuller Bottom)</a> &middot;
 <a href="trip-plan.gpx" download>Download GPX</a></div>
 </header>
 <main>

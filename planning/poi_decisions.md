@@ -33,7 +33,7 @@ Confirmed via chat on the POI triage. `status` values:
 
 | Mi | Name | Status | Time | Notes |
 |---:|---|---|---|---|
-| 82.4 | River crossing | primary | 5-15 min | Added per user: water crossings are desirable for overlanders |
+| 82.4 | River crossing (Fuller Bottom) | primary | 5-15 min | Fuller Bottom ford of the San Rafael River inside the Upper San Rafael River WMA; BLM Fuller Bottom Rd = NF-3516 / BLM 6767, becomes Little Wedge Rd / BLM 629 south of the ford. Added per user: water crossings are desirable for overlanders |
 | 95.2 | DP - The Drips | primary | 10-15 min | Natural spring, on-route |
 | 97.4 | Coal Wash | backup | 15-20 min | |
 | 100.5 | DP - Eva Conover Trail | primary | ongoing | Trail section (blue rating) |
@@ -152,7 +152,7 @@ Confirmed via chat on the POI triage. `status` values:
 Verified against source GPX: every POI listed maps 1:1 to a `<wpt>` by name; all lat/lon values used in deliverables are the GPX's exact coordinates (0 m drift); no POIs are fabricated.
 
 - Day 1: 11 primary POIs + 1 on-route backup + 3 May-2 bonus backups + 2 skips (trailhead/off-route)
-- Day 2: 12 primary POIs (+ River crossing) + 1 backup + 4 skips
+- Day 2: 12 primary POIs (+ River crossing / Fuller Bottom ford) + 1 backup + 4 skips
 - Day 3: 6 primary POIs + **3 hike candidates** (Wild Horse Window, Chute, Crack) + **6 backups** (LWH/Bell/Wild Horse Canyon + trailheads + Hondu viewpoint) + 3 skips — see [slot-canyon-guide.md](slot-canyon-guide.md) / [slot-canyon-guide.html](../slot-canyon-guide.html)
 - Day 4 AM: 4 primary POIs + 2 skips (Temple Mountain Viewpoint, Freeway Access anchor)
 
