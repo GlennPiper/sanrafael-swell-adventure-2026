@@ -900,6 +900,9 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .summary-stat .lab{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
 .map{height:400px;background:#0d1117;border:1px solid var(--border);border-radius:6px;margin:12px 0}
 .map-wrap{position:relative;margin:12px 0}
+/* Inner stage: map + fullscreen button. OSRM note lives below the stage (not inside)
+   so the button's position:absolute bottom:* stays over the map, not the disclaimer. */
+.map-stage{position:relative}
 .map-wrap .map{margin:0}
 /* Bottom-right corner, lifted ~24px to clear Leaflet's attribution strip
    (which lives at bottom:0). Top-right is reserved for the layers control
@@ -1333,6 +1336,7 @@ def build_itinerary_html(variant=None):
             )
         map_html = (
             f'<div class="map-wrap" id="map-wrap-{d["id"]}">'
+            f'<div class="map-stage">'
             f'<button type="button" class="map-fs-btn" data-target="map-wrap-{d["id"]}" '
             f'title="Toggle fullscreen map (Esc to exit)" aria-label="Toggle fullscreen">'
             f'<span class="fs-icon fs-icon-enter" aria-hidden="true">&#x26F6;</span>'
@@ -1340,7 +1344,7 @@ def build_itinerary_html(variant=None):
             f'<span class="fs-label">Fullscreen</span></button>'
             f'<div id="{map_id}" class="map" data-day-id="{d["id"]}"><div class="map-offline-notice">'
             'Loading map... (requires internet for tiles; falls back to coordinates list if offline)'
-            f'</div></div>{hw_note}</div>'
+            f'</div></div></div>{hw_note}</div>'
             if has_map else
             '<div class="info">No mapped track segment for this day (travel/transit/Moab day).</div>'
         )
