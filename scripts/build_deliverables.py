@@ -1515,8 +1515,9 @@ def build_itinerary_html(variant=None):
 <div class="meta">{variant['header_meta']} &middot;
 {reference_link_html}{ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
-<a href="fuel-plan.html">Fuel plan</a> &middot;
+<a href="moab-camping.html">Moab camping</a> &middot;
 <a href="river-crossing.html">River crossing (Fuller Bottom)</a> &middot;
+<a href="fuel-plan.html">Fuel plan</a> &middot;
 <a href="{gpx_href}" download>Download GPX</a></div>
 </header>
 <main>
@@ -2198,8 +2199,9 @@ def build_reference_html():
 <a href="trip-itinerary.html">Open daily itinerary</a> &middot;
 {ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
-<a href="fuel-plan.html">Fuel plan</a> &middot;
+<a href="moab-camping.html">Moab camping</a> &middot;
 <a href="river-crossing.html">River crossing (Fuller Bottom)</a> &middot;
+<a href="fuel-plan.html">Fuel plan</a> &middot;
 <a href="trip-plan.gpx" download>Download GPX</a></div>
 </header>
 <main>
@@ -2246,6 +2248,7 @@ def build_reference_html():
 <li><a href="Utah_Destinations_In_San_Rafael_Area.md">Utah_Destinations_In_San_Rafael_Area.md</a> (raw POI list)</li>
 <li><a href="planning/poi_decisions.md">planning/poi_decisions.md</a> (locked POI triage)</li>
 <li><a href="slot-canyon-guide.html">Slot canyon guide</a> (Day 3 hikes + links; offline) &mdash; source <a href="planning/slot-canyon-guide.md">planning/slot-canyon-guide.md</a></li>
+<li><a href="moab-camping.html">Moab camping</a> (BLM / Sand Flats / nearby options + map; offline) — edited as <code>moab-camping.html</code> in repo root</li>
 <li><a href="planning/campsite_plan.md">planning/campsite_plan.md</a> (camps + live availability check)</li>
 <li><a href="fuel-plan.html">Fuel plan</a> (full worksheet; offline) &mdash; source <a href="planning/fuel_plan.md">planning/fuel_plan.md</a></li>
 <li><a href="planning/realtime_info_sources.md">planning/realtime_info_sources.md</a></li>

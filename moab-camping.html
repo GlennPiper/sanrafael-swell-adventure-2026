@@ -10,6 +10,10 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SRS Trip">
+<meta name="mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
 :root { color-scheme: dark; }
@@ -128,8 +132,9 @@ code {
 <a href="overland-alternates.html">Alt routes</a>
 <a href="trip-reference.html">Full reference</a>
 <a href="slot-canyon-guide.html">Slot canyon guide</a>
-<a href="fuel-plan.html">Fuel plan</a>
 <strong>Moab camping</strong>
+<a href="river-crossing.html">River crossing (Fuller Bottom)</a>
+<a href="fuel-plan.html">Fuel plan</a>
 <a href="trip-plan.gpx" download>GPX</a>
 </nav>
 
@@ -154,14 +159,14 @@ code {
 <div class="legend" id="legend"></div>
 <div id="map" role="img" aria-label="Map of Moab camping locations"></div>
 
-<h2>This trip (reserved anchor)</h2>
+<h2>This trip (working plan)</h2>
 <table>
-<thead><tr><th>Site</th><th>Manager</th><th>Notes</th></tr></thead>
+<thead><tr><th>Approach</th><th>Manager</th><th>Notes</th></tr></thead>
 <tbody>
 <tr>
-<td><strong>Ken’s Lake — Group Site B</strong></td>
-<td>BLM (book via Recreation.gov)</td>
-<td>Primary Moab hold for the group itinerary. Standard group site; vault toilets; no hookups. <a href="https://www.recreation.gov/camping/campgrounds/251840">Recreation.gov</a></td>
+<td><strong>Sand Flats — multiple adjacent FCFS sites</strong></td>
+<td>BLM + Grand County (fee booth)</td>
+<td>No group reservation held. Plan to line up <strong>several neighboring numbered sites</strong> in the same loop (or the next loop over) so the group stays within easy walking distance. <strong>Up to two vehicles per site only when both fit</strong>; rigs with trailers or long wheelbases usually need their own pad. Arrive earlier on busy spring days; renew FCFS nightly or relocate if rotations require it.</td>
 </tr>
 </tbody>
 </table>
@@ -263,7 +268,6 @@ code {
 <tr><td>Hunter Canyon</td><td>12</td><td>Kane Creek Rd</td></tr>
 <tr><td>Jaycee Park</td><td>7</td><td>SR 279 Potash</td></tr>
 <tr><td>Juniper</td><td>17</td><td>BLM map (not Sand Flats Juniper loop)</td></tr>
-<tr><td>Ken’s Lake</td><td>31 + group sites</td><td>Ken’s Lake Rd</td></tr>
 <tr><td>King’s Bottom</td><td>11</td><td>Kane Creek Rd</td></tr>
 <tr><td>Ledge A &amp; B</td><td>74</td><td>Kane Creek Rd</td></tr>
 <tr><td>Ledge C, D &amp; E</td><td>31</td><td>Kane Creek Rd</td></tr>
@@ -362,7 +366,7 @@ code {
 <script>
 (function () {
   const CAT = {
-    trip: { label: 'This trip (reserved)', color: '#f5c252' },
+    trip: { label: 'This trip (Sand Flats cluster)', color: '#f5c252' },
     dispersed: { label: 'Designated dispersed (BLM)', color: '#7ee787' },
     willow: { label: 'Utahraptor State Park camping', color: '#ffa657' },
     sandflats: { label: 'Sand Flats (FCFS / group)', color: '#d2a8ff' },
@@ -373,11 +377,8 @@ code {
   };
 
   const sites = [
-    { name: "Ken's Lake Group Site B (2026 hold)", cat: 'trip', lat: 38.4875, lon: -109.4248,
-      note: 'Reserved group site — primary Moab anchor for the trip.',
-      url: 'https://www.recreation.gov/camping/campgrounds/251840' },
-    { name: 'Sand Flats — entrance / fee station', cat: 'sandflats', lat: 38.57563, lon: -109.52401,
-      note: 'Pay day-use + camping fees; FCFS loops A–H + Juniper.',
+    { name: 'Sand Flats — cluster base (trip plan)', cat: 'trip', lat: 38.57563, lon: -109.52401,
+      note: 'Adjacent FCFS sites; double rigs only where pads fit; trailer combos usually take separate sites.',
       url: 'https://www.recreation.gov/gateways/2160' },
     { name: 'Sand Flats — Datura group area', cat: 'sandflats', lat: 38.56770, lon: -109.52710,
       note: 'Reservable group sites Datura A–D; near individual loops.',
@@ -418,9 +419,6 @@ code {
     { name: 'Grandstaff Campground (developed BLM)', cat: 'blm', lat: 38.61020, lon: -109.53390,
       note: 'Tent-oriented river sites — verify 2026 partial closure.',
       url: 'https://www.blm.gov/visit/grandstaff-campground' },
-    { name: "Ken's Lake standard loops (developed BLM)", cat: 'blm', lat: 38.4885, lon: -109.4230,
-      note: '31 FCFS sites + additional group sites; reservoir access.',
-      url: 'https://www.recreation.gov/camping/campgrounds/251840' },
     { name: 'Devils Garden Campground (Arches NP)', cat: 'nps', lat: 38.77694, lon: -109.58917,
       note: 'Reservations Mar–Oct; iconic but competitive.',
       url: 'https://www.recreation.gov/camping/campgrounds/234059' },
@@ -475,6 +473,42 @@ code {
   });
 
   map.fitBounds(bounds, { padding: [36, 36], maxZoom: 11 });
+})();
+</script>
+<script>
+(function(){
+  if (!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('service-worker.js').then(function(reg){
+      reg.addEventListener('updatefound', function(){
+        var nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener('statechange', function(){
+          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+            showUpdateToast(reg);
+          }
+        });
+      });
+    }).catch(function(){});
+    var refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
+    });
+  });
+  function showUpdateToast(reg){
+    if (document.getElementById('pwa-update-toast')) return;
+    var t = document.createElement('div');
+    t.id = 'pwa-update-toast';
+    t.setAttribute('role', 'status');
+    t.style.cssText = 'position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#1f6feb;color:#fff;padding:12px 16px;border-radius:8px;font:14px/1.4 system-ui,sans-serif;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.35);max-width:90vw;text-align:center;cursor:pointer';
+    t.innerHTML = 'New trip data available. <strong>Tap to reload</strong>.';
+    t.addEventListener('click', function(){
+      if (reg.waiting) reg.waiting.postMessage({type: 'SKIP_WAITING'});
+    });
+    document.body.appendChild(t);
+  }
 })();
 </script>
 </body></html>

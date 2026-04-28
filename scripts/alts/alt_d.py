@@ -12,7 +12,7 @@ Day split summary:
          Fuller Bottom -> Wedge Overlook camp.
   May 6: Split at Wedge. Early-leavers N -> Green River Cutoff -> Castle Dale
          -> I-15/I-84 to Boise by 09:30. Stay-overs (V1) N through Buckhorn
-         corridor + Black Dragon string -> I-70 E -> Ken's Lake same evening.
+         corridor + Black Dragon string -> I-70 E -> Sand Flats cluster same evening.
 """
 from __future__ import annotations
 import pathlib
@@ -37,7 +37,7 @@ from alts.common import (  # noqa: E402
     REALTIME_LINKS,
     crack_canyon_camps,
     family_butte_primary_camps,
-    kens_lake_camps,
+    sand_flats_moab_camps,
     temple_mtn_staging,
     wedge_overlook_camps,
 )
@@ -142,7 +142,7 @@ DAYS = [
         'label': 'May 6 (Tue) - Split at Wedge; stay-overs I-70 E to Moab',
         'date_iso': '2026-05-06',
         'title': 'Early-leavers N exit via Green River Cutoff (09:30 target); '
-                 'stay-overs run Buckhorn + Black Dragon string -> Ken\'s Lake (V1)',
+                 'stay-overs run Buckhorn + Black Dragon string -> Sand Flats cluster (V1)',
         'type': 'transit',
         'descr': 'Shared Wedge sunrise ~07:00. ~07:30-08:00 split. Early-leavers: off '
                  'rim N past "Toilets" waypoint -> E Green River Cutoff Rd -> Hwy 10 '
@@ -150,7 +150,7 @@ DAYS = [
                  'graded to pavement, ~75 min; inside the 09:30 target). Stay-overs: N '
                  'from Wedge through Buckhorn corridor (Dinosaur Footprint -> petroglyphs '
                  '-> wash -> Split Rock -> Red Canyon -> Swinging Bridge -> Sinkhole) -> '
-                 'Black Dragon Canyon + petroglyph -> I-70 Exit 147 E -> Moab / Ken\'s Lake '
+                 'Black Dragon Canyon + petroglyph -> I-70 Exit 147 E -> Moab / Sand Flats '
                  'evening.',
         'miles': 140,
         'driving_hours_est': 3.5,
@@ -163,7 +163,7 @@ DAYS = [
         'date_iso': '2026-05-07',
         'title': 'Moab - Day 1 (activities TBD)',
         'type': 'moab',
-        'descr': 'Move to Dead Horse Point SP Wingate. Activities TBD.',
+        'descr': 'Sand Flats base camp + activities TBD.',
         'camp_key': 'altD_day5_moab',
     },
     {
@@ -202,7 +202,7 @@ CAMPS = {
     'altD_day1_swell':        crack_canyon_camps(),
     'altD_day2_swell':        family_butte_primary_camps(),
     'altD_day3_swell':        wedge_overlook_camps(),
-    'altD_day4_moab_transit': kens_lake_camps(),
+    'altD_day4_moab_transit': sand_flats_moab_camps(),
     'altD_day5_moab':         {'inherit': 'altD_day4_moab_transit'},
     'altD_day6_moab':         {'inherit': 'altD_day4_moab_transit'},
     'altD_day7_moab':         {'inherit': 'altD_day4_moab_transit'},
@@ -224,7 +224,7 @@ INTRO_HTML = (
     'the way to Tomsich. Hidden Splendor Overlook moves to <strong>May 4</strong>. '
     'May 6 split is at <strong>Wedge</strong> (not Swinging Bridge): early-leavers exit '
     'N via E Green River Cutoff Rd to hit pavement by 09:30; stay-overs run the full '
-    'Buckhorn + Black Dragon string and reach Moab / Ken\'s Lake the same evening (V1). '
+    'Buckhorn + Black Dragon string and reach Moab / Sand Flats the same evening (V1). '
     'Planning notes: <a href="planning/trip-itinerary-alt-d.md">trip-itinerary-alt-d.md</a> '
     '&middot; <a href="overland-alternates.html">Alt overview</a>.'
     '</div>'

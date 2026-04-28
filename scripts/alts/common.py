@@ -351,19 +351,23 @@ def crack_canyon_camps() -> dict:
     }
 
 
-def kens_lake_camps() -> dict:
-    """Main-trip Moab arrival camp (Ken's Lake Group Site B)."""
+def sand_flats_moab_camps() -> dict:
+    """Moab arrival camp: clustered first-come sites in Sand Flats (no group reservation)."""
     return {
         'primary': {
-            'name': "Ken's Lake Group Site B (RESERVABLE)",
-            'lat': 38.4875, 'lon': -109.4248,
+            'name': 'Sand Flats Recreation Area — adjacent FCFS sites (cluster)',
+            'lat': 38.57563, 'lon': -109.52401,
             'status': 'primary',
-            'kind': 'developed_reserved',
-            'cost': '$50/night',
-            'facilities': 'Vault toilets, fire grates, shade shelter, picnic tables',
-            'notes': 'Site B = 25-person capacity, standard. Shared with the main Moab group.',
-            'access': 'Hwy 191 S from Moab ~8 mi, E on Ken\'s Lake Rd',
-            'reserve_url': 'https://www.recreation.gov/camping/campgrounds/251840',
+            'kind': 'developed_fcfs',
+            'cost': 'Day-use pass + per-night camping fee (pay fee station)',
+            'facilities': 'Picnic tables, fire rings, pit toilets; no drinking water onsite',
+            'notes': 'No group reservation: plan to snag several adjoining sites on the same loop '
+                     '(or nearby loops) so the crew stays visual distance. Typical rule is '
+                     'up to two vehicles parked at a numbered site **when everything fits**—'
+                     'put tow rigs/trailers on their own pads when tandem parking is tight. '
+                     'Spring Thu–Sat nights fill quickly; aim to arrive midday when possible.',
+            'access': 'From Moab: 400 East -> Mill Creek Dr -> Sand Flats Rd to BLM/co-county booth',
+            'reserve_url': 'https://www.recreation.gov/gateways/2160',
         },
         'secondary': {
             'name': 'Dead Horse Point SP - Wingate (electric site)',
@@ -377,14 +381,14 @@ def kens_lake_camps() -> dict:
             'reserve_url': 'https://utahstateparks.reserveamerica.com',
         },
         'tertiary': {
-            'name': 'Willow Springs dispersed',
-            'lat': 38.7105, 'lon': -109.7180,
+            'name': 'BLM designated dispersed pods (Mill Canyon / Cotter / Dubinky)',
+            'lat': 38.6500, 'lon': -109.7700,
             'status': 'tertiary',
             'kind': 'designated_dispersed',
-            'cost': '$15/night honor',
-            'facilities': 'Fire rings, vault toilets',
-            'notes': 'Walk-up only, 11 mi N of Moab.',
-            'access': 'Hwy 191 N from Moab',
+            'cost': 'Free where signed — human-waste containment required',
+            'facilities': 'No services; numbered posts — see BLM map',
+            'notes': '~11–22 mi from Moab depending on spur. Camp only signed sites.',
+            'access': 'Hwy 191 / SR 313 corridors north/northwest',
         },
     }
 
@@ -414,14 +418,14 @@ def dead_horse_camps() -> dict:
             'reserve_url': 'https://utahstateparks.reserveamerica.com',
         },
         'tertiary': {
-            'name': "Ken's Lake non-group + BLM dispersed fallback",
-            'lat': 38.4875, 'lon': -109.4248,
+            'name': 'BLM designated dispersed (Cotter / Dubinky corridors)',
+            'lat': 38.6500, 'lon': -109.7700,
             'status': 'tertiary',
-            'kind': 'dispersed_fcfs',
+            'kind': 'designated_dispersed',
             'cost': 'varies',
-            'facilities': 'varies',
-            'notes': 'Willow Springs / Cotter Mine Rd / Dubinky Wells all within 15 mi.',
-            'access': 'Multiple',
+            'facilities': 'Signed dispersed pods — pack out waste per BLM postings',
+            'notes': 'Use if Dead Horse Wingate unavailable; stay on posted pods only.',
+            'access': 'North of Hwy 313 / Hwy 191 per BLM camping map',
         },
     }
 
@@ -432,7 +436,7 @@ def stayover_sinbad_camps() -> dict:
         'primary': dict(temple_mtn_camps()['primary'],
                         notes='Stay-overs return here after Chute/Crack tactical hikes + '
                               'Head of Sinbad cluster; good launching point for May 7 '
-                              'I-70 E to Moab + an easy afternoon trail (e.g. Fins N Things).'),
+                              'I-70 E to Moab / Sand Flats + an easy afternoon trail (e.g. Fins N Things).'),
         'secondary': {
             'name': 'Goblin Valley SP (reservable)',
             'lat': 38.57340, 'lon': -110.70300,

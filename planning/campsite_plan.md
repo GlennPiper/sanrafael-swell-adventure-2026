@@ -4,7 +4,7 @@ All Swell overnight coordinates are now **snapped to actual `<sym>campsite-24</s
 
 All San Rafael Swell BLM campgrounds (Swinging Bridge, Buckhorn Draw, Temple Mountain Townsite) returned **"Not Reservable"** status on Recreation.gov -- they are first-come-served despite being listed. No reservations needed or possible for the Swell portion.
 
-Moab-area group sites on SR 128 (Goose Island, Hal Canyon) are all reserved May 6-9. Dead Horse Point SP and Ken's Lake have real availability.
+Moab-area group sites on SR 128 (Goose Island, Hal Canyon) were largely booked May 6-9 during early checks. The working plan is **Sand Flats clustered FCFS sites** (no Ken’s Lake group reservation). Dead Horse remains a reservable fallback.
 
 ---
 
@@ -77,9 +77,9 @@ Day-3 track ends at **38.66431, -110.64746** (Temple Mtn / Dutchman Arch area).
 
 Group changes: overlanders split (some go home, others continue). Moab-only participants join. **7 people total for Moab** (the Moab subset of the group).
 
-- **Primary: Ken's Lake Group Site B** at **38.4875, -109.4248** (verified via Recreation.gov live-check, 2026-04-16). 25-person capacity, GROUP STANDARD NONELECTRIC. 8 mi S of Moab on Hwy 191. $50/night. Fire grates, picnic tables, shade shelter, vault toilets. **Reserve at** https://www.recreation.gov/camping/campgrounds/251840 -- Site B specifically (Site A is equestrian).
-- **Secondary:** Dead Horse Point SP Wingate at **38.4710, -109.7450** -- 150+ sites available May 6 (live check). Book 1 site (max 8 people) at $60/night. ~30 min from Moab but stunning Canyonlands views.
-- **Tertiary:** Willow Springs dispersed at **38.7105, -109.7180** (11 mi N of Moab on Hwy 191, $15/night, fire rings, vault toilets). Walk-up only.
+- **Primary:** **Sand Flats Recreation Area** — multiple **adjacent first-come/first-served** sites (~**38.5756, -109.5240** booth / loops A–H + Juniper). Day-use + nightly camping fees. Pit toilets only; haul potable water. **Strategy:** send the first rigs in early afternoon to snag neighboring numbered pads along one loop so the group is co-located. **Put two rigs on one pad only when pad size allows** — trailer+tow combos often need separate sites.
+- **Secondary:** Dead Horse Point SP Wingate at **38.4710, -109.7450** — reservable fallback if Sand Flats is full / bad weather (~30 mi drive, canyon views).
+- **Tertiary:** BLM **designated dispersed** pods along **Cotter / Dubinky / Mill Canyon** corridors (signed posts only) or Utahraptor SP **Fossil Flats** primitive (fee — see state parks site).
 
 ---
 
@@ -87,12 +87,12 @@ Group changes: overlanders split (some go home, others continue). Moab-only part
 
 Note: These are not on the overland track, so lat/lon are from reservable-site listings (ReserveAmerica / Recreation.gov), not the trip GPX.
 
-- **Primary:** **Dead Horse Point State Park - Wingate Loop**. Reserve 1 site with electric for the 7-person group (max 8/site). ~150 sites available each night (live check Apr 16). $60/night x 3 nights = $180 total, ~$26pp.
+- **Preferred:** Continue the **Sand Flats cluster** nightly (renew or shift sites FCFS — expect morning turnover traffic).
+- **Primary (optional reservable fallback):** **Dead Horse Point State Park - Wingate Loop**. Reserve 1 site with electric for the Moab subgroup (max 8/site) if leaving Sand Flats. ~150 sites historically available shoulder season. $60/night x 3 nights ≈ prior estimates.
     - Reserve at: https://utahstateparks.reserveamerica.com / Dead Horse Point
     - No water at sites (no showers in park). Nearest water fill / shower: Moab, 35 mi away.
     - Check-in 3 PM, check-out 12 PM.
 - **Secondary:** Dead Horse Point - Kayenta Loop (59+ sites available each night). Same pricing tier.
-- **Tertiary:** Extend Ken's Lake if Site B rolls to May 7+ (May 7-8 Reserved, May 9 Site A available).
 - **Fallback dispersed:** Willow Springs / Cotter Mine Rd / Dubinky Wells -- all BLM dispersed within 15 mi of Moab.
 
 **Important:** Goose Island Group Sites (SR 128 scenic river road), Hal Canyon, Big Bend -- all RESERVED or booked for our entire Moab window per live check. Don't try to walk into these expecting open spots.
@@ -111,16 +111,15 @@ If you add a new camp or change a day's route, **snap coordinates to real GPX wa
 
 ## Action items (YOU)
 
-1. **IMMEDIATELY (today or tomorrow):** Reserve **Ken's Lake Group Site B for May 6, 2026** at https://www.recreation.gov/camping/campgrounds/251840. $50 + small reservation fee.
-2. **Within 1 week:** Reserve **Dead Horse Point SP Wingate, 1 site with electric, May 7-9 (3 nights)** at ReserveAmerica. ~$180 + reservation fees.
-3. **Optional:** If you want a shower night in the middle, swap one Dead Horse Point night for a **Moab in-town motel** night.
+1. **Coordinate Sand Flats cluster plan** — agree who scouts/arrives early May 6+ to hold adjacent pads; clarify two-vehicles-per-site rules vs trailer lengths.
+2. **Optional:** Reserve **Dead Horse Point SP Wingate, May 7-9**, only if the crew wants electricity or Sand Flats looks untenable — ReserveAmerica / Utah State Parks.
+3. **Optional:** Swap a camp night for a **Moab in-town motel** night if showers are desired.
 
 ## Live availability summary (fetched 2026-04-16)
 
 | Facility | May 6 | May 7 | May 8 | May 9 |
 |---|---|---|---|---|
-| Ken's Lake Group A (equestrian, 40 ppl) | Available | Reserved | Reserved | Available |
-| Ken's Lake Group B (standard, 25 ppl) | **Available** | Reserved | Reserved | Reserved |
+| Sand Flats (FCFS loops) | walk-up | walk-up | walk-up | walk-up |
 | Goose Island Group A & B | Reserved | Reserved | Reserved | Reserved |
 | Hal Canyon (SR 128) | Reserved x4 | Reserved x4 | Reserved x4 | Reserved x4 |
 | Hittle Bottom (SR 128) | Not Reservable (FCFS) | " | " | " |

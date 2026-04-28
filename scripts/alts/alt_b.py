@@ -1,7 +1,7 @@
 """Alternate itinerary B (reverse, V1).
 
 Run the Swell west -> east (Temple / Sinbad side first, Buckhorn / Black Dragon
-last). Variant V1 is the default: stay-overs reach Moab / Ken's Lake the
+last). Variant V1 is the default: stay-overs reach Moab / Sand Flats the
 evening of May 6 after any catch-up miles. V2 (extra Swell night May 6,
 Moab May 7) is a drop-in alternative the group can pick on the ground.
 
@@ -12,7 +12,7 @@ Day split summary:
   May 4: Day 2 Tomsich -> Reds / Lucky Strike -> Eagle Canyon cluster ->
          Eva Conover -> Wedge camp.
   May 5: Day 3 Wedge -> Buckhorn -> Black Dragon camp (near I-70 exit).
-  May 6: Early-leavers pavement by ~09:30; stay-overs I-70 E to Ken's Lake.
+  May 6: Early-leavers pavement by ~09:30; stay-overs I-70 E to Moab / Sand Flats cluster.
 """
 from __future__ import annotations
 import pathlib
@@ -36,7 +36,7 @@ from alts.common import (  # noqa: E402
     GROUP_COUNTS,
     REALTIME_LINKS,
     black_dragon_stage,
-    kens_lake_camps,
+    sand_flats_moab_camps,
     temple_mtn_staging,
     tomsich_camps,
     wedge_overlook_camps,
@@ -109,12 +109,12 @@ DAYS = [
         'id': 'altB_day4_moab_transit',
         'label': 'May 6 (Tue) - Split at Black Dragon; stay-overs I-70 E to Moab',
         'date_iso': '2026-05-06',
-        'title': 'Early-leavers pavement; stay-overs I-70 E to Moab / Ken\'s Lake (V1)',
+        'title': 'Early-leavers pavement; stay-overs I-70 E to Moab / Sand Flats cluster (V1)',
         'type': 'transit',
         'descr': 'Early-leavers: Black Dragon camp -> I-70 Exit 147 W -> on pavement '
                  'by 09:30 target -> home routing. Stay-overs (V1): pick up anything '
                  'skipped on Day 1 (extra slot, BTR segment), then I-70 E to Moab / '
-                 'Ken\'s Lake same evening.',
+                 'Sand Flats cluster camp same evening.',
         'miles': 140,
         'driving_hours_est': 3.0,
         'camp_key': 'altB_day4_moab_transit',
@@ -125,7 +125,7 @@ DAYS = [
         'date_iso': '2026-05-07',
         'title': 'Moab - Day 1 (activities TBD)',
         'type': 'moab',
-        'descr': 'Move to Dead Horse Point SP Wingate site. Activities TBD.',
+        'descr': 'Sand Flats base camp + activities TBD (Arches, biking, SR 279, etc.).',
         'camp_key': 'altB_day5_moab',
     },
     {
@@ -164,7 +164,7 @@ CAMPS = {
     'altB_day1_swell':        tomsich_camps(),
     'altB_day2_swell':        wedge_overlook_camps(),
     'altB_day3_swell':        black_dragon_stage(),
-    'altB_day4_moab_transit': kens_lake_camps(),
+    'altB_day4_moab_transit': sand_flats_moab_camps(),
     'altB_day5_moab':         {'inherit': 'altB_day4_moab_transit'},
     'altB_day6_moab':         {'inherit': 'altB_day4_moab_transit'},
     'altB_day7_moab':         {'inherit': 'altB_day4_moab_transit'},
@@ -185,7 +185,7 @@ INTRO_HTML = (
     'Buckhorn / Black Dragon last. Hardest day (Day 1) is handled while the group is '
     'fresh. Day 3 ends near the highway at Black Dragon so <strong>early-leavers</strong> '
     'hit pavement by 09:30 on May 6 with minimal Swell miles. <strong>V1 stay-overs</strong> '
-    'head I-70 E to Moab / Ken\'s Lake the same evening. Planning notes: '
+    'head I-70 E to Moab / Sand Flats the same evening. Planning notes: '
     '<a href="planning/trip-itinerary-alt-b.md">trip-itinerary-alt-b.md</a> '
     '&middot; <a href="overland-alternates.html">Alt overview</a>. '
     'Fuel / resupply narrative in <a href="fuel-plan.html">Fuel plan</a> is still written '

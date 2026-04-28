@@ -1,6 +1,6 @@
 # Alternate itinerary D — Reverse, BTR split, Crack camp D1, Variant V1
 
-**Not the primary GPX.** **Option D** is **reverse** like B but **splits Behind-the-Reef** across **May 3–4**, camps **May 3** at the **Chute / Crack** cluster (not mid-BTR), and drives **Hidden Splendor Overlook** on **May 4**. **May 6** split is at **Wedge camp** (not Swinging Bridge — geometry / backtrack). Default variant: **V1** — stay-overs **Moab / Ken’s Lake ~18:00–19:00** May 6. (**V2** = Black Dragon camp May 6, Moab May 7 — optional.)
+**Not the primary GPX.** **Option D** is **reverse** like B but **splits Behind-the-Reef** across **May 3–4**, camps **May 3** at the **Chute / Crack** cluster (not mid-BTR), and drives **Hidden Splendor Overlook** on **May 4**. **May 6** split is at **Wedge camp** (not Swinging Bridge — geometry / backtrack). Default variant: **V1** — stay-overs **Moab / Sand Flats cluster ~18:00–19:00** May 6. (**V2** = Black Dragon camp May 6, Moab May 7 — optional.)
 
 **Overview:** [overland-alternates.html](../overland-alternates.html)
 
@@ -52,7 +52,7 @@ Shared **Wedge / Little Grand Canyon** sunrise (camp at rim).
 
 **Early-leavers:** off rim → **N** past **Toilets** waypoint (39.17475, -110.78929) → **W** on **E Green River Cutoff Rd** → **Hwy 10** → **Maverik, Castle Dale** → US-6 W → I-15 N → I-84 W → Boise. ~30 mi graded, ~**75 min** to pavement — inside **09:30** target.
 
-**Stay-overs:** **N** from Wedge through **Buckhorn** corridor (Dinosaur Footprint → petroglyphs → wash → Split Rock → Red Canyon → Swinging Bridge → Sinkhole → Black Dragon Canyon → petroglyph) → **I-70 E** Exit 147 → fuel → **Ken’s Lake** (**V1**, evening).
+**Stay-overs:** **N** from Wedge through **Buckhorn** corridor (Dinosaur Footprint → petroglyphs → wash → Split Rock → Red Canyon → Swinging Bridge → Sinkhole → Black Dragon Canyon → petroglyph) → **I-70 E** Exit 147 → fuel → **Moab / Sand Flats** (**V1**, evening).
 
 ---
 

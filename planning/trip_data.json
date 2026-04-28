@@ -19503,7 +19503,7 @@
           "dist_to_track_m": 0.7,
           "sym": "water",
           "status": "primary",
-          "note": "Early Day-2 river crossing (on-route, 1 m off). Added per group request -- water crossings desirable for overlanders.",
+          "note": "Fuller Bottom ford of the San Rafael River (Upper San Rafael River WMA, BLM Fuller Bottom road = NF-3516 / BLM 6767, becomes Little Wedge Road / BLM 629 south of the crossing). Added per group request -- water crossings desirable for overlanders.",
           "desc": "",
           "spur_mi": 0.0,
           "default_minutes": 15,
@@ -48816,7 +48816,7 @@
       "date_iso": "2026-05-06",
       "title": "Head of Sinbad -> I-70 E -> Moab",
       "type": "transit",
-      "descr": "Exit route, fuel at Green River, drive to Moab. Check in at Ken's Lake Group Site B (reserved).",
+      "descr": "Exit route, fuel at Green River, drive to Moab / Sand Flats; claim clustered FCFS sites (multiple adjoining pads — double-up vehicles where site size allows).",
       "mi_lo": null,
       "mi_hi": null,
       "miles": 70,
@@ -48825,16 +48825,16 @@
       "track_points": [],
       "camps": {
         "primary": {
-          "name": "Ken's Lake Group Site B (RESERVABLE)",
-          "lat": 38.4875,
-          "lon": -109.4248,
+          "name": "Sand Flats Recreation Area — adjacent FCFS sites (cluster)",
+          "lat": 38.57563,
+          "lon": -109.52401,
           "status": "primary",
-          "kind": "developed_reserved",
-          "cost": "$50/night",
-          "facilities": "Vault toilets, fire grates, shade shelter, picnic tables",
-          "notes": "Site B = 25-person capacity, standard (NOT equestrian). Available May 6 as of 2026-04-16 check.",
-          "access": "Hwy 191 S from Moab ~8 mi, E on Ken's Lake Rd",
-          "reserve_url": "https://www.recreation.gov/camping/campgrounds/251840"
+          "kind": "developed_fcfs",
+          "cost": "Day-use + camping fees collected at booth",
+          "facilities": "Picnic tables, fire rings, pit toilets; haul drinking water",
+          "notes": "No group reservation. Send scouts early afternoon if possible and grab adjoining numbered sites on the same loop (or neighboring loops). Up to **two rigs per pad** only when pads are large enough—trailers/tow combos usually need dedicated sites.",
+          "access": "Moab: Center/400 East -> Mill Creek Dr -> Sand Flats Rd (~5 mi graded)",
+          "reserve_url": "https://www.recreation.gov/gateways/2160"
         },
         "secondary": {
           "name": "Dead Horse Point SP - Wingate (electric site)",
@@ -48849,15 +48849,15 @@
           "reserve_url": "https://utahstateparks.reserveamerica.com"
         },
         "tertiary": {
-          "name": "Willow Springs dispersed",
-          "lat": 38.7105,
-          "lon": -109.718,
+          "name": "BLM designated dispersed pods (Mill Canyon / Cotter / Dubinky)",
+          "lat": 38.65,
+          "lon": -109.77,
           "status": "tertiary",
           "kind": "designated_dispersed",
-          "cost": "$15/night honor",
-          "facilities": "Fire rings, vault toilets",
-          "notes": "Walk-up only, 11 mi N of Moab.",
-          "access": "Hwy 191 N from Moab"
+          "cost": "Free where marked — obey posted waste rules",
+          "facilities": "None (signs only)",
+          "notes": "Last resort north of Hwy 313 / east of Hwy 191; verify brown post sites.",
+          "access": "Spurs off Cotter Mine, Dubinky, Mill Canyon corridors"
         }
       }
     },
@@ -48867,7 +48867,7 @@
       "date_iso": "2026-05-07",
       "title": "Moab - Day 1 (activities TBD)",
       "type": "moab",
-      "descr": "Move to Dead Horse Point SP Wingate site. Activities TBD (Arches, Canyonlands Island in the Sky, SR 279 petroglyphs, Hell's Revenge, Fins-n-Things, Slickrock, etc.)",
+      "descr": "Sand Flats cluster base camp + activities TBD (Arches, Canyonlands Island in the Sky, SR 279 petroglyphs, Hell's Revenge, Fins-n-Things, Slickrock, etc.)",
       "mi_lo": null,
       "mi_hi": null,
       "miles": null,
@@ -48876,39 +48876,40 @@
       "track_points": [],
       "camps": {
         "primary": {
-          "name": "Dead Horse Point SP - Wingate (ideally same site 3 nights)",
+          "name": "Sand Flats Recreation Area — cluster camp (renew sites daily FCFS)",
+          "lat": 38.57563,
+          "lon": -109.52401,
+          "status": "primary",
+          "kind": "developed_fcfs",
+          "cost": "Day-use + nightly camping fee per Grand County/Booth",
+          "facilities": "Pit toilets, picnic tables, fire rings; pack water.",
+          "notes": "Preferred Moab hub: neighboring FCFS pads, two vehicles/site when space allows (long trailers usually need standalone sites). Overflow loop opens when staffed.",
+          "access": "Same Sand Flats Rd corridor as transit night.",
+          "reserve_url": "https://www.recreation.gov/gateways/2160"
+        },
+        "secondary": {
+          "name": "Dead Horse Point SP - Wingate (reserved backup)",
           "lat": 38.471,
           "lon": -109.745,
-          "status": "primary",
+          "status": "secondary",
           "kind": "developed_reserved",
           "cost": "$60/night",
-          "facilities": "Electric, vault toilets, no showers",
-          "notes": "Book 1 site for May 7-9 (3 nights). Max 8 ppl/site; we have 7. ~$180 total.",
+          "facilities": "Electric, vault toilets",
+          "notes": "Use if Sand Flats is untenable weather / capacity-wise — book ahead if leaning on this.",
           "access": "Hwy 313 W off Hwy 191",
           "reserve_url": "https://utahstateparks.reserveamerica.com"
         },
-        "secondary": {
-          "name": "Dead Horse Point SP - Kayenta",
-          "lat": 38.4715,
-          "lon": -109.7465,
-          "status": "secondary",
-          "kind": "developed_reserved",
-          "cost": "$45-60/night",
-          "facilities": "Vault toilets, no showers",
-          "notes": "59+ sites open each night of May 7-9.",
-          "access": "Same park, different loop",
-          "reserve_url": "https://utahstateparks.reserveamerica.com"
-        },
         "tertiary": {
-          "name": "Ken's Lake non-group + BLM dispersed fallback",
-          "lat": 38.4875,
-          "lon": -109.4248,
+          "name": "Dead Horse Kayenta loop / Utahraptor Fossil Flats primitive (fee)",
+          "lat": 38.472,
+          "lon": -109.744,
           "status": "tertiary",
-          "kind": "dispersed_fcfs",
-          "cost": "varies",
-          "facilities": "varies",
-          "notes": "Willow Springs / Cotter Mine Rd / Dubinky Wells all within 15 mi.",
-          "access": "Multiple"
+          "kind": "developed_reserved",
+          "cost": "Varies",
+          "facilities": "Electric at Kayenta; primitive at Fossil Flats corridor",
+          "notes": "Split-group backup options north of downtown.",
+          "access": "Hwy 313 or Hwy 191 N",
+          "reserve_url": "https://utahstateparks.reserveamerica.com"
         }
       }
     },
@@ -48927,39 +48928,40 @@
       "track_points": [],
       "camps": {
         "primary": {
-          "name": "Dead Horse Point SP - Wingate (ideally same site 3 nights)",
+          "name": "Sand Flats Recreation Area — cluster camp (renew sites daily FCFS)",
+          "lat": 38.57563,
+          "lon": -109.52401,
+          "status": "primary",
+          "kind": "developed_fcfs",
+          "cost": "Day-use + nightly camping fee per Grand County/Booth",
+          "facilities": "Pit toilets, picnic tables, fire rings; pack water.",
+          "notes": "Preferred Moab hub: neighboring FCFS pads, two vehicles/site when space allows (long trailers usually need standalone sites). Overflow loop opens when staffed.",
+          "access": "Same Sand Flats Rd corridor as transit night.",
+          "reserve_url": "https://www.recreation.gov/gateways/2160"
+        },
+        "secondary": {
+          "name": "Dead Horse Point SP - Wingate (reserved backup)",
           "lat": 38.471,
           "lon": -109.745,
-          "status": "primary",
+          "status": "secondary",
           "kind": "developed_reserved",
           "cost": "$60/night",
-          "facilities": "Electric, vault toilets, no showers",
-          "notes": "Book 1 site for May 7-9 (3 nights). Max 8 ppl/site; we have 7. ~$180 total.",
+          "facilities": "Electric, vault toilets",
+          "notes": "Use if Sand Flats is untenable weather / capacity-wise — book ahead if leaning on this.",
           "access": "Hwy 313 W off Hwy 191",
           "reserve_url": "https://utahstateparks.reserveamerica.com"
         },
-        "secondary": {
-          "name": "Dead Horse Point SP - Kayenta",
-          "lat": 38.4715,
-          "lon": -109.7465,
-          "status": "secondary",
-          "kind": "developed_reserved",
-          "cost": "$45-60/night",
-          "facilities": "Vault toilets, no showers",
-          "notes": "59+ sites open each night of May 7-9.",
-          "access": "Same park, different loop",
-          "reserve_url": "https://utahstateparks.reserveamerica.com"
-        },
         "tertiary": {
-          "name": "Ken's Lake non-group + BLM dispersed fallback",
-          "lat": 38.4875,
-          "lon": -109.4248,
+          "name": "Dead Horse Kayenta loop / Utahraptor Fossil Flats primitive (fee)",
+          "lat": 38.472,
+          "lon": -109.744,
           "status": "tertiary",
-          "kind": "dispersed_fcfs",
-          "cost": "varies",
-          "facilities": "varies",
-          "notes": "Willow Springs / Cotter Mine Rd / Dubinky Wells all within 15 mi.",
-          "access": "Multiple"
+          "kind": "developed_reserved",
+          "cost": "Varies",
+          "facilities": "Electric at Kayenta; primitive at Fossil Flats corridor",
+          "notes": "Split-group backup options north of downtown.",
+          "access": "Hwy 313 or Hwy 191 N",
+          "reserve_url": "https://utahstateparks.reserveamerica.com"
         }
       }
     },
@@ -48978,39 +48980,40 @@
       "track_points": [],
       "camps": {
         "primary": {
-          "name": "Dead Horse Point SP - Wingate (ideally same site 3 nights)",
+          "name": "Sand Flats Recreation Area — cluster camp (renew sites daily FCFS)",
+          "lat": 38.57563,
+          "lon": -109.52401,
+          "status": "primary",
+          "kind": "developed_fcfs",
+          "cost": "Day-use + nightly camping fee per Grand County/Booth",
+          "facilities": "Pit toilets, picnic tables, fire rings; pack water.",
+          "notes": "Preferred Moab hub: neighboring FCFS pads, two vehicles/site when space allows (long trailers usually need standalone sites). Overflow loop opens when staffed.",
+          "access": "Same Sand Flats Rd corridor as transit night.",
+          "reserve_url": "https://www.recreation.gov/gateways/2160"
+        },
+        "secondary": {
+          "name": "Dead Horse Point SP - Wingate (reserved backup)",
           "lat": 38.471,
           "lon": -109.745,
-          "status": "primary",
+          "status": "secondary",
           "kind": "developed_reserved",
           "cost": "$60/night",
-          "facilities": "Electric, vault toilets, no showers",
-          "notes": "Book 1 site for May 7-9 (3 nights). Max 8 ppl/site; we have 7. ~$180 total.",
+          "facilities": "Electric, vault toilets",
+          "notes": "Use if Sand Flats is untenable weather / capacity-wise — book ahead if leaning on this.",
           "access": "Hwy 313 W off Hwy 191",
           "reserve_url": "https://utahstateparks.reserveamerica.com"
         },
-        "secondary": {
-          "name": "Dead Horse Point SP - Kayenta",
-          "lat": 38.4715,
-          "lon": -109.7465,
-          "status": "secondary",
-          "kind": "developed_reserved",
-          "cost": "$45-60/night",
-          "facilities": "Vault toilets, no showers",
-          "notes": "59+ sites open each night of May 7-9.",
-          "access": "Same park, different loop",
-          "reserve_url": "https://utahstateparks.reserveamerica.com"
-        },
         "tertiary": {
-          "name": "Ken's Lake non-group + BLM dispersed fallback",
-          "lat": 38.4875,
-          "lon": -109.4248,
+          "name": "Dead Horse Kayenta loop / Utahraptor Fossil Flats primitive (fee)",
+          "lat": 38.472,
+          "lon": -109.744,
           "status": "tertiary",
-          "kind": "dispersed_fcfs",
-          "cost": "varies",
-          "facilities": "varies",
-          "notes": "Willow Springs / Cotter Mine Rd / Dubinky Wells all within 15 mi.",
-          "access": "Multiple"
+          "kind": "developed_reserved",
+          "cost": "Varies",
+          "facilities": "Electric at Kayenta; primitive at Fossil Flats corridor",
+          "notes": "Split-group backup options north of downtown.",
+          "access": "Hwy 313 or Hwy 191 N",
+          "reserve_url": "https://utahstateparks.reserveamerica.com"
         }
       }
     },

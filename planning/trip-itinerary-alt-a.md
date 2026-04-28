@@ -2,7 +2,7 @@
 
 **Not the primary GPX.** This is the **Option A** day-by-day plan: same **Wedge-first** direction as the main trip, with **Family Butte** on **May 4**, **Behind-the-Reef without tactical slot hikes** on **May 5**, and **slot + Sinbad work on May 6** for stay-overs. **Early-leavers** peel off **May 6** after a shared send-off (~09:00–09:15) toward **Boise**.
 
-**Variant:** **A-V2** — do **not** run to Moab the night of May 6; **May 7** highway to Moab / Ken’s Lake + easy afternoon (e.g. **Fins N Things**, Sand Flats — confirm permits/fees).
+**Variant:** **A-V2** — do **not** run to Moab the night of May 6; **May 7** highway to Moab / **Sand Flats cluster** + easy afternoon (e.g. **Fins N Things** — confirm booth fees).
 
 **Overview:** [overland-alternates.html](../overland-alternates.html)
 
@@ -49,13 +49,13 @@ Same as **main** plan: travel to **Black Dragon**-area staging / camp (see prima
 ### Stay-overs (rest of May 6)
 
 - **West on Behind-the-Reef** to **Chute** and/or **Crack** trailheads (tactical; flood check — see [slot-canyon-guide.html](../slot-canyon-guide.html)).
-- Return **east** → **Tunnel** → **Head of Sinbad** → **Dutchman Arch** → **I-70 E** toward Moab — **stop short** for night: **Goblin Valley SP**, **Temple Mtn** again, or **Hwy 24** dispersed (not Ken’s Lake same night).
+- Return **east** → **Tunnel** → **Head of Sinbad** → **Dutchman Arch** → **I-70 E** toward Moab — **stop short** for night: **Goblin Valley SP**, **Temple Mtn** again, or **Hwy 24** dispersed (not Moab/Sand Flats same night).
 
 ---
 
 ## Day 5 — Wed May 7 (travel / Moab)
 
-- Morning: **I-70 E** to **Moab / Ken’s Lake**.
+- Morning: **I-70 E** to **Moab / Sand Flats**.
 - Afternoon: **recovery** trail — planned **Fins N Things** ([BLM Sand Flats](https://www.blm.gov/visit/sand-flats)); confirm group appetite and fees.
 
 ---

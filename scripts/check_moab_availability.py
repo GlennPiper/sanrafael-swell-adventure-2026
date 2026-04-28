@@ -9,8 +9,6 @@ TARGET_DATES = ['2026-05-06', '2026-05-07', '2026-05-08', '2026-05-09']
 
 TARGETS = [
     ('251841', 'Goose Island Group Sites (SR 128)'),
-    ('251840', "Ken's Lake Group Sites"),
-    ('234388', "Ken's Lake Campground"),
     ('251842', 'Big Bend Campground (SR 128)'),
     ('233921', 'Hittle Bottom (SR 128)'),
     ('251843', 'Hal Canyon (SR 128)'),

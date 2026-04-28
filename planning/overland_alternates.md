@@ -25,7 +25,7 @@ This document captures **alternate San Rafael Swell overland plans** that lighte
 ## Option A — forward, Family Butte, defer slot hikes
 
 - **Idea:** Keep current **Wedge-first** story; **May 4** camp **Family Butte** (pushes Reds Canyon + Lucky Strike to May 5); **May 5** drive **Behind-the-Reef** but **skip tactical slot hikes en route**; **May 6** stay-overs backtrack for **Chute/Crack** (and optional **WHW** send-off) then **Sinbad / Dutchman**, **not** pushing to Moab that night.
-- **Variant:** **A-V2** is the working plan — **May 6 night** short-hop camp (Goblin Valley SP, Temple Mtn again, or Hwy 24 dispersed); **May 7** Moab / Ken’s Lake + light afternoon (e.g. **Fins N Things** in Sand Flats). **A-V1** (Ken’s Lake same night May 6) is intentionally avoided as too late for a good camp night.
+- **Variant:** **A-V2** is the working plan — **May 6 night** short-hop camp (Goblin Valley SP, Temple Mtn again, or Hwy 24 dispersed); **May 7** Moab / **Sand Flats cluster camp** + light afternoon (e.g. **Fins N Things**). **A-V1** (Sand Flats same night May 6) is intentionally avoided as too late for a good camp night.
 - **Detail:** [trip-itinerary-alt-a.html](../trip-itinerary-alt-a.html)
 
 ---
@@ -41,7 +41,7 @@ This document captures **alternate San Rafael Swell overland plans** that lighte
 ## Option D — reverse, BTR split, Crack/Chute camp night 1, V1 default
 
 - **Idea:** Same reverse staging as B; **split Behind-the-Reef** across **May 3–4**; **May 3** camp near **Crack Canyon** dispersed (**38.64423, -110.73771** primary; secondary at Chute/Crack TH pockets; tertiary **38.66000, -110.73253**); **Hidden Splendor Overlook** driven on **May 4**; **Family Butte** May 4; **Wedge** May 5; **May 6** split at **Wedge** (early-leavers north via **E Green River Cutoff** → Castle Dale).
-- **Variant:** **V1** — stay-overs **Ken’s Lake ~18:00–19:00** May 6. **V2** optional. Defaults here: **V1**.
+- **Variant:** **V1** — stay-overs **Moab / Sand Flats cluster ~18:00–19:00** May 6. **V2** optional. Defaults here: **V1**.
 - **Detail:** [trip-itinerary-alt-d.html](../trip-itinerary-alt-d.html)
 
 ---

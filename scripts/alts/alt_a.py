@@ -8,7 +8,7 @@ Day split summary:
          BTR traverse (no tactical slots) -> Temple Mtn camp.
   May 6: Day 4 stay-over slots (Chute/Crack) + Sinbad cluster; extra
          Swell night (Temple Mtn / Goblin). Early-leavers peel off AM.
-  May 7: Travel to Moab (Ken's Lake), easy afternoon trail.
+  May 7: Travel to Moab / Sand Flats cluster, easy afternoon trail.
 
 Reuses main-trip POI catalog via trip_core.POI_STATUS.
 """
@@ -35,7 +35,7 @@ from alts.common import (  # noqa: E402
     REALTIME_LINKS,
     black_dragon_stage,
     family_butte_primary_camps,
-    kens_lake_camps,
+    sand_flats_moab_camps,
     stayover_sinbad_camps,
     temple_mtn_camps,
     wedge_overlook_camps,
@@ -139,9 +139,9 @@ DAYS = [
         'id': 'altA_day5_moab_transit',
         'label': 'May 7 (Wed) - Transit to Moab + easy afternoon',
         'date_iso': '2026-05-07',
-        'title': 'Head of Sinbad area -> I-70 E -> Moab / Ken\'s Lake; optional Fins N Things',
+        'title': 'Head of Sinbad area -> I-70 E -> Moab / Sand Flats cluster; optional Fins N Things',
         'type': 'transit',
-        'descr': 'Morning I-70 E to Moab / Ken\'s Lake. Afternoon recovery trail: '
+        'descr': 'Morning I-70 E to Moab / Sand Flats. Afternoon recovery trail: '
                  'planned Fins N Things (BLM Sand Flats); confirm permits/fees on arrival.',
         'miles': 120,
         'driving_hours_est': 2.5,
@@ -184,7 +184,7 @@ CAMPS = {
     'altA_day2_swell':          family_butte_primary_camps(),
     'altA_day3_swell':          temple_mtn_camps(),
     'altA_day4_stayover':       stayover_sinbad_camps(),
-    'altA_day5_moab_transit':   kens_lake_camps(),
+    'altA_day5_moab_transit':   sand_flats_moab_camps(),
     'altA_day6_moab':           {'inherit': 'altA_day5_moab_transit'},
     'altA_day7_moab':           {'inherit': 'altA_day5_moab_transit'},
 }

@@ -1,6 +1,6 @@
 # Alternate itinerary B — Reverse (Sinbad-first), Variant V1
 
-**Not the primary GPX.** **Option B** runs the Swell **west → east** (Temple / Sinbad side first, Buckhorn / Black Dragon last). This page uses **Variant V1** by default: stay-overs reach **Moab / Ken’s Lake the evening of May 6** after any catch-up miles. (**V2** = extra Swell night May 6, Moab May 7 — optional.)
+**Not the primary GPX.** **Option B** runs the Swell **west → east** (Temple / Sinbad side first, Buckhorn / Black Dragon last). This page uses **Variant V1** by default: stay-overs reach **Moab / Sand Flats the evening of May 6** after any catch-up miles. (**V2** = extra Swell night May 6, Moab May 7 — optional.)
 
 **Overview:** [overland-alternates.html](../overland-alternates.html)
 
@@ -40,7 +40,7 @@ Wedge → Dinosaur Footprint → Buckhorn Petroglyphs → Buckhorn Wash → Spli
 ## Day 4 — Tue May 6
 
 - **Early-leavers:** per **May 5** camp choice above; on pavement by **09:30** target.
-- **Stay-overs (V1):** anything **skipped Day 1** (extra slot, BTR segment if abbreviated), then **I-70 E** to **Moab / Ken’s Lake** — plan **same evening** as main Moab arrival (adjust exact hour to field reality).
+- **Stay-overs (V1):** anything **skipped Day 1** (extra slot, BTR segment if abbreviated), then **I-70 E** to **Moab / Sand Flats** — plan **same evening** as main Moab arrival (adjust exact hour to field reality).
 
 ---
 

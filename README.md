@@ -237,11 +237,9 @@ To add or edit descriptions, edit the `<desc>` elements directly in the source G
 
 These must be done by **a human** - they require a real reservation or phone call:
 
-1. **Reserve Ken's Lake Group Site B for May 6, 2026**
-   - [recreation.gov/camping/campgrounds/251840](https://www.recreation.gov/camping/campgrounds/251840)
-   - $50/night, 25-person capacity, was available as of Apr 16, 2026
+1. **Coordinate Sand Flats cluster camping May 6–9, 2026** — Multiple adjacent first-come/first-served sites in Sand Flats (no Ken’s Lake group reservation). Aim for midday arrivals on turnover-heavy days so the group can snag neighboring pads (two rigs per pad only where space allows).
 
-2. **Reserve Dead Horse Point SP - Wingate Loop (1 standard electric site) for May 7, 8, 9**
+2. **Reserve Dead Horse Point SP - Wingate Loop (1 standard electric site) for May 7, 8, 9** (optional backup — skip if staying entirely in Sand Flats or other picks)
    - [utahstateparks.reserveamerica.com](https://utahstateparks.reserveamerica.com)
    - $60/night * 3 nights = ~$180 total, max 8 people / site (we have 7)
 

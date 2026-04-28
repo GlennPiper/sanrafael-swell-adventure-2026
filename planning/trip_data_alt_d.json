@@ -16436,7 +16436,7 @@
           "dist_to_track_m": 0.7,
           "sym": "water",
           "status": "primary",
-          "note": "Early Day-2 river crossing (on-route, 1 m off). Added per group request -- water crossings desirable for overlanders.",
+          "note": "Fuller Bottom ford of the San Rafael River (Upper San Rafael River WMA, BLM Fuller Bottom road = NF-3516 / BLM 6767, becomes Little Wedge Road / BLM 629 south of the crossing). Added per group request -- water crossings desirable for overlanders.",
           "desc": "",
           "spur_mi": 0.0,
           "default_minutes": 15,
@@ -29515,9 +29515,9 @@
       "id": "altD_day4_moab_transit",
       "label": "May 6 (Tue) - Split at Wedge; stay-overs I-70 E to Moab",
       "date_iso": "2026-05-06",
-      "title": "Early-leavers N exit via Green River Cutoff (09:30 target); stay-overs run Buckhorn + Black Dragon string -> Ken's Lake (V1)",
+      "title": "Early-leavers N exit via Green River Cutoff (09:30 target); stay-overs run Buckhorn + Black Dragon string -> Sand Flats cluster (V1)",
       "type": "transit",
-      "descr": "Shared Wedge sunrise ~07:00. ~07:30-08:00 split. Early-leavers: off rim N past \"Toilets\" waypoint -> E Green River Cutoff Rd -> Hwy 10 -> Maverik Castle Dale -> US-6 W -> I-15 N -> I-84 W -> Boise (~30 mi graded to pavement, ~75 min; inside the 09:30 target). Stay-overs: N from Wedge through Buckhorn corridor (Dinosaur Footprint -> petroglyphs -> wash -> Split Rock -> Red Canyon -> Swinging Bridge -> Sinkhole) -> Black Dragon Canyon + petroglyph -> I-70 Exit 147 E -> Moab / Ken's Lake evening.",
+      "descr": "Shared Wedge sunrise ~07:00. ~07:30-08:00 split. Early-leavers: off rim N past \"Toilets\" waypoint -> E Green River Cutoff Rd -> Hwy 10 -> Maverik Castle Dale -> US-6 W -> I-15 N -> I-84 W -> Boise (~30 mi graded to pavement, ~75 min; inside the 09:30 target). Stay-overs: N from Wedge through Buckhorn corridor (Dinosaur Footprint -> petroglyphs -> wash -> Split Rock -> Red Canyon -> Swinging Bridge -> Sinkhole) -> Black Dragon Canyon + petroglyph -> I-70 Exit 147 E -> Moab / Sand Flats evening.",
       "miles": 140,
       "driving_hours_est": 3.5,
       "camp_key": "altD_day4_moab_transit",
@@ -48743,16 +48743,16 @@
       ],
       "camps": {
         "primary": {
-          "name": "Ken's Lake Group Site B (RESERVABLE)",
-          "lat": 38.4875,
-          "lon": -109.4248,
+          "name": "Sand Flats Recreation Area — adjacent FCFS sites (cluster)",
+          "lat": 38.57563,
+          "lon": -109.52401,
           "status": "primary",
-          "kind": "developed_reserved",
-          "cost": "$50/night",
-          "facilities": "Vault toilets, fire grates, shade shelter, picnic tables",
-          "notes": "Site B = 25-person capacity, standard. Shared with the main Moab group.",
-          "access": "Hwy 191 S from Moab ~8 mi, E on Ken's Lake Rd",
-          "reserve_url": "https://www.recreation.gov/camping/campgrounds/251840"
+          "kind": "developed_fcfs",
+          "cost": "Day-use pass + per-night camping fee (pay fee station)",
+          "facilities": "Picnic tables, fire rings, pit toilets; no drinking water onsite",
+          "notes": "No group reservation: plan to snag several adjoining sites on the same loop (or nearby loops) so the crew stays visual distance. Typical rule is up to two vehicles parked at a numbered site **when everything fits**—put tow rigs/trailers on their own pads when tandem parking is tight. Spring Thu–Sat nights fill quickly; aim to arrive midday when possible.",
+          "access": "From Moab: 400 East -> Mill Creek Dr -> Sand Flats Rd to BLM/co-county booth",
+          "reserve_url": "https://www.recreation.gov/gateways/2160"
         },
         "secondary": {
           "name": "Dead Horse Point SP - Wingate (electric site)",
@@ -48767,15 +48767,15 @@
           "reserve_url": "https://utahstateparks.reserveamerica.com"
         },
         "tertiary": {
-          "name": "Willow Springs dispersed",
-          "lat": 38.7105,
-          "lon": -109.718,
+          "name": "BLM designated dispersed pods (Mill Canyon / Cotter / Dubinky)",
+          "lat": 38.65,
+          "lon": -109.77,
           "status": "tertiary",
           "kind": "designated_dispersed",
-          "cost": "$15/night honor",
-          "facilities": "Fire rings, vault toilets",
-          "notes": "Walk-up only, 11 mi N of Moab.",
-          "access": "Hwy 191 N from Moab"
+          "cost": "Free where signed — human-waste containment required",
+          "facilities": "No services; numbered posts — see BLM map",
+          "notes": "~11–22 mi from Moab depending on spur. Camp only signed sites.",
+          "access": "Hwy 191 / SR 313 corridors north/northwest"
         }
       }
     },
@@ -48785,22 +48785,22 @@
       "date_iso": "2026-05-07",
       "title": "Moab - Day 1 (activities TBD)",
       "type": "moab",
-      "descr": "Move to Dead Horse Point SP Wingate. Activities TBD.",
+      "descr": "Sand Flats base camp + activities TBD.",
       "camp_key": "altD_day5_moab",
       "pois": [],
       "track_points": [],
       "camps": {
         "primary": {
-          "name": "Ken's Lake Group Site B (RESERVABLE)",
-          "lat": 38.4875,
-          "lon": -109.4248,
+          "name": "Sand Flats Recreation Area — adjacent FCFS sites (cluster)",
+          "lat": 38.57563,
+          "lon": -109.52401,
           "status": "primary",
-          "kind": "developed_reserved",
-          "cost": "$50/night",
-          "facilities": "Vault toilets, fire grates, shade shelter, picnic tables",
-          "notes": "Site B = 25-person capacity, standard. Shared with the main Moab group.",
-          "access": "Hwy 191 S from Moab ~8 mi, E on Ken's Lake Rd",
-          "reserve_url": "https://www.recreation.gov/camping/campgrounds/251840"
+          "kind": "developed_fcfs",
+          "cost": "Day-use pass + per-night camping fee (pay fee station)",
+          "facilities": "Picnic tables, fire rings, pit toilets; no drinking water onsite",
+          "notes": "No group reservation: plan to snag several adjoining sites on the same loop (or nearby loops) so the crew stays visual distance. Typical rule is up to two vehicles parked at a numbered site **when everything fits**—put tow rigs/trailers on their own pads when tandem parking is tight. Spring Thu–Sat nights fill quickly; aim to arrive midday when possible.",
+          "access": "From Moab: 400 East -> Mill Creek Dr -> Sand Flats Rd to BLM/co-county booth",
+          "reserve_url": "https://www.recreation.gov/gateways/2160"
         },
         "secondary": {
           "name": "Dead Horse Point SP - Wingate (electric site)",
@@ -48815,15 +48815,15 @@
           "reserve_url": "https://utahstateparks.reserveamerica.com"
         },
         "tertiary": {
-          "name": "Willow Springs dispersed",
-          "lat": 38.7105,
-          "lon": -109.718,
+          "name": "BLM designated dispersed pods (Mill Canyon / Cotter / Dubinky)",
+          "lat": 38.65,
+          "lon": -109.77,
           "status": "tertiary",
           "kind": "designated_dispersed",
-          "cost": "$15/night honor",
-          "facilities": "Fire rings, vault toilets",
-          "notes": "Walk-up only, 11 mi N of Moab.",
-          "access": "Hwy 191 N from Moab"
+          "cost": "Free where signed — human-waste containment required",
+          "facilities": "No services; numbered posts — see BLM map",
+          "notes": "~11–22 mi from Moab depending on spur. Camp only signed sites.",
+          "access": "Hwy 191 / SR 313 corridors north/northwest"
         }
       }
     },
@@ -48839,16 +48839,16 @@
       "track_points": [],
       "camps": {
         "primary": {
-          "name": "Ken's Lake Group Site B (RESERVABLE)",
-          "lat": 38.4875,
-          "lon": -109.4248,
+          "name": "Sand Flats Recreation Area — adjacent FCFS sites (cluster)",
+          "lat": 38.57563,
+          "lon": -109.52401,
           "status": "primary",
-          "kind": "developed_reserved",
-          "cost": "$50/night",
-          "facilities": "Vault toilets, fire grates, shade shelter, picnic tables",
-          "notes": "Site B = 25-person capacity, standard. Shared with the main Moab group.",
-          "access": "Hwy 191 S from Moab ~8 mi, E on Ken's Lake Rd",
-          "reserve_url": "https://www.recreation.gov/camping/campgrounds/251840"
+          "kind": "developed_fcfs",
+          "cost": "Day-use pass + per-night camping fee (pay fee station)",
+          "facilities": "Picnic tables, fire rings, pit toilets; no drinking water onsite",
+          "notes": "No group reservation: plan to snag several adjoining sites on the same loop (or nearby loops) so the crew stays visual distance. Typical rule is up to two vehicles parked at a numbered site **when everything fits**—put tow rigs/trailers on their own pads when tandem parking is tight. Spring Thu–Sat nights fill quickly; aim to arrive midday when possible.",
+          "access": "From Moab: 400 East -> Mill Creek Dr -> Sand Flats Rd to BLM/co-county booth",
+          "reserve_url": "https://www.recreation.gov/gateways/2160"
         },
         "secondary": {
           "name": "Dead Horse Point SP - Wingate (electric site)",
@@ -48863,15 +48863,15 @@
           "reserve_url": "https://utahstateparks.reserveamerica.com"
         },
         "tertiary": {
-          "name": "Willow Springs dispersed",
-          "lat": 38.7105,
-          "lon": -109.718,
+          "name": "BLM designated dispersed pods (Mill Canyon / Cotter / Dubinky)",
+          "lat": 38.65,
+          "lon": -109.77,
           "status": "tertiary",
           "kind": "designated_dispersed",
-          "cost": "$15/night honor",
-          "facilities": "Fire rings, vault toilets",
-          "notes": "Walk-up only, 11 mi N of Moab.",
-          "access": "Hwy 191 N from Moab"
+          "cost": "Free where signed — human-waste containment required",
+          "facilities": "No services; numbered posts — see BLM map",
+          "notes": "~11–22 mi from Moab depending on spur. Camp only signed sites.",
+          "access": "Hwy 191 / SR 313 corridors north/northwest"
         }
       }
     },
@@ -48887,16 +48887,16 @@
       "track_points": [],
       "camps": {
         "primary": {
-          "name": "Ken's Lake Group Site B (RESERVABLE)",
-          "lat": 38.4875,
-          "lon": -109.4248,
+          "name": "Sand Flats Recreation Area — adjacent FCFS sites (cluster)",
+          "lat": 38.57563,
+          "lon": -109.52401,
           "status": "primary",
-          "kind": "developed_reserved",
-          "cost": "$50/night",
-          "facilities": "Vault toilets, fire grates, shade shelter, picnic tables",
-          "notes": "Site B = 25-person capacity, standard. Shared with the main Moab group.",
-          "access": "Hwy 191 S from Moab ~8 mi, E on Ken's Lake Rd",
-          "reserve_url": "https://www.recreation.gov/camping/campgrounds/251840"
+          "kind": "developed_fcfs",
+          "cost": "Day-use pass + per-night camping fee (pay fee station)",
+          "facilities": "Picnic tables, fire rings, pit toilets; no drinking water onsite",
+          "notes": "No group reservation: plan to snag several adjoining sites on the same loop (or nearby loops) so the crew stays visual distance. Typical rule is up to two vehicles parked at a numbered site **when everything fits**—put tow rigs/trailers on their own pads when tandem parking is tight. Spring Thu–Sat nights fill quickly; aim to arrive midday when possible.",
+          "access": "From Moab: 400 East -> Mill Creek Dr -> Sand Flats Rd to BLM/co-county booth",
+          "reserve_url": "https://www.recreation.gov/gateways/2160"
         },
         "secondary": {
           "name": "Dead Horse Point SP - Wingate (electric site)",
@@ -48911,15 +48911,15 @@
           "reserve_url": "https://utahstateparks.reserveamerica.com"
         },
         "tertiary": {
-          "name": "Willow Springs dispersed",
-          "lat": 38.7105,
-          "lon": -109.718,
+          "name": "BLM designated dispersed pods (Mill Canyon / Cotter / Dubinky)",
+          "lat": 38.65,
+          "lon": -109.77,
           "status": "tertiary",
           "kind": "designated_dispersed",
-          "cost": "$15/night honor",
-          "facilities": "Fire rings, vault toilets",
-          "notes": "Walk-up only, 11 mi N of Moab.",
-          "access": "Hwy 191 N from Moab"
+          "cost": "Free where signed — human-waste containment required",
+          "facilities": "No services; numbered posts — see BLM map",
+          "notes": "~11–22 mi from Moab depending on spur. Camp only signed sites.",
+          "access": "Hwy 191 / SR 313 corridors north/northwest"
         }
       }
     },
@@ -54203,5 +54203,5 @@
     }
   ],
   "generated_at": "2026-04-20",
-  "intro_html": "<div class=\"info\"><strong>Alternate D - Reverse, BTR split, Crack camp D1 (Variant V1).</strong> Like B but softens Day 1 by <em>splitting</em> Behind-the-Reef across May 3-4 and camping near the <strong>Crack Canyon trailhead</strong> instead of pushing all the way to Tomsich. Hidden Splendor Overlook moves to <strong>May 4</strong>. May 6 split is at <strong>Wedge</strong> (not Swinging Bridge): early-leavers exit N via E Green River Cutoff Rd to hit pavement by 09:30; stay-overs run the full Buckhorn + Black Dragon string and reach Moab / Ken's Lake the same evening (V1). Planning notes: <a href=\"planning/trip-itinerary-alt-d.md\">trip-itinerary-alt-d.md</a> &middot; <a href=\"overland-alternates.html\">Alt overview</a>.</div>"
+  "intro_html": "<div class=\"info\"><strong>Alternate D - Reverse, BTR split, Crack camp D1 (Variant V1).</strong> Like B but softens Day 1 by <em>splitting</em> Behind-the-Reef across May 3-4 and camping near the <strong>Crack Canyon trailhead</strong> instead of pushing all the way to Tomsich. Hidden Splendor Overlook moves to <strong>May 4</strong>. May 6 split is at <strong>Wedge</strong> (not Swinging Bridge): early-leavers exit N via E Green River Cutoff Rd to hit pavement by 09:30; stay-overs run the full Buckhorn + Black Dragon string and reach Moab / Sand Flats the same evening (V1). Planning notes: <a href=\"planning/trip-itinerary-alt-d.md\">trip-itinerary-alt-d.md</a> &middot; <a href=\"overland-alternates.html\">Alt overview</a>.</div>"
 }
