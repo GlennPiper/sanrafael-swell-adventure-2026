@@ -71,6 +71,75 @@ GROUP_COUNTS = {'overland': 11, 'moab': 7}
 
 
 # ---------------------------------------------------------------------------
+# May 1 — Boise meet + Bonneville overnight (main + all alternates)
+# ---------------------------------------------------------------------------
+
+def may1_meet_synthetic_pois() -> list[dict]:
+    """Logistics pin for Federal Way Albertsons / Sinclair (Boise)."""
+    return [{
+        'name': 'Meet — Albertsons / Sinclair (Federal Way, Boise)',
+        'lat': 43.6190,
+        'lon': -116.2835,
+        'ele': None,
+        'mile': 0.0,
+        'dist_to_track_m': 0.0,
+        'sym': 'city-24',
+        'status': 'logistics',
+        'note': (
+            'Roll noon–1:00 PM; depart by 1:00 PM. Gas + McDonald\'s same parcel. '
+            'Map: https://maps.app.goo.gl/RsEAZBhu2zFwD9Cj9'
+        ),
+        'desc': '',
+        'spur_mi': 0.0,
+    }]
+
+
+def bonneville_may1_camps() -> dict:
+    """Dispersed options near Bonneville Salt Flats (May 1 overnight); Idaho pins are bailouts only."""
+    return {
+        'primary': {
+            'name': 'Bonneville Salt Flats — leading candidate (dispersed, TBD)',
+            'lat': 40.772616,
+            'lon': -113.981099,
+            'status': 'primary',
+            'kind': 'dispersed',
+            'cost': 'Typically free on BLM desert pull-offs — verify postings',
+            'facilities': 'None — pack out waste; respect wet salt',
+            'notes': (
+                'Leading overnight candidate for the group scout. Confirm legal dispersed rules '
+                'and salt moisture before driving on flats.'
+            ),
+            'access': 'NW of Wendover; reach via I-80 corridor.',
+        },
+        'secondary': {
+            'name': 'Bonneville Salt Flats — alternate pin',
+            'lat': 40.80273,
+            'lon': -114.00395,
+            'status': 'secondary',
+            'kind': 'dispersed',
+            'cost': 'Typically free — verify postings',
+            'facilities': 'None',
+            'notes': 'Second Bonneville-area candidate; use if primary cluster is occupied or soggy.',
+            'access': 'Same general Bonneville / Wendover approach.',
+        },
+        'tertiary': {
+            'name': 'Northern corridor bailouts (NOT Bonneville)',
+            'lat': 42.14688,
+            'lon': -113.08988,
+            'status': 'tertiary',
+            'kind': 'dispersed',
+            'cost': 'Varies',
+            'facilities': 'None',
+            'notes': (
+                'Only if the group reroutes far north (e.g. I-84 toward Sublett / Idaho). '
+                'NOT substitutes for Bonneville — companion pin ~42.13773, -113.07632.'
+            ),
+            'access': 'Off corridor north of the Bonneville overnight plan.',
+        },
+    }
+
+
+# ---------------------------------------------------------------------------
 # Shared camp specs
 # ---------------------------------------------------------------------------
 

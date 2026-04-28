@@ -6,6 +6,7 @@ evening of May 6 after any catch-up miles. V2 (extra Swell night May 6,
 Moab May 7) is a drop-in alternative the group can pick on the ground.
 
 Day split summary:
+  May 1: Meet Boise -> overnight Bonneville (same as main).
   May 2: Travel + stage at Temple Mtn Townsite (or Goblin Valley dispersed).
   May 3: Day 1 meaty reverse: Temple Mtn -> Dutchman -> Head of Sinbad ->
          WHW + tactical slots -> Behind-the-Reef W to Tomsich camp.
@@ -27,6 +28,7 @@ from trip_core import (  # noqa: E402
     DAY0_STAGE_NAMES,
     SUPPRESS_NAMES,
     build_payload,
+    load_highway_tracks,
     load_route,
     print_payload_summary,
     write_payload,
@@ -36,6 +38,8 @@ from alts.common import (  # noqa: E402
     GROUP_COUNTS,
     REALTIME_LINKS,
     black_dragon_stage,
+    bonneville_may1_camps,
+    may1_meet_synthetic_pois,
     sand_flats_moab_camps,
     temple_mtn_staging,
     tomsich_camps,
@@ -48,20 +52,35 @@ PLAN = _BASE / 'planning'
 
 DAYS = [
     {
-        'id': 'altB_day0_travel',
-        'label': 'May 2 (Fri) - Travel + Stage (Temple Mtn side)',
-        'date_iso': '2026-05-02',
-        'title': 'Boise, ID -> Temple Mountain Townsite (staging)',
+        'id': 'altB_may1_bonneville',
+        'label': 'May 1 (Fri) - Meet + Bonneville overnight',
+        'date_iso': '2026-05-01',
+        'title': 'Boise meet -> Bonneville Salt Flats area',
         'type': 'travel',
-        'descr': 'Boise -> Green River -> S on Hwy 24 -> Temple Mountain Townsite (FCFS) '
+        'descr': (
+            'Same meet + Bonneville overnight as the main plan (Albertsons / Sinclair Federal Way; '
+            'depart by 1:00 PM).'
+        ),
+        'miles': 340,
+        'driving_hours_est': 5.5,
+        'camp_key': 'altB_may1_bonneville',
+        'synthetic_pois': may1_meet_synthetic_pois(),
+    },
+    {
+        'id': 'altB_day0_travel',
+        'label': 'May 2 (Sat) - Travel + Stage (Temple Mtn side)',
+        'date_iso': '2026-05-02',
+        'title': 'Bonneville area -> Temple Mountain Townsite (staging)',
+        'type': 'travel',
+        'descr': 'Bonneville / Wendover -> Green River -> S on Hwy 24 -> Temple Mountain Townsite (FCFS) '
                  'or Goblin Valley dispersed. NOT Black Dragon staging.',
-        'miles': 650,
-        'driving_hours_est': 10.0,
+        'miles': 310,
+        'driving_hours_est': 5.0,
         'camp_key': 'altB_day0_travel',
     },
     {
         'id': 'altB_day1_swell',
-        'label': 'May 3 (Sat) - Day 1: Temple Mtn -> Tomsich (MEATY)',
+        'label': 'May 3 (Sun) - Day 1: Temple Mtn -> Tomsich (MEATY)',
         'date_iso': '2026-05-03',
         'title': 'Day 1 (reverse, meaty): Temple Mtn -> Dutchman -> BTR W -> Tomsich',
         'type': 'overland',
@@ -76,7 +95,7 @@ DAYS = [
     },
     {
         'id': 'altB_day2_swell',
-        'label': 'May 4 (Sun) - Day 2: Tomsich -> Wedge',
+        'label': 'May 4 (Mon) - Day 2: Tomsich -> Wedge',
         'date_iso': '2026-05-04',
         'title': 'Day 2 (reverse): Tomsich -> Hondu / Reds -> Lucky Strike -> '
                  'Eagle Canyon cluster -> Eva Conover -> Wedge',
@@ -92,7 +111,7 @@ DAYS = [
     },
     {
         'id': 'altB_day3_swell',
-        'label': 'May 5 (Mon) - Day 3: Wedge -> Black Dragon camp',
+        'label': 'May 5 (Tue) - Day 3: Wedge -> Black Dragon camp',
         'date_iso': '2026-05-05',
         'title': 'Day 3 (reverse): Wedge -> Buckhorn -> Black Dragon camp',
         'type': 'overland',
@@ -107,7 +126,7 @@ DAYS = [
     },
     {
         'id': 'altB_day4_moab_transit',
-        'label': 'May 6 (Tue) - Split at Black Dragon; stay-overs I-70 E to Moab',
+        'label': 'May 6 (Wed) - Split at Black Dragon; stay-overs I-70 E to Moab',
         'date_iso': '2026-05-06',
         'title': 'Early-leavers pavement; stay-overs I-70 E to Moab / Sand Flats cluster (V1)',
         'type': 'transit',
@@ -121,7 +140,7 @@ DAYS = [
     },
     {
         'id': 'altB_day5_moab',
-        'label': 'May 7 (Wed) - Moab Day 1',
+        'label': 'May 7 (Thu) - Moab Day 1',
         'date_iso': '2026-05-07',
         'title': 'Moab - Day 1 (activities TBD)',
         'type': 'moab',
@@ -130,7 +149,7 @@ DAYS = [
     },
     {
         'id': 'altB_day6_moab',
-        'label': 'May 8 (Thu) - Moab Day 2',
+        'label': 'May 8 (Fri) - Moab Day 2',
         'date_iso': '2026-05-08',
         'title': 'Moab - Day 2 (activities TBD)',
         'type': 'moab',
@@ -139,7 +158,7 @@ DAYS = [
     },
     {
         'id': 'altB_day7_moab',
-        'label': 'May 9 (Fri) - Moab Day 3',
+        'label': 'May 9 (Sat) - Moab Day 3',
         'date_iso': '2026-05-09',
         'title': 'Moab - Day 3 (activities TBD)',
         'type': 'moab',
@@ -148,7 +167,7 @@ DAYS = [
     },
     {
         'id': 'altB_day8_return',
-        'label': 'May 10 (Sat) - Return to Boise',
+        'label': 'May 10 (Sun) - Return to Boise',
         'date_iso': '2026-05-10',
         'title': 'Moab -> Boise',
         'type': 'travel',
@@ -160,6 +179,7 @@ DAYS = [
 
 
 CAMPS = {
+    'altB_may1_bonneville':   bonneville_may1_camps(),
     'altB_day0_travel':       temple_mtn_staging(),
     'altB_day1_swell':        tomsich_camps(),
     'altB_day2_swell':        wedge_overlook_camps(),
@@ -196,18 +216,35 @@ INTRO_HTML = (
 
 def build() -> pathlib.Path:
     route = load_route(PLAN)
+    hw = load_highway_tracks(PLAN)
+    days_spec = []
+    for day in DAYS:
+        d = dict(day)
+        if d['id'] == 'altB_may1_bonneville':
+            d['synthetic_track_points'] = hw.get('may1_boise_bonneville') or []
+        elif d['id'] == 'altB_day0_travel':
+            d['synthetic_track_points'] = hw.get('may2_bonneville_temple_mtn') or []
+        elif d['id'] == 'altB_day4_moab_transit':
+            d['synthetic_track_points'] = hw.get('green_river_to_sand_flats') or []
+        elif d['id'] == 'altB_day8_return':
+            d['synthetic_track_points'] = hw.get('sand_flats_to_boise_federal_way') or []
+        days_spec.append(d)
     payload = build_payload(
-        days_spec=DAYS,
+        days_spec=days_spec,
         camp_data=CAMPS,
         schedule_defaults=SCHEDULE_DEFAULTS,
         route=route,
         trip_meta={
             'title': '2026 SRS Adventure + Moab - Alt B (reverse, V1)',
-            'dates': '2026-05-02 through 2026-05-10',
+            'dates': '2026-05-01 through 2026-05-10',
             'route_gpx_source': 'san-rafael-swell-adv-route-2025.gpx',
             'route_total_miles': round(route['total_mi'], 2),
             'main_track_points': len(route['main_points']),
             'variant': 'B-V1',
+            'highway_tracks_note': (
+                (hw.get('source') or '').strip() or
+                'Highway polylines (when present) follow OpenStreetMap via OSRM; not live Google Maps data.'
+            ),
         },
         group_counts=GROUP_COUNTS,
         fuel_plan=FUEL_PLAN_SUMMARY,

@@ -8,9 +8,15 @@
 
 ---
 
-## Day 0 — Fri May 2
+## May 1 — Fri (meet + Bonneville)
 
-Same as **main** plan: travel to **Black Dragon**-area staging / camp (see primary itinerary).
+Same as **main**: meet **Albertsons / Sinclair** on **Federal Way** (Boise); overnight dispersed near **Bonneville Salt Flats** (see `campsite_plan.md`).
+
+---
+
+## May 2 — Sat (staging: Black Dragon)
+
+Travel from Bonneville corridor to **Black Dragon**-area staging / camp (same as **main** May 2).
 
 ---
 

@@ -11,9 +11,9 @@ Confirmed via chat on the POI triage. `status` values:
 
 | Mi | Name | Status | Time | Notes |
 |---:|---|---|---|---|
-| 0.1 | San Rafael Reef Viewpoint | backup | 15-30 min | Off-route 1.4 km; only if daylight on May 2 arrival |
-| 0.4 | DP - Petroglyph Canyon Panel | backup | 30-45 min | May 2 bonus if arrive with daylight |
-| 0.4 | DP - Spirit Arch | backup | 20-40 min | May 2 bonus if arrive with daylight |
+| 0.1 | San Rafael Reef Viewpoint | backup | 15-30 min | Off-route 1.4 km; only if daylight on **May 2** arrival at Black Dragon |
+| 0.4 | DP - Petroglyph Canyon Panel | backup | 30-45 min | **May 2** bonus if arrive with daylight (staging night at Black Dragon) |
+| 0.4 | DP - Spirit Arch | backup | 20-40 min | **May 2** bonus if arrive with daylight (staging night at Black Dragon) |
 | 1.8 | DP - Black Dragon Petroglyph | primary | 20-40 min | |
 | 2.3 | DP - Black Dragon Canyon | primary | 30-60 min | Drive through with stops |
 | 15.2 | DP - The Sinkhole | primary | 20-30 min | 860 m off |

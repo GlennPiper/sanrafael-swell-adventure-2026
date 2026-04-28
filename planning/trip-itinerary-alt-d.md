@@ -6,9 +6,15 @@
 
 ---
 
-## Day 0 — Fri May 2
+## May 1 — Fri (meet + Bonneville)
 
-Same as **B:** → **Temple Mountain Townsite** or Goblin Valley dispersed.
+Same as **main** May 1 meet + Bonneville overnight.
+
+---
+
+## May 2 — Sat (staging: Temple Mtn side)
+
+Same as **Alt B** Day 0 after Bonneville: → **Temple Mountain Townsite** or Goblin Valley dispersed.
 
 ---
 

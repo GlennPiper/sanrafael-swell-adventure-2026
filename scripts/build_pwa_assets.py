@@ -42,7 +42,7 @@ QR_OUT = ASSETS / 'qr.png'
 APP_NAME = '2026 San Rafael Swell Adventure'
 APP_SHORT = 'SRS Trip'
 APP_DESC = (
-    'Offline trip itinerary, route, camps, and reference for the May 2-10, 2026 '
+    'Offline trip itinerary, route, camps, and reference for the May 1-10, 2026 '
     'San Rafael Swell + Moab overlanding adventure.'
 )
 THEME_COLOR = '#0d1117'
@@ -85,6 +85,8 @@ def _build_version() -> str:
     for name in extra_html_names:
         p = BASE / name
         extra_raw += p.read_bytes() if p.exists() else b''
+    hw_tracks = PLAN / 'highway_tracks.json'
+    extra_raw += hw_tracks.read_bytes() if hw_tracks.exists() else b''
     short = hashlib.sha1(raw + alt_raw + extra_raw).hexdigest()[:10]
     try:
         gen = json.loads(raw.decode('utf-8')).get('generated_at', '')

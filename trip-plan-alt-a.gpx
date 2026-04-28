@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gpx version="1.1" creator="build_deliverables.py" xmlns="http://www.topografix.com/GPX/1/1">
 <metadata><name>2026 SRS Trip Plan - Alt A (forward, V2)</name><desc>Day-split tracks, POIs, and camps for Alt A (forward direction, 4-day Swell lighten, Variant V2).</desc><time>2026-04-16T00:00:00Z</time></metadata>
+<wpt lat="40.772616" lon="-113.981099"><name>[CAMP PRIMARY] May 1 (Fri) - Meet + Bonneville overnight - Bonneville Salt Flats — leading candidate (dispersed, TBD)</name><desc>Typically free on BLM desert pull-offs — verify postings | None — pack out waste; respect wet salt | Leading overnight candidate for the group scout. Confirm legal dispersed rules and salt moisture before driving on flats. | Access: NW of Wendover; reach via I-80 corridor.</desc><sym>Campground</sym></wpt>
+<wpt lat="40.80273" lon="-114.00395"><name>[CAMP BACKUP] May 1 (Fri) - Meet + Bonneville overnight - Bonneville Salt Flats — alternate pin</name><desc>Typically free — verify postings | None | Second Bonneville-area candidate; use if primary cluster is occupied or soggy. | Access: Same general Bonneville / Wendover approach.</desc><sym>Campground</sym></wpt>
+<wpt lat="42.14688" lon="-113.08988"><name>[CAMP LAST-RESORT] May 1 (Fri) - Meet + Bonneville overnight - Northern corridor bailouts (NOT Bonneville)</name><desc>Varies | None | Only if the group reroutes far north (e.g. I-84 toward Sublett / Idaho). NOT substitutes for Bonneville — companion pin ~42.13773, -113.07632. | Access: Off corridor north of the Bonneville overnight plan.</desc><sym>Campground</sym></wpt>
 <wpt lat="38.9275660778" lon="-110.4332184792"><ele>1361.0</ele><name>[BACKUP] DP - Petroglyph Canyon Panel</name><desc>May 2 bonus if arrive with daylight</desc><sym>petroglyph</sym></wpt>
 <wpt lat="38.929849" lon="-110.434566"><ele>1404.0</ele><name>[BACKUP] DP - Spirit Arch</name><desc>May 2 bonus if arrive with daylight</desc><sym>stone</sym></wpt>
-<wpt lat="38.93141" lon="-110.42163"><name>[CAMP PRIMARY] May 2 (Fri) - Travel + Stage (Black Dragon) - Black Dragon Canyon - &quot;Camp site&quot; (GPX-verified)</name><desc>Free (BLM) | None (no toilets, no water) | GPX waypoint &quot;Camp site&quot; 0.80 km from Day-1 track start. Camp under cottonwoods; NO camping in the canyon interior (petroglyph zone). | Access: I-70 mm 147 westbound; gated side road on N side; sandy, high-clearance recommended.</desc><sym>Campground</sym></wpt>
-<wpt lat="38.92676" lon="-110.41852"><name>[CAMP BACKUP] May 2 (Fri) - Travel + Stage (Black Dragon) - Black Dragon Trailhead Flats (BLM dispersed, highway-adjacent)</name><desc>Free (BLM) | None (no toilets, no water; highway noise) | Open BLM flats right off I-70 at the Black Dragon exit, only 221 m from the trail start. 09:30-pavement-friendly for early leavers exiting Day 1. | Access: I-70 Exit 145 (Black Dragon); pull onto the flats just past the cattleguard.</desc><sym>Campground</sym></wpt>
-<wpt lat="38.92111" lon="-110.43187"><name>[CAMP LAST-RESORT] May 2 (Fri) - Travel + Stage (Black Dragon) - San Rafael Reef View Area (BLM pullout on I-70)</name><desc>Free (BLM) | None | Signed BLM view area ~1 mi SW of Black Dragon trailhead. | Access: I-70 EB between Exit 129 and Exit 145; &quot;San Rafael Reef View Area&quot; pullout.</desc><sym>Campground</sym></wpt>
+<wpt lat="38.93141" lon="-110.42163"><name>[CAMP PRIMARY] May 2 (Sat) - Travel + Stage (Black Dragon) - Black Dragon Canyon - &quot;Camp site&quot; (GPX-verified)</name><desc>Free (BLM) | None (no toilets, no water) | GPX waypoint &quot;Camp site&quot; 0.80 km from Day-1 track start. Camp under cottonwoods; NO camping in the canyon interior (petroglyph zone). | Access: I-70 mm 147 westbound; gated side road on N side; sandy, high-clearance recommended.</desc><sym>Campground</sym></wpt>
+<wpt lat="38.92676" lon="-110.41852"><name>[CAMP BACKUP] May 2 (Sat) - Travel + Stage (Black Dragon) - Black Dragon Trailhead Flats (BLM dispersed, highway-adjacent)</name><desc>Free (BLM) | None (no toilets, no water; highway noise) | Open BLM flats right off I-70 at the Black Dragon exit, only 221 m from the trail start. 09:30-pavement-friendly for early leavers exiting Day 1. | Access: I-70 Exit 145 (Black Dragon); pull onto the flats just past the cattleguard.</desc><sym>Campground</sym></wpt>
+<wpt lat="38.92111" lon="-110.43187"><name>[CAMP LAST-RESORT] May 2 (Sat) - Travel + Stage (Black Dragon) - San Rafael Reef View Area (BLM pullout on I-70)</name><desc>Free (BLM) | None | Signed BLM view area ~1 mi SW of Black Dragon trailhead. | Access: I-70 EB between Exit 129 and Exit 145; &quot;San Rafael Reef View Area&quot; pullout.</desc><sym>Campground</sym></wpt>
 <wpt lat="38.943193" lon="-110.425124"><ele>1357.0</ele><name>DP - Black Dragon Petroglyph</name><sym>petroglyph</sym></wpt>
 <wpt lat="38.9459627007" lon="-110.4330221305"><ele>1368.0</ele><name>DP - Black Dragon Canyon</name><sym>cliff</sym></wpt>
 <wpt lat="38.921673" lon="-110.600985"><ele>1983.0</ele><name>DP - The Sinkhole</name><sym>attraction</sym></wpt>
@@ -18,15 +21,15 @@
 <wpt lat="39.1604974527" lon="-110.7292699814"><ele>1693.0</ele><name>DP - Dinosaur Footprint</name><sym>attraction</sym></wpt>
 <wpt lat="39.0985168307" lon="-110.7359099575"><ele>1583.0</ele><name>DP - Little Grand Canyon</name><desc>Combined with Wedge Overlook</desc><sym>cliff</sym></wpt>
 <wpt lat="39.0955288221" lon="-110.7490264424"><ele>1917.0</ele><name>DP - Wedge Overlook</name><desc>End-of-day highlight</desc><sym>binoculars</sym></wpt>
-<wpt lat="39.12445" lon="-110.75133"><name>[CAMP PRIMARY] May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</name><desc>$15/site honor system | None | First-come only. Tight #3-#7 cluster on the west rim. Scout ahead during any Buckhorn stop; claim 3-4 adjacent sites for the group. | Access: Wedge Rd spur off Buckhorn Draw Rd</desc><sym>Campground</sym></wpt>
-<wpt lat="39.12423" lon="-110.74498"><name>[CAMP PRIMARY-CLUSTER] May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #3</name><desc>Designated site in the primary cluster anchored at Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</desc><sym>Campground</sym></wpt>
-<wpt lat="39.12748" lon="-110.74781"><name>[CAMP PRIMARY-CLUSTER] May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #4</name><desc>Designated site in the primary cluster anchored at Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</desc><sym>Campground</sym></wpt>
-<wpt lat="39.12254" lon="-110.75204"><name>[CAMP PRIMARY-CLUSTER] May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #6</name><desc>Designated site in the primary cluster anchored at Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</desc><sym>Campground</sym></wpt>
-<wpt lat="39.12563" lon="-110.75521"><name>[CAMP PRIMARY-CLUSTER] May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #7</name><desc>Designated site in the primary cluster anchored at Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</desc><sym>Campground</sym></wpt>
-<wpt lat="39.10857" lon="-110.70223"><name>[CAMP BACKUP-A] May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Camp #1 (GPX) - east-rim site</name><desc>$15/site honor system | None | East-side rim site. Good sunrise exposure but farther from the iconic overlook. | Access: Wedge Rd east spur</desc><sym>Campground</sym></wpt>
-<wpt lat="39.11221" lon="-110.73341"><name>[CAMP BACKUP-B] May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Camp #2 (GPX) - east-rim site</name><desc>$15/site honor system | None | East-side rim site midway between #1 and the overlook. | Access: Wedge Rd east spur</desc><sym>Campground</sym></wpt>
-<wpt lat="39.11674" lon="-110.75523"><name>[CAMP BACKUP-C] May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #8 (GPX) - southern outlier</name><desc>$15/site honor system | None | Extends the cluster if we need one extra site, or stand-alone backup. | Access: Wedge Rd spur, ~900 m before the main overlook turn-off</desc><sym>Campground</sym></wpt>
-<wpt lat="39.16753" lon="-110.73766"><name>[CAMP LAST-RESORT] May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge - Buckhorn Draw Campsite 1 (GPX) - developed loop</name><desc>$15 ind / $50 group | Vault toilets, fire rings, tables | 32 sites + 7 group sites. First-come. ~8 km S of Wedge. | Access: Buckhorn Draw Rd</desc><sym>Campground</sym></wpt>
+<wpt lat="39.12445" lon="-110.75133"><name>[CAMP PRIMARY] May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</name><desc>$15/site honor system | None | First-come only. Tight #3-#7 cluster on the west rim. Scout ahead during any Buckhorn stop; claim 3-4 adjacent sites for the group. | Access: Wedge Rd spur off Buckhorn Draw Rd</desc><sym>Campground</sym></wpt>
+<wpt lat="39.12423" lon="-110.74498"><name>[CAMP PRIMARY-CLUSTER] May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #3</name><desc>Designated site in the primary cluster anchored at Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</desc><sym>Campground</sym></wpt>
+<wpt lat="39.12748" lon="-110.74781"><name>[CAMP PRIMARY-CLUSTER] May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #4</name><desc>Designated site in the primary cluster anchored at Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</desc><sym>Campground</sym></wpt>
+<wpt lat="39.12254" lon="-110.75204"><name>[CAMP PRIMARY-CLUSTER] May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #6</name><desc>Designated site in the primary cluster anchored at Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</desc><sym>Campground</sym></wpt>
+<wpt lat="39.12563" lon="-110.75521"><name>[CAMP PRIMARY-CLUSTER] May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #7</name><desc>Designated site in the primary cluster anchored at Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)</desc><sym>Campground</sym></wpt>
+<wpt lat="39.10857" lon="-110.70223"><name>[CAMP BACKUP-A] May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Camp #1 (GPX) - east-rim site</name><desc>$15/site honor system | None | East-side rim site. Good sunrise exposure but farther from the iconic overlook. | Access: Wedge Rd east spur</desc><sym>Campground</sym></wpt>
+<wpt lat="39.11221" lon="-110.73341"><name>[CAMP BACKUP-B] May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Camp #2 (GPX) - east-rim site</name><desc>$15/site honor system | None | East-side rim site midway between #1 and the overlook. | Access: Wedge Rd east spur</desc><sym>Campground</sym></wpt>
+<wpt lat="39.11674" lon="-110.75523"><name>[CAMP BACKUP-C] May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge - Wedge Overlook Campsite #8 (GPX) - southern outlier</name><desc>$15/site honor system | None | Extends the cluster if we need one extra site, or stand-alone backup. | Access: Wedge Rd spur, ~900 m before the main overlook turn-off</desc><sym>Campground</sym></wpt>
+<wpt lat="39.16753" lon="-110.73766"><name>[CAMP LAST-RESORT] May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge - Buckhorn Draw Campsite 1 (GPX) - developed loop</name><desc>$15 ind / $50 group | Vault toilets, fire rings, tables | 32 sites + 7 group sites. First-come. ~8 km S of Wedge. | Access: Buckhorn Draw Rd</desc><sym>Campground</sym></wpt>
 <wpt lat="39.1155539228" lon="-110.854119549"><ele>1603.0</ele><name>River crossing</name><desc>Fuller Bottom ford of the San Rafael River (Upper San Rafael River WMA, BLM Fuller Bottom road = NF-3516 / BLM 6767, becomes Little Wedge Road / BLM 629 south of the crossing). Added per group request -- water crossings desirable for overlanders.</desc><sym>water</sym></wpt>
 <wpt lat="39.0139987505" lon="-110.8998799324"><ele>1719.0</ele><name>DP - The Drips</name><desc>Natural spring, on-route</desc><sym>natural-spring</sym></wpt>
 <wpt lat="38.9919917011" lon="-110.8912784504"><ele>1752.0</ele><name>[BACKUP] Coal Wash</name><sym>attraction</sym></wpt>
@@ -38,9 +41,9 @@
 <wpt lat="38.8348605461" lon="-110.8108091354"><ele>2206.0</ele><name>DP - The Icebox</name><desc>Short walk into cool grotto</desc><sym>cave</sym></wpt>
 <wpt lat="38.835759" lon="-110.807499"><ele>2195.0</ele><name>DP - Swasey's Cabin</name><desc>Historic cabin</desc><sym>building-24</sym></wpt>
 <wpt lat="38.853001" lon="-110.803194"><ele>2189.0</ele><name>DP - Loan Warrior Petroglyph</name><desc>Short hike; panel sits ~1.5 mi off the main trail (spur drive budgeted in stop time)</desc><sym>petroglyph</sym></wpt>
-<wpt lat="38.76868" lon="-110.83217"><name>[CAMP PRIMARY] May 4 (Sun) - Day 2: Wedge -&gt; Family Butte (SHORT) - Family Butte Dispersed Camping (GPX)</name><desc>Free (BLM) | None (no toilets, no water) | GPX-marked open dispersed area, room for 6-8 vehicles. First-come; group may need to spill to nearby Reds Canyon Rd pull-offs if the butte fills up. Scout on arrival. | Access: Family Butte Rd spur, mid-route (NE of Tomsich)</desc><sym>Campground</sym></wpt>
-<wpt lat="38.755" lon="-110.875"><name>[CAMP BACKUP] May 4 (Sun) - Day 2: Wedge -&gt; Family Butte (SHORT) - Reds Canyon Rd dispersed pullouts (nearby overflow)</name><desc>Free (BLM) | None | Scattered BLM pullouts along Reds Canyon Rd W/NW of Family Butte. Use if the Family Butte dispersed area is full; fan out the group. | Access: Reds Canyon Rd</desc><sym>Campground</sym></wpt>
-<wpt lat="38.68282" lon="-110.989"><name>[CAMP LAST-RESORT] May 4 (Sun) - Day 2: Wedge -&gt; Family Butte (SHORT) - Tomsich Butte Camp (push on to Day-3 start)</name><desc>Free (BLM) | None | Last-resort: push through to the main-trip Day-2 end camp. Makes Day 3 short and Day 2 long. | Access: Tomsich Butte Rd at the mine area</desc><sym>Campground</sym></wpt>
+<wpt lat="38.76868" lon="-110.83217"><name>[CAMP PRIMARY] May 4 (Mon) - Day 2: Wedge -&gt; Family Butte (SHORT) - Family Butte Dispersed Camping (GPX)</name><desc>Free (BLM) | None (no toilets, no water) | GPX-marked open dispersed area, room for 6-8 vehicles. First-come; group may need to spill to nearby Reds Canyon Rd pull-offs if the butte fills up. Scout on arrival. | Access: Family Butte Rd spur, mid-route (NE of Tomsich)</desc><sym>Campground</sym></wpt>
+<wpt lat="38.755" lon="-110.875"><name>[CAMP BACKUP] May 4 (Mon) - Day 2: Wedge -&gt; Family Butte (SHORT) - Reds Canyon Rd dispersed pullouts (nearby overflow)</name><desc>Free (BLM) | None | Scattered BLM pullouts along Reds Canyon Rd W/NW of Family Butte. Use if the Family Butte dispersed area is full; fan out the group. | Access: Reds Canyon Rd</desc><sym>Campground</sym></wpt>
+<wpt lat="38.68282" lon="-110.989"><name>[CAMP LAST-RESORT] May 4 (Mon) - Day 2: Wedge -&gt; Family Butte (SHORT) - Tomsich Butte Camp (push on to Day-3 start)</name><desc>Free (BLM) | None | Last-resort: push through to the main-trip Day-2 end camp. Makes Day 3 short and Day 2 long. | Access: Tomsich Butte Rd at the mine area</desc><sym>Campground</sym></wpt>
 <wpt lat="38.7544645783" lon="-110.9243170904"><ele>1787.0</ele><name>DP - Reds Canyon</name><desc>Scenic drive-through</desc><sym>cliff</sym></wpt>
 <wpt lat="38.755407" lon="-110.948559"><ele>1767.0</ele><name>Lucky Strike Mine</name><desc>Mine of interest -- added to the route as a primary stop.</desc><sym>mine</sym></wpt>
 <wpt lat="38.683909739" lon="-110.9917396426"><ele>1579.0</ele><name>DP - Tomsich Butte Uranium Mine</name><desc>Mine ruins + equipment</desc><sym>mine</sym></wpt>
@@ -58,9 +61,9 @@
 <wpt lat="38.653784" lon="-110.676269"><ele>1722.0</ele><name>[HIKE] DP - Wild Horse Window Arch</name><desc>Default Day 3 hike; route author #1 geology; 2 mi RT; BLM not GSVP gate; set up camp before this hike and carpool to the trailhead; see slot-canyon-guide.html + AllTrails WHW</desc><sym>stone</sym></wpt>
 <wpt lat="38.6503198742" lon="-110.6760708959"><ele>1599.0</ele><name>[BACKUP] Wild Horse Canyon</name><desc>AllTrails Wild Horse Canyon trail; lower priority — slot-canyon-guide.html</desc><sym>cliff</sym></wpt>
 <wpt lat="38.661013" lon="-110.669472"><ele>1633.0</ele><name>DP - Temple Wash Petroglpyphs</name><desc>Roadside panel (GPX name has a typo, kept exact for lookup)</desc><sym>petroglyph</sym></wpt>
-<wpt lat="38.65606" lon="-110.66015"><name>[CAMP PRIMARY] May 5 (Mon) - Day 3: Family Butte -&gt; Temple Mtn (BTR, no slots) - Temple Mountain Townsite - Site 1 (Group Site) (GPX)</name><desc>$50/night | Vault toilets, fire rings, tables, large shade structure | Group-capacity site; first-come only. Tuesday night very likely open. | Access: Temple Mtn Rd, Townsite Campground complex</desc><sym>Campground</sym></wpt>
-<wpt lat="38.6577" lon="-110.66224"><name>[CAMP BACKUP] May 5 (Mon) - Day 3: Family Butte -&gt; Temple Mtn (BTR, no slots) - Temple Mount East Campground (GPX)</name><desc>$15/site | Vault toilets | 10-site loop, first-come. Split group across several sites if group site is taken. | Access: Temple Mtn Rd, E of the Townsite</desc><sym>Campground</sym></wpt>
-<wpt lat="38.66075" lon="-110.64263"><name>[CAMP LAST-RESORT] May 5 (Mon) - Day 3: Family Butte -&gt; Temple Mtn (BTR, no slots) - Dispersed &quot;Camp&quot; near track end (GPX)</name><desc>Free (BLM) | None | Primitive dispersed; closest GPX-marked camp to Behind-the-Reef exit. | Access: On-route near Temple Mtn area</desc><sym>Campground</sym></wpt>
+<wpt lat="38.65606" lon="-110.66015"><name>[CAMP PRIMARY] May 5 (Tue) - Day 3: Family Butte -&gt; Temple Mtn (BTR, no slots) - Temple Mountain Townsite - Site 1 (Group Site) (GPX)</name><desc>$50/night | Vault toilets, fire rings, tables, large shade structure | Group-capacity site; first-come only. Tuesday night very likely open. | Access: Temple Mtn Rd, Townsite Campground complex</desc><sym>Campground</sym></wpt>
+<wpt lat="38.6577" lon="-110.66224"><name>[CAMP BACKUP] May 5 (Tue) - Day 3: Family Butte -&gt; Temple Mtn (BTR, no slots) - Temple Mount East Campground (GPX)</name><desc>$15/site | Vault toilets | 10-site loop, first-come. Split group across several sites if group site is taken. | Access: Temple Mtn Rd, E of the Townsite</desc><sym>Campground</sym></wpt>
+<wpt lat="38.66075" lon="-110.64263"><name>[CAMP LAST-RESORT] May 5 (Tue) - Day 3: Family Butte -&gt; Temple Mtn (BTR, no slots) - Dispersed &quot;Camp&quot; near track end (GPX)</name><desc>Free (BLM) | None | Primitive dispersed; closest GPX-marked camp to Behind-the-Reef exit. | Access: On-route near Temple Mtn area</desc><sym>Campground</sym></wpt>
 <wpt lat="38.6187227373" lon="-110.7610813765"><ele>1538.0</ele><name>[HIKE] DP - Chute Canyon</name><desc>Tactical slot/wash; easier; wide ~first mi; ~0.8 mi to first narrowing (GCT); partial OAB typical; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness</desc><sym>cliff</sym></wpt>
 <wpt lat="38.629651" lon="-110.763442"><ele>1567.0</ele><name>[BACKUP] Chute Canyon Trailhead</name><desc>Chute Canyon hike parking — slot-canyon-guide.html</desc><sym>known-route</sym></wpt>
 <wpt lat="38.6323158128" lon="-110.7394259487"><ele>1632.0</ele><name>[HIKE] DP - Crack Canyon</name><desc>Tactical slot; ~5 mi RT typical (Utah.com); ~10 ft drop ~1 mi in; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness</desc><sym>cliff</sym></wpt>
@@ -72,12 +75,588 @@
 <wpt lat="38.8681032783" lon="-110.7791170217"><ele>2115.0</ele><name>Tunnel / Freeway Underpass</name><desc>HEIGHT CHECK for tall rigs; Freeway Access bypass if too tall</desc><sym>attraction</sym></wpt>
 <wpt lat="38.8807455" lon="-110.7710685212"><ele>2169.0</ele><name>DP - Head of Sinbad Petroglyph</name><sym>petroglyph</sym></wpt>
 <wpt lat="38.872668" lon="-110.787818"><ele>2135.0</ele><name>DP - Dutchman Arch</name><sym>stone</sym></wpt>
-<wpt lat="38.5734" lon="-110.703"><name>[CAMP BACKUP] May 6 (Tue) - Day 4: Shared AM + stay-over slot hikes + Sinbad - Goblin Valley SP (reservable)</name><desc>$35-40/night | Toilets, water, showers | Good overnight if Temple Mtn is full; reservation recommended. | Access: Hwy 24 -&gt; Goblin Valley Rd W</desc><sym>Campground</sym></wpt>
-<wpt lat="38.55" lon="-110.71"><name>[CAMP LAST-RESORT] May 6 (Tue) - Day 4: Shared AM + stay-over slot hikes + Sinbad - Hwy 24 dispersed pullouts (BLM)</name><desc>Free (BLM) | None | Scattered BLM pullouts off Hwy 24 between Temple Mtn Rd and Hanksville. Use as last-resort; approximate coords -- scout daylight. | Access: Hwy 24</desc><sym>Campground</sym></wpt>
-<wpt lat="38.57563" lon="-109.52401"><name>[CAMP PRIMARY] May 7 (Wed) - Transit to Moab + easy afternoon - Sand Flats Recreation Area — adjacent FCFS sites (cluster)</name><desc>Day-use pass + per-night camping fee (pay fee station) | Picnic tables, fire rings, pit toilets; no drinking water onsite | No group reservation: plan to snag several adjoining sites on the same loop (or nearby loops) so the crew stays visual distance. Typical rule is up to two vehicles parked at a numbered site **when everything fits**—put tow rigs/trailers on their own pads when tandem parking is tight. Spring Thu–Sat nights fill quickly; aim to arrive midday when possible. | Access: From Moab: 400 East -&gt; Mill Creek Dr -&gt; Sand Flats Rd to BLM/co-county booth</desc><sym>Campground</sym></wpt>
-<wpt lat="38.471" lon="-109.745"><name>[CAMP BACKUP] May 7 (Wed) - Transit to Moab + easy afternoon - Dead Horse Point SP - Wingate (electric site)</name><desc>$60/night | Electric, vault toilets, no showers | 150+ sites available May 6. One site fits up to 8. | Access: Hwy 313 W off Hwy 191</desc><sym>Campground</sym></wpt>
-<wpt lat="38.65" lon="-109.77"><name>[CAMP LAST-RESORT] May 7 (Wed) - Transit to Moab + easy afternoon - BLM designated dispersed pods (Mill Canyon / Cotter / Dubinky)</name><desc>Free where signed — human-waste containment required | No services; numbered posts — see BLM map | ~11–22 mi from Moab depending on spur. Camp only signed sites. | Access: Hwy 191 / SR 313 corridors north/northwest</desc><sym>Campground</sym></wpt>
-<trk><name>May 3 (Sat) - Day 1: Black Dragon -&gt; Wedge</name><trkseg>
+<wpt lat="38.5734" lon="-110.703"><name>[CAMP BACKUP] May 6 (Wed) - Day 4: Shared AM + stay-over slot hikes + Sinbad - Goblin Valley SP (reservable)</name><desc>$35-40/night | Toilets, water, showers | Good overnight if Temple Mtn is full; reservation recommended. | Access: Hwy 24 -&gt; Goblin Valley Rd W</desc><sym>Campground</sym></wpt>
+<wpt lat="38.55" lon="-110.71"><name>[CAMP LAST-RESORT] May 6 (Wed) - Day 4: Shared AM + stay-over slot hikes + Sinbad - Hwy 24 dispersed pullouts (BLM)</name><desc>Free (BLM) | None | Scattered BLM pullouts off Hwy 24 between Temple Mtn Rd and Hanksville. Use as last-resort; approximate coords -- scout daylight. | Access: Hwy 24</desc><sym>Campground</sym></wpt>
+<wpt lat="38.57563" lon="-109.52401"><name>[CAMP PRIMARY] May 7 (Thu) - Transit to Moab + easy afternoon - Sand Flats Recreation Area — adjacent FCFS sites (cluster)</name><desc>Day-use pass + per-night camping fee (pay fee station) | Picnic tables, fire rings, pit toilets; no drinking water onsite | No group reservation: plan to snag several adjoining sites on the same loop (or nearby loops) so the crew stays visual distance. Typical rule is up to two vehicles parked at a numbered site **when everything fits**—put tow rigs/trailers on their own pads when tandem parking is tight. Spring Thu–Sat nights fill quickly; aim to arrive midday when possible. | Access: From Moab: 400 East -&gt; Mill Creek Dr -&gt; Sand Flats Rd to BLM/co-county booth</desc><sym>Campground</sym></wpt>
+<wpt lat="38.471" lon="-109.745"><name>[CAMP BACKUP] May 7 (Thu) - Transit to Moab + easy afternoon - Dead Horse Point SP - Wingate (electric site)</name><desc>$60/night | Electric, vault toilets, no showers | 150+ sites available May 6. One site fits up to 8. | Access: Hwy 313 W off Hwy 191</desc><sym>Campground</sym></wpt>
+<wpt lat="38.65" lon="-109.77"><name>[CAMP LAST-RESORT] May 7 (Thu) - Transit to Moab + easy afternoon - BLM designated dispersed pods (Mill Canyon / Cotter / Dubinky)</name><desc>Free where signed — human-waste containment required | No services; numbered posts — see BLM map | ~11–22 mi from Moab depending on spur. Camp only signed sites. | Access: Hwy 191 / SR 313 corridors north/northwest</desc><sym>Campground</sym></wpt>
+<trk><name>May 1 (Fri) - Meet + Bonneville overnight</name><trkseg>
+<trkpt lat="43.618964" lon="-116.283462"></trkpt>
+<trkpt lat="43.6179" lon="-116.284194"></trkpt>
+<trkpt lat="43.614307" lon="-116.284173"></trkpt>
+<trkpt lat="43.61097" lon="-116.284171"></trkpt>
+<trkpt lat="43.609529" lon="-116.284838"></trkpt>
+<trkpt lat="43.608274" lon="-116.284044"></trkpt>
+<trkpt lat="43.605467" lon="-116.281443"></trkpt>
+<trkpt lat="43.600268" lon="-116.285559"></trkpt>
+<trkpt lat="43.596529" lon="-116.28919"></trkpt>
+<trkpt lat="43.594885" lon="-116.285272"></trkpt>
+<trkpt lat="43.588195" lon="-116.270359"></trkpt>
+<trkpt lat="43.57901" lon="-116.251406"></trkpt>
+<trkpt lat="43.572754" lon="-116.238386"></trkpt>
+<trkpt lat="43.571958" lon="-116.234655"></trkpt>
+<trkpt lat="43.571758" lon="-116.218939"></trkpt>
+<trkpt lat="43.568329" lon="-116.204207"></trkpt>
+<trkpt lat="43.563929" lon="-116.191536"></trkpt>
+<trkpt lat="43.547722" lon="-116.168332"></trkpt>
+<trkpt lat="43.541139" lon="-116.160353"></trkpt>
+<trkpt lat="43.534988" lon="-116.156069"></trkpt>
+<trkpt lat="43.511599" lon="-116.145528"></trkpt>
+<trkpt lat="43.479324" lon="-116.108946"></trkpt>
+<trkpt lat="43.462852" lon="-116.092055"></trkpt>
+<trkpt lat="43.433158" lon="-116.060319"></trkpt>
+<trkpt lat="43.406809" lon="-116.020471"></trkpt>
+<trkpt lat="43.353568" lon="-115.962985"></trkpt>
+<trkpt lat="43.28896" lon="-115.893469"></trkpt>
+<trkpt lat="43.222496" lon="-115.822073"></trkpt>
+<trkpt lat="43.178802" lon="-115.768258"></trkpt>
+<trkpt lat="43.174157" lon="-115.75069"></trkpt>
+<trkpt lat="43.169715" lon="-115.72745"></trkpt>
+<trkpt lat="43.163035" lon="-115.704591"></trkpt>
+<trkpt lat="43.15705" lon="-115.691131"></trkpt>
+<trkpt lat="43.149565" lon="-115.676962"></trkpt>
+<trkpt lat="43.141229" lon="-115.665789"></trkpt>
+<trkpt lat="43.12637" lon="-115.652663"></trkpt>
+<trkpt lat="43.111261" lon="-115.638972"></trkpt>
+<trkpt lat="43.096938" lon="-115.621527"></trkpt>
+<trkpt lat="43.091104" lon="-115.617062"></trkpt>
+<trkpt lat="43.081124" lon="-115.609282"></trkpt>
+<trkpt lat="43.068053" lon="-115.598189"></trkpt>
+<trkpt lat="43.056076" lon="-115.586969"></trkpt>
+<trkpt lat="43.04008" lon="-115.572056"></trkpt>
+<trkpt lat="43.025248" lon="-115.559986"></trkpt>
+<trkpt lat="43.008109" lon="-115.548055"></trkpt>
+<trkpt lat="43.001634" lon="-115.538407"></trkpt>
+<trkpt lat="42.99019" lon="-115.525283"></trkpt>
+<trkpt lat="42.976786" lon="-115.507423"></trkpt>
+<trkpt lat="42.96283" lon="-115.489744"></trkpt>
+<trkpt lat="42.958262" lon="-115.479832"></trkpt>
+<trkpt lat="42.958643" lon="-115.460212"></trkpt>
+<trkpt lat="42.957609" lon="-115.450493"></trkpt>
+<trkpt lat="42.954198" lon="-115.441822"></trkpt>
+<trkpt lat="42.946939" lon="-115.427393"></trkpt>
+<trkpt lat="42.945508" lon="-115.409392"></trkpt>
+<trkpt lat="42.948516" lon="-115.389554"></trkpt>
+<trkpt lat="42.953541" lon="-115.378305"></trkpt>
+<trkpt lat="42.956948" lon="-115.367041"></trkpt>
+<trkpt lat="42.957149" lon="-115.356401"></trkpt>
+<trkpt lat="42.958551" lon="-115.345798"></trkpt>
+<trkpt lat="42.964395" lon="-115.3289"></trkpt>
+<trkpt lat="42.962066" lon="-115.314003"></trkpt>
+<trkpt lat="42.959901" lon="-115.299521"></trkpt>
+<trkpt lat="42.959818" lon="-115.289652"></trkpt>
+<trkpt lat="42.960668" lon="-115.275705"></trkpt>
+<trkpt lat="42.961563" lon="-115.262508"></trkpt>
+<trkpt lat="42.964609" lon="-115.254499"></trkpt>
+<trkpt lat="42.968143" lon="-115.242813"></trkpt>
+<trkpt lat="42.97196" lon="-115.229041"></trkpt>
+<trkpt lat="42.973763" lon="-115.217192"></trkpt>
+<trkpt lat="42.973505" lon="-115.204723"></trkpt>
+<trkpt lat="42.970709" lon="-115.195891"></trkpt>
+<trkpt lat="42.963982" lon="-115.187428"></trkpt>
+<trkpt lat="42.9576" lon="-115.17992"></trkpt>
+<trkpt lat="42.955601" lon="-115.173244"></trkpt>
+<trkpt lat="42.953171" lon="-115.142239"></trkpt>
+<trkpt lat="42.951002" lon="-115.119502"></trkpt>
+<trkpt lat="42.943888" lon="-115.09231"></trkpt>
+<trkpt lat="42.938859" lon="-115.073195"></trkpt>
+<trkpt lat="42.937803" lon="-115.058231"></trkpt>
+<trkpt lat="42.937897" lon="-115.017003"></trkpt>
+<trkpt lat="42.937982" lon="-114.97761"></trkpt>
+<trkpt lat="42.937031" lon="-114.954341"></trkpt>
+<trkpt lat="42.929684" lon="-114.943134"></trkpt>
+<trkpt lat="42.921258" lon="-114.930996"></trkpt>
+<trkpt lat="42.913191" lon="-114.91834"></trkpt>
+<trkpt lat="42.896041" lon="-114.895762"></trkpt>
+<trkpt lat="42.880912" lon="-114.875888"></trkpt>
+<trkpt lat="42.872794" lon="-114.864422"></trkpt>
+<trkpt lat="42.869081" lon="-114.855497"></trkpt>
+<trkpt lat="42.865151" lon="-114.850385"></trkpt>
+<trkpt lat="42.855891" lon="-114.843416"></trkpt>
+<trkpt lat="42.851735" lon="-114.832914"></trkpt>
+<trkpt lat="42.838992" lon="-114.819389"></trkpt>
+<trkpt lat="42.83094" lon="-114.807664"></trkpt>
+<trkpt lat="42.817656" lon="-114.785035"></trkpt>
+<trkpt lat="42.805803" lon="-114.767718"></trkpt>
+<trkpt lat="42.788238" lon="-114.742126"></trkpt>
+<trkpt lat="42.77705" lon="-114.727122"></trkpt>
+<trkpt lat="42.771448" lon="-114.71884"></trkpt>
+<trkpt lat="42.766846" lon="-114.708161"></trkpt>
+<trkpt lat="42.762146" lon="-114.684233"></trkpt>
+<trkpt lat="42.750281" lon="-114.645409"></trkpt>
+<trkpt lat="42.740434" lon="-114.611204"></trkpt>
+<trkpt lat="42.734296" lon="-114.580102"></trkpt>
+<trkpt lat="42.730351" lon="-114.558555"></trkpt>
+<trkpt lat="42.726417" lon="-114.549812"></trkpt>
+<trkpt lat="42.718816" lon="-114.540511"></trkpt>
+<trkpt lat="42.709556" lon="-114.533612"></trkpt>
+<trkpt lat="42.691969" lon="-114.520873"></trkpt>
+<trkpt lat="42.684296" lon="-114.515195"></trkpt>
+<trkpt lat="42.67976" lon="-114.510616"></trkpt>
+<trkpt lat="42.67302" lon="-114.501965"></trkpt>
+<trkpt lat="42.666409" lon="-114.493488"></trkpt>
+<trkpt lat="42.657937" lon="-114.482561"></trkpt>
+<trkpt lat="42.652494" lon="-114.474428"></trkpt>
+<trkpt lat="42.646532" lon="-114.458893"></trkpt>
+<trkpt lat="42.637527" lon="-114.448843"></trkpt>
+<trkpt lat="42.617849" lon="-114.450339"></trkpt>
+<trkpt lat="42.604632" lon="-114.452575"></trkpt>
+<trkpt lat="42.596644" lon="-114.455145"></trkpt>
+<trkpt lat="42.594103" lon="-114.459098"></trkpt>
+<trkpt lat="42.592082" lon="-114.461096"></trkpt>
+<trkpt lat="42.59202" lon="-114.468332"></trkpt>
+<trkpt lat="42.59177" lon="-114.479515"></trkpt>
+<trkpt lat="42.591811" lon="-114.502655"></trkpt>
+<trkpt lat="42.593528" lon="-114.527123"></trkpt>
+<trkpt lat="42.593709" lon="-114.568899"></trkpt>
+<trkpt lat="42.571085" lon="-114.574462"></trkpt>
+<trkpt lat="42.558071" lon="-114.574755"></trkpt>
+<trkpt lat="42.54349" lon="-114.574717"></trkpt>
+<trkpt lat="42.534814" lon="-114.574735"></trkpt>
+<trkpt lat="42.516689" lon="-114.574779"></trkpt>
+<trkpt lat="42.50558" lon="-114.574769"></trkpt>
+<trkpt lat="42.476706" lon="-114.574672"></trkpt>
+<trkpt lat="42.461266" lon="-114.574712"></trkpt>
+<trkpt lat="42.437319" lon="-114.574752"></trkpt>
+<trkpt lat="42.419885" lon="-114.574733"></trkpt>
+<trkpt lat="42.400099" lon="-114.574788"></trkpt>
+<trkpt lat="42.383407" lon="-114.573713"></trkpt>
+<trkpt lat="42.372127" lon="-114.574853"></trkpt>
+<trkpt lat="42.36058" lon="-114.574817"></trkpt>
+<trkpt lat="42.353212" lon="-114.574799"></trkpt>
+<trkpt lat="42.340368" lon="-114.574814"></trkpt>
+<trkpt lat="42.322869" lon="-114.574775"></trkpt>
+<trkpt lat="42.288112" lon="-114.574717"></trkpt>
+<trkpt lat="42.252503" lon="-114.574646"></trkpt>
+<trkpt lat="42.24026" lon="-114.577523"></trkpt>
+<trkpt lat="42.226493" lon="-114.586289"></trkpt>
+<trkpt lat="42.211435" lon="-114.597286"></trkpt>
+<trkpt lat="42.195722" lon="-114.613878"></trkpt>
+<trkpt lat="42.184775" lon="-114.625486"></trkpt>
+<trkpt lat="42.179851" lon="-114.635378"></trkpt>
+<trkpt lat="42.174544" lon="-114.656956"></trkpt>
+<trkpt lat="42.165801" lon="-114.666773"></trkpt>
+<trkpt lat="42.144204" lon="-114.682471"></trkpt>
+<trkpt lat="42.129694" lon="-114.685268"></trkpt>
+<trkpt lat="42.107039" lon="-114.688208"></trkpt>
+<trkpt lat="42.095887" lon="-114.682854"></trkpt>
+<trkpt lat="42.075924" lon="-114.67732"></trkpt>
+<trkpt lat="42.06157" lon="-114.675147"></trkpt>
+<trkpt lat="42.031369" lon="-114.673794"></trkpt>
+<trkpt lat="42.016052" lon="-114.673409"></trkpt>
+<trkpt lat="42.005193" lon="-114.671262"></trkpt>
+<trkpt lat="41.996406" lon="-114.669306"></trkpt>
+<trkpt lat="41.992774" lon="-114.669619"></trkpt>
+<trkpt lat="41.98776" lon="-114.671166"></trkpt>
+<trkpt lat="41.983368" lon="-114.672734"></trkpt>
+<trkpt lat="41.979757" lon="-114.673832"></trkpt>
+<trkpt lat="41.976708" lon="-114.674269"></trkpt>
+<trkpt lat="41.966727" lon="-114.675258"></trkpt>
+<trkpt lat="41.955996" lon="-114.67697"></trkpt>
+<trkpt lat="41.949981" lon="-114.681935"></trkpt>
+<trkpt lat="41.943622" lon="-114.687028"></trkpt>
+<trkpt lat="41.930728" lon="-114.693745"></trkpt>
+<trkpt lat="41.917196" lon="-114.698526"></trkpt>
+<trkpt lat="41.906293" lon="-114.702297"></trkpt>
+<trkpt lat="41.886942" lon="-114.708941"></trkpt>
+<trkpt lat="41.870439" lon="-114.711221"></trkpt>
+<trkpt lat="41.8562" lon="-114.713025"></trkpt>
+<trkpt lat="41.846787" lon="-114.715432"></trkpt>
+<trkpt lat="41.831868" lon="-114.722886"></trkpt>
+<trkpt lat="41.809579" lon="-114.733939"></trkpt>
+<trkpt lat="41.794938" lon="-114.739417"></trkpt>
+<trkpt lat="41.780571" lon="-114.747685"></trkpt>
+<trkpt lat="41.771156" lon="-114.752475"></trkpt>
+<trkpt lat="41.761241" lon="-114.757266"></trkpt>
+<trkpt lat="41.751905" lon="-114.764039"></trkpt>
+<trkpt lat="41.743319" lon="-114.773654"></trkpt>
+<trkpt lat="41.740002" lon="-114.780304"></trkpt>
+<trkpt lat="41.735106" lon="-114.78885"></trkpt>
+<trkpt lat="41.723385" lon="-114.7999"></trkpt>
+<trkpt lat="41.706039" lon="-114.816217"></trkpt>
+<trkpt lat="41.697472" lon="-114.823699"></trkpt>
+<trkpt lat="41.686401" lon="-114.827553"></trkpt>
+<trkpt lat="41.674394" lon="-114.829122"></trkpt>
+<trkpt lat="41.664866" lon="-114.827258"></trkpt>
+<trkpt lat="41.645935" lon="-114.818512"></trkpt>
+<trkpt lat="41.624567" lon="-114.808684"></trkpt>
+<trkpt lat="41.60229" lon="-114.79856"></trkpt>
+<trkpt lat="41.583247" lon="-114.794055"></trkpt>
+<trkpt lat="41.551985" lon="-114.785819"></trkpt>
+<trkpt lat="41.537261" lon="-114.781267"></trkpt>
+<trkpt lat="41.5217" lon="-114.770713"></trkpt>
+<trkpt lat="41.501028" lon="-114.765416"></trkpt>
+<trkpt lat="41.478412" lon="-114.761256"></trkpt>
+<trkpt lat="41.45422" lon="-114.756788"></trkpt>
+<trkpt lat="41.435609" lon="-114.753415"></trkpt>
+<trkpt lat="41.41949" lon="-114.750362"></trkpt>
+<trkpt lat="41.41241" lon="-114.749755"></trkpt>
+<trkpt lat="41.386537" lon="-114.771667"></trkpt>
+<trkpt lat="41.376624" lon="-114.781953"></trkpt>
+<trkpt lat="41.369705" lon="-114.795134"></trkpt>
+<trkpt lat="41.36111" lon="-114.800432"></trkpt>
+<trkpt lat="41.348694" lon="-114.805475"></trkpt>
+<trkpt lat="41.340902" lon="-114.810848"></trkpt>
+<trkpt lat="41.329386" lon="-114.819117"></trkpt>
+<trkpt lat="41.321871" lon="-114.820912"></trkpt>
+<trkpt lat="41.297759" lon="-114.823839"></trkpt>
+<trkpt lat="41.281089" lon="-114.82584"></trkpt>
+<trkpt lat="41.258389" lon="-114.82854"></trkpt>
+<trkpt lat="41.24038" lon="-114.834726"></trkpt>
+<trkpt lat="41.215646" lon="-114.844208"></trkpt>
+<trkpt lat="41.209543" lon="-114.848819"></trkpt>
+<trkpt lat="41.198205" lon="-114.862264"></trkpt>
+<trkpt lat="41.186455" lon="-114.873723"></trkpt>
+<trkpt lat="41.174216" lon="-114.879955"></trkpt>
+<trkpt lat="41.143864" lon="-114.909995"></trkpt>
+<trkpt lat="41.122188" lon="-114.931755"></trkpt>
+<trkpt lat="41.112352" lon="-114.943116"></trkpt>
+<trkpt lat="41.104931" lon="-114.952945"></trkpt>
+<trkpt lat="41.101078" lon="-114.957204"></trkpt>
+<trkpt lat="41.098015" lon="-114.950815"></trkpt>
+<trkpt lat="41.101426" lon="-114.911317"></trkpt>
+<trkpt lat="41.112123" lon="-114.833259"></trkpt>
+<trkpt lat="41.112511" lon="-114.779624"></trkpt>
+<trkpt lat="41.091919" lon="-114.715946"></trkpt>
+<trkpt lat="41.071421" lon="-114.646904"></trkpt>
+<trkpt lat="41.071773" lon="-114.621497"></trkpt>
+<trkpt lat="41.068487" lon="-114.613334"></trkpt>
+<trkpt lat="41.06615" lon="-114.607813"></trkpt>
+<trkpt lat="41.067675" lon="-114.6014"></trkpt>
+<trkpt lat="41.073087" lon="-114.595973"></trkpt>
+<trkpt lat="41.074065" lon="-114.591641"></trkpt>
+<trkpt lat="41.075908" lon="-114.586797"></trkpt>
+<trkpt lat="41.078007" lon="-114.576436"></trkpt>
+<trkpt lat="41.077513" lon="-114.569519"></trkpt>
+<trkpt lat="41.074366" lon="-114.560747"></trkpt>
+<trkpt lat="41.07238" lon="-114.551578"></trkpt>
+<trkpt lat="41.07118" lon="-114.545864"></trkpt>
+<trkpt lat="41.066603" lon="-114.539072"></trkpt>
+<trkpt lat="41.064195" lon="-114.534336"></trkpt>
+<trkpt lat="41.060883" lon="-114.523721"></trkpt>
+<trkpt lat="41.050703" lon="-114.512986"></trkpt>
+<trkpt lat="41.032046" lon="-114.493473"></trkpt>
+<trkpt lat="40.950117" lon="-114.372295"></trkpt>
+<trkpt lat="40.923442" lon="-114.325267"></trkpt>
+<trkpt lat="40.912847" lon="-114.315936"></trkpt>
+<trkpt lat="40.90141" lon="-114.292552"></trkpt>
+<trkpt lat="40.901168" lon="-114.283726"></trkpt>
+<trkpt lat="40.896597" lon="-114.268916"></trkpt>
+<trkpt lat="40.891629" lon="-114.259923"></trkpt>
+<trkpt lat="40.885915" lon="-114.252956"></trkpt>
+<trkpt lat="40.874702" lon="-114.241832"></trkpt>
+<trkpt lat="40.85945" lon="-114.226585"></trkpt>
+<trkpt lat="40.827459" lon="-114.194916"></trkpt>
+<trkpt lat="40.811676" lon="-114.179201"></trkpt>
+<trkpt lat="40.797017" lon="-114.164644"></trkpt>
+<trkpt lat="40.78727" lon="-114.154982"></trkpt>
+<trkpt lat="40.774117" lon="-114.141896"></trkpt>
+<trkpt lat="40.762061" lon="-114.126543"></trkpt>
+<trkpt lat="40.748368" lon="-114.108691"></trkpt>
+<trkpt lat="40.744732" lon="-114.099189"></trkpt>
+<trkpt lat="40.744318" lon="-114.084668"></trkpt>
+<trkpt lat="40.74432" lon="-114.074675"></trkpt>
+<trkpt lat="40.742692" lon="-114.067706"></trkpt>
+<trkpt lat="40.739742" lon="-114.058149"></trkpt>
+<trkpt lat="40.73795" lon="-114.050154"></trkpt>
+<trkpt lat="40.737971" lon="-114.043694"></trkpt>
+<trkpt lat="40.740865" lon="-114.032915"></trkpt>
+<trkpt lat="40.745862" lon="-114.01775"></trkpt>
+<trkpt lat="40.747057" lon="-114.005111"></trkpt>
+<trkpt lat="40.741827" lon="-113.973485"></trkpt>
+<trkpt lat="40.74993" lon="-113.970251"></trkpt>
+<trkpt lat="40.76288" lon="-113.97098"></trkpt>
+<trkpt lat="40.771318" lon="-113.983349"></trkpt>
+<trkpt lat="40.772349" lon="-113.98086"></trkpt>
+</trkseg></trk>
+<trk><name>May 2 (Sat) - Travel + Stage (Black Dragon)</name><trkseg>
+<trkpt lat="40.772349" lon="-113.98086"></trkpt>
+<trkpt lat="40.769565" lon="-113.981112"></trkpt>
+<trkpt lat="40.761348" lon="-113.970107"></trkpt>
+<trkpt lat="40.740369" lon="-113.96852"></trkpt>
+<trkpt lat="40.738413" lon="-113.848242"></trkpt>
+<trkpt lat="40.732111" lon="-113.551406"></trkpt>
+<trkpt lat="40.726568" lon="-113.269182"></trkpt>
+<trkpt lat="40.725325" lon="-113.164224"></trkpt>
+<trkpt lat="40.730429" lon="-113.117667"></trkpt>
+<trkpt lat="40.749712" lon="-113.047334"></trkpt>
+<trkpt lat="40.76602" lon="-112.989247"></trkpt>
+<trkpt lat="40.792822" lon="-112.952202"></trkpt>
+<trkpt lat="40.822547" lon="-112.899411"></trkpt>
+<trkpt lat="40.814282" lon="-112.87589"></trkpt>
+<trkpt lat="40.756567" lon="-112.76224"></trkpt>
+<trkpt lat="40.740825" lon="-112.626144"></trkpt>
+<trkpt lat="40.706649" lon="-112.522597"></trkpt>
+<trkpt lat="40.686789" lon="-112.452671"></trkpt>
+<trkpt lat="40.670977" lon="-112.387592"></trkpt>
+<trkpt lat="40.662711" lon="-112.32832"></trkpt>
+<trkpt lat="40.675751" lon="-112.285668"></trkpt>
+<trkpt lat="40.699869" lon="-112.258684"></trkpt>
+<trkpt lat="40.721946" lon="-112.227937"></trkpt>
+<trkpt lat="40.735166" lon="-112.19804"></trkpt>
+<trkpt lat="40.766284" lon="-112.157167"></trkpt>
+<trkpt lat="40.770834" lon="-112.074948"></trkpt>
+<trkpt lat="40.770952" lon="-112.016238"></trkpt>
+<trkpt lat="40.768719" lon="-112.002345"></trkpt>
+<trkpt lat="40.764629" lon="-111.98991"></trkpt>
+<trkpt lat="40.765764" lon="-111.945196"></trkpt>
+<trkpt lat="40.764748" lon="-111.929016"></trkpt>
+<trkpt lat="40.764292" lon="-111.917202"></trkpt>
+<trkpt lat="40.759501" lon="-111.914975"></trkpt>
+<trkpt lat="40.756033" lon="-111.912382"></trkpt>
+<trkpt lat="40.749325" lon="-111.90937"></trkpt>
+<trkpt lat="40.738966" lon="-111.904538"></trkpt>
+<trkpt lat="40.715641" lon="-111.904557"></trkpt>
+<trkpt lat="40.698131" lon="-111.90195"></trkpt>
+<trkpt lat="40.690261" lon="-111.903475"></trkpt>
+<trkpt lat="40.659393" lon="-111.901545"></trkpt>
+<trkpt lat="40.635851" lon="-111.905106"></trkpt>
+<trkpt lat="40.626575" lon="-111.903061"></trkpt>
+<trkpt lat="40.613211" lon="-111.906256"></trkpt>
+<trkpt lat="40.592351" lon="-111.902284"></trkpt>
+<trkpt lat="40.563401" lon="-111.89938"></trkpt>
+<trkpt lat="40.533508" lon="-111.892332"></trkpt>
+<trkpt lat="40.499772" lon="-111.891381"></trkpt>
+<trkpt lat="40.49069" lon="-111.892414"></trkpt>
+<trkpt lat="40.464254" lon="-111.913498"></trkpt>
+<trkpt lat="40.449969" lon="-111.912897"></trkpt>
+<trkpt lat="40.435413" lon="-111.895021"></trkpt>
+<trkpt lat="40.425964" lon="-111.884939"></trkpt>
+<trkpt lat="40.413724" lon="-111.869509"></trkpt>
+<trkpt lat="40.394517" lon="-111.838471"></trkpt>
+<trkpt lat="40.389658" lon="-111.834376"></trkpt>
+<trkpt lat="40.384554" lon="-111.831443"></trkpt>
+<trkpt lat="40.381421" lon="-111.826821"></trkpt>
+<trkpt lat="40.377366" lon="-111.819988"></trkpt>
+<trkpt lat="40.375102" lon="-111.815385"></trkpt>
+<trkpt lat="40.372991" lon="-111.807752"></trkpt>
+<trkpt lat="40.371344" lon="-111.802755"></trkpt>
+<trkpt lat="40.36512" lon="-111.792794"></trkpt>
+<trkpt lat="40.355097" lon="-111.777273"></trkpt>
+<trkpt lat="40.329758" lon="-111.737658"></trkpt>
+<trkpt lat="40.323641" lon="-111.728719"></trkpt>
+<trkpt lat="40.319417" lon="-111.726468"></trkpt>
+<trkpt lat="40.300634" lon="-111.726009"></trkpt>
+<trkpt lat="40.285018" lon="-111.725604"></trkpt>
+<trkpt lat="40.281304" lon="-111.724085"></trkpt>
+<trkpt lat="40.274949" lon="-111.718753"></trkpt>
+<trkpt lat="40.261606" lon="-111.706788"></trkpt>
+<trkpt lat="40.252179" lon="-111.696381"></trkpt>
+<trkpt lat="40.249323" lon="-111.695452"></trkpt>
+<trkpt lat="40.244575" lon="-111.695151"></trkpt>
+<trkpt lat="40.238967" lon="-111.690005"></trkpt>
+<trkpt lat="40.228799" lon="-111.68001"></trkpt>
+<trkpt lat="40.216795" lon="-111.666426"></trkpt>
+<trkpt lat="40.201504" lon="-111.653903"></trkpt>
+<trkpt lat="40.193942" lon="-111.648138"></trkpt>
+<trkpt lat="40.188629" lon="-111.646675"></trkpt>
+<trkpt lat="40.155621" lon="-111.646869"></trkpt>
+<trkpt lat="40.133377" lon="-111.647288"></trkpt>
+<trkpt lat="40.131254" lon="-111.647706"></trkpt>
+<trkpt lat="40.130079" lon="-111.649012"></trkpt>
+<trkpt lat="40.128463" lon="-111.648925"></trkpt>
+<trkpt lat="40.125515" lon="-111.646711"></trkpt>
+<trkpt lat="40.122017" lon="-111.642111"></trkpt>
+<trkpt lat="40.119234" lon="-111.638606"></trkpt>
+<trkpt lat="40.113934" lon="-111.634969"></trkpt>
+<trkpt lat="40.111312" lon="-111.63343"></trkpt>
+<trkpt lat="40.1099" lon="-111.632008"></trkpt>
+<trkpt lat="40.099787" lon="-111.613278"></trkpt>
+<trkpt lat="40.092496" lon="-111.599679"></trkpt>
+<trkpt lat="40.088922" lon="-111.594016"></trkpt>
+<trkpt lat="40.083798" lon="-111.59171"></trkpt>
+<trkpt lat="40.082334" lon="-111.588331"></trkpt>
+<trkpt lat="40.074968" lon="-111.580193"></trkpt>
+<trkpt lat="40.06877" lon="-111.574984"></trkpt>
+<trkpt lat="40.065424" lon="-111.573106"></trkpt>
+<trkpt lat="40.06314" lon="-111.569911"></trkpt>
+<trkpt lat="40.059829" lon="-111.566955"></trkpt>
+<trkpt lat="40.05626" lon="-111.560437"></trkpt>
+<trkpt lat="40.054288" lon="-111.550393"></trkpt>
+<trkpt lat="40.051855" lon="-111.547675"></trkpt>
+<trkpt lat="40.046648" lon="-111.548227"></trkpt>
+<trkpt lat="40.042157" lon="-111.544382"></trkpt>
+<trkpt lat="40.038722" lon="-111.536157"></trkpt>
+<trkpt lat="40.034466" lon="-111.521553"></trkpt>
+<trkpt lat="40.032011" lon="-111.513403"></trkpt>
+<trkpt lat="40.028914" lon="-111.505322"></trkpt>
+<trkpt lat="40.027046" lon="-111.501354"></trkpt>
+<trkpt lat="40.019043" lon="-111.496369"></trkpt>
+<trkpt lat="40.008717" lon="-111.491844"></trkpt>
+<trkpt lat="40.00298" lon="-111.49071"></trkpt>
+<trkpt lat="40.000808" lon="-111.484127"></trkpt>
+<trkpt lat="39.998351" lon="-111.477528"></trkpt>
+<trkpt lat="39.995848" lon="-111.471491"></trkpt>
+<trkpt lat="39.995076" lon="-111.463438"></trkpt>
+<trkpt lat="39.995407" lon="-111.458155"></trkpt>
+<trkpt lat="39.99486" lon="-111.453468"></trkpt>
+<trkpt lat="39.996082" lon="-111.44834"></trkpt>
+<trkpt lat="39.996403" lon="-111.443994"></trkpt>
+<trkpt lat="39.995919" lon="-111.436324"></trkpt>
+<trkpt lat="39.997149" lon="-111.422032"></trkpt>
+<trkpt lat="39.996832" lon="-111.406342"></trkpt>
+<trkpt lat="39.99465" lon="-111.401796"></trkpt>
+<trkpt lat="39.991823" lon="-111.394847"></trkpt>
+<trkpt lat="39.991501" lon="-111.386174"></trkpt>
+<trkpt lat="39.990346" lon="-111.376593"></trkpt>
+<trkpt lat="39.989478" lon="-111.371468"></trkpt>
+<trkpt lat="39.986734" lon="-111.365718"></trkpt>
+<trkpt lat="39.982542" lon="-111.357761"></trkpt>
+<trkpt lat="39.977575" lon="-111.347757"></trkpt>
+<trkpt lat="39.970099" lon="-111.329475"></trkpt>
+<trkpt lat="39.965248" lon="-111.317534"></trkpt>
+<trkpt lat="39.965908" lon="-111.310649"></trkpt>
+<trkpt lat="39.962931" lon="-111.306149"></trkpt>
+<trkpt lat="39.958016" lon="-111.302386"></trkpt>
+<trkpt lat="39.952158" lon="-111.288953"></trkpt>
+<trkpt lat="39.952239" lon="-111.271334"></trkpt>
+<trkpt lat="39.953869" lon="-111.264119"></trkpt>
+<trkpt lat="39.956642" lon="-111.25007"></trkpt>
+<trkpt lat="39.956822" lon="-111.244096"></trkpt>
+<trkpt lat="39.955574" lon="-111.24052"></trkpt>
+<trkpt lat="39.954663" lon="-111.236059"></trkpt>
+<trkpt lat="39.953338" lon="-111.227213"></trkpt>
+<trkpt lat="39.948187" lon="-111.214484"></trkpt>
+<trkpt lat="39.945536" lon="-111.20535"></trkpt>
+<trkpt lat="39.937863" lon="-111.198958"></trkpt>
+<trkpt lat="39.933087" lon="-111.200019"></trkpt>
+<trkpt lat="39.929044" lon="-111.188722"></trkpt>
+<trkpt lat="39.93102" lon="-111.170113"></trkpt>
+<trkpt lat="39.932432" lon="-111.161919"></trkpt>
+<trkpt lat="39.933695" lon="-111.156493"></trkpt>
+<trkpt lat="39.93406" lon="-111.15137"></trkpt>
+<trkpt lat="39.936059" lon="-111.142099"></trkpt>
+<trkpt lat="39.935911" lon="-111.132765"></trkpt>
+<trkpt lat="39.933904" lon="-111.126329"></trkpt>
+<trkpt lat="39.934557" lon="-111.118726"></trkpt>
+<trkpt lat="39.933319" lon="-111.106925"></trkpt>
+<trkpt lat="39.933558" lon="-111.09443"></trkpt>
+<trkpt lat="39.930943" lon="-111.087352"></trkpt>
+<trkpt lat="39.92851" lon="-111.080672"></trkpt>
+<trkpt lat="39.925533" lon="-111.07089"></trkpt>
+<trkpt lat="39.913319" lon="-111.062511"></trkpt>
+<trkpt lat="39.886239" lon="-111.049654"></trkpt>
+<trkpt lat="39.876233" lon="-111.037294"></trkpt>
+<trkpt lat="39.863898" lon="-111.028243"></trkpt>
+<trkpt lat="39.855559" lon="-111.017803"></trkpt>
+<trkpt lat="39.844984" lon="-111.000933"></trkpt>
+<trkpt lat="39.838823" lon="-110.983732"></trkpt>
+<trkpt lat="39.825118" lon="-110.950521"></trkpt>
+<trkpt lat="39.822238" lon="-110.94501"></trkpt>
+<trkpt lat="39.817705" lon="-110.940479"></trkpt>
+<trkpt lat="39.815769" lon="-110.938866"></trkpt>
+<trkpt lat="39.813294" lon="-110.93949"></trkpt>
+<trkpt lat="39.809458" lon="-110.942399"></trkpt>
+<trkpt lat="39.806135" lon="-110.943583"></trkpt>
+<trkpt lat="39.804024" lon="-110.941846"></trkpt>
+<trkpt lat="39.801134" lon="-110.93678"></trkpt>
+<trkpt lat="39.799631" lon="-110.932484"></trkpt>
+<trkpt lat="39.797639" lon="-110.931911"></trkpt>
+<trkpt lat="39.794104" lon="-110.931898"></trkpt>
+<trkpt lat="39.790828" lon="-110.931347"></trkpt>
+<trkpt lat="39.788192" lon="-110.929045"></trkpt>
+<trkpt lat="39.784674" lon="-110.92566"></trkpt>
+<trkpt lat="39.782017" lon="-110.921136"></trkpt>
+<trkpt lat="39.779012" lon="-110.917996"></trkpt>
+<trkpt lat="39.7765" lon="-110.914313"></trkpt>
+<trkpt lat="39.774737" lon="-110.912075"></trkpt>
+<trkpt lat="39.772217" lon="-110.910192"></trkpt>
+<trkpt lat="39.770212" lon="-110.908178"></trkpt>
+<trkpt lat="39.766188" lon="-110.904928"></trkpt>
+<trkpt lat="39.763833" lon="-110.901417"></trkpt>
+<trkpt lat="39.763025" lon="-110.896335"></trkpt>
+<trkpt lat="39.757378" lon="-110.889714"></trkpt>
+<trkpt lat="39.751899" lon="-110.886417"></trkpt>
+<trkpt lat="39.749727" lon="-110.884984"></trkpt>
+<trkpt lat="39.746941" lon="-110.883813"></trkpt>
+<trkpt lat="39.743627" lon="-110.880329"></trkpt>
+<trkpt lat="39.739778" lon="-110.874871"></trkpt>
+<trkpt lat="39.73618" lon="-110.874073"></trkpt>
+<trkpt lat="39.730357" lon="-110.869572"></trkpt>
+<trkpt lat="39.728162" lon="-110.867557"></trkpt>
+<trkpt lat="39.726283" lon="-110.867712"></trkpt>
+<trkpt lat="39.724727" lon="-110.867344"></trkpt>
+<trkpt lat="39.722855" lon="-110.865491"></trkpt>
+<trkpt lat="39.721308" lon="-110.865149"></trkpt>
+<trkpt lat="39.718069" lon="-110.867573"></trkpt>
+<trkpt lat="39.715545" lon="-110.868763"></trkpt>
+<trkpt lat="39.712032" lon="-110.867605"></trkpt>
+<trkpt lat="39.702963" lon="-110.868815"></trkpt>
+<trkpt lat="39.694589" lon="-110.864719"></trkpt>
+<trkpt lat="39.692175" lon="-110.858647"></trkpt>
+<trkpt lat="39.689038" lon="-110.856467"></trkpt>
+<trkpt lat="39.682817" lon="-110.858484"></trkpt>
+<trkpt lat="39.678065" lon="-110.860962"></trkpt>
+<trkpt lat="39.668315" lon="-110.861363"></trkpt>
+<trkpt lat="39.64738" lon="-110.860099"></trkpt>
+<trkpt lat="39.640932" lon="-110.859424"></trkpt>
+<trkpt lat="39.6328" lon="-110.862231"></trkpt>
+<trkpt lat="39.621829" lon="-110.857065"></trkpt>
+<trkpt lat="39.616274" lon="-110.850595"></trkpt>
+<trkpt lat="39.614739" lon="-110.83955"></trkpt>
+<trkpt lat="39.606374" lon="-110.832045"></trkpt>
+<trkpt lat="39.592204" lon="-110.820417"></trkpt>
+<trkpt lat="39.586676" lon="-110.808824"></trkpt>
+<trkpt lat="39.585503" lon="-110.79894"></trkpt>
+<trkpt lat="39.587565" lon="-110.791168"></trkpt>
+<trkpt lat="39.585947" lon="-110.788127"></trkpt>
+<trkpt lat="39.575698" lon="-110.784578"></trkpt>
+<trkpt lat="39.568645" lon="-110.778095"></trkpt>
+<trkpt lat="39.547935" lon="-110.749422"></trkpt>
+<trkpt lat="39.542611" lon="-110.739035"></trkpt>
+<trkpt lat="39.542429" lon="-110.733586"></trkpt>
+<trkpt lat="39.542461" lon="-110.724892"></trkpt>
+<trkpt lat="39.542507" lon="-110.712366"></trkpt>
+<trkpt lat="39.542582" lon="-110.69177"></trkpt>
+<trkpt lat="39.543134" lon="-110.683083"></trkpt>
+<trkpt lat="39.550819" lon="-110.658927"></trkpt>
+<trkpt lat="39.547219" lon="-110.646893"></trkpt>
+<trkpt lat="39.546404" lon="-110.623684"></trkpt>
+<trkpt lat="39.527919" lon="-110.578382"></trkpt>
+<trkpt lat="39.521758" lon="-110.564055"></trkpt>
+<trkpt lat="39.507693" lon="-110.534173"></trkpt>
+<trkpt lat="39.473714" lon="-110.5021"></trkpt>
+<trkpt lat="39.446052" lon="-110.470011"></trkpt>
+<trkpt lat="39.42375" lon="-110.444419"></trkpt>
+<trkpt lat="39.40248" lon="-110.424937"></trkpt>
+<trkpt lat="39.369085" lon="-110.396004"></trkpt>
+<trkpt lat="39.344351" lon="-110.374893"></trkpt>
+<trkpt lat="39.326705" lon="-110.367071"></trkpt>
+<trkpt lat="39.296387" lon="-110.354989"></trkpt>
+<trkpt lat="39.276426" lon="-110.347718"></trkpt>
+<trkpt lat="39.257119" lon="-110.340287"></trkpt>
+<trkpt lat="39.241467" lon="-110.338856"></trkpt>
+<trkpt lat="39.180654" lon="-110.338349"></trkpt>
+<trkpt lat="39.148544" lon="-110.337389"></trkpt>
+<trkpt lat="39.135343" lon="-110.33754"></trkpt>
+<trkpt lat="39.129509" lon="-110.336333"></trkpt>
+<trkpt lat="39.119213" lon="-110.329671"></trkpt>
+<trkpt lat="39.094963" lon="-110.321897"></trkpt>
+<trkpt lat="39.052337" lon="-110.310632"></trkpt>
+<trkpt lat="39.028951" lon="-110.302378"></trkpt>
+<trkpt lat="39.004937" lon="-110.275372"></trkpt>
+<trkpt lat="38.981755" lon="-110.233348"></trkpt>
+<trkpt lat="38.980058" lon="-110.226746"></trkpt>
+<trkpt lat="38.983836" lon="-110.223157"></trkpt>
+<trkpt lat="38.989761" lon="-110.191124"></trkpt>
+<trkpt lat="38.992866" lon="-110.186946"></trkpt>
+<trkpt lat="38.995178" lon="-110.183018"></trkpt>
+<trkpt lat="38.995489" lon="-110.163953"></trkpt>
+<trkpt lat="38.995112" lon="-110.159636"></trkpt>
+<trkpt lat="38.995489" lon="-110.165047"></trkpt>
+<trkpt lat="38.995116" lon="-110.183242"></trkpt>
+<trkpt lat="38.992671" lon="-110.187148"></trkpt>
+<trkpt lat="38.989224" lon="-110.197735"></trkpt>
+<trkpt lat="38.98304" lon="-110.228179"></trkpt>
+<trkpt lat="38.963469" lon="-110.283752"></trkpt>
+<trkpt lat="38.93198" lon="-110.355956"></trkpt>
+<trkpt lat="38.924754" lon="-110.371371"></trkpt>
+<trkpt lat="38.921777" lon="-110.386749"></trkpt>
+<trkpt lat="38.921935" lon="-110.396175"></trkpt>
+<trkpt lat="38.925143" lon="-110.415877"></trkpt>
+<trkpt lat="38.924692" lon="-110.41923"></trkpt>
+</trkseg></trk>
+<trk><name>May 3 (Sun) - Day 1: Black Dragon -&gt; Wedge</name><trkseg>
 <trkpt lat="38.925234" lon="-110.416887"></trkpt>
 <trkpt lat="38.925571" lon="-110.417147"></trkpt>
 <trkpt lat="38.925828" lon="-110.417486"></trkpt>
@@ -4831,7 +5410,7 @@
 <trkpt lat="39.096461" lon="-110.750989"></trkpt>
 <trkpt lat="39.096421" lon="-110.751111"></trkpt>
 </trkseg></trk>
-<trk><name>May 4 (Sun) - Day 2: Wedge -&gt; Family Butte (SHORT)</name><trkseg>
+<trk><name>May 4 (Mon) - Day 2: Wedge -&gt; Family Butte (SHORT)</name><trkseg>
 <trkpt lat="39.096421" lon="-110.751111"></trkpt>
 <trkpt lat="39.096334" lon="-110.751328"></trkpt>
 <trkpt lat="39.096314" lon="-110.751393"></trkpt>
@@ -8066,7 +8645,7 @@
 <trkpt lat="38.760133" lon="-110.841106"></trkpt>
 <trkpt lat="38.759145" lon="-110.843428"></trkpt>
 </trkseg></trk>
-<trk><name>May 5 (Mon) - Day 3: Family Butte -&gt; Temple Mtn (BTR, no slots)</name><trkseg>
+<trk><name>May 5 (Tue) - Day 3: Family Butte -&gt; Temple Mtn (BTR, no slots)</name><trkseg>
 <trkpt lat="38.759145" lon="-110.843428"></trkpt>
 <trkpt lat="38.758587" lon="-110.845049"></trkpt>
 <trkpt lat="38.758366" lon="-110.845598"></trkpt>
@@ -11038,7 +11617,7 @@
 <trkpt lat="38.663732" lon="-110.646908"></trkpt>
 <trkpt lat="38.664312" lon="-110.647463"></trkpt>
 </trkseg></trk>
-<trk><name>May 6 (Tue) - Day 4: Shared AM + stay-over slot hikes + Sinbad</name><trkseg>
+<trk><name>May 6 (Wed) - Day 4: Shared AM + stay-over slot hikes + Sinbad</name><trkseg>
 <trkpt lat="38.629627" lon="-110.76855"></trkpt>
 <trkpt lat="38.629464" lon="-110.768279"></trkpt>
 <trkpt lat="38.62919" lon="-110.768086"></trkpt>
@@ -12599,6 +13178,384 @@
 <trkpt lat="38.868998" lon="-110.782136"></trkpt>
 <trkpt lat="38.868737" lon="-110.782071"></trkpt>
 <trkpt lat="38.868603" lon="-110.781993"></trkpt>
+</trkseg></trk>
+<trk><name>May 7 (Thu) - Transit to Moab + easy afternoon</name><trkseg>
+<trkpt lat="38.867782" lon="-110.781681"></trkpt>
+<trkpt lat="38.865319" lon="-110.797129"></trkpt>
+<trkpt lat="38.86578" lon="-110.809062"></trkpt>
+<trkpt lat="38.862521" lon="-110.814004"></trkpt>
+<trkpt lat="38.860006" lon="-110.818234"></trkpt>
+<trkpt lat="38.859003" lon="-110.833872"></trkpt>
+<trkpt lat="38.861799" lon="-110.841983"></trkpt>
+<trkpt lat="38.864782" lon="-110.848216"></trkpt>
+<trkpt lat="38.864781" lon="-110.852189"></trkpt>
+<trkpt lat="38.861198" lon="-110.865445"></trkpt>
+<trkpt lat="38.856832" lon="-110.871472"></trkpt>
+<trkpt lat="38.855118" lon="-110.875352"></trkpt>
+<trkpt lat="38.853309" lon="-110.880002"></trkpt>
+<trkpt lat="38.850555" lon="-110.884536"></trkpt>
+<trkpt lat="38.848647" lon="-110.887225"></trkpt>
+<trkpt lat="38.847217" lon="-110.891099"></trkpt>
+<trkpt lat="38.847084" lon="-110.894923"></trkpt>
+<trkpt lat="38.848946" lon="-110.90268"></trkpt>
+<trkpt lat="38.851121" lon="-110.90597"></trkpt>
+<trkpt lat="38.855383" lon="-110.911134"></trkpt>
+<trkpt lat="38.856246" lon="-110.913128"></trkpt>
+<trkpt lat="38.85483" lon="-110.912758"></trkpt>
+<trkpt lat="38.853815" lon="-110.909985"></trkpt>
+<trkpt lat="38.848987" lon="-110.903294"></trkpt>
+<trkpt lat="38.846612" lon="-110.892248"></trkpt>
+<trkpt lat="38.850425" lon="-110.883646"></trkpt>
+<trkpt lat="38.852557" lon="-110.877091"></trkpt>
+<trkpt lat="38.8593" lon="-110.865711"></trkpt>
+<trkpt lat="38.863407" lon="-110.854458"></trkpt>
+<trkpt lat="38.863835" lon="-110.846141"></trkpt>
+<trkpt lat="38.860157" lon="-110.840341"></trkpt>
+<trkpt lat="38.859243" lon="-110.823956"></trkpt>
+<trkpt lat="38.860106" lon="-110.817142"></trkpt>
+<trkpt lat="38.862512" lon="-110.813565"></trkpt>
+<trkpt lat="38.865465" lon="-110.808716"></trkpt>
+<trkpt lat="38.865024" lon="-110.799278"></trkpt>
+<trkpt lat="38.868591" lon="-110.776593"></trkpt>
+<trkpt lat="38.875023" lon="-110.74773"></trkpt>
+<trkpt lat="38.867034" lon="-110.713421"></trkpt>
+<trkpt lat="38.876237" lon="-110.667158"></trkpt>
+<trkpt lat="38.881006" lon="-110.658488"></trkpt>
+<trkpt lat="38.888653" lon="-110.647013"></trkpt>
+<trkpt lat="38.893035" lon="-110.625511"></trkpt>
+<trkpt lat="38.897086" lon="-110.596886"></trkpt>
+<trkpt lat="38.89852" lon="-110.574757"></trkpt>
+<trkpt lat="38.90524" lon="-110.550589"></trkpt>
+<trkpt lat="38.904432" lon="-110.537789"></trkpt>
+<trkpt lat="38.905557" lon="-110.532936"></trkpt>
+<trkpt lat="38.913892" lon="-110.519649"></trkpt>
+<trkpt lat="38.913509" lon="-110.510317"></trkpt>
+<trkpt lat="38.913331" lon="-110.505893"></trkpt>
+<trkpt lat="38.917073" lon="-110.501675"></trkpt>
+<trkpt lat="38.927845" lon="-110.495224"></trkpt>
+<trkpt lat="38.931117" lon="-110.489974"></trkpt>
+<trkpt lat="38.936946" lon="-110.48623"></trkpt>
+<trkpt lat="38.937995" lon="-110.4836"></trkpt>
+<trkpt lat="38.937587" lon="-110.480317"></trkpt>
+<trkpt lat="38.936615" lon="-110.476142"></trkpt>
+<trkpt lat="38.937488" lon="-110.472048"></trkpt>
+<trkpt lat="38.937005" lon="-110.464767"></trkpt>
+<trkpt lat="38.933839" lon="-110.46396"></trkpt>
+<trkpt lat="38.931255" lon="-110.465338"></trkpt>
+<trkpt lat="38.928727" lon="-110.462949"></trkpt>
+<trkpt lat="38.928062" lon="-110.456654"></trkpt>
+<trkpt lat="38.924454" lon="-110.451604"></trkpt>
+<trkpt lat="38.92307" lon="-110.445382"></trkpt>
+<trkpt lat="38.920839" lon="-110.438594"></trkpt>
+<trkpt lat="38.919266" lon="-110.434269"></trkpt>
+<trkpt lat="38.920857" lon="-110.428853"></trkpt>
+<trkpt lat="38.923589" lon="-110.422221"></trkpt>
+<trkpt lat="38.924599" lon="-110.416596"></trkpt>
+<trkpt lat="38.923289" lon="-110.405482"></trkpt>
+<trkpt lat="38.921624" lon="-110.39669"></trkpt>
+<trkpt lat="38.921131" lon="-110.391345"></trkpt>
+<trkpt lat="38.921187" lon="-110.386142"></trkpt>
+<trkpt lat="38.92232" lon="-110.378152"></trkpt>
+<trkpt lat="38.925115" lon="-110.369302"></trkpt>
+<trkpt lat="38.927668" lon="-110.362388"></trkpt>
+<trkpt lat="38.93353" lon="-110.351151"></trkpt>
+<trkpt lat="38.942457" lon="-110.330384"></trkpt>
+<trkpt lat="38.962793" lon="-110.283397"></trkpt>
+<trkpt lat="38.97969" lon="-110.237688"></trkpt>
+<trkpt lat="38.982541" lon="-110.229029"></trkpt>
+<trkpt lat="38.984755" lon="-110.219172"></trkpt>
+<trkpt lat="38.989703" lon="-110.192342"></trkpt>
+<trkpt lat="38.989789" lon="-110.189597"></trkpt>
+<trkpt lat="38.991755" lon="-110.187802"></trkpt>
+<trkpt lat="38.99311" lon="-110.186665"></trkpt>
+<trkpt lat="38.994669" lon="-110.184467"></trkpt>
+<trkpt lat="38.995234" lon="-110.182774"></trkpt>
+<trkpt lat="38.995463" lon="-110.17169"></trkpt>
+<trkpt lat="38.995489" lon="-110.163953"></trkpt>
+<trkpt lat="38.995499" lon="-110.161012"></trkpt>
+<trkpt lat="38.995112" lon="-110.159636"></trkpt>
+<trkpt lat="38.99551" lon="-110.157911"></trkpt>
+<trkpt lat="38.995331" lon="-110.152475"></trkpt>
+<trkpt lat="38.994399" lon="-110.146104"></trkpt>
+<trkpt lat="38.993007" lon="-110.140224"></trkpt>
+<trkpt lat="38.991481" lon="-110.133869"></trkpt>
+<trkpt lat="38.989674" lon="-110.128688"></trkpt>
+<trkpt lat="38.988491" lon="-110.127484"></trkpt>
+<trkpt lat="38.980179" lon="-110.122125"></trkpt>
+<trkpt lat="38.978328" lon="-110.121354"></trkpt>
+<trkpt lat="38.976485" lon="-110.121314"></trkpt>
+<trkpt lat="38.975636" lon="-110.11921"></trkpt>
+<trkpt lat="38.975398" lon="-110.116026"></trkpt>
+<trkpt lat="38.974475" lon="-110.110916"></trkpt>
+<trkpt lat="38.972759" lon="-110.105533"></trkpt>
+<trkpt lat="38.966937" lon="-110.084149"></trkpt>
+<trkpt lat="38.962338" lon="-110.069666"></trkpt>
+<trkpt lat="38.95703" lon="-110.059117"></trkpt>
+<trkpt lat="38.947222" lon="-110.042786"></trkpt>
+<trkpt lat="38.936259" lon="-110.027639"></trkpt>
+<trkpt lat="38.931495" lon="-110.015047"></trkpt>
+<trkpt lat="38.926256" lon="-110.001939"></trkpt>
+<trkpt lat="38.925884" lon="-109.989769"></trkpt>
+<trkpt lat="38.922861" lon="-109.971813"></trkpt>
+<trkpt lat="38.920623" lon="-109.949079"></trkpt>
+<trkpt lat="38.920884" lon="-109.935927"></trkpt>
+<trkpt lat="38.923006" lon="-109.921677"></trkpt>
+<trkpt lat="38.929699" lon="-109.878122"></trkpt>
+<trkpt lat="38.93514" lon="-109.84342"></trkpt>
+<trkpt lat="38.939165" lon="-109.830854"></trkpt>
+<trkpt lat="38.941283" lon="-109.823028"></trkpt>
+<trkpt lat="38.941649" lon="-109.816747"></trkpt>
+<trkpt lat="38.940615" lon="-109.816354"></trkpt>
+<trkpt lat="38.905906" lon="-109.814411"></trkpt>
+<trkpt lat="38.878008" lon="-109.812697"></trkpt>
+<trkpt lat="38.86851" lon="-109.809963"></trkpt>
+<trkpt lat="38.853051" lon="-109.802418"></trkpt>
+<trkpt lat="38.838659" lon="-109.791993"></trkpt>
+<trkpt lat="38.823273" lon="-109.780463"></trkpt>
+<trkpt lat="38.800987" lon="-109.763759"></trkpt>
+<trkpt lat="38.790921" lon="-109.756799"></trkpt>
+<trkpt lat="38.772456" lon="-109.747733"></trkpt>
+<trkpt lat="38.754908" lon="-109.740138"></trkpt>
+<trkpt lat="38.744154" lon="-109.736585"></trkpt>
+<trkpt lat="38.731881" lon="-109.727559"></trkpt>
+<trkpt lat="38.724748" lon="-109.719512"></trkpt>
+<trkpt lat="38.71734" lon="-109.70765"></trkpt>
+<trkpt lat="38.713777" lon="-109.704453"></trkpt>
+<trkpt lat="38.70325" lon="-109.700921"></trkpt>
+<trkpt lat="38.685596" lon="-109.69525"></trkpt>
+<trkpt lat="38.680681" lon="-109.69238"></trkpt>
+<trkpt lat="38.673846" lon="-109.687351"></trkpt>
+<trkpt lat="38.670953" lon="-109.685415"></trkpt>
+<trkpt lat="38.662904" lon="-109.680755"></trkpt>
+<trkpt lat="38.649162" lon="-109.672624"></trkpt>
+<trkpt lat="38.636971" lon="-109.664116"></trkpt>
+<trkpt lat="38.632531" lon="-109.659415"></trkpt>
+<trkpt lat="38.626543" lon="-109.650983"></trkpt>
+<trkpt lat="38.620937" lon="-109.641792"></trkpt>
+<trkpt lat="38.618776" lon="-109.637013"></trkpt>
+<trkpt lat="38.616416" lon="-109.631692"></trkpt>
+<trkpt lat="38.613723" lon="-109.625421"></trkpt>
+<trkpt lat="38.61358" lon="-109.624005"></trkpt>
+<trkpt lat="38.61402" lon="-109.622012"></trkpt>
+<trkpt lat="38.615162" lon="-109.61909"></trkpt>
+<trkpt lat="38.6155" lon="-109.616746"></trkpt>
+<trkpt lat="38.615279" lon="-109.614666"></trkpt>
+<trkpt lat="38.614732" lon="-109.613135"></trkpt>
+<trkpt lat="38.614064" lon="-109.612048"></trkpt>
+<trkpt lat="38.61114" lon="-109.608402"></trkpt>
+<trkpt lat="38.609961" lon="-109.606943"></trkpt>
+<trkpt lat="38.60703" lon="-109.603395"></trkpt>
+<trkpt lat="38.605568" lon="-109.600899"></trkpt>
+<trkpt lat="38.605064" lon="-109.598784"></trkpt>
+<trkpt lat="38.605073" lon="-109.596365"></trkpt>
+<trkpt lat="38.606123" lon="-109.589352"></trkpt>
+<trkpt lat="38.606517" lon="-109.586645"></trkpt>
+<trkpt lat="38.606656" lon="-109.583284"></trkpt>
+<trkpt lat="38.606497" lon="-109.581208"></trkpt>
+<trkpt lat="38.605096" lon="-109.579273"></trkpt>
+<trkpt lat="38.600933" lon="-109.575187"></trkpt>
+<trkpt lat="38.598544" lon="-109.572873"></trkpt>
+<trkpt lat="38.595318" lon="-109.568558"></trkpt>
+<trkpt lat="38.591989" lon="-109.564053"></trkpt>
+<trkpt lat="38.589856" lon="-109.562015"></trkpt>
+<trkpt lat="38.58836" lon="-109.560281"></trkpt>
+<trkpt lat="38.585841" lon="-109.557137"></trkpt>
+<trkpt lat="38.582373" lon="-109.55282"></trkpt>
+<trkpt lat="38.580985" lon="-109.551603"></trkpt>
+<trkpt lat="38.580135" lon="-109.551152"></trkpt>
+<trkpt lat="38.579049" lon="-109.55082"></trkpt>
+<trkpt lat="38.577314" lon="-109.550741"></trkpt>
+<trkpt lat="38.576158" lon="-109.550747"></trkpt>
+<trkpt lat="38.574823" lon="-109.550219"></trkpt>
+<trkpt lat="38.574823" lon="-109.546842"></trkpt>
+<trkpt lat="38.574758" lon="-109.542912"></trkpt>
+<trkpt lat="38.571719" lon="-109.542953"></trkpt>
+<trkpt lat="38.569607" lon="-109.542956"></trkpt>
+<trkpt lat="38.567246" lon="-109.542939"></trkpt>
+<trkpt lat="38.566982" lon="-109.541636"></trkpt>
+<trkpt lat="38.566107" lon="-109.539264"></trkpt>
+<trkpt lat="38.56526" lon="-109.537138"></trkpt>
+<trkpt lat="38.565036" lon="-109.535075"></trkpt>
+<trkpt lat="38.564965" lon="-109.531783"></trkpt>
+<trkpt lat="38.565737" lon="-109.52992"></trkpt>
+<trkpt lat="38.565085" lon="-109.527547"></trkpt>
+<trkpt lat="38.566461" lon="-109.525268"></trkpt>
+<trkpt lat="38.568644" lon="-109.525207"></trkpt>
+<trkpt lat="38.570659" lon="-109.526252"></trkpt>
+<trkpt lat="38.576048" lon="-109.527722"></trkpt>
+<trkpt lat="38.577278" lon="-109.527019"></trkpt>
+<trkpt lat="38.575718" lon="-109.524651"></trkpt>
+<trkpt lat="38.575505" lon="-109.523427"></trkpt>
+<trkpt lat="38.575628" lon="-109.52401"></trkpt>
+</trkseg></trk>
+<trk><name>May 10 (Sun) - Return to Boise</name><trkseg>
+<trkpt lat="38.575628" lon="-109.52401"></trkpt>
+<trkpt lat="38.565797" lon="-109.529177"></trkpt>
+<trkpt lat="38.568434" lon="-109.54295"></trkpt>
+<trkpt lat="38.578125" lon="-109.550734"></trkpt>
+<trkpt lat="38.590079" lon="-109.562235"></trkpt>
+<trkpt lat="38.606658" lon="-109.581976"></trkpt>
+<trkpt lat="38.60785" lon="-109.604427"></trkpt>
+<trkpt lat="38.615237" lon="-109.618846"></trkpt>
+<trkpt lat="38.62547" lon="-109.648983"></trkpt>
+<trkpt lat="38.675374" lon="-109.688466"></trkpt>
+<trkpt lat="38.732658" lon="-109.728257"></trkpt>
+<trkpt lat="38.838659" lon="-109.791993"></trkpt>
+<trkpt lat="38.940936" lon="-109.826732"></trkpt>
+<trkpt lat="38.922883" lon="-109.968508"></trkpt>
+<trkpt lat="38.93609" lon="-110.026299"></trkpt>
+<trkpt lat="38.974728" lon="-110.110643"></trkpt>
+<trkpt lat="38.974278" lon="-110.140966"></trkpt>
+<trkpt lat="38.990942" lon="-110.174905"></trkpt>
+<trkpt lat="38.983931" lon="-110.235408"></trkpt>
+<trkpt lat="39.035774" lon="-110.306194"></trkpt>
+<trkpt lat="39.126158" lon="-110.333917"></trkpt>
+<trkpt lat="39.180654" lon="-110.338349"></trkpt>
+<trkpt lat="39.280312" lon="-110.349117"></trkpt>
+<trkpt lat="39.350165" lon="-110.379619"></trkpt>
+<trkpt lat="39.434868" lon="-110.457018"></trkpt>
+<trkpt lat="39.516456" lon="-110.551799"></trkpt>
+<trkpt lat="39.547219" lon="-110.646893"></trkpt>
+<trkpt lat="39.542576" lon="-110.693602"></trkpt>
+<trkpt lat="39.542418" lon="-110.735627"></trkpt>
+<trkpt lat="39.573424" lon="-110.783203"></trkpt>
+<trkpt lat="39.585881" lon="-110.797295"></trkpt>
+<trkpt lat="39.606503" lon="-110.831777"></trkpt>
+<trkpt lat="39.621532" lon="-110.856494"></trkpt>
+<trkpt lat="39.641478" lon="-110.859198"></trkpt>
+<trkpt lat="39.679803" lon="-110.860203"></trkpt>
+<trkpt lat="39.69263" lon="-110.859385"></trkpt>
+<trkpt lat="39.712969" lon="-110.86766"></trkpt>
+<trkpt lat="39.722221" lon="-110.865188"></trkpt>
+<trkpt lat="39.727816" lon="-110.867468"></trkpt>
+<trkpt lat="39.739778" lon="-110.874871"></trkpt>
+<trkpt lat="39.750222" lon="-110.885051"></trkpt>
+<trkpt lat="39.763527" lon="-110.897889"></trkpt>
+<trkpt lat="39.771533" lon="-110.909002"></trkpt>
+<trkpt lat="39.777895" lon="-110.916709"></trkpt>
+<trkpt lat="39.788192" lon="-110.929045"></trkpt>
+<trkpt lat="39.798094" lon="-110.931809"></trkpt>
+<trkpt lat="39.804727" lon="-110.942712"></trkpt>
+<trkpt lat="39.814859" lon="-110.938792"></trkpt>
+<trkpt lat="39.824678" lon="-110.949501"></trkpt>
+<trkpt lat="39.855559" lon="-111.017803"></trkpt>
+<trkpt lat="39.888323" lon="-111.05048"></trkpt>
+<trkpt lat="39.928659" lon="-111.083997"></trkpt>
+<trkpt lat="39.934059" lon="-111.114819"></trkpt>
+<trkpt lat="39.93651" lon="-111.139095"></trkpt>
+<trkpt lat="39.93205" lon="-111.162949"></trkpt>
+<trkpt lat="39.93437" lon="-111.199858"></trkpt>
+<trkpt lat="39.949983" lon="-111.218763"></trkpt>
+<trkpt lat="39.956717" lon="-111.242839"></trkpt>
+<trkpt lat="39.953317" lon="-111.269553"></trkpt>
+<trkpt lat="39.962827" lon="-111.306048"></trkpt>
+<trkpt lat="39.971238" lon="-111.33228"></trkpt>
+<trkpt lat="39.988099" lon="-111.367458"></trkpt>
+<trkpt lat="39.991931" lon="-111.3895"></trkpt>
+<trkpt lat="39.997453" lon="-111.418569"></trkpt>
+<trkpt lat="39.996166" lon="-111.44798"></trkpt>
+<trkpt lat="39.995068" lon="-111.46382"></trkpt>
+<trkpt lat="40.001131" lon="-111.486955"></trkpt>
+<trkpt lat="40.024323" lon="-111.499742"></trkpt>
+<trkpt lat="40.033997" lon="-111.517033"></trkpt>
+<trkpt lat="40.046282" lon="-111.548149"></trkpt>
+<trkpt lat="40.056752" lon="-111.561341"></trkpt>
+<trkpt lat="40.066087" lon="-111.573717"></trkpt>
+<trkpt lat="40.083045" lon="-111.590742"></trkpt>
+<trkpt lat="40.099391" lon="-111.612532"></trkpt>
+<trkpt lat="40.113613" lon="-111.634786"></trkpt>
+<trkpt lat="40.126165" lon="-111.647226"></trkpt>
+<trkpt lat="40.158454" lon="-111.646574"></trkpt>
+<trkpt lat="40.199662" lon="-111.652082"></trkpt>
+<trkpt lat="40.235549" lon="-111.686297"></trkpt>
+<trkpt lat="40.25056" lon="-111.695233"></trkpt>
+<trkpt lat="40.281407" lon="-111.723834"></trkpt>
+<trkpt lat="40.318689" lon="-111.725981"></trkpt>
+<trkpt lat="40.330077" lon="-111.737715"></trkpt>
+<trkpt lat="40.357013" lon="-111.779699"></trkpt>
+<trkpt lat="40.375643" lon="-111.816224"></trkpt>
+<trkpt lat="40.386561" lon="-111.832657"></trkpt>
+<trkpt lat="40.410212" lon="-111.862951"></trkpt>
+<trkpt lat="40.448724" lon="-111.911503"></trkpt>
+<trkpt lat="40.521342" lon="-111.890923"></trkpt>
+<trkpt lat="40.586037" lon="-111.899957"></trkpt>
+<trkpt lat="40.628074" lon="-111.902857"></trkpt>
+<trkpt lat="40.694556" lon="-111.902149"></trkpt>
+<trkpt lat="40.74446" lon="-111.904135"></trkpt>
+<trkpt lat="40.764718" lon="-111.913275"></trkpt>
+<trkpt lat="40.817989" lon="-111.917685"></trkpt>
+<trkpt lat="40.875098" lon="-111.896719"></trkpt>
+<trkpt lat="40.953856" lon="-111.890844"></trkpt>
+<trkpt lat="41.011987" lon="-111.938236"></trkpt>
+<trkpt lat="41.058998" lon="-111.961826"></trkpt>
+<trkpt lat="41.124813" lon="-112.024339"></trkpt>
+<trkpt lat="41.17668" lon="-112.018689"></trkpt>
+<trkpt lat="41.184011" lon="-112.012354"></trkpt>
+<trkpt lat="41.215302" lon="-112.001039"></trkpt>
+<trkpt lat="41.223016" lon="-111.992301"></trkpt>
+<trkpt lat="41.228132" lon="-112.004484"></trkpt>
+<trkpt lat="41.25956" lon="-112.02367"></trkpt>
+<trkpt lat="41.342341" lon="-112.037945"></trkpt>
+<trkpt lat="41.424439" lon="-112.054441"></trkpt>
+<trkpt lat="41.491278" lon="-112.053134"></trkpt>
+<trkpt lat="41.616957" lon="-112.08686"></trkpt>
+<trkpt lat="41.68304" lon="-112.147337"></trkpt>
+<trkpt lat="41.725745" lon="-112.239385"></trkpt>
+<trkpt lat="41.785638" lon="-112.275559"></trkpt>
+<trkpt lat="41.815218" lon="-112.357467"></trkpt>
+<trkpt lat="41.844592" lon="-112.44038"></trkpt>
+<trkpt lat="41.894663" lon="-112.525721"></trkpt>
+<trkpt lat="41.900378" lon="-112.579431"></trkpt>
+<trkpt lat="41.933611" lon="-112.651378"></trkpt>
+<trkpt lat="41.964985" lon="-112.757559"></trkpt>
+<trkpt lat="42.04677" lon="-112.880417"></trkpt>
+<trkpt lat="42.096969" lon="-112.931595"></trkpt>
+<trkpt lat="42.159367" lon="-112.991103"></trkpt>
+<trkpt lat="42.196246" lon="-113.023626"></trkpt>
+<trkpt lat="42.215485" lon="-113.049227"></trkpt>
+<trkpt lat="42.228381" lon="-113.080792"></trkpt>
+<trkpt lat="42.264934" lon="-113.139476"></trkpt>
+<trkpt lat="42.330018" lon="-113.215908"></trkpt>
+<trkpt lat="42.415913" lon="-113.319835"></trkpt>
+<trkpt lat="42.476339" lon="-113.384522"></trkpt>
+<trkpt lat="42.56974" lon="-113.517651"></trkpt>
+<trkpt lat="42.568946" lon="-113.620477"></trkpt>
+<trkpt lat="42.56895" lon="-113.738347"></trkpt>
+<trkpt lat="42.568864" lon="-113.813569"></trkpt>
+<trkpt lat="42.576501" lon="-113.877867"></trkpt>
+<trkpt lat="42.576343" lon="-114.015445"></trkpt>
+<trkpt lat="42.576151" lon="-114.116884"></trkpt>
+<trkpt lat="42.576103" lon="-114.193444"></trkpt>
+<trkpt lat="42.57669" lon="-114.28558"></trkpt>
+<trkpt lat="42.615002" lon="-114.368456"></trkpt>
+<trkpt lat="42.656866" lon="-114.480711"></trkpt>
+<trkpt lat="42.731316" lon="-114.560517"></trkpt>
+<trkpt lat="42.766512" lon="-114.704722"></trkpt>
+<trkpt lat="42.807381" lon="-114.769383"></trkpt>
+<trkpt lat="42.854546" lon="-114.840693"></trkpt>
+<trkpt lat="42.876604" lon="-114.869676"></trkpt>
+<trkpt lat="42.920543" lon="-114.928745"></trkpt>
+<trkpt lat="42.938192" lon="-115.003241"></trkpt>
+<trkpt lat="42.950744" lon="-115.116875"></trkpt>
+<trkpt lat="42.963001" lon="-115.185835"></trkpt>
+<trkpt lat="42.972902" lon="-115.226427"></trkpt>
+<trkpt lat="42.961264" lon="-115.270722"></trkpt>
+<trkpt lat="42.964507" lon="-115.332025"></trkpt>
+<trkpt lat="42.950274" lon="-115.385156"></trkpt>
+<trkpt lat="42.954852" lon="-115.442373"></trkpt>
+<trkpt lat="42.979938" lon="-115.51065"></trkpt>
+<trkpt lat="43.032832" lon="-115.564385"></trkpt>
+<trkpt lat="43.09999" lon="-115.623701"></trkpt>
+<trkpt lat="43.150611" lon="-115.678194"></trkpt>
+<trkpt lat="43.182868" lon="-115.776239"></trkpt>
+<trkpt lat="43.435819" lon="-116.062261"></trkpt>
+<trkpt lat="43.538631" lon="-116.157943"></trkpt>
+<trkpt lat="43.56842" lon="-116.203592"></trkpt>
+<trkpt lat="43.583987" lon="-116.261047"></trkpt>
+<trkpt lat="43.599861" lon="-116.274146"></trkpt>
+<trkpt lat="43.607171" lon="-116.282043"></trkpt>
+<trkpt lat="43.616451" lon="-116.284179"></trkpt>
+<trkpt lat="43.618964" lon="-116.283462"></trkpt>
 </trkseg></trk>
 <trk><name>[ALT] Freeway Access (bypass tunnel for tall rigs)</name><trkseg>
 <trkpt lat="38.828196" lon="-110.707927"></trkpt>

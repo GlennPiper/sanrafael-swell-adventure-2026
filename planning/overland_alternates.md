@@ -32,7 +32,7 @@ This document captures **alternate San Rafael Swell overland plans** that lighte
 
 ## Option B — reverse (Sinbad-first), V1 default
 
-- **Idea:** Stage **Day 0** at **Temple Mountain**; run **west → east** so **Black Dragon / Buckhorn** land last; **May 5** camp **Black Dragon** (I-70) *or* **Wedge** (nicer camp, Castle Dale exit for early-leavers).
+- **Idea:** **May 1** meet + Bonneville night **same as main**; stage **May 2** at **Temple Mountain**; run **west → east** so **Black Dragon / Buckhorn** land last; **May 5** camp **Black Dragon** (I-70) *or* **Wedge** (nicer camp, Castle Dale exit for early-leavers).
 - **Variant:** **V1** — stay-overs **Moab same night May 6** after any make-up stops. **V2** (extra Swell night) is optional; this doc defaults to **V1** for B.
 - **Detail:** [trip-itinerary-alt-b.html](../trip-itinerary-alt-b.html)
 
@@ -50,7 +50,7 @@ This document captures **alternate San Rafael Swell overland plans** that lighte
 
 | | A (forward) | B (reverse) | D (reverse, split) |
 |---|-------------|-------------|---------------------|
-| **Staging May 2** | Black Dragon area (unchanged) | Temple Mtn | Temple Mtn |
+| **Meet + staging** | May 1 Bonneville (same as main); May 2 Black Dragon | May 1 Bonneville; May 2 Temple Mtn | May 1 Bonneville; May 2 Temple Mtn |
 | **May 5 camp** | Temple Mtn | Black Dragon or Wedge | Wedge |
 | **Early-leaver “miss”** | No slots / Sinbad / WHW | Different mix vs D | No Buckhorn / Black Dragon string |
 | **Moab timing (defaults)** | A-V2: Moab **May 7** + easy PM trail | V1: Moab **May 6** PM | V1: Moab **May 6** PM |

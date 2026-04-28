@@ -30,7 +30,7 @@ from typing import Any
 # Explicit POI status map from planning/poi_decisions.md (manual transcription)
 # status: primary | backup | skip | conditional | hike_candidate
 POI_STATUS: dict[str, tuple[str, str]] = {
-    # Day 0 / May 2 staging POIs and bonuses
+    # Day 0 / May 2 staging POIs (Black Dragon arrival) and bonuses
     'DP - Petroglyph Canyon Panel':        ('backup',   'Bonus if arrive with daylight on May 2'),
     'DP - Spirit Arch':                    ('backup',   'Bonus if arrive with daylight on May 2'),
 
@@ -174,6 +174,14 @@ def _haversine_m(a, b):
     dlon = lo2 - lo1
     s = math.sin(dlat / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin(dlon / 2) ** 2
     return 2 * R * math.asin(math.sqrt(s))
+
+
+def load_highway_tracks(planning_dir: pathlib.Path) -> dict[str, Any]:
+    """Load optional OSRM polylines for May 1–2 highway legs (``planning/highway_tracks.json``)."""
+    p = planning_dir / 'highway_tracks.json'
+    if not p.exists():
+        return {}
+    return json.loads(p.read_text(encoding='utf-8'))
 
 
 def load_route(plan_dir: pathlib.Path) -> dict[str, Any]:
@@ -368,13 +376,15 @@ def build_payload(
 ) -> dict[str, Any]:
     """Build a full trip-data payload from a days-spec + camp + schedule set.
 
-    ``days_spec`` items mirror the original ``DAYS`` list with two optional
-    fields:
+    ``days_spec`` items mirror the original ``DAYS`` list with optional fields:
       * ``track_segments``: list of ``{mi_lo, mi_hi, reverse}``. If present,
         takes precedence over the legacy ``mi_lo/mi_hi`` scalar fields when
         both POIs and the track polyline are computed.
       * ``poi_names_override``: optional explicit list of POI names for the
         day. Short-circuits the mile-window POI extraction.
+      * ``synthetic_pois`` / ``synthetic_track_points``: injected POIs or
+        lat/lon polylines (e.g. May 1–2 highway legs); not copied verbatim into
+        output day dicts — polylines become ``track_points``.
     """
     poi_status = poi_status or POI_STATUS
     day0_stage_names = day0_stage_names or set()
@@ -382,7 +392,10 @@ def build_payload(
 
     out_days: list[dict] = []
     for d in days_spec:
-        d_copy = {k: v for k, v in d.items() if k not in ('track_segments', 'poi_names_override', 'poi_extra_status')}
+        d_copy = {k: v for k, v in d.items() if k not in (
+            'track_segments', 'poi_names_override', 'poi_extra_status', 'synthetic_pois',
+            'synthetic_track_points',
+        )}
 
         # Determine the segment set: explicit > legacy mi_lo/mi_hi.
         # `legacy_window` signals the main-trip forward-only case where we
@@ -397,7 +410,9 @@ def build_payload(
         segments = segments or []
 
         # POIs.
-        if d['id'] == 'day0_travel' or d.get('include_day0_staging_pois'):
+        if d.get('synthetic_pois') is not None:
+            d_copy['pois'] = [dict(p) for p in d['synthetic_pois']]
+        elif d['id'] == 'day0_travel' or d.get('include_day0_staging_pois'):
             # Day-0 staging days only surface the pre-mile-0 bonus POIs,
             # tagged as backup (light blue "bonus if arrive with daylight").
             poi_list = []
@@ -439,8 +454,14 @@ def build_payload(
                 use_day_mi=not legacy_window,
             )
 
-        # Track polyline for this day.
-        d_copy['track_points'] = build_day_track(route, segments) if segments else []
+        # Track polyline for this day (Swell segments, or optional highway polyline).
+        synth = d.get('synthetic_track_points')
+        if synth:
+            d_copy['track_points'] = [[float(p[0]), float(p[1])] for p in synth]
+        elif segments:
+            d_copy['track_points'] = build_day_track(route, segments)
+        else:
+            d_copy['track_points'] = []
 
         # Camp selection.
         camp_key = d.get('camp_key', d['id'])

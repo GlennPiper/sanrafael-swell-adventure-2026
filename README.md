@@ -1,8 +1,8 @@
 # 2026 San Rafael Swell Adventure + Moab
 
-Trip planning workspace for the **May 2 - 10, 2026** overlanding trip to Utah.
+Trip planning workspace for the **May 1 - 10, 2026** overlanding trip to Utah.
 
-- **11 overlanders** do the San Rafael Swell route (May 2-6)
+- **11 overlanders** do the San Rafael Swell route (**May 3-6**; **May 1-2** are Boise meet + Bonneville night + staging travel)
 - **7 of those continue** to Moab (May 6-10); rest head back to Boise May 6
 - Route: OTG Crew 225-mi San Rafael Swell Adventure loop
 
@@ -78,6 +78,7 @@ All inside `planning/`:
 | `poi_menu.md` | Original POI candidate list (now superseded by `poi_decisions.md`; retained for context). |
 | `campsite_menu.md` | Original campsite candidate list (now superseded by `campsite_plan.md`). |
 | `trip_data.json` | The single source-of-truth dataset that drives all three deliverables. Generated; do not hand-edit. |
+| `highway_tracks.json` | OSRM highway polylines for paved / transit days — see **`highway_tracks.md`**. |
 | `route_analysis.json` / `route_waypoints.json` / `route_tracks.json` | Intermediate parsed GPX data. Generated. |
 | `moab_availability_raw.txt` / `recgov_*.json` | Raw API responses from live availability checks. |
 
@@ -136,7 +137,7 @@ Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs these step
 | `scripts/analyze_route.py` | `planning/route_*.json` | `planning/route_analysis.json` (waypoints ordered along track with mile + off-track distance) | Only if parsed GPX changes |
 | `scripts/check_availability.py` | (live Recreation.gov API) | `planning/recgov_*.json`, console output | Anytime we want to re-check Swell campground status |
 | `scripts/check_moab_availability.py` | (live Recreation.gov API) | `planning/moab_availability_raw.txt` | Anytime we want to re-check Moab camp status |
-| **`scripts/build_trip_data.py`** | `planning/route_analysis.json`, `planning/route_tracks.json` + hardcoded `POI_STATUS` + `CAMPSITES` + `FUEL_PLAN_SUMMARY` + `REALTIME_LINKS` + `GROUP_COUNTS` | `planning/trip_data.json` | Anytime a POI, camp, link, or count changes |
+| **`scripts/build_trip_data.py`** | `planning/route_analysis.json`, `planning/route_tracks.json`, `planning/highway_tracks.json` + hardcoded `POI_STATUS` + `CAMPSITES` + `FUEL_PLAN_SUMMARY` + `REALTIME_LINKS` + `GROUP_COUNTS` | `planning/trip_data.json` | Anytime a POI, camp, link, or count changes |
 | **`scripts/build_deliverables.py`** | `planning/trip_data.json`, `planning/slot-canyon-guide.md`, `planning/fuel_plan.md` | `trip-itinerary.html`, `trip-reference.html`, `trip-plan.gpx`, **`slot-canyon-guide.html`**, **`fuel-plan.html`** | After `build_trip_data.py`; needs `pip install markdown` |
 | `scripts/build_pwa_assets.py` | `planning/trip_data.json`, those two `.md` files, env `SITE_URL` | `manifest.webmanifest`, `service-worker.js`, `robots.txt`, `assets/qr.png` | **After** `build_deliverables.py` (precache includes both standalone pages) |
 | `scripts/build_pwa_icons.py` | `assets/icon-source.svg` | `icons/icon-192.png`, `icon-512.png`, `icon-512-maskable.png`, `apple-touch-icon.png` | Whenever the icon source changes |
@@ -182,6 +183,10 @@ Then rebuild.
 ### Change fuel data (new station, different MPG factor)
 
 Edit `FUEL_PLAN_SUMMARY` dict in `scripts/build_trip_data.py` for the embedded / HTML version. Edit `planning/fuel_plan.md` for the full per-vehicle worksheet (manually, not generated).
+
+### Update highway / OSRM polylines (May 1–2, Moab transit, return)
+
+See **`planning/highway_tracks.md`**. Edit `planning/highway_tracks.json` (or regenerate geometry via OSRM), then rebuild. Main-trip wiring is in `_attach_main_highway_tracks()` in `scripts/build_trip_data.py`; alternates wire the same keys in `scripts/alts/alt_*.py`.
 
 ### Update the group counts
 

@@ -6,9 +6,15 @@
 
 ---
 
-## Day 0 — Fri May 2
+## May 1 — Fri (meet + Bonneville)
 
-**Staging change vs main:** Boise → Green River → **S on Hwy 24** → **Temple Mountain Townsite** (reserve / FCFS) or Goblin Valley dispersed. **Not** Black Dragon staging.
+Same as **main** May 1 meet + Bonneville overnight.
+
+---
+
+## May 2 — Sat (staging: Temple Mtn side)
+
+**Staging:** Bonneville corridor → Green River → **S on Hwy 24** → **Temple Mountain Townsite** (FCFS) or Goblin Valley dispersed. **Not** Black Dragon staging.
 
 ---
 

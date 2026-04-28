@@ -35,18 +35,19 @@ VARIANT_MAIN = {
     'gpx_filename':       'trip-plan.gpx',
     'page_title':         '2026 San Rafael Swell + Moab - Itinerary',
     'header_h1':          '2026 San Rafael Swell Adventure + Moab',
-    'header_meta':        'May 2 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi',
+    'header_meta':        'May 1 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi',
     'nav_key':            'itinerary',
     'show_reference_link': True,
     'overview_title':     'Full San Rafael Swell route',
     'overview_desc_html': (
         'Stitched <strong>GPX driving corridor</strong> (Day 1 through Day 4 AM segments) '
         'plus <strong>travel + overland POIs and camps</strong> (rows marked <em>skip</em> in data are omitted). '
-        'Highway travel to May 2 staging is not part of this polyline; Moab and the return leg are not drawn \u2014 '
+        'Highway travel (May 1 meet + Bonneville, May 2 staging) and the return leg are not '
+        'part of this polyline \u2014 '
         'use per-day tabs for those.'
     ),
     'gpx_metadata_name':  '2026 San Rafael Swell Trip Plan',
-    'gpx_metadata_desc':  'Day-split tracks, primary POIs, and primary/backup campsites for the May 2-10, 2026 trip.',
+    'gpx_metadata_desc':  'Day-split tracks, primary POIs, and primary/backup campsites for the May 1-10, 2026 trip.',
 }
 
 VARIANT_ALT_A = {
@@ -57,7 +58,7 @@ VARIANT_ALT_A = {
     'gpx_filename':       'trip-plan-alt-a.gpx',
     'page_title':         'Alt A - 2026 SRS Itinerary (forward, 4-day, V2)',
     'header_h1':          'Alt A - 2026 San Rafael Swell Adventure + Moab',
-    'header_meta':        'May 2 - May 10, 2026 &middot; Variant A-V2 (forward, 4-day Swell lighten) &middot; 11 overlanders + 7 Moab',
+    'header_meta':        'May 1 - May 10, 2026 &middot; Variant A-V2 (forward, 4-day Swell lighten) &middot; 11 overlanders + 7 Moab',
     'nav_key':            'alt-a',
     'show_reference_link': True,
     'overview_title':     'Full Swell route (Alt A)',
@@ -78,7 +79,7 @@ VARIANT_ALT_B = {
     'gpx_filename':       'trip-plan-alt-b.gpx',
     'page_title':         'Alt B - 2026 SRS Itinerary (reverse, V1)',
     'header_h1':          'Alt B - 2026 San Rafael Swell Adventure + Moab',
-    'header_meta':        'May 2 - May 10, 2026 &middot; Variant B-V1 (reverse, stay-overs Moab May 6) &middot; 11 overlanders + 7 Moab',
+    'header_meta':        'May 1 - May 10, 2026 &middot; Variant B-V1 (reverse, stay-overs Moab May 6) &middot; 11 overlanders + 7 Moab',
     'nav_key':            'alt-b',
     'show_reference_link': True,
     'overview_title':     'Full Swell route (Alt B, reverse)',
@@ -99,7 +100,7 @@ VARIANT_ALT_D = {
     'gpx_filename':       'trip-plan-alt-d.gpx',
     'page_title':         'Alt D - 2026 SRS Itinerary (reverse, BTR split, V1)',
     'header_h1':          'Alt D - 2026 San Rafael Swell Adventure + Moab',
-    'header_meta':        'May 2 - May 10, 2026 &middot; Variant D-V1 (reverse, BTR split, Crack camp D1) &middot; 11 overlanders + 7 Moab',
+    'header_meta':        'May 1 - May 10, 2026 &middot; Variant D-V1 (reverse, BTR split, Crack camp D1) &middot; 11 overlanders + 7 Moab',
     'nav_key':            'alt-d',
     'show_reference_link': True,
     'overview_title':     'Full Swell route (Alt D, reverse, BTR split)',
@@ -151,7 +152,7 @@ LEAFLET_CSS = _read_vendor('leaflet.css')
 # do NOT need doubled braces.
 # -----------------------------------------------------------------------------
 PWA_HEAD = """<meta name="theme-color" content="#0d1117">
-<meta name="description" content="Offline trip itinerary, route, camps, and reference for the May 2-10, 2026 San Rafael Swell + Moab overlanding adventure.">
+<meta name="description" content="Offline trip itinerary, route, camps, and reference for the May 1-10, 2026 San Rafael Swell + Moab overlanding adventure.">
 <meta name="robots" content="noindex,nofollow">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
@@ -1317,9 +1318,19 @@ def build_itinerary_html(variant=None):
         # Schedule controls bar (only on scheduled days)
         sched_html = schedule_controls_html(d)
 
-        # Map container
+        # Map container (highway days include OSRM polylines from planning/highway_tracks.json).
         map_id = f'map-{d["id"]}'
         has_map = day_has_map
+        hw_note = ''
+        if has_map and d.get('type') in ('travel', 'transit') and len(d.get('track_points') or []) > 30:
+            hw_note = (
+                '<p class="muted" style="margin:10px 2px 0;font-size:12px;line-height:1.45">'
+                '<strong>Orange line:</strong> approximate paved corridor from '
+                '<strong>OpenStreetMap</strong> (OSRM routing), decimated for offline pages '
+                '&mdash; same <em>general</em> path as Google/Apple Maps but not copied from them. '
+                'Navigate with Google Maps (or similar) in real time for lanes, traffic, and closures.'
+                '</p>'
+            )
         map_html = (
             f'<div class="map-wrap" id="map-wrap-{d["id"]}">'
             f'<button type="button" class="map-fs-btn" data-target="map-wrap-{d["id"]}" '
@@ -1329,18 +1340,18 @@ def build_itinerary_html(variant=None):
             f'<span class="fs-label">Fullscreen</span></button>'
             f'<div id="{map_id}" class="map" data-day-id="{d["id"]}"><div class="map-offline-notice">'
             'Loading map... (requires internet for tiles; falls back to coordinates list if offline)'
-            '</div></div></div>'
+            f'</div></div>{hw_note}</div>'
             if has_map else
             '<div class="info">No mapped track segment for this day (travel/transit/Moab day).</div>'
         )
 
-        # Quick links for this day (weather + alerts). Day 0 is identified by
-        # the May 2 travel/stage date so the alternates' day-0 IDs
-        # (altA_day0_travel / altB_day0_travel / altD_day0_travel) are treated
-        # as "day 0" too, without hardcoding any specific id.
-        is_day0 = d['type'] == 'travel' and d.get('date_iso') == '2026-05-02'
+        # Quick links for this day (weather + alerts). May 2 staging travel uses
+        # Green River / I-70 links; May 1 uses Wendover / I-80 corridor; alternates'
+        # alt*_day0_travel IDs share the May 2 date without hardcoding ids.
+        is_may1_travel = d['type'] == 'travel' and d.get('date_iso') == '2026-05-01'
+        is_may2_staging_travel = d['type'] == 'travel' and d.get('date_iso') == '2026-05-02'
         quick_links = []
-        if d['type'] in ('overland', 'travel') and not is_day0:
+        if d['type'] in ('overland', 'travel') and not is_may2_staging_travel and not is_may1_travel:
             quick_links = [
                 {'label': 'Swell weather (Wedge)',    'url': 'https://forecast.weather.gov/MapClick.php?lat=39.0985&lon=-110.7850'},
                 {'label': 'SLC flash-flood info',     'url': 'https://www.weather.gov/slc/flashflood'},
@@ -1356,11 +1367,17 @@ def build_itinerary_html(variant=None):
                 {'label': 'UDOT I-70/191',            'url': 'https://www.udottraffic.utah.gov/'},
                 {'label': 'Arches NP alerts',         'url': 'https://www.nps.gov/arch/planyourvisit/conditions.htm'},
             ]
-        elif is_day0:
+        elif is_may2_staging_travel:
             quick_links = [
                 {'label': 'Green River weather',      'url': 'https://forecast.weather.gov/MapClick.php?lat=38.9953&lon=-110.1599'},
                 {'label': 'UDOT I-70',                'url': 'https://www.udottraffic.utah.gov/'},
                 {'label': 'SLC active warnings',      'url': 'https://www.weather.gov/slc/WWA'},
+            ]
+        elif is_may1_travel:
+            quick_links = [
+                {'label': 'Wendover / Bonneville wx', 'url': 'https://forecast.weather.gov/MapClick.php?lat=40.7472&lon=-114.0378'},
+                {'label': 'UDOT I-80 corridor',       'url': 'https://www.udottraffic.utah.gov/'},
+                {'label': 'NWS Boise (start)',        'url': 'https://forecast.weather.gov/MapClick.php?lat=43.6150&lon=-116.2343'},
             ]
 
         ql_html = ''
@@ -2195,7 +2212,7 @@ def build_reference_html():
 </head><body>
 <header>
 <h1>2026 San Rafael Swell Adventure + Moab - Reference</h1>
-<div class="meta">May 2 - May 10, 2026 &middot; Full knowledge dump &middot;
+<div class="meta">May 1 - May 10, 2026 &middot; Full knowledge dump &middot;
 <a href="trip-itinerary.html">Open daily itinerary</a> &middot;
 {ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
@@ -2210,7 +2227,7 @@ def build_reference_html():
 <h2>Trip Overview</h2>
 <div class="summary-grid">
 <div class="summary-stat"><div class="val">{data["trip"]["route_total_miles"]:.0f}</div><div class="lab">Swell route miles</div></div>
-<div class="summary-stat"><div class="val">9</div><div class="lab">Days on trip</div></div>
+<div class="summary-stat"><div class="val">10</div><div class="lab">Days on trip</div></div>
 <div class="summary-stat"><div class="val">11</div><div class="lab">Overlanders</div></div>
 <div class="summary-stat"><div class="val">7</div><div class="lab">Moab group</div></div>
 <div class="summary-stat"><div class="val">4</div><div class="lab">Swell nights</div></div>
@@ -2308,7 +2325,7 @@ def build_gpx(variant=None):
     variant = variant or VARIANT_MAIN
     gpx_name = variant.get('gpx_metadata_name', '2026 San Rafael Swell Trip Plan')
     gpx_desc = variant.get('gpx_metadata_desc',
-                           'Day-split tracks, primary POIs, and primary/backup campsites for the May 2-10, 2026 trip.')
+                           'Day-split tracks, primary POIs, and primary/backup campsites for the May 1-10, 2026 trip.')
     out = []
     out.append('<?xml version="1.0" encoding="UTF-8"?>')
     out.append('<gpx version="1.1" creator="build_deliverables.py" xmlns="http://www.topografix.com/GPX/1/1">')

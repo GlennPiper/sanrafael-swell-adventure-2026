@@ -8,6 +8,16 @@ Moab-area group sites on SR 128 (Goose Island, Hal Canyon) were largely booked M
 
 ---
 
+## May 1 (Friday) -- Meet (Boise) + overnight: Bonneville Salt Flats area
+
+**Meet:** **Albertsons / Sinclair** on **Federal Way** (Boise). Gather **noon–1:00 PM**; **depart by 1:00 PM**. Same parcel has gas and a McDonald’s if you want lunch or buffer for late arrivals. Map: <https://maps.app.goo.gl/RsEAZBhu2zFwD9Cj9>.
+
+**Overnight:** dispersed near the **Bonneville Salt Flats** / Wendover corridor (leading candidate **40.772616, -113.981099**; alternate **40.80273, -114.00395**). Confirm wet/salt conditions before driving onto the flats; pack out waste; respect postings.
+
+**Not Bonneville:** pins near **42.14688, -113.08988** / **42.13773, -113.07632** are **Idaho / northern corridor bailouts only** if the group reroutes — not substitutes for the Bonneville overnight.
+
+---
+
 ## May 2 (Saturday) -- Staging: Black Dragon Canyon
 
 All three May-2 options are BLM dispersed camping -- no hotels or state parks. Group uses dispersed camping throughout the Swell portion.

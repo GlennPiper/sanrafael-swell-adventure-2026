@@ -14,9 +14,17 @@ day boundaries.
 """
 from __future__ import annotations
 import pathlib
+import sys
+
+_SCRIPTS = pathlib.Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+from alts.common import bonneville_may1_camps, may1_meet_synthetic_pois  # noqa: E402
 
 from trip_core import (
     build_payload,
+    load_highway_tracks,
     load_route,
     print_payload_summary,
     write_payload,
@@ -31,16 +39,37 @@ PLAN = BASE / 'planning'
 # ---------------------------------------------------------------------------
 DAYS = [
     {
+        'id': 'may1_boise_bonneville',
+        'label': 'May 1 (Fri) - Meet + Bonneville overnight',
+        'date_iso': '2026-05-01',
+        'title': 'Boise meet -> Bonneville Salt Flats area',
+        'type': 'travel',
+        'descr': (
+            'Meet at Albertsons / Sinclair on Federal Way (Boise). Gather noon–1:00 PM; '
+            'depart by 1:00 PM. I-84 E toward Wendover; overnight dispersed near Bonneville '
+            'Salt Flats (site TBD — see camps below).'
+        ),
+        'mi_lo': None,
+        'mi_hi': None,
+        'miles': 340,
+        'driving_hours_est': 5.5,
+        'synthetic_pois': may1_meet_synthetic_pois(),
+    },
+    {
         'id': 'day0_travel',
         'label': 'May 2 (Sat) - Travel + Stage',
         'date_iso': '2026-05-02',
-        'title': 'Boise, ID -> Black Dragon Canyon',
+        'title': 'Bonneville area -> Black Dragon Canyon',
         'type': 'travel',
-        'descr': 'Long travel day from Boise via I-84 -> I-15 -> I-70. Fuel in Green River. Stage at Black Dragon Canyon dispersed to be ready for Day 1 kick-off.',
+        'descr': (
+            'Continue from the Bonneville / Wendover corridor via I-80 / I-15 / I-70. '
+            'Fuel in Green River. Stage at Black Dragon Canyon dispersed for Day 1 Swell '
+            'kick-off.'
+        ),
         'mi_lo': None,
         'mi_hi': None,
-        'miles': 620,
-        'driving_hours_est': 9.5,
+        'miles': 280,
+        'driving_hours_est': 5.0,
     },
     {
         'id': 'day1_swell',
@@ -144,9 +173,10 @@ DAYS = [
         'id': 'day8_return',
         'label': 'May 10 (Sun) - Return to Boise',
         'date_iso': '2026-05-10',
-        'title': 'Moab -> Boise',
+        'title': 'Sand Flats (Moab) -> Boise (Federal Way meet)',
         'type': 'travel',
-        'descr': 'Early departure; Moab -> I-70 W -> Salina -> I-15 N -> I-84 W -> Boise. ~670 mi.',
+        'descr': 'Early departure from Sand Flats cluster; I-70 W -> Salina -> I-15 N -> I-84 W -> '
+                 'Boise-area finish at the same Federal Way meet point as May 1 (~670 mi).',
         'mi_lo': None,
         'mi_hi': None,
         'miles': 670,
@@ -161,6 +191,7 @@ DAYS = [
 CAMPSITES = {
     # NOTE: All Swell overnight coordinates below are SNAPPED to actual
     # `<sym>campsite-24</sym>` waypoints in san-rafael-swell-adv-route-2025.gpx.
+    'may1_boise_bonneville': bonneville_may1_camps(),
     'day0_travel': {  # May 2 night -- stage for Day 1 kickoff at Black Dragon
         'primary': {
             'name': 'Black Dragon Canyon - "Camp site" (GPX-verified)',
@@ -532,20 +563,42 @@ DAY0_STAGE_NAMES = {'DP - Petroglyph Canyon Panel', 'DP - Spirit Arch'}
 DAY01_SUPPRESS_NAMES = {'San Rafael Reef Viewpoint'}
 
 
+def _attach_main_highway_tracks(hw: dict, day: dict) -> dict:
+    """Merge OSRM polylines from planning/highway_tracks.json onto main-trip day rows."""
+    d = dict(day)
+    key = {
+        'may1_boise_bonneville': 'may1_boise_bonneville',
+        'day0_travel': 'may2_bonneville_black_dragon',
+        'day4_moab_transit': 'green_river_to_sand_flats',
+        'day8_return': 'sand_flats_to_boise_federal_way',
+    }.get(d['id'])
+    if key:
+        d['synthetic_track_points'] = hw.get(key) or []
+    return d
+
+
 def main() -> None:
     route = load_route(PLAN)
+    hw = load_highway_tracks(PLAN)
+    days_spec: list[dict] = []
+    for day in DAYS:
+        days_spec.append(_attach_main_highway_tracks(hw, day))
 
     payload = build_payload(
-        days_spec=DAYS,
+        days_spec=days_spec,
         camp_data=CAMPSITES,
         schedule_defaults=SCHEDULE_DEFAULTS,
         route=route,
         trip_meta={
             'title': '2026 San Rafael Swell Adventure + Moab',
-            'dates': '2026-05-02 through 2026-05-10',
+            'dates': '2026-05-01 through 2026-05-10',
             'route_gpx_source': 'san-rafael-swell-adv-route-2025.gpx',
             'route_total_miles': round(route['total_mi'], 2),
             'main_track_points': len(route['main_points']),
+            'highway_tracks_note': (
+                (hw.get('source') or '').strip() or
+                'Highway polylines (when present) follow OpenStreetMap via OSRM; not live Google Maps data.'
+            ),
         },
         group_counts=GROUP_COUNTS,
         fuel_plan=FUEL_PLAN_SUMMARY,

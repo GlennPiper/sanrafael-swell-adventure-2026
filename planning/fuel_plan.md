@@ -13,7 +13,7 @@ Standard interstate stops. Last practical top-off before leaving pavement:
 | **Green River, UT** (I-70 Exit 160) | ~14 mi E of Black Dragon Canyon entry | **PRIMARY FILL-UP POINT before Day 1.** Multiple stations: Maverik (24 hr), Chevron, Shell, Love's Travel Stop, FJ Express. Diesel available. Grocery (Ross's Food Farm). |
 | Salina, UT (I-70 mm 56) | ~90 mi W | Last fuel before the long I-70 gap going E; fuel here if coming from I-15/Salt Lake direction |
 
-**Plan: fuel up in Green River on the way in** (morning of May 2 or evening arrival). Round-trip from I-70 Exit 160 to Black Dragon entry (mm 147) is ~28 mi.
+**Plan: fuel up in Green River on the way in** (morning of **May 2** after the Bonneville night, or evening arrival May 2). Round-trip from I-70 Exit 160 to Black Dragon entry (mm 147) is ~28 mi.
 
 ### Fueling options DURING the Swell (all require a detour from the route)
 
@@ -82,14 +82,15 @@ Add 15% safety margin -> plan for **~26 gal** through the Swell.
 
 | Leg | Miles | Surface | Est. MPG | Est. gal |
 |---|---:|---|---:|---:|
-| Boise -> Green River staging (May 2) | ~620 | Paved interstate | 16 | 38.8 |
+| Boise meet -> Bonneville overnight (May 1) | ~340 | Paved interstate | 16 | 21.3 |
+| Bonneville -> Green River staging -> Black Dragon (May 2) | ~294 | Paved interstate | 16 | 18.4 |
 | Green River -> Black Dragon entry | ~14 | Paved | 17 | 0.8 |
 | **Swell route (May 3-6 AM)** | ~255 | Mixed dirt/trail | ~11 avg | ~22.9 |
 | Sinbad exit -> I-70 -> Green River refuel | ~14 | Paved | 17 | 0.8 |
 | Green River -> Moab (May 6) | ~52 | Paved I-70/Hwy 191 | 17 | 3.1 |
 | Moab local loops (May 6-9, estimate) | ~150 | Mixed paved/graded | 14 | 10.7 |
 | Moab -> Boise return (May 10) | ~670 | Paved interstate | 16 | 41.9 |
-| **FULL TRIP TOTAL** | ~1,775 | | | **~119 gal** |
+| **FULL TRIP TOTAL** | ~1,789 | | | **~120 gal** |
 
 ## Per-Vehicle Worksheet (fill in for each driver before trip)
 
@@ -110,7 +111,7 @@ Expected Swell fuel burn:
   + 15% safety margin: _____ gal needed
 
 Fuel strategy:
-  [ ] Full tank at Green River morning of May 2
+  [ ] Full tank at Green River morning of May 2 (after Bonneville night)
   [ ] Aux cans full (quantity: ___ x ___ gal = ___ gal)
   [ ] Detour to Castle Dale (~54 mi RT) if tank drops below 1/2 at mi 45
   [ ] Detour to Hanksville (~60 mi RT) if tank drops below 1/2 at mi 180
@@ -118,7 +119,8 @@ Fuel strategy:
   [ ] Day-by-day review each morning
 
 Expected fuel stops:
-  May 2:   Boise area (baseline) + Green River UT fill
+  May 1:   Boise area (baseline); I-84 toward Wendover
+  May 2:   Green River UT fill before Black Dragon; enter Swell with full tanks
   May 3-5: NO FUEL (aux cans only if needed)
   May 6:   Green River re-fill after Sinbad exit; top off at Moab
   May 7-9: Moab local fill as needed
