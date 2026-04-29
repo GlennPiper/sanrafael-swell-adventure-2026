@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Moab trails reference (BOH ≤ RR4W 6) - SRS Trip</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d1117">
+<meta name="description" content="Moab-area Jeep Badge of Honor trails rated RR4W 6 or lower: ratings, descriptions, links, and rig notes for 4Runner, Wrangler, Gladiator.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SRS Trip">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  padding: 0 0 48px;
+  min-height: 100vh;
+}
+a { color: #58a6ff; }
+.top-nav {
+  position: sticky; top: 0; z-index: 10;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  padding: 12px 18px;
+  font-size: 14px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0;
+  line-height: 1.6;
+}
+.top-nav a { margin-right: 14px; }
+.top-nav strong { color: #f0f6fc; margin-right: 14px; }
+article.md-page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 20px 18px 40px;
+}
+article.md-page h1 {
+  font-size: clamp(22px, 4vw, 28px);
+  color: #f0f6fc;
+  margin: 8px 0 12px;
+}
+article.md-page h2 {
+  font-size: 18px;
+  color: #f0f6fc;
+  margin: 28px 0 12px;
+  padding-top: 12px;
+  border-top: 1px solid #21262d;
+}
+article.md-page h2:first-of-type { border-top: none; padding-top: 0; }
+article.md-page h3 { font-size: 16px; color: #f0f6fc; margin: 22px 0 10px; }
+article.md-page p { margin: 10px 0; }
+article.md-page ul { padding-left: 22px; }
+article.md-page li { margin: 6px 0; }
+article.md-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 14px;
+}
+article.md-page th, article.md-page td {
+  border: 1px solid #30363d;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+article.md-page th { background: #161b22; color: #f0f6fc; }
+article.md-page code {
+  background: #21262d;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.muted { color: #8b949e; font-size: 14px; }
+.callout {
+  background: #1f2a3a;
+  border: 1px solid #2d4a6e;
+  border-left: 4px solid #f5c252;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 16px 0;
+}
+.callout strong { color: #f5c252; }
+.trail-card {
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 16px 18px 20px;
+  margin: 22px 0;
+  background: #161b22;
+}
+.trail-card h2 { margin-top: 0; padding-top: 0; border-top: none; }
+.rating-pill {
+  display: inline-block;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #f0f6fc;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.boh-badge {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+  line-height: 0;
+}
+.boh-badge img {
+  width: 26px;
+  height: 26px;
+  vertical-align: middle;
+}
+.table-boh {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  display: inline-block;
+}
+th.boh-col {
+  white-space: nowrap;
+}
+td.ta-c { text-align: center; }
+.link-list {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #30363d;
+}
+.link-list strong { display: block; margin-bottom: 6px; color: #f0f6fc; }
+.link-list a { display: block; margin: 3px 0; font-size: 14px; }
+.trail-plan {
+  margin: 12px 0 16px;
+  padding: 10px 12px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #c9d1d9;
+}
+.trail-plan p { margin: 8px 0; }
+.trail-plan p:first-child { margin-top: 0; }
+.trail-plan p:last-child { margin-bottom: 0; }
+.trail-plan strong { color: #f0f6fc; }
+@media (max-width: 640px) {
+  article.md-page { padding-left: 12px; padding-right: 12px; }
+  article.md-page table { display: block; overflow-x: auto; max-width: 100vw; }
+}
+</style>
+</head><body>
+<nav class="top-nav" aria-label="Trip pages">
+<a href="trip-itinerary.html">Daily itinerary</a>
+<a href="overland-alternates.html">Alt routes</a>
+<a href="trip-reference.html">Full reference</a>
+<a href="slot-canyon-guide.html">Slot canyon guide</a>
+<a href="moab-camping.html">Moab camping</a>
+<strong>Moab trails</strong>
+<a href="river-crossing.html">River crossing (Fuller Bottom)</a>
+<a href="fuel-plan.html">Fuel plan</a>
+<a href="trip-plan.gpx" download>GPX</a>
+</nav>
+<article class="md-page">
+<h1>Moab trails (Jeep Badge of Honor, RR4W ≤ 6)</h1>
+<p class="muted">Reference for the 2026 trip. <strong>RR4W numbers</strong> are from the Red Rock 4-Wheelers <a href="https://www.rr4w.com/userfiles/files/Trail%20Grid%20-%20EJS%202025%20Website.pdf">EJS 2025 Trail Grid PDF</a> (same scale as <a href="Participants.md">Participants.md</a>). Trails in the <a href="https://www.jeep.com/off-road/badge-of-honor.html">Jeep Badge of Honor</a> app are marked with the <strong>green BOH badge</strong> (<img src="icons/badge-of-honor-mark.svg" class="table-boh" width="20" height="20" alt="" aria-hidden="true">) in headings and the table—that is a <strong>trip-pack placeholder</strong>, not the official Jeep trademark artwork. Confirm check-in rules in the Jeep app. Trail photos are omitted; use linked guides and your own scouting shots. <strong>Typical times</strong> on each card are rough ranges for a <strong>private group</strong> (air-down, lunch, photos, optional obstacles)—slower than a tight club run, faster than a photo safari.</p>
+
+<div class="callout">
+<strong>Rig shorthand (for “hardest parts” below):</strong>
+<ul style="margin:8px 0 0;">
+<li><strong>4Runner</strong> — stock-ish suspension, <strong>33″</strong> tires (example: Sean’s questionnaire).</li>
+<li><strong>JL</strong> — stock <strong>Jeep Wrangler 4-door</strong>: shorter tires than ideal for RR4W “recommended” sizes on some trails, moderate wheelbase.</li>
+<li><strong>Gladiator</strong> — lifted on <strong>35s</strong>, typically best clearance of the three; still watch breakover on long-wheelbase climbs.</li>
+</ul>
+</div>
+
+<h2 id="glenn-shortlist">Glenn’s Moab shortlist (personal picks)</h2>
+<div class="callout">
+<strong>Trails on this list, by RR4W rating (low → high):</strong>
+<ol style="margin:10px 0 0;">
+<li><a href="#sevenmile-rim">Sevenmile Rim</a> — <span class="rating-pill">RR4W 4</span></li>
+<li><a href="#three-d">3-D</a> — <span class="rating-pill">RR4W 4</span></li>
+<li><a href="#wipe-out">Wipe-Out Hill</a> — <span class="rating-pill">RR4W 5</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="22" height="22" alt="Badge of Honor"></span></li>
+<li><a href="#hells">Hell’s Revenge</a> — <span class="rating-pill">RR4W 6</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="22" height="22" alt="Badge of Honor"></span></li>
+<li><a href="#totw">Top of the World</a> — <span class="rating-pill">RR4W 6</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="22" height="22" alt="Badge of Honor"></span></li>
+</ol>
+<p style="margin:14px 0 0;"><strong>Two trails in one day?</strong> For a mixed private group, treat <strong>each</strong> of the five above as a <strong>full-day commitment</strong> unless you deliberately shorten a route. <strong>Sevenmile Rim</strong> and <strong>Wipe-Out Hill</strong> can overlap in <strong>Tusher / Big Mesa</strong> country on some variants—running <em>both</em> full RR4W-style loops the same day is usually <strong>too much</strong>; pick one, or accept a cut-down/custom day. <strong>3-D</strong> and <strong>Top of the World</strong> are <strong>mileage-heavy</strong> and do not pair cleanly with another major trail from this list. The realistic “double” pattern in Moab is usually <strong>Hell’s Revenge</strong> plus a <strong>short Sand Flats add-on</strong> that is <em>not</em> on this shortlist—see <a href="#fins">Fins and Things</a> (long same-day push for fast groups) or <a href="#baby-lion">Baby Lion’s Back</a> (typical evening hit).</p>
+</div>
+
+<h2>Quick comparison</h2>
+<table>
+<thead><tr><th>Trail</th><th>RR4W</th><th class="boh-col" scope="col"><span class="sr-only">Jeep Badge of Honor</span><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="22" height="22" alt="" aria-hidden="true"> BOH</th><th>RR4W min tires (notes)</th><th>Lockers (RR4W notes)</th></tr></thead>
+<tbody>
+<tr><td>Lost World</td><td>3</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>33+</td><td>None required</td></tr>
+<tr><td>Fins and Things</td><td>4</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>33+</td><td>None required</td></tr>
+<tr><td>Wipe-Out Hill</td><td>5</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>33+</td><td>Rear locker yes</td></tr>
+<tr><td>Hell’s Revenge</td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
+<tr><td>Poison Spider Mesa</td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
+<tr><td>Top of the World</td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
+<tr><td>Steel Bender</td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
+<tr><td>Porcupine Rim</td><td>6</td><td class="ta-c">—</td><td>33+</td><td>Rear locker yes</td></tr>
+<tr><td>Flat Iron Mesa</td><td>6</td><td class="ta-c">—</td><td>35+</td><td>Front + rear</td></tr>
+<tr><td>Sevenmile Rim</td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
+<tr><td>3-D</td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
+<tr><td>Dome Plateau</td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
+<tr><td>Behind the Rocks Tip-Toe</td><td>5</td><td class="ta-c">—</td><td>33+</td><td>Rear locker yes</td></tr>
+<tr><td>Hell’s Revenge, Tip-Toe Trip</td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
+</tbody>
+</table>
+<p class="muted">RR4W “minimum” columns are <em>club guidance for Easter Jeep Safari runs</em>, not a legal gate on public BLM routes. <strong>BOH column:</strong> <img src="icons/badge-of-honor-mark.svg" class="table-boh" width="20" height="20" alt="" aria-hidden="true"> = commonly listed in the Jeep Badge of Honor app for Moab/Utah (verify current list); <strong>—</strong> = not treated as a separate BOH listing here.</p>
+
+<h2 id="lost-world">Lost World <span class="rating-pill">RR4W 3</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="26" height="26" alt="Badge of Honor"></span></h2>
+<div class="trail-card">
+<p>New to EJS in <strong>2024</strong>. Runs between <strong>Rainbow Terrace</strong> and <strong>Lost World Butte</strong>, southeast of Tenmile Canyon. Surfaces mix <strong>county road, dirt, sand, and slickrock</strong>; named waypoints include Mini-Hell’s Gate, Gun Site Rock, Serpent Arch, and Juniper Arch. RR4W calls out <strong>steep climbs/descents</strong> and <strong>“tippy”</strong> sections despite the low number rating—terrain feel can exceed a “3” in places if you are new to off-camber slickrock.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>4–7 hours</strong> wheel-to-wheel for a mixed group (distance varies by exact loop; add time for approach roads and staging).</p>
+<p><strong>Often combined with:</strong> usually its own <strong>half- or full-day</strong>. If you want two tastes of the Sand Flats world, some groups add a <strong>short out-and-back</strong> the same calendar day—see <a href="#porcupine-rim">Porcupine Rim</a> (can make a <strong>long</strong> day together).</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> Usually fine; watch <strong>breakover</strong> on short ledge transitions and any <strong>off-camber</strong> slickrock—stock sidesteps and long rear overhang can drag.</li>
+<li><strong>Stock JL:</strong> Good breakover; <strong>door sheetmetal</strong> in any narrow brush/rock pinch; tire height is the main limiter on steeper ledges.</li>
+<li><strong>Gladiator 35s:</strong> Least concern; still mind <strong>tippy feel</strong> for passengers—pick lines slowly.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=85">RR4W — Lost World (trail id 85)</a>
+<a href="https://www.rr4w.com/ratings.cfm">RR4W — Rating system explained</a>
+<a href="https://www.blm.gov/visit/sand-flats">BLM — Sand Flats Recreation Area</a> (Moab-area OHV context)
+<a href="https://www.utah.com/moab/things-to-do/off-roading/">Utah.com — Moab off-roading overview</a>
+</div>
+</div>
+
+<h2 id="fins">Fins and Things <span class="rating-pill">RR4W 4</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="26" height="26" alt="Badge of Honor"></span></h2>
+<div class="trail-card">
+<p>Classic <strong>Sand Flats</strong> slickrock loop east of Hell’s Revenge: rolling Navajo fins, sandy approaches, and roller-coaster climbs including “Frenchies Fin” and “Kenny’s Climb.” About <strong>25 mi total / ~13 mi off highway</strong> per RR4W. Great first full trail day for a mixed group.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>3–5 hours</strong> on the fins (add Sand Flats entry and air-down).</p>
+<p><strong>Often combined with:</strong> same-day <a href="#hells">Hell’s Revenge</a> only if the group wants a <strong>very long Sand Flats day</strong> (~8–12+ hours total); more commonly a <strong>dedicated Fins day</strong> then Hell’s another day. <a href="#baby-lion">Baby Lion’s Back</a> is a common <strong>evening add-on</strong> (same fee area).</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> Steep climbs with <strong>long overhangs</strong>—scrape risk on transitions; pick bypass lines where offered.</li>
+<li><strong>Stock JL:</strong> Generally well matched; <strong>short wheelbase</strong> helps on tight fin climbs.</li>
+<li><strong>Gladiator:</strong> Watch <strong>tail swing</strong> on switchback-style slickrock turns.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=9">RR4W — Fins and Things</a>
+<a href="https://www.blm.gov/visit/sand-flats">BLM — Sand Flats fees, camping, and rules</a>
+<a href="https://www.trailsoffroad.com/US/utah/trails/549-hells-revenge">Trails Offroad — nearby Hell’s Revenge guide</a> (same fee area; good Sand Flats context)
+<a href="https://csginger.com/fins-and-things-moab/">CS Ginger — Fins and Things trail guide</a>
+</div>
+</div>
+
+<h2 id="wipe-out">Wipe-Out Hill <span class="rating-pill">RR4W 5</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="26" height="26" alt="Badge of Honor"></span></h2>
+<div class="trail-card">
+<p>Scenic <strong>~43 mi / ~19 mi off highway</strong> loop south of Canyonlands Airport and west of Hwy 191 through Bartlett Wash, Tusher Canyon, Courthouse Pasture, and Big Mesa. RR4W highlights: <strong>sandy hill</strong> early, wet/narrow <strong>Tusher Wash</strong> rock course (wide/long rigs fight <strong>sheetmetal</strong>), <strong>Wicked Ledge</strong>, short steep <strong>Wipe-Out Hill</strong>, and <strong>Rattlesnake Hill</strong> bumps. High “variety” trail—geology and views are a big payoff.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>5–8 hours</strong> for the full RR4W-style loop with a relaxed group.</p>
+<p><strong>Often combined with:</strong> <a href="#sevenmile-rim">Sevenmile Rim</a> when leaders include the <strong>Tusher / Big Mesa</strong> fork—you overlap the same country (still a full day). Otherwise usually <strong>standalone</strong> west of town.</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> <strong>Tusher Wash</strong> pinstriping and step damage risk; <strong>rear locker</strong> helps on sandy pulls per RR4W.</li>
+<li><strong>Stock JL:</strong> Narrow wash is your friend vs width; still watch <strong>rock sliders</strong> on Wicked Ledge / ledgy climbs.</li>
+<li><strong>Gladiator 35s:</strong> <strong>Width + wheelbase</strong> in Tusher—spot carefully; lockers help on Rattlesnake Hill.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=44">RR4W — Wipe-Out Hill</a>
+<a href="https://www.rr4w.com/userfiles/files/Trail%20Grid%20-%20EJS%202025%20Website.pdf">RR4W — EJS 2025 Trail Grid (ratings)</a>
+<a href="https://www.blm.gov/office/moab-field-office">BLM Moab Field Office</a> (closures and seasonal notices)
+<a href="https://www.quadratec.com/c/blog/jeep-adding-three-new-moab-based-badge-of-honor-trails">Quadratec — newer Moab BOH trails (incl. Wipe-Out Hill)</a>
+</div>
+</div>
+
+<h2 id="hells">Hell’s Revenge <span class="rating-pill">RR4W 6</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="26" height="26" alt="Badge of Honor"></span></h2>
+<div class="trail-card">
+<p>Premier <strong>Sand Flats</strong> slickrock route (~16 mi total, ~12 off highway): steep climbs/descents, famous optional obstacles (<strong>Hell’s Gate</strong>, <strong>Escalator</strong>, <strong>Mickey’s Hot Tub</strong>, etc.) with <strong>bypasses</strong> on many hard spots. Intersects the Slickrock Bike Trail in places. RR4W lists <strong>35+</strong> tires and <strong>front + rear lockers</strong>—plan spotting and conservative lines for stocker 33s.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>4–7 hours</strong> depending on how many optional obstacles you queue for and how busy Sand Flats is.</p>
+<p><strong>Often combined with:</strong> <a href="#fins">Fins and Things</a> on a <strong>monster Sand Flats day</strong> (only for fast groups), or—more realistically—<a href="#baby-lion">Baby Lion’s Back</a> as a <strong>same-evening</strong> fin hit. <a href="#hell-tip-toe">Hell’s Revenge Tip-Toe Trip</a> is an <strong>alternative</strong> to full Hell’s, not usually stacked back-to-back.</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> <strong>Escalator / steep V-notches</strong>, brake traction on downgrades, and <strong>breakover</strong> at the base of ledges; use bypasses freely.</li>
+<li><strong>Stock JL:</strong> Traction is often fine on Navajo slickrock; exposure and <strong>tall center of gravity</strong> matter more than raw grip—avoid hot-tub stunts without experience.</li>
+<li><strong>Gladiator 35s:</strong> Still long—<strong>breakover</strong> on double-apex climbs; lockers make the day relaxed on rated 6 moves.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=11">RR4W — Hell’s Revenge</a>
+<a href="https://www.blm.gov/visit/sand-flats">BLM — Sand Flats</a>
+<a href="https://www.trailsoffroad.com/US/utah/trails/549-hells-revenge">Trails Offroad — Hell’s Revenge</a>
+<a href="https://www.utah.com/moab/things-to-do/off-roading/">Utah.com — Moab off-roading</a>
+</div>
+</div>
+
+<h2 id="poison">Poison Spider Mesa <span class="rating-pill">RR4W 6</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="26" height="26" alt="Badge of Honor"></span></h2>
+<div class="trail-card">
+<p>Climbs from <strong>Potash Road (SR 279)</strong> onto the mesa northwest of town (~37 mi / ~16 off highway). Highlights include switchbacks, sandy pulls, the <strong>Waterfall</strong> ledge series, optional <strong>V-notch</strong> photo line, and big rim views (Jeep Arch, Moab below). <strong>Do not confuse</strong> with the <strong>“Where Eagles Dare”</strong> add-on (RR4W <strong>7</strong>) unless the whole group wants that tier.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>5–8 hours</strong> for the mesa loop at a social pace.</p>
+<p><strong>Often combined with:</strong> the scenic <strong>Potash Road</strong> drive to/from the trailhead (same SR 279 corridor—not a second “trail,” but part of the same outing). Treat as its own day versus <a href="#hells">Hell’s Revenge</a> / <a href="#fins">Fins</a> (different side of town).</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> <strong>Waterfall</strong> ledges and sand before them—momentum + protection for oil pan / sliders.</li>
+<li><strong>Stock JL:</strong> Good for tight ledge steps; <strong>35s+ recommended</strong> by RR4W for a reason—expect careful wheel placement.</li>
+<li><strong>Gladiator 35s:</strong> Length on switchbacks and <strong>V-notch</strong> optional squeeze—spot the rear bumper path.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=24">RR4W — Poison Spider Mesa</a>
+<a href="https://www.blm.gov/visit/moab-area-travel-plan">BLM — Moab-area travel management</a> (SR 279 corridor rules change over time)
+<a href="https://www.utah.com/moab/scenic-drives/potash-road/">Utah.com — Potash Road scenic drive</a> (approach road context)
+<a href="https://www.jeep.com/off-road/badge-of-honor.html">Jeep — Badge of Honor program</a>
+</div>
+</div>
+
+<h2 id="totw">Top of the World <span class="rating-pill">RR4W 6</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="26" height="26" alt="Badge of Honor"></span></h2>
+<div class="trail-card">
+<p>Long day: RR4W lists <strong>~64 mi pavement + ~25 off pavement</strong> to a dramatic overlook on <strong>Waring Mesa</strong> above Fisher Valley / Onion Creek (Dewey Bridge area on Utah 128). Much is scenic approach; the 4×4 section mixes <strong>broken rock, loose climbs, and shelf steps</strong> to the rim. Often windy. Confirm <strong>early-spring snow/mud</strong> on La Sal–side approaches before committing.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>8–11 hours</strong> door-to-door from Moab (long highway connectors + rim section + lunch).</p>
+<p><strong>Often combined with:</strong> usually <strong>standalone</strong> because of mileage. If you are already on the river corridor, plan <a href="#dome-plateau">Dome Plateau</a> as a <strong>different day</strong> (both are big).</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> <strong>Shelf steps + loose rock</strong>—long wheelbase can teeter; need solid skid package and careful line choice.</li>
+<li><strong>Stock JL:</strong> Traction can work with lockers; <strong>fuel range</strong> and long day fatigue matter as much as obstacles.</li>
+<li><strong>Gladiator 35s:</strong> Best matched to RR4W equipment call—still watch <strong>descending shelf traction</strong> when rocks are wet.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=38">RR4W — Top of the World</a>
+<a href="https://www.utah.com/moab/scenic-drives/scenic-byway-128/">Utah.com — Scenic Byway 128 (Colorado River)</a>
+<a href="https://www.blm.gov/office/moab-field-office">BLM Moab Field Office</a>
+<a href="https://www.jeep.com/off-road/badge-of-honor.html">Jeep — Badge of Honor</a>
+<a href="https://www.onxmaps.com/offroad/blog/top-jeep-badge-of-honor-trails">onX — Moab Badge of Honor trails overview</a>
+</div>
+</div>
+
+<h2 id="steel">Steel Bender <span class="rating-pill">RR4W 6</span> <span class="boh-badge" title="Jeep Badge of Honor trail"><img src="icons/badge-of-honor-mark.svg" width="26" height="26" alt="Badge of Honor"></span></h2>
+<div class="trail-card">
+<p><strong>Mill Creek</strong> country between Moab and the La Sals (~30 mi / ~15 off highway): multiple <strong>creek crossings</strong>, then sustained <strong>shelved hill climbs</strong>, optional <strong>“The Wall”</strong> loop with a slickrock fin, and a historically tricky <strong>rocky descent</strong> RR4W warns “continues to defy” maintenance—then more shelves and a <strong>slickrock descent</strong> to <strong>South Mill Creek</strong>. Rating has bounced with erosion—treat as a solid <strong>6</strong> mentally even when the grid says 6.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>5–8 hours</strong> with creek play and careful shelf spotting.</p>
+<p><strong>Often combined with:</strong> usually <strong>standalone</strong> east of town (different vibe than Sand Flats). Some locals pair a <strong>short Mill Creek scenic drive</strong> with dinner in Moab—not the same as the full trail.</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> RR4W lists <strong>35s + both lockers</strong>—expect <strong>shelf hill</strong> traction struggles and possible winch points if wet; skip “Wall” loop if unsure.</li>
+<li><strong>Stock JL:</strong> Creek crossings OK; <strong>shelved climbs</strong> are the filter—spot every hump, protect diffs.</li>
+<li><strong>Gladiator 35s + lift:</strong> Best fit on paper; still respect the <strong>maintained-but-nasty descent</strong>—long wheelbase can swap ends if you rush.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=46">RR4W — Steel Bender</a>
+<a href="https://www.rr4w.com/userfiles/files/Trail%20Grid%20-%20EJS%202025%20Website.pdf">RR4W — EJS 2025 Trail Grid</a>
+<a href="https://www.blm.gov/office/moab-field-office">BLM Moab Field Office</a>
+<a href="https://www.utah.com/moab/things-to-do/off-roading/">Utah.com — Moab off-roading</a>
+</div>
+</div>
+
+<h2 id="porcupine-rim">Porcupine Rim <span class="rating-pill">RR4W 6</span></h2>
+<div class="trail-card">
+<p>Starts from <strong>Sand Flats Road</strong> (~9.5 mi from Moab), drops to terraces above Negro Bill Canyon, then climbs to rim overlooks including <strong>Picture Rock</strong> over Castle Valley. RR4W lists <strong>~32 mi total / ~6 mi off highway</strong>; they warn the route is <strong>continuously rough</strong> (bedrock knobs and ledges) despite big views. Spring snow or mud is possible at Easter elevation.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>3–5 hours</strong> out-and-back at a photo-friendly pace.</p>
+<p><strong>Often combined with:</strong> other <strong>Sand Flats</strong> hits the same trip week—e.g. <a href="#lost-world">Lost World</a> or <a href="#fins">Fins and Things</a> on a <strong>different day</strong> (stacking two the same day is only for fast groups).</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> <strong>Off-camber ledges</strong> and growing rock ledges toward the rim—articulation and careful spotting; rear locker per RR4W.</li>
+<li><strong>Stock JL:</strong> Often doable with technique; <strong>Picture Rock</strong> positioning can feel exposed for passengers.</li>
+<li><strong>Gladiator 35s:</strong> Tire and locker stack helps; still a <strong>rough ride</strong>—plan suspension patience.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=12">RR4W — Porcupine Rim (trail id 12)</a>
+<a href="https://www.blm.gov/visit/sand-flats">BLM — Sand Flats Recreation Area</a>
+<a href="https://www.utah.com/moab/things-to-do/off-roading/">Utah.com — Moab off-roading overview</a>
+<a href="https://www.rr4w.com/ratings.cfm">RR4W — Rating system explained</a>
+</div>
+</div>
+
+<h2 id="flat-iron">Flat Iron Mesa <span class="rating-pill">RR4W 6</span></h2>
+<div class="trail-card">
+<p><strong>Kane Creek corridor</strong> country south of Moab: mesa roads and canyon overlooks on a mix of old two-tracks. RR4W lists <strong>~55 mi total / ~17 mi off highway</strong>, <strong>35″+</strong> tires, and <strong>front + rear lockers</strong>. Multiple named obstacles set the rating—some have bypasses, some do not. The optional <strong>Easter Egg Rock</strong> squeeze leads into a <strong>very narrow cliff-edge</strong> section that is not for anyone uncomfortable with exposure.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>6–9 hours</strong> for the full mesa tour.</p>
+<p><strong>Often combined with:</strong> usually its own <strong>Kane Creek day</strong> (Golden Spike / Chicken Corners country is the classic neighbor—confirm open status and group appetite). Not the same outing as <a href="#poison">Poison Spider</a> (Potash side).</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> Below RR4W’s posted minimums for this run—treat as <strong>leader discretion</strong> only, not a default group line.</li>
+<li><strong>Stock JL:</strong> Same story on tires/lockers versus RR4W call—possible in dry conditions with an experienced spotter, but not “by the book.”</li>
+<li><strong>Gladiator 35s + both lockers:</strong> Closest match to the club grid; still respect <strong>no-bypass</strong> spots and cliff exposure.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=16">RR4W — Flat Iron Mesa (trail id 16)</a>
+<a href="https://www.blm.gov/visit/moab-area-travel-plan">BLM — Moab-area travel management</a>
+<a href="https://www.blm.gov/office/moab-field-office">BLM Moab Field Office</a>
+<a href="https://www.utah.com/moab/things-to-do/off-roading/">Utah.com — Moab off-roading</a>
+</div>
+</div>
+
+<h2 id="sevenmile-rim">Sevenmile Rim <span class="rating-pill">RR4W 4</span></h2>
+<div class="trail-card">
+<p>Leaves <strong>US-191</strong> north of the <strong>UT-313</strong> junction (~11 mi north of Moab), crosses old <strong>Cotter uranium</strong> workings, then runs rim roads with Entrada cliffs, <strong>Uranium Arch</strong>, Merrimac/Monitor slickrock, and may dip through <strong>Tusher Pass</strong> into <strong>Tusher Wash</strong> (overlaps Wipe-Out Hill country if the full fork is used). RR4W lists <strong>~50 mi total / ~21 mi off highway</strong>—a big scenic day with moderate technicality.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>5–8 hours</strong> for the full published loop variant.</p>
+<p><strong>Often combined with:</strong> when the route uses <strong>Tusher / Big Mesa</strong>, you are in the same neighborhood as <a href="#wipe-out">Wipe-Out Hill</a>—some groups plan one trail and a <strong>future return</strong> for the other rather than same-day doubling.</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> Well matched; watch <strong>sidehill slickrock</strong> near Merrimac and sandy pulls late in the day.</li>
+<li><strong>Stock JL:</strong> Good fit for RR4W “4” with patience on sandy hills.</li>
+<li><strong>Gladiator 35s:</strong> Comfortable; still spot <strong>tail swing</strong> on tight rim turns.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=43">RR4W — Sevenmile Rim (trail id 43)</a>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=44">RR4W — Wipe-Out Hill</a> (adjacent Tusher system context)
+<a href="https://www.blm.gov/office/moab-field-office">BLM Moab Field Office</a>
+<a href="https://www.utah.com/moab/things-to-do/off-roading/">Utah.com — Moab off-roading</a>
+</div>
+</div>
+
+<h2 id="three-d">3-D <span class="rating-pill">RR4W 4</span></h2>
+<div class="trail-card">
+<p>Northwest of Moab around <strong>Hidden Canyon</strong> and <strong>Brink Spring</strong>: canyon bottom, rim, and a higher overlook (“three dimensions” of the same country). RR4W lists <strong>~59 mi total / ~28 mi off highway</strong>—mostly pleasant family-style 4×4 with a few hills that can challenge stock tires. Highlights include <strong>Mean Hill</strong> (hogback with drop-offs both sides) and seasonal sand in the canyon bottom.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>6–9 hours</strong> (mileage-heavy day).</p>
+<p><strong>Often combined with:</strong> usually <strong>standalone</strong> northwest of town. Some trips tag a <strong>highway scenic</strong> on Utah 191 before/after—not wheeling on this page.</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> Generally aligned with RR4W minimums; air down for sand.</li>
+<li><strong>Stock JL:</strong> Often fine; may need multiple attempts on <strong>Airport View Hill</strong> at highway pressures.</li>
+<li><strong>Gladiator 35s:</strong> Easy cruise; still respect hogback exposure for passengers.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=1">RR4W — 3-D (trail id 1)</a>
+<a href="https://www.blm.gov/office/moab-field-office">BLM Moab Field Office</a>
+<a href="https://www.utah.com/moab/things-to-do/off-roading/">Utah.com — Moab off-roading</a>
+<a href="https://www.rr4w.com/userfiles/files/Trail%20Grid%20-%20EJS%202025%20Website.pdf">RR4W — EJS 2025 Trail Grid</a>
+</div>
+</div>
+
+<h2 id="dome-plateau">Dome Plateau <span class="rating-pill">RR4W 4</span></h2>
+<div class="trail-card">
+<p>High mesa country <strong>north of the Colorado River</strong> and east of Arches, usually staged from the <strong>Dewey Bridge / Utah 128</strong> side—RR4W lists <strong>~98 mi total / ~30 mi off highway</strong> with long paved connectors. Forested plateau tops, mine-country scenery, arches along Entrada cliffs, dinosaur tracks, and a strong Colorado River overlook. Mostly dirt with one notable <strong>loose rock / ledge hill</strong> (“Again-and-Again Hill”) that may offer a guided bypass.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>8–11 hours</strong> (almost always a full day because of road miles).</p>
+<p><strong>Often combined with:</strong> <a href="#totw">Top of the World</a> is the usual “neighbor” in <strong>trip planning</strong> (same river-corridor staging)—typically <strong>not</strong> same day unless you like pain.</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> Good match; <strong>fuel and time</strong> are the real constraints on this mileage.</li>
+<li><strong>Stock JL:</strong> Traction usually fine on a “4”; plan a full day and carry extra fuel if you tend to run short.</li>
+<li><strong>Gladiator 35s:</strong> Comfortable on obstacles; watch <strong>length</strong> on tight hill switchbacks.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=8">RR4W — Dome Plateau (trail id 8)</a>
+<a href="https://www.utah.com/moab/scenic-drives/scenic-byway-128/">Utah.com — Scenic Byway 128</a>
+<a href="https://www.blm.gov/office/moab-field-office">BLM Moab Field Office</a>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=38">RR4W — Top of the World</a> (same general river-corridor planning context)
+</div>
+</div>
+
+<h2 id="btr-tip-toe">Behind the Rocks, Tip-Toe <span class="rating-pill">RR4W 5</span></h2>
+<div class="trail-card">
+<p>Scenic tour of <strong>Behind the Rocks</strong> that stays clear of the worst High Dive / White Knuckle obstacles on the hard route, but still intersects that system. RR4W lists <strong>~53 mi total / ~33 mi off highway</strong> and calls for a <strong>rear locker</strong>; rating was bumped as some rocky descents eroded. Surfaces are mostly sandy dirt with occasional ledgy drainages—great arches-in-the-distance scenery.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>7–9 hours</strong> (long off-pavement mileage).</p>
+<p><strong>Often combined with:</strong> usually <strong>standalone</strong> south/behind-the-rim day. The full <strong>Behind the Rocks</strong> hard line is a different commitment—Tip-Toe is the “big scenic” variant on this page.</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> Ledgy washes reward <strong>patient lines</strong> and rear traction; skip if wet clay is smearing rocks.</li>
+<li><strong>Stock JL:</strong> Often workable on a “5” Tip-Toe with spotting; protect sheetmetal on any rock gardens.</li>
+<li><strong>Gladiator 35s:</strong> Traction is rarely the limiter; mind <strong>width</strong> on brushy two-tracks.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=18">RR4W — Behind the Rocks Tip-Toe (trail id 18)</a>
+<a href="https://www.blm.gov/visit/moab-area-travel-plan">BLM — Moab-area travel management</a>
+<a href="https://www.blm.gov/office/moab-field-office">BLM Moab Field Office</a>
+<a href="https://www.utah.com/moab/things-to-do/off-roading/">Utah.com — Moab off-roading</a>
+</div>
+</div>
+
+<h2 id="hell-tip-toe">Hell’s Revenge, Tip-Toe Trip <span class="rating-pill">RR4W 4</span></h2>
+<div class="trail-card">
+<p>RR4W’s <strong>guided weekday</strong> flavor of Hell’s Revenge: most of the same slickrock scenery with <strong>bypasses emphasized</strong> at the hair-raising obstacles—aimed at cautious drivers and near-stock rigs. Listed as <strong>~16 mi total / ~12 mi off highway</strong>, <strong>33″+</strong>, no lockers required on paper. This is still <strong>Hell’s Revenge geology</strong> (exposure, steep climbs); it is not the same as a paved overlook.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>3–5 hours</strong> (similar footprint to <a href="#hells">full Hell’s Revenge</a>, less obstacle queue time).</p>
+<p><strong>Often combined with:</strong> <a href="#fins">Fins and Things</a> the same Sand Flats morning/afternoon is possible for a <strong>skills-building day</strong> (still long); or run Tip-Toe alone then <a href="#baby-lion">Baby Lion’s Back</a> at sunset.</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong></p>
+<ul>
+<li><strong>4Runner 33s:</strong> Reasonable entry to the Hell’s landscape if the group wants <strong>less obstacle drama</strong> than the full “6.”</li>
+<li><strong>Stock JL:</strong> Often the best fit for a Tip-Toe pace—still bring a spotter mindset.</li>
+<li><strong>Gladiator 35s:</strong> Easy mechanically; watch <strong>breakover</strong> on any optional harder spurs if the leader opens them.</li>
+</ul>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=37">RR4W — Hell’s Revenge, Tip-Toe Trip (trail id 37)</a>
+<a href="https://www.rr4w.com/trail-details.cfm?trailid=11">RR4W — Hell’s Revenge (full trail)</a>
+<a href="https://www.blm.gov/visit/sand-flats">BLM — Sand Flats Recreation Area</a>
+<a href="https://www.jeep.com/off-road/badge-of-honor.html">Jeep — Badge of Honor</a>
+</div>
+</div>
+
+<h2 id="shafer-dead-horse">Shafer Trail vs Dead Horse Point State Park</h2>
+<div class="trail-card">
+<p>These names come up in the same <strong>Island in the Sky / Colorado River overlook</strong> conversations, but they are <strong>not the same place</strong> and not the same agency.</p>
+<ul>
+<li><strong>Shafer Trail</strong> is a <strong>steep, switchbacked 4WD road</strong> in <strong>Canyonlands National Park — Island in the Sky</strong> (NPS), often described as requiring <strong>high clearance</strong> and comfort with <strong>exposure</strong>. It needs a <strong>park pass / fees</strong>, follows <strong>NPS road rules</strong> (including seasonal closures or maintenance gates—check current alerts), and is a <strong>different planning problem</strong> than RR4W’s Sand Flats “club trail” grid. It is <strong>not inside Dead Horse Point State Park</strong>.</li>
+<li><strong>Dead Horse Point State Park</strong> is a <strong>Utah State Parks</strong> unit on the peninsula rim northwest of Moab—famous <strong>gooseneck overlooks</strong>, hiking and biking trails, and developed camping. Great for a <strong>scenic half-day or sunset</strong>; off-roading is <strong>not</strong> a Shafer-style descent through the park’s main visitation experience.</li>
+</ul>
+<p class="muted">If you camp at Dead Horse, see <a href="moab-camping.html">Moab camping</a> for Kayenta/Wingate notes. For Shafer, start from the official <strong>Canyonlands</strong> pages the day you go—conditions and rules change.</p>
+
+<div class="trail-plan">
+<p><strong>Shafer Trail (one-way emphasis):</strong> about <strong>2–4 hours</strong> for cautious downhill/photo pacing (not counting Island in the Sky overlooks or the drive back around). Often planned with other <strong>Canyonlands paved viewpoints</strong> the same day.</p>
+<p><strong>Dead Horse Point State Park:</strong> about <strong>1–3 hours</strong> for overlooks + short walks; pairs naturally with a <strong>Moab → park → back</strong> scenic loop. Combine with <strong>Shafer</strong> only as a <strong>big-picture itinerary</strong> (different agencies, different roads—see bullets above).</p>
+</div>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.nps.gov/canyonlands/planyourvisit/shafer-trail.htm">NPS Canyonlands — Shafer Trail</a>
+<a href="https://www.nps.gov/canyonlands/planyourvisit/index.htm">NPS Canyonlands — Island in the Sky planner</a>
+<a href="https://stateparks.utah.gov/parks/dead-horse/">Utah State Parks — Dead Horse Point</a>
+<a href="moab-camping.html">Trip page — Moab camping</a> (Dead Horse campgrounds)
+</div>
+</div>
+
+<h2 id="baby-lion">Extra: Baby Lion’s Back (Sand Flats) <span class="rating-pill">not BOH</span></h2>
+<div class="trail-card">
+<p>Very short <strong>one-way</strong> Sand Flats practice fin near Hell’s Revenge / Fins—often cited ~15 minutes. <strong>Steep descent</strong> can end in a <strong>water pool</strong> after storms or snowmelt (hydrolock / deep wading risk). Third-party guides often call it <strong>moderate (~5)</strong>; not the same publication as RR4W’s grid. Fits a <strong>May 6 evening</strong> hit per your trip plan.</p>
+
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>20–45 minutes</strong> including staging, spotting, and turnaround (longer if you wait for other groups).</p>
+<p><strong>Often combined with:</strong> <a href="#hells">Hell’s Revenge</a> or <a href="#fins">Fins and Things</a> as a <strong>same-evening</strong> dessert (same Sand Flats pass mindset).</p>
+</div>
+
+<p><strong>Hardest parts vs your rigs:</strong> <strong>Descent angle + cross-slope</strong> (pick the easier rider line); <strong>pool depth</strong> at the bottom for 4Runner/JL; Gladiator—watch <strong>tail swing</strong> at the turnaround.</p>
+
+<div class="link-list">
+<strong>Links</strong>
+<a href="https://www.trailsoffroad.com/us/utah/scout-routes/1900-baby-lions-back">Trails Offroad — Baby Lions Back</a>
+<a href="https://www.blm.gov/visit/sand-flats">BLM — Sand Flats</a>
+<a href="https://www.onxmaps.com/offroad/trails/us/utah/baby-lions-back">onX Offroad — Baby Lions Back</a>
+<a href="https://www.utah.com/moab/things-to-do/off-roading/">Utah.com — Moab off-roading</a>
+</div>
+</div>
+
+<h2>Also BOH at RR4W ≤ 6, but not a Moab “town day”</h2>
+<p><strong>Elephant Hill</strong> (Canyonlands Needles) is <strong>RR4W 5</strong> on the same 2025 grid and is a Badge of Honor trail, but the trailhead is a <strong>long highway day</strong> from Moab and has <strong>NPS permits, timed access, and vehicle length rules</strong>—plan as its own national-park mission, not as filler between Sand Flats loops.</p>
+<div class="trail-plan">
+<p><strong>Typical time:</strong> about <strong>6–10 hours</strong> from Moab-area lodging as a <strong>full Needles mission</strong> (drive + trail + permits).</p>
+<p><strong>Often combined with:</strong> other <strong>Canyonlands Needles</strong> hikes or overlooks the same trip—not with <a href="#hells">Hell’s Revenge</a> same day.</p>
+</div>
+</article>
+</body></html>

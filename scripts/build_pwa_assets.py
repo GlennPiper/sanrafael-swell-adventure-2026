@@ -11,7 +11,7 @@ The ``BUILD_VERSION`` baked into ``service-worker.js`` is the cache namespace.
 Bumping it forces installed clients to re-download on next visit. We derive it
 from ``planning/trip_data.json`` (``generated_at`` + content hash) **and** the
 Markdown sources for standalone PWA pages (slot, fuel, overland alternates,
-alt itineraries), plus ``river-crossing.html`` and ``moab-camping.html``, so
+alt itineraries), plus ``river-crossing.html``, ``moab-camping.html``, and ``moab-trails.html``, so
 edits invalidate the cache even when ``trip_data.json`` is unchanged.
 
 The site's public URL is read from the ``SITE_URL`` env var (set by the GitHub
@@ -81,7 +81,7 @@ def _build_version() -> str:
         p = PLAN / name
         extra_raw += p.read_bytes() if p.exists() else b''
     # Standalone HTML not emitted from markdown (must bump SW when edited).
-    extra_html_names = ('river-crossing.html', 'moab-camping.html')
+    extra_html_names = ('river-crossing.html', 'moab-camping.html', 'moab-trails.html')
     for name in extra_html_names:
         p = BASE / name
         extra_raw += p.read_bytes() if p.exists() else b''
@@ -111,6 +111,7 @@ PRECACHE = [
     'overland-alternates.html',
     'river-crossing.html',
     'moab-camping.html',
+    'moab-trails.html',
     'trip-itinerary-alt-a.html',
     'trip-itinerary-alt-b.html',
     'trip-itinerary-alt-d.html',

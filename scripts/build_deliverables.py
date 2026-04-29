@@ -290,7 +290,7 @@ ALT_ROUTES_LINKS_HTML = '<a href="overland-alternates.html">Alt routes</a>'
 
 def _top_nav_html(current: str) -> str:
     """current is 'itinerary' | 'reference' | 'slot' | 'fuel' | 'overland-alt' |
-    'moab' | 'river' | 'none'. Per-alt itinerary HTML uses the main header template,
+    'moab' | 'trails' | 'river' | 'none'. Per-alt itinerary HTML uses the main header template,
     not this nav.
     """
     def link(href, label, key):
@@ -305,6 +305,7 @@ def _top_nav_html(current: str) -> str:
         link('trip-reference.html', 'Full reference', 'reference'),
         link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
         link('moab-camping.html', 'Moab camping', 'moab'),
+        link('moab-trails.html', 'Moab trails', 'trails'),
         link('river-crossing.html', 'River crossing (Fuller Bottom)', 'river'),
         link('fuel-plan.html', 'Fuel plan', 'fuel'),
         '<a href="trip-plan.gpx" download>GPX</a>',
@@ -1537,6 +1538,7 @@ def build_itinerary_html(variant=None):
 {reference_link_html}{ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="moab-camping.html">Moab camping</a> &middot;
+<a href="moab-trails.html">Moab trails</a> &middot;
 <a href="river-crossing.html">River crossing (Fuller Bottom)</a> &middot;
 <a href="fuel-plan.html">Fuel plan</a> &middot;
 <a href="{gpx_href}" download>Download GPX</a></div>
@@ -2221,6 +2223,7 @@ def build_reference_html():
 {ALT_ROUTES_LINKS_HTML} &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="moab-camping.html">Moab camping</a> &middot;
+<a href="moab-trails.html">Moab trails</a> &middot;
 <a href="river-crossing.html">River crossing (Fuller Bottom)</a> &middot;
 <a href="fuel-plan.html">Fuel plan</a> &middot;
 <a href="trip-plan.gpx" download>Download GPX</a></div>
@@ -2270,6 +2273,7 @@ def build_reference_html():
 <li><a href="planning/poi_decisions.md">planning/poi_decisions.md</a> (locked POI triage)</li>
 <li><a href="slot-canyon-guide.html">Slot canyon guide</a> (Day 3 hikes + links; offline) &mdash; source <a href="planning/slot-canyon-guide.md">planning/slot-canyon-guide.md</a></li>
 <li><a href="moab-camping.html">Moab camping</a> (BLM / Sand Flats / nearby options + map; offline) — edited as <code>moab-camping.html</code> in repo root</li>
+<li><a href="moab-trails.html">Moab trails</a> (BOH + RR4W ≤6 reference, links, rig notes; offline) — <code>moab-trails.html</code> in repo root</li>
 <li><a href="planning/campsite_plan.md">planning/campsite_plan.md</a> (camps + live availability check)</li>
 <li><a href="fuel-plan.html">Fuel plan</a> (full worksheet; offline) &mdash; source <a href="planning/fuel_plan.md">planning/fuel_plan.md</a></li>
 <li><a href="planning/realtime_info_sources.md">planning/realtime_info_sources.md</a></li>

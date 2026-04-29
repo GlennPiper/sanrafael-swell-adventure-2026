@@ -60,9 +60,12 @@ _publish/
 # build. Not committed; produced fresh into the publish staging dir.
 #
 # (Keep `assets/icon-source.svg` -- that one IS the source of truth.)
+# Exception: `icons/badge-of-honor-mark.svg` is a small static asset used by
+# `moab-trails.html` (BOH placeholder); track it so offline pages resolve.
 # ---------------------------------------------------------------------------
 manifest.webmanifest
 service-worker.js
 robots.txt
-icons/
+icons/*
+!icons/badge-of-honor-mark.svg
 assets/qr.png

@@ -73,8 +73,8 @@ jobs:
           set -euxo pipefail
           rm -rf _publish
           mkdir -p _publish
-          cp index.html trip-itinerary.html trip-reference.html slot-canyon-guide.html fuel-plan.html \
-            overland-alternates.html river-crossing.html moab-camping.html \
+            cp index.html trip-itinerary.html trip-reference.html slot-canyon-guide.html fuel-plan.html \
+            overland-alternates.html river-crossing.html moab-camping.html moab-trails.html \
             trip-itinerary-alt-a.html trip-itinerary-alt-b.html trip-itinerary-alt-d.html \
             trip-plan.gpx trip-plan-alt-a.gpx trip-plan-alt-b.gpx trip-plan-alt-d.gpx _publish/
           cp manifest.webmanifest service-worker.js robots.txt _publish/
