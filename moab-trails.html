@@ -55,6 +55,7 @@ article.md-page h2 {
   border-top: 1px solid #21262d;
 }
 article.md-page h2:first-of-type { border-top: none; padding-top: 0; }
+article.md-page h2[id] { scroll-margin-top: 52px; }
 article.md-page h3 { font-size: 16px; color: #f0f6fc; margin: 22px 0 10px; }
 article.md-page p { margin: 10px 0; }
 article.md-page ul { padding-left: 22px; }
@@ -206,20 +207,20 @@ td.ta-c { text-align: center; }
 <table>
 <thead><tr><th>Trail</th><th>RR4W</th><th class="boh-col" scope="col"><span class="sr-only">Jeep Badge of Honor</span><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="22" height="22" alt="" aria-hidden="true"> BOH</th><th>RR4W min tires (notes)</th><th>Lockers (RR4W notes)</th></tr></thead>
 <tbody>
-<tr><td>Lost World</td><td>3</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>33+</td><td>None required</td></tr>
-<tr><td>Fins and Things</td><td>4</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>33+</td><td>None required</td></tr>
-<tr><td>Wipe-Out Hill</td><td>5</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>33+</td><td>Rear locker yes</td></tr>
-<tr><td>Hell’s Revenge</td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
-<tr><td>Poison Spider Mesa</td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
-<tr><td>Top of the World</td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
-<tr><td>Steel Bender</td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
-<tr><td>Porcupine Rim</td><td>6</td><td class="ta-c">—</td><td>33+</td><td>Rear locker yes</td></tr>
-<tr><td>Flat Iron Mesa</td><td>6</td><td class="ta-c">—</td><td>35+</td><td>Front + rear</td></tr>
-<tr><td>Sevenmile Rim</td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
-<tr><td>3-D</td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
-<tr><td>Dome Plateau</td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
-<tr><td>Behind the Rocks Tip-Toe</td><td>5</td><td class="ta-c">—</td><td>33+</td><td>Rear locker yes</td></tr>
-<tr><td>Hell’s Revenge, Tip-Toe Trip</td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
+<tr><td><a href="#lost-world">Lost World</a></td><td>3</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>33+</td><td>None required</td></tr>
+<tr><td><a href="#fins">Fins and Things</a></td><td>4</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>33+</td><td>None required</td></tr>
+<tr><td><a href="#wipe-out">Wipe-Out Hill</a></td><td>5</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>33+</td><td>Rear locker yes</td></tr>
+<tr><td><a href="#hells">Hell’s Revenge</a></td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
+<tr><td><a href="#poison">Poison Spider Mesa</a></td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
+<tr><td><a href="#totw">Top of the World</a></td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
+<tr><td><a href="#steel">Steel Bender</a></td><td>6</td><td class="ta-c"><img src="icons/badge-of-honor-mark.svg" class="table-boh" width="24" height="24" alt="Listed in Jeep BOH app" title="Jeep Badge of Honor"></td><td>35+</td><td>Front + rear</td></tr>
+<tr><td><a href="#porcupine-rim">Porcupine Rim</a></td><td>6</td><td class="ta-c">—</td><td>33+</td><td>Rear locker yes</td></tr>
+<tr><td><a href="#flat-iron">Flat Iron Mesa</a></td><td>6</td><td class="ta-c">—</td><td>35+</td><td>Front + rear</td></tr>
+<tr><td><a href="#sevenmile-rim">Sevenmile Rim</a></td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
+<tr><td><a href="#three-d">3-D</a></td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
+<tr><td><a href="#dome-plateau">Dome Plateau</a></td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
+<tr><td><a href="#btr-tip-toe">Behind the Rocks Tip-Toe</a></td><td>5</td><td class="ta-c">—</td><td>33+</td><td>Rear locker yes</td></tr>
+<tr><td><a href="#hell-tip-toe">Hell’s Revenge, Tip-Toe Trip</a></td><td>4</td><td class="ta-c">—</td><td>33+</td><td>None required</td></tr>
 </tbody>
 </table>
 <p class="muted">RR4W “minimum” columns are <em>club guidance for Easter Jeep Safari runs</em>, not a legal gate on public BLM routes. <strong>BOH column:</strong> <img src="icons/badge-of-honor-mark.svg" class="table-boh" width="20" height="20" alt="" aria-hidden="true"> = commonly listed in the Jeep Badge of Honor app for Moab/Utah (verify current list); <strong>—</strong> = not treated as a separate BOH listing here.</p>
