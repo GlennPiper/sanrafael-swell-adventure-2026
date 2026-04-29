@@ -24,8 +24,11 @@ fi
 # Hardcoded participant first/last names. Keep this list in sync with the
 # local-only Participants.md roster. Adding names here only matters for the
 # scan -- they never appear in any tracked file.
+#
+# "Glenn" is intentionally omitted: the public site may credit the trip
+# organizer by first name (e.g. moab-trails.html shortlist). Phone and email
+# scans still protect contact info.
 NAMES=(
-  "Glenn"
   "Vahnessa"
   "Helligso"
   "Stradley"
