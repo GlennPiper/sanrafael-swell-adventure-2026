@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Weather UX — Option E (A-like + KPI tiles)</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0d1117;
+  --panel: #161b22;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #ff9d45;
+  --border: #30363d;
+  --link: #58a6ff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--link); }
+body { max-width: 820px; margin: 0 auto; padding: 20px 16px 48px; }
+.crumb { font-size: 14px; margin: 0 0 16px; }
+.crumb a { color: var(--muted); }
+h1 { font-size: 22px; margin: 0 0 8px; }
+.sub { color: var(--muted); margin: 0 0 24px; font-size: 14px; line-height: 1.5; }
+.day-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+.day-card h2 { margin: 0 0 12px; font-size: 18px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.day-weather {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  background: rgba(13, 17, 23, 0.6);
+  border-radius: 6px;
+  padding: 12px 14px 14px;
+}
+/* Title + location: one row when wide */
+.wx-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 20px;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+.wx-head h3 { margin: 0; font-size: 15px; color: var(--accent); }
+.wx-head .loc { margin: 0; font-size: 13px; color: var(--muted); text-align: right; line-height: 1.35; }
+@media (max-width: 540px) {
+  .wx-head { grid-template-columns: 1fr; }
+  .wx-head .loc { text-align: left; }
+}
+/* Clear Hi / Lo / Rain / Wind */
+.wx-kpi {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 4px 0 14px;
+}
+@media (max-width: 600px) {
+  .wx-kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 320px) {
+  .wx-kpi { grid-template-columns: 1fr; }
+}
+.wx-kpi-item {
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: center;
+}
+.wx-kpi-item .k {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.wx-kpi-item .v {
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  line-height: 1.15;
+}
+.wx-kpi-item .v .mph { font-size: 13px; font-weight: 600; color: var(--text); }
+.teaser { margin: 0 0 12px; font-size: 14px; line-height: 1.45; color: var(--text); }
+.wx-concerns {
+  background: #1f2a3a;
+  border: 1px solid #2d4a6e;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  font-size: 13px;
+}
+.wx-concerns strong { color: var(--accent); }
+.wx-concerns ul { margin: 6px 0 0; padding-left: 1.2em; }
+.wx-concerns li { margin: 4px 0; }
+.link-row { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+.link-row a { font-weight: 600; white-space: nowrap; }
+details { margin-top: 8px; font-size: 13px; }
+details summary { cursor: pointer; color: var(--muted); }
+.details-inner { margin-top: 10px; padding-left: 12px; border-left: 3px solid var(--accent); }
+.details-inner p { margin: 8px 0; }
+.om-list { margin: 8px 0 0; padding-left: 18px; }
+</style>
+</head>
+<body>
+<p class="crumb"><a href="index.html">Weather UX previews</a></p>
+<h1>Option E — A-like + KPI tiles</h1>
+<p class="sub">Keeps Option A’s quiet subsection. “Forecast for this day” with location/date on the same row when wide. Large Hi / Lo / Rain / Wind tiles. Concerns callout. NWS as a <strong>text link</strong> (no big button).</p>
+
+<article class="day-card">
+  <h2>May 7 (Thu) — Moab Day 1 (mock)</h2>
+  <section class="day-weather" aria-label="Weather for this day">
+    <div class="wx-head">
+      <h3>Forecast for this day</h3>
+      <p class="loc">Moab town / Sand Flats · 2026-05-07</p>
+    </div>
+    <div class="wx-kpi" aria-label="Key forecast numbers">
+      <div class="wx-kpi-item"><span class="k">Hi</span><span class="v">84°</span></div>
+      <div class="wx-kpi-item"><span class="k">Lo</span><span class="v">59°</span></div>
+      <div class="wx-kpi-item"><span class="k">Rain</span><span class="v">15%</span></div>
+      <div class="wx-kpi-item"><span class="k">Wind</span><span class="v">~22<span class="mph"> mph</span></span></div>
+    </div>
+    <p class="teaser">Mostly sunny and breezy on west winds — good travel weather; watch gusts on exposed rims (mock).</p>
+    <div class="wx-concerns">
+      <strong>Concerns</strong>
+      <ul>
+        <li>Breezy / windy — exposed rims and dust on dirt roads.</li>
+        <li>No automated red flags for slot entries on this snapshot (mock).</li>
+      </ul>
+    </div>
+    <p class="link-row">
+      <a href="https://forecast.weather.gov/MapClick.php?lat=38.5733&lon=-109.5498" target="_blank" rel="noopener">Open NWS forecast</a>
+      · <a href="https://open-meteo.com/en/docs" target="_blank" rel="noopener">Open-Meteo</a>
+      · <a href="https://www.wunderground.com/weather/us/ut/moab" target="_blank" rel="noopener">WU Moab (manual)</a>
+    </p>
+    <details>
+      <summary>Full forecast details</summary>
+      <div class="details-inner">
+        <p><strong>NWS (mock):</strong> Mostly sunny, with a high near 84. West wind 10 to 15 mph, with gusts as high as 25 mph. Thursday night: low around 59. Slight chance of showers after midnight — probability 15%.</p>
+        <p><strong>Open-Meteo (mock):</strong></p>
+        <ul class="om-list">
+          <li>Hi / Lo: 84°F / 59°F</li>
+          <li>Precip probability (max): 15%</li>
+          <li>Wind (10 m max): ~22 mph</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+</article>
+
+<article class="day-card">
+  <h2>May 10 (Sun) — Return to Boise (mock)</h2>
+  <section class="day-weather" aria-label="Weather for this day">
+    <div class="wx-head">
+      <h3>Forecast for this day</h3>
+      <p class="loc">Boise area (return) · 2026-05-10</p>
+    </div>
+    <div class="wx-kpi" aria-label="Key forecast numbers">
+      <div class="wx-kpi-item"><span class="k">Hi</span><span class="v">68°</span></div>
+      <div class="wx-kpi-item"><span class="k">Lo</span><span class="v">42°</span></div>
+      <div class="wx-kpi-item"><span class="k">Rain</span><span class="v">30%</span></div>
+      <div class="wx-kpi-item"><span class="k">Wind</span><span class="v">~12<span class="mph"> mph</span></span></div>
+    </div>
+    <p class="teaser">Partly cloudy and cooler; some shower chance early — fine for highway travel (mock).</p>
+    <div class="wx-concerns">
+      <strong>Concerns</strong>
+      <ul>
+        <li>Elevated rain chance (30%) — check NWS wording before any off-pavement detours (mock).</li>
+      </ul>
+    </div>
+    <p class="link-row">
+      <a href="https://forecast.weather.gov/MapClick.php?lat=43.6150&lon=-116.2343" target="_blank" rel="noopener">Open NWS forecast</a>
+      · <a href="https://open-meteo.com/en/docs" target="_blank" rel="noopener">Open-Meteo</a>
+    </p>
+    <details>
+      <summary>Full forecast details</summary>
+      <div class="details-inner">
+        <p><strong>NWS (mock):</strong> Partly cloudy, with a high near 68. Northwest wind 8 to 12 mph. Chance of precipitation 30%, mainly before 11am.</p>
+        <p><strong>Open-Meteo (mock):</strong></p>
+        <ul class="om-list">
+          <li>Hi / Lo: 68°F / 42°F</li>
+          <li>Precip probability (max): 30%</li>
+          <li>Wind (10 m max): ~12 mph</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+</article>
+</body>
+</html>

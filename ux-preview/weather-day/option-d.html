@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Weather UX — Option D (ultra-compact)</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0d1117;
+  --panel: #161b22;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #ff9d45;
+  --border: #30363d;
+  --link: #58a6ff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--link); }
+body { max-width: 820px; margin: 0 auto; padding: 20px 16px 48px; }
+.crumb { font-size: 14px; margin: 0 0 16px; }
+.crumb a { color: var(--muted); }
+h1 { font-size: 22px; margin: 0 0 8px; }
+.sub { color: var(--muted); margin: 0 0 24px; font-size: 14px; }
+.day-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+.day-card h2 { margin: 0 0 12px; font-size: 18px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+details.wx-compact {
+  margin-top: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #0d1117;
+  overflow: hidden;
+}
+details.wx-compact summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 10px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  font-size: 14px;
+}
+details.wx-compact summary::-webkit-details-marker { display: none; }
+.chip {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #21262d;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.chev { color: var(--accent); font-weight: 700; margin-left: auto; }
+.wx-expanded { padding: 0 14px 14px; border-top: 1px solid var(--border); font-size: 14px; }
+.wx-expanded h3 { font-size: 14px; color: var(--accent); margin: 12px 0 6px; }
+.loc { color: var(--muted); font-size: 13px; margin: 0 0 10px; }
+.links { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.links a {
+  padding: 10px 12px;
+  background: #21262d;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 13px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<p class="crumb"><a href="index.html">Weather UX previews</a></p>
+<h1>Option D — Ultra-compact</h1>
+<p class="sub">Collapsed chip bar; tap to expand for the same depth as today’s production block (mock).</p>
+
+<article class="day-card">
+  <h2>May 7 (Thu) — Moab Day 1 (mock)</h2>
+  <details class="wx-compact">
+    <summary>
+      <span class="chip">84° / 59°</span>
+      <span class="chip">Rain 15%</span>
+      <span class="chip">Wind ~22</span>
+      <span class="chev">Expand</span>
+    </summary>
+    <div class="wx-expanded">
+      <p class="loc">Moab town / Sand Flats · 2026-05-07</p>
+      <h3>NWS (mock)</h3>
+      <p>Mostly sunny, with a high near 84. West wind 10 to 15 mph, with gusts as high as 25 mph. Thursday night: low around 59. Slight chance of showers after midnight — probability 15%.</p>
+      <h3>Open-Meteo (mock)</h3>
+      <p>Hi/lo 84°F / 59°F · PoP 15% · Wind to ~22 mph.</p>
+      <h3>Concerns (mock)</h3>
+      <ul><li>Breezy on rims.</li><li>No major automated flags for slots.</li></ul>
+      <div class="links">
+        <a href="https://forecast.weather.gov/MapClick.php?lat=38.5733&lon=-109.5498" target="_blank" rel="noopener">NWS point forecast</a>
+        <a href="https://www.wunderground.com/weather/us/ut/moab" target="_blank" rel="noopener">WU Moab (manual)</a>
+      </div>
+    </div>
+  </details>
+</article>
+
+<article class="day-card">
+  <h2>May 10 (Sun) — Return to Boise (mock)</h2>
+  <details class="wx-compact">
+    <summary>
+      <span class="chip">68° / 42°</span>
+      <span class="chip">Rain 30%</span>
+      <span class="chip">Wind ~12</span>
+      <span class="chev">Expand</span>
+    </summary>
+    <div class="wx-expanded">
+      <p class="loc">Boise area (return) · 2026-05-10</p>
+      <h3>NWS (mock)</h3>
+      <p>Partly cloudy, with a high near 68. Northwest wind 8 to 12 mph. Chance of precipitation 30%, mainly before 11am.</p>
+      <h3>Open-Meteo (mock)</h3>
+      <p>Hi/lo 68°F / 42°F · PoP 30% · Wind to ~12 mph.</p>
+      <div class="links">
+        <a href="https://forecast.weather.gov/MapClick.php?lat=43.6150&lon=-116.2343" target="_blank" rel="noopener">NWS point forecast</a>
+      </div>
+    </div>
+  </details>
+</article>
+</body>
+</html>

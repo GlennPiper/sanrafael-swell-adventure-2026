@@ -185,8 +185,67 @@
     if (/snow|sleet|ice|wintry/.test(txt)) {
       out.push('Winter mix possible — verify passes (I-70) if traveling.');
     }
-    if (!out.length) out.push('No major automated flags — still check NWS alerts and slot guide before hikes.');
+    if (!out.length) out.push('No major automated flags — check NWS alerts and slot guide before hikes.');
     return out;
+  }
+
+  function mergeHi(n, o) {
+    if (o && o.hi != null) return Math.round(Number(o.hi));
+    if (n && n.hi != null) return n.hi;
+    return null;
+  }
+  function mergeLo(n, o) {
+    if (o && o.lo != null) return Math.round(Number(o.lo));
+    if (n && n.lo != null) return n.lo;
+    return null;
+  }
+  function mergePop(n, o) {
+    if (o && o.pop != null) return o.pop;
+    if (n && n.pop != null) return n.pop;
+    return null;
+  }
+  function mergeWindMph(n, o) {
+    if (o && o.windMph != null) return Number(o.windMph);
+    if (n && n.windMph != null) return n.windMph;
+    return null;
+  }
+
+  function isMoabCorridor(lat, lon) {
+    if (lat == null || lon == null) return false;
+    return lat >= 37.5 && lat <= 39.5 && lon >= -111.5 && lon <= -108.5;
+  }
+
+  function teaserText(n, o) {
+    if (n && n.shortForecast) {
+      var s = n.shortForecast;
+      return s.length <= 160 ? s : s.slice(0, 157) + '…';
+    }
+    if (o && (o.hi != null || o.lo != null)) {
+      return (
+        'Open-Meteo daily: hi/lo ' +
+        (o.hi != null ? Math.round(o.hi) : '—') +
+        '°/' +
+        (o.lo != null ? Math.round(o.lo) : '—') +
+        '°F' +
+        (o.pop != null ? ' · PoP ' + o.pop + '%' : '') +
+        (o.windMph != null ? ' · wind to ~' + Math.round(o.windMph) + ' mph' : '') +
+        '.'
+      );
+    }
+    return 'Forecast unavailable for this snapshot.';
+  }
+
+  function kpiV(innerHtml) {
+    return '<span class="v">' + innerHtml + '</span>';
+  }
+  function kpiCell(label, innerHtml) {
+    return (
+      '<div class="wx-kpi-item"><span class="k">' +
+      esc(label) +
+      '</span>' +
+      innerHtml +
+      '</div>'
+    );
   }
 
   function readCache(variantKey) {
@@ -206,81 +265,113 @@
   }
 
   function renderDaySlot(el, row, cachedDay, liveMeta) {
+    row = row || {};
     var loc = el.querySelector('.day-weather-loc');
-    var body = el.querySelector('.day-weather-body');
+    var dyn = el.querySelector('.day-weather-dynamic');
     if (loc) {
       loc.textContent =
-        row.location_label +
-        ' · ' +
-        row.date_iso +
-        ' (' +
-        (row.lat && row.lon ? row.lat.toFixed(4) + ', ' + row.lon.toFixed(4) : '') +
-        ')';
+        (row.location_label || '') + (row.date_iso ? ' · ' + row.date_iso : '');
     }
-    if (!body) return;
+    if (!dyn) return;
     if (!cachedDay) {
-      body.innerHTML =
+      dyn.className = 'day-weather-dynamic muted';
+      dyn.innerHTML =
         '<span class="muted">' +
-        (liveMeta && liveMeta.loading ? 'Loading forecasts…' : 'No cached data yet. Connect to refresh.') +
+        (liveMeta && liveMeta.loading
+          ? 'Loading forecasts…'
+          : 'No cached data yet. Connect to refresh when you want numbers for this leg.') +
         '</span>';
       return;
     }
     var n = cachedDay.nws && cachedDay.nws.summary;
     var o = cachedDay.openMeteo;
     var concerns = cachedDay.concerns || [];
-    var nwsLine =
+    var hi = mergeHi(n, o);
+    var lo = mergeLo(n, o);
+    var pop = mergePop(n, o);
+    var wind = mergeWindMph(n, o);
+
+    var hiInner = hi == null ? kpiV('—') : kpiV(hi + '°');
+    var loInner = lo == null ? kpiV('—') : kpiV(lo + '°');
+    var popInner = pop == null ? kpiV('—') : kpiV(pop + '%');
+    var windInner =
+      wind == null
+        ? kpiV('—')
+        : kpiV('~' + Math.round(wind) + '<span class="mph"> mph</span>');
+
+    var kpiHtml =
+      '<div class="wx-kpi" aria-label="Key forecast numbers">' +
+      kpiCell('Hi', hiInner) +
+      kpiCell('Lo', loInner) +
+      kpiCell('Rain', popInner) +
+      kpiCell('Wind', windInner) +
+      '</div>';
+
+    var teaser = '<p class="wx-teaser">' + esc(teaserText(n, o)) + '</p>';
+
+    var cHtml =
+      '<div class="wx-concerns"><strong>Concerns</strong><ul>' +
+      (concerns && concerns.length
+        ? concerns
+            .map(function (c) {
+              return '<li>' + esc(c) + '</li>';
+            })
+            .join('')
+        : '<li class="muted">None flagged by automated checks.</li>') +
+      '</ul></div>';
+
+    var nwsHref = (cachedDay.links && cachedDay.links.nws) || '';
+    var linkBits = [
+      '<a href="' + esc(nwsHref) + '" target="_blank" rel="noopener">NWS point forecast</a>',
+      '<a href="' + esc(openMeteoDocsUrl()) + '" target="_blank" rel="noopener">Open-Meteo docs</a>',
+    ];
+    if (isMoabCorridor(row.lat, row.lon)) {
+      linkBits.push(
+        '<a href="' + esc(wuMoabUrl()) + '" target="_blank" rel="noopener">WU Moab (manual)</a>'
+      );
+    }
+    var linkRow = '<p class="wx-link-row">' + linkBits.join(' · ') + '</p>';
+
+    var nwsFull =
       n
-        ? 'NWS: ' +
-          n.shortForecast +
-          ' · Hi/lo ' +
+        ? '<p><strong>NWS:</strong> ' +
+          esc(n.shortForecast) +
+          ' Hi/lo ' +
           n.hi +
           '°/' +
           n.lo +
           '°F' +
           (n.pop != null ? ' · PoP ' + n.pop + '%' : '') +
-          (n.windSpeed ? ' · Wind ' + esc(n.windSpeed) : '')
-        : cachedDay.nws && cachedDay.nws.error
-          ? 'NWS: ' + esc(cachedDay.nws.error)
-          : 'NWS: —';
-    var omLine = o
-      ? 'Open-Meteo: Hi/lo ' +
+          (n.windSpeed ? ' · Wind ' + esc(n.windSpeed) + '.' : '.') +
+          '</p>'
+        : '<p class="muted"><strong>NWS:</strong> ' +
+          esc((cachedDay.nws && cachedDay.nws.error) || '—') +
+          '</p>';
+    var omFull = o
+      ? '<p><strong>Open-Meteo (daily):</strong> Hi/lo ' +
         (o.hi != null ? Math.round(o.hi) : '—') +
         '°/' +
         (o.lo != null ? Math.round(o.lo) : '—') +
         '°F' +
         (o.pop != null ? ' · PoP ' + o.pop + '%' : '') +
-        (o.windMph != null ? ' · Wind to ~' + Math.round(o.windMph) + ' mph' : '')
-      : 'Open-Meteo: —';
-    var cHtml =
-      concerns && concerns.length
-        ? '<ul class="weather-concerns">' +
-          concerns.map(function (c) {
-            return '<li>' + esc(c) + '</li>';
-          }).join('') +
-          '</ul>'
-        : '';
+        (o.windMph != null ? ' · Wind to ~' + Math.round(o.windMph) + ' mph.' : '.') +
+        '</p>'
+      : '<p class="muted"><strong>Open-Meteo:</strong> —</p>';
+
+    var detailsHtml =
+      '<details class="wx-details">' +
+      '<summary>Full NWS + Open-Meteo text</summary>' +
+      '<div class="wx-details-inner">' +
+      nwsFull +
+      omFull +
+      '</div></details>';
+
     var stamp = cachedDay.fetchedAt
       ? '<p class="muted weather-stamp">Snapshot: ' + esc(cachedDay.fetchedAt) + '</p>'
       : '';
-    body.innerHTML =
-      '<p class="weather-dual">' +
-      esc(nwsLine) +
-      '</p><p class="weather-dual">' +
-      esc(omLine) +
-      '</p>' +
-      cHtml +
-      '<p class="muted weather-src-links">' +
-      '<a href="' +
-      esc((cachedDay.links && cachedDay.links.nws) || '') +
-      '" target="_blank" rel="noopener">NWS point forecast</a> · ' +
-      '<a href="' +
-      esc(openMeteoDocsUrl()) +
-      '" target="_blank" rel="noopener">Open-Meteo</a> · ' +
-      '<a href="' +
-      esc(wuMoabUrl()) +
-      '" target="_blank" rel="noopener">WU Moab (manual)</a>' +
-      '</p>' +
-      stamp;
+
+    dyn.className = 'day-weather-dynamic';
+    dyn.innerHTML = kpiHtml + teaser + cHtml + linkRow + detailsHtml + stamp;
   }
 
   function renderWeatherPageTable(tbody, daysRows, byDayId, liveMeta) {

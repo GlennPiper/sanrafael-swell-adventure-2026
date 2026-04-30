@@ -479,16 +479,15 @@ def merge_weather_days(weather_key: str, trip_days: list) -> list:
     return out
 
 
-def weather_day_section_html(day_id: str, weather_key: str) -> str:
-    wq = esc(weather_key)
+def weather_day_section_html(day_id: str) -> str:
+    # Option E layout: title row + dynamic block (KPI tiles, teaser, concerns, links, details) filled by weather-client.js
     return (
-        '<section class="day-weather card" data-day-weather="' + esc(day_id) + '" aria-live="polite">'
-        '<h3>Weather snapshot (this location)</h3>'
-        '<p class="muted day-weather-loc"></p>'
-        '<div class="day-weather-body muted">Loading forecasts…</div>'
-        '<p class="muted" style="margin:10px 0 0">'
-        '<a href="weather.html?variant=' + wq + '">Full trip weather page</a> — NWS + Open-Meteo; cached offline in this browser.'
-        '</p>'
+        '<section class="day-weather" data-day-weather="' + esc(day_id) + '" aria-live="polite">'
+        '<div class="wx-head">'
+        '<h3>Forecast for this day</h3>'
+        '<p class="day-weather-loc"></p>'
+        '</div>'
+        '<div class="day-weather-dynamic muted">Loading forecasts…</div>'
         '</section>'
     )
 
@@ -1131,12 +1130,31 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .warn{background:#4d1a00;border:1px solid #c7450c;border-radius:6px;padding:10px 12px;margin:10px 0;color:#ffd7a8}
 .info{background:#0b2239;border:1px solid #1f6feb;border-radius:6px;padding:10px 12px;margin:10px 0}
 .muted{color:var(--muted)}
-.day-weather.card{margin-top:12px;padding:12px 14px;background:#0d1117;border:1px solid var(--border)}
-.day-weather h3{margin:0 0 8px;font-size:15px;color:var(--accent)}
-.weather-dual{margin:6px 0;line-height:1.45;font-size:13px}
-.weather-concerns{margin:8px 0 0;padding-left:1.2em;font-size:13px}
-.weather-src-links{margin:8px 0 0;font-size:12px}
-.weather-stamp{margin:6px 0 0;font-size:12px}
+.day-weather{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);background:rgba(13,17,23,.55);border-radius:6px;padding:12px 14px 14px}
+.wx-head{display:grid;grid-template-columns:1fr auto;gap:6px 20px;align-items:baseline;margin-bottom:12px}
+.wx-head h3{margin:0;font-size:15px;color:var(--accent)}
+.wx-head .day-weather-loc{margin:0;font-size:13px;color:var(--muted);text-align:right;line-height:1.35}
+@media (max-width:540px){.wx-head{grid-template-columns:1fr}.wx-head .day-weather-loc{text-align:left}}
+.wx-kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:4px 0 14px}
+@media (max-width:600px){.wx-kpi{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:320px){.wx-kpi{grid-template-columns:1fr}}
+.wx-kpi-item{background:#0d1117;border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center}
+.wx-kpi-item .k{display:block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.wx-kpi-item .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent);line-height:1.15}
+.wx-kpi-item .v .mph{font-size:13px;font-weight:600;color:var(--text)}
+.wx-teaser{margin:0 0 12px;font-size:14px;line-height:1.45;color:var(--text)}
+.wx-concerns{background:#1f2a3a;border:1px solid #2d4a6e;border-left:4px solid var(--accent);border-radius:8px;padding:10px 12px;margin:12px 0;font-size:13px}
+.wx-concerns strong{color:var(--accent)}
+.wx-concerns ul{margin:6px 0 0;padding-left:1.2em}
+.wx-concerns li{margin:4px 0}
+.wx-link-row{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.6}
+.wx-link-row a{font-weight:600}
+.day-weather details.wx-details{margin-top:8px;font-size:13px}
+.day-weather details.wx-details summary{cursor:pointer;color:var(--muted)}
+.day-weather .wx-details-inner{margin-top:10px;padding-left:12px;border-left:3px solid var(--accent)}
+.day-weather .wx-details-inner p{margin:8px 0}
+.day-weather .wx-details-inner ul{margin:8px 0 0;padding-left:18px}
+.weather-stamp{margin:10px 0 0;font-size:12px;color:var(--muted)}
 .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
 ul.clean{margin:4px 0;padding-left:20px}
 ul.clean li{margin:3px 0}
@@ -1615,7 +1633,7 @@ def build_itinerary_html(variant=None):
             f'<h2>{esc(d["title"])}</h2>'
             f'<div class="muted">{esc(d.get("descr", ""))}</div>'
             f'<div class="summary-grid">{stat_html}</div>'
-            f'{weather_day_section_html(d["id"], wkey)}'
+            f'{weather_day_section_html(d["id"])}'
             f'{moab_trail_card_html(d, variant)}'
             f'{hike_warn}'
             f'{sched_html}'
