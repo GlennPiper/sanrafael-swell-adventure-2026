@@ -1720,15 +1720,29 @@ const POI_DESCRIPTIONS = {"DP - Petroglyph Canyon Panel": {"desc": "Petroglyph C
 })();
 
 
-// Leaflet is inlined in <head>, so `L` is already defined by the time this
-// script runs. Kick off the first-tab map immediately.
-if (typeof L !== 'undefined') {
-  ensureMap('route_overview');
-} else {
-  document.querySelectorAll('.map-offline-notice').forEach(el => {
-    el.textContent = 'Map engine failed to load. Refer to GPX or printed maps. Textual content is fully usable.';
-  });
-}
+// Leaflet is inlined in <head>. If the viewer's local calendar date matches a
+// trip leg's date_iso, open that day tab (first match when two legs share a date);
+// otherwise keep the default "Full route" tab and load its map.
+(function(){
+  const DAY_TAB_DATES = [{"id": "may1_boise_bonneville", "date": "2026-05-01"}, {"id": "day0_travel", "date": "2026-05-02"}, {"id": "day1_swell", "date": "2026-05-03"}, {"id": "day2_swell", "date": "2026-05-04"}, {"id": "day3_swell", "date": "2026-05-05"}, {"id": "day4_swell", "date": "2026-05-06"}, {"id": "day4_moab_transit", "date": "2026-05-06"}, {"id": "day5_moab", "date": "2026-05-07"}, {"id": "day6_moab", "date": "2026-05-08"}, {"id": "day7_moab", "date": "2026-05-09"}, {"id": "day8_return", "date": "2026-05-10"}];
+  if (typeof L === 'undefined') {
+    document.querySelectorAll('.map-offline-notice').forEach(el => {
+      el.textContent = 'Map engine failed to load. Refer to GPX or printed maps. Textual content is fully usable.';
+    });
+    return;
+  }
+  const y = new Date();
+  const today = y.getFullYear() + '-' + String(y.getMonth() + 1).padStart(2, '0') + '-' + String(y.getDate()).padStart(2, '0');
+  let picked = null;
+  for (let i = 0; i < DAY_TAB_DATES.length; i++) {
+    if (DAY_TAB_DATES[i].date === today) { picked = DAY_TAB_DATES[i].id; break; }
+  }
+  if (picked && activateTab(picked)) {
+    setTimeout(() => ensureMap(picked), 30);
+  } else {
+    ensureMap('route_overview');
+  }
+})();
 </script>
 <script>window.__SRS_WEATHER_BOOT__={"variantKey": "main", "days": [{"day_id": "may1_boise_bonneville", "date_iso": "2026-05-01", "lat": 40.7472, "lon": -114.0378, "location_label": "Wendover / Bonneville overnight corridor", "trip_label": "May 1 (Fri) - Meet + Bonneville overnight", "trip_title": "Boise meet -> Bonneville Salt Flats area"}, {"day_id": "day0_travel", "date_iso": "2026-05-02", "lat": 38.9953, "lon": -110.1599, "location_label": "Green River (I-70 staging)", "trip_label": "May 2 (Sat) - Travel + Stage", "trip_title": "Bonneville area -> Black Dragon Canyon"}, {"day_id": "day1_swell", "date_iso": "2026-05-03", "lat": 39.0985, "lon": -110.785, "location_label": "Wedge Overlook area (Day 1 camp)", "trip_label": "May 3 (Sun) - Day 1: Black Dragon -> Wedge", "trip_title": "Day 1: Black Dragon Canyon -> Wedge Overlook"}, {"day_id": "day2_swell", "date_iso": "2026-05-04", "lat": 38.78, "lon": -110.855, "location_label": "Tomsich Butte / Reds Canyon", "trip_label": "May 4 (Mon) - Day 2: Wedge -> Tomsich / Reds", "trip_title": "Day 2: Wedge -> Eagle Canyon -> Reds Canyon"}, {"day_id": "day3_swell", "date_iso": "2026-05-05", "lat": 38.653, "lon": -110.668, "location_label": "Temple Mountain trailhead area", "trip_label": "May 5 (Tue) - Day 3: Reds -> Temple Mtn", "trip_title": "Day 3: Tomsich Butte -> Behind-the-Reef -> Temple Mtn"}, {"day_id": "day4_swell", "date_iso": "2026-05-06", "lat": 38.85, "lon": -110.55, "location_label": "Swell corridor (Temple Mtn toward Sinbad / I-70)", "trip_label": "May 6 (Wed AM) - Day 4 AM: Temple Mtn -> Sinbad", "trip_title": "Day 4 AM: Temple Mtn -> Head of Sinbad / Dutchman Arch"}, {"day_id": "day4_moab_transit", "date_iso": "2026-05-06", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab (PM arrival / Sand Flats side)", "trip_label": "May 6 (Wed PM) - Transit to Moab", "trip_title": "Head of Sinbad -> I-70 E -> Moab"}, {"day_id": "day5_moab", "date_iso": "2026-05-07", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 7 (Thu) - Moab Day 1", "trip_title": "Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)"}, {"day_id": "day6_moab", "date_iso": "2026-05-08", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 8 (Fri) - Moab Day 2", "trip_title": "Moab Day 2 — Wipe-Out Hill (RR4W 44)"}, {"day_id": "day7_moab", "date_iso": "2026-05-09", "lat": 38.471, "lon": -109.745, "location_label": "Dead Horse Point area (rim / exposure)", "trip_label": "May 9 (Sat) - Moab Day 3", "trip_title": "Moab Day 3 — Top of the World (RR4W 38)"}, {"day_id": "day8_return", "date_iso": "2026-05-10", "lat": 43.615, "lon": -116.2343, "location_label": "Boise area (return)", "trip_label": "May 10 (Sun) - Return to Boise", "trip_title": "Sand Flats (Moab) -> Boise (Federal Way meet)"}]};</script>
 <script src="weather-client.js"></script>

@@ -1720,15 +1720,29 @@ const POI_DESCRIPTIONS = {"DP - Head of Sinbad Petroglyph": {"desc": "The Head o
 })();
 
 
-// Leaflet is inlined in <head>, so `L` is already defined by the time this
-// script runs. Kick off the first-tab map immediately.
-if (typeof L !== 'undefined') {
-  ensureMap('route_overview');
-} else {
-  document.querySelectorAll('.map-offline-notice').forEach(el => {
-    el.textContent = 'Map engine failed to load. Refer to GPX or printed maps. Textual content is fully usable.';
-  });
-}
+// Leaflet is inlined in <head>. If the viewer's local calendar date matches a
+// trip leg's date_iso, open that day tab (first match when two legs share a date);
+// otherwise keep the default "Full route" tab and load its map.
+(function(){
+  const DAY_TAB_DATES = [{"id": "altD_may1_bonneville", "date": "2026-05-01"}, {"id": "altD_day0_travel", "date": "2026-05-02"}, {"id": "altD_day1_swell", "date": "2026-05-03"}, {"id": "altD_day2_swell", "date": "2026-05-04"}, {"id": "altD_day3_swell", "date": "2026-05-05"}, {"id": "altD_day4_moab_transit", "date": "2026-05-06"}, {"id": "altD_day5_moab", "date": "2026-05-07"}, {"id": "altD_day6_moab", "date": "2026-05-08"}, {"id": "altD_day7_moab", "date": "2026-05-09"}, {"id": "altD_day8_return", "date": "2026-05-10"}];
+  if (typeof L === 'undefined') {
+    document.querySelectorAll('.map-offline-notice').forEach(el => {
+      el.textContent = 'Map engine failed to load. Refer to GPX or printed maps. Textual content is fully usable.';
+    });
+    return;
+  }
+  const y = new Date();
+  const today = y.getFullYear() + '-' + String(y.getMonth() + 1).padStart(2, '0') + '-' + String(y.getDate()).padStart(2, '0');
+  let picked = null;
+  for (let i = 0; i < DAY_TAB_DATES.length; i++) {
+    if (DAY_TAB_DATES[i].date === today) { picked = DAY_TAB_DATES[i].id; break; }
+  }
+  if (picked && activateTab(picked)) {
+    setTimeout(() => ensureMap(picked), 30);
+  } else {
+    ensureMap('route_overview');
+  }
+})();
 </script>
 <script>window.__SRS_WEATHER_BOOT__={"variantKey": "alt-d", "days": [{"day_id": "altD_may1_bonneville", "date_iso": "2026-05-01", "lat": 40.7472, "lon": -114.0378, "location_label": "Wendover / Bonneville overnight corridor", "trip_label": "May 1 (Fri) - Meet + Bonneville overnight", "trip_title": "Boise meet -> Bonneville Salt Flats area"}, {"day_id": "altD_day0_travel", "date_iso": "2026-05-02", "lat": 38.9953, "lon": -110.1599, "location_label": "Green River (I-70 staging)", "trip_label": "May 2 (Sat) - Travel + Stage (Temple Mtn side)", "trip_title": "Bonneville area -> Temple Mountain Townsite (staging)"}, {"day_id": "altD_day1_swell", "date_iso": "2026-05-03", "lat": 38.653, "lon": -110.668, "location_label": "Crack Canyon TH / Temple side (BTR split)", "trip_label": "May 3 (Sun) - Day 1: Temple Mtn -> Sinbad -> BTR W -> Crack camp", "trip_title": "Day 1 (reverse, BTR east half): Temple Mtn -> Dutchman -> Sinbad -> BTR W to Crack trailhead cluster"}, {"day_id": "altD_day2_swell", "date_iso": "2026-05-04", "lat": 38.78, "lon": -110.855, "location_label": "Hidden Splendor / mid-corridor", "trip_label": "May 4 (Mon) - Day 2: Crack -> BTR W + HS Overlook -> Family Butte", "trip_title": "Day 2 (reverse): Crack -> BTR west (Miner's Cabin) -> Hidden Splendor -> Tomsich / Hondu -> Reds / Lucky Strike -> Loan Warrior / Swaseys / Icebox / Eagle Canyon -> Family Butte"}, {"day_id": "altD_day3_swell", "date_iso": "2026-05-05", "lat": 39.0985, "lon": -110.785, "location_label": "Wedge / Buckhorn toward split", "trip_label": "May 5 (Tue) - Day 3: Family Butte -> Wedge (breather)", "trip_title": "Day 3 (reverse, breather): Family Butte -> Eva Conover -> Drips -> River crossing -> Fuller Bottom -> Wedge Overlook"}, {"day_id": "altD_day4_moab_transit", "date_iso": "2026-05-06", "lat": 38.9953, "lon": -110.1599, "location_label": "Green River / I-70 toward Moab", "trip_label": "May 6 (Wed) - Split at Wedge; stay-overs I-70 E to Moab", "trip_title": "Early-leavers N exit via Green River Cutoff (09:30 target); stay-overs run Buckhorn + Black Dragon string -> Sand Flats cluster (V1)"}, {"day_id": "altD_day5_moab", "date_iso": "2026-05-07", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 7 (Thu) - Moab Day 1", "trip_title": "Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)"}, {"day_id": "altD_day6_moab", "date_iso": "2026-05-08", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 8 (Fri) - Moab Day 2", "trip_title": "Moab Day 2 — Wipe-Out Hill (RR4W 44)"}, {"day_id": "altD_day7_moab", "date_iso": "2026-05-09", "lat": 38.471, "lon": -109.745, "location_label": "Dead Horse Point area (rim / exposure)", "trip_label": "May 9 (Sat) - Moab Day 3", "trip_title": "Moab Day 3 — Top of the World (RR4W 38)"}, {"day_id": "altD_day8_return", "date_iso": "2026-05-10", "lat": 43.615, "lon": -116.2343, "location_label": "Boise area (return)", "trip_label": "May 10 (Sun) - Return to Boise", "trip_title": "Moab -> Boise"}]};</script>
 <script src="weather-client.js"></script>

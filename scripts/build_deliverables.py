@@ -1920,6 +1920,14 @@ def build_itinerary_html(variant=None):
     }
 
     map_json = json.dumps(map_payload)
+    # Calendar day -> tab id for "open today's leg" on load (browser local date).
+    # If several legs share one date_iso, the first in itinerary order wins.
+    day_tab_dates = [
+        {'id': d['id'], 'date': d['date_iso']}
+        for d in days
+        if d.get('date_iso')
+    ]
+    day_tab_dates_json = json.dumps(day_tab_dates, ensure_ascii=False)
 
     # POI description dialog: map every POI name with a <desc> to its description + meta
     poi_desc_map = collect_poi_descriptions(data)
@@ -2480,15 +2488,29 @@ document.querySelectorAll('.schedule-controls').forEach(attachSchedule);
 
 {poi_desc_dialog_js}
 
-// Leaflet is inlined in <head>, so `L` is already defined by the time this
-// script runs. Kick off the first-tab map immediately.
-if (typeof L !== 'undefined') {{
-  ensureMap('{ROUTE_OVERVIEW_ID}');
-}} else {{
-  document.querySelectorAll('.map-offline-notice').forEach(el => {{
-    el.textContent = 'Map engine failed to load. Refer to GPX or printed maps. Textual content is fully usable.';
-  }});
-}}
+// Leaflet is inlined in <head>. If the viewer's local calendar date matches a
+// trip leg's date_iso, open that day tab (first match when two legs share a date);
+// otherwise keep the default "Full route" tab and load its map.
+(function(){{
+  const DAY_TAB_DATES = {day_tab_dates_json};
+  if (typeof L === 'undefined') {{
+    document.querySelectorAll('.map-offline-notice').forEach(el => {{
+      el.textContent = 'Map engine failed to load. Refer to GPX or printed maps. Textual content is fully usable.';
+    }});
+    return;
+  }}
+  const y = new Date();
+  const today = y.getFullYear() + '-' + String(y.getMonth() + 1).padStart(2, '0') + '-' + String(y.getDate()).padStart(2, '0');
+  let picked = null;
+  for (let i = 0; i < DAY_TAB_DATES.length; i++) {{
+    if (DAY_TAB_DATES[i].date === today) {{ picked = DAY_TAB_DATES[i].id; break; }}
+  }}
+  if (picked && activateTab(picked)) {{
+    setTimeout(() => ensureMap(picked), 30);
+  }} else {{
+    ensureMap('{ROUTE_OVERVIEW_ID}');
+  }}
+}})();
 </script>
 {weather_scripts}
 {PWA_REGISTER_JS}
