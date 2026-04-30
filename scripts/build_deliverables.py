@@ -401,14 +401,14 @@ def _top_nav_html(
 
     lis = [
         li_itinerary(),
-        li_link('overland-alternates.html', 'Alt routes', 'overland-alt'),
-        li_link('trip-reference.html', 'Full reference', 'reference'),
+        li_link('fuel-plan.html', 'Fuel plan', 'fuel'),
         li_link(weather_href, 'Weather', 'weather'),
+        li_link('river-crossing.html', 'River crossing (Fuller Bottom)', 'river'),
         li_link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
         li_link('moab-camping.html', 'Moab camping', 'moab'),
         li_link('moab-trails.html', 'Moab trails', 'trails'),
-        li_link('river-crossing.html', 'River crossing (Fuller Bottom)', 'river'),
-        li_link('fuel-plan.html', 'Fuel plan', 'fuel'),
+        li_link('overland-alternates.html', 'Alt routes', 'overland-alt'),
+        li_link('trip-reference.html', 'Full reference', 'reference'),
         li_link(gpx_href, 'GPX', '_gpx', download=True),
     ]
     ul = '<ul class="top-nav-list" id="top-nav-list">' + ''.join(lis) + '</ul>'
