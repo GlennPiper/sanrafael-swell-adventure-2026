@@ -143,7 +143,7 @@ DAYS = [
             'Primary trail: Hell’s Revenge — Tip-Toe Trip (RR4W trail id 37, Sand Flats fee area). '
             'Optional slickrock warm-up: Baby Lion’s Back this morning or Wed May 6 evening — see moab-trails.html#baby-lion. '
             'Sand Flats day-use + camping fees at the booth; cluster FCFS pads in camp block below. '
-            'Map orange line is RR4W-published geometry (decimated for this page) — navigate with judgment; '
+            'Map orange line is a field-recorded GPX track (decimated for this page) — navigate with judgment; '
             'load trip-plan.gpx in Gaia/onX if basemap tiles are offline.'
         ),
         'mi_lo': None,
@@ -175,7 +175,7 @@ DAYS = [
         'type': 'moab',
         'descr': (
             'Primary trail: Top of the World (RR4W trail id 38; Potash / SR 279 approach). '
-            'Last full Moab day — pack for Sunday departure. RR4W route on map; verify closures and '
+            'Last full Moab day — pack for Sunday departure. Map line is field-recorded GPX; verify closures and '
             'group comfort with exposure before committing.'
         ),
         'mi_lo': None,

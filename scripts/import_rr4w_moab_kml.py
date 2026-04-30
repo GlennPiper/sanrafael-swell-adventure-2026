@@ -6,6 +6,11 @@ Re-run when RR4W updates a trail, then commit the JSON. Builds stay offline/dete
 Usage:
   py -3 scripts/import_rr4w_moab_kml.py
   py -3 scripts/import_rr4w_moab_kml.py --from-dir planning
+
+Trails **37** (Hell's) and **38** (Top of the World) use GPX tracks from
+``planning/hell_s_revenge_kmz.gpx`` and ``planning/top-of-the-world-2024.gpx``
+when those files exist (Gaia / field recordings); RR4W KML is still used for
+trail **44** and for metadata links on 37/38.
 """
 from __future__ import annotations
 
@@ -19,6 +24,12 @@ import xml.etree.ElementTree as ET
 
 PLAN = pathlib.Path(__file__).resolve().parent.parent / 'planning'
 OUT_PATH = PLAN / 'moab_rr4w_geometry.json'
+
+# Field / Gaia GPX replaces KML-derived polylines for these RR4W ids (full track in JSON; HTML maps decimate).
+GPX_TRACK_OVERRIDES: dict[str, pathlib.Path] = {
+    '37': PLAN / 'hell_s_revenge_kmz.gpx',
+    '38': PLAN / 'top-of-the-world-2024.gpx',
+}
 
 TRAILS = {
     '37': {
@@ -263,6 +274,50 @@ def load_kml(path: pathlib.Path) -> ET.Element:
     return ET.fromstring(text)
 
 
+def load_gpx_track_and_waypoints(path: pathlib.Path) -> tuple[list[list[float]], list[tuple[float, float, str]]]:
+    """All ``trkpt`` in document order; waypoints from ``wpt``."""
+    root = load_kml(path)
+    track: list[list[float]] = []
+    wpts: list[tuple[float, float, str]] = []
+    for el in root.iter():
+        tag = _local(el.tag)
+        if tag == 'trkpt':
+            la, lo = el.get('lat'), el.get('lon')
+            if la is None or lo is None:
+                continue
+            lat, lon = float(la), float(lo)
+            if track and track[-1][0] == lat and track[-1][1] == lon:
+                continue
+            track.append([lat, lon])
+        elif tag == 'wpt':
+            la, lo = el.get('lat'), el.get('lon')
+            if la is None or lo is None:
+                continue
+            name = ''
+            for ch in el:
+                if _local(ch.tag) == 'name':
+                    name = _text(ch)
+                    break
+            wpts.append((float(la), float(lo), name.strip() or 'Waypoint'))
+    # Drop obvious GPS teleports; keep field tracks dense.
+    track = _longest_run_without_long_edges(track, max_edge_m=5000.0)
+    return track, wpts
+
+
+def apply_gpx_track_override(tid: str, blob: dict, meta: dict) -> dict:
+    path = GPX_TRACK_OVERRIDES.get(tid)
+    if not path or not path.is_file():
+        return blob
+    track, wpts = load_gpx_track_and_waypoints(path)
+    if len(track) < 2:
+        return blob
+    rel = path.relative_to(path.parents[1]).as_posix()
+    pois = build_pois_for_trail(tid, track, wpts, meta)
+    out = {**blob, 'track_points': track, 'pois': pois}
+    out['geometry_source_gpx'] = rel
+    return out
+
+
 def fetch_kml(trail_id: str) -> ET.Element:
     url = f'https://www.rr4w.com/kml/{trail_id}.kml'
     req = urllib.request.Request(url, headers={'User-Agent': 'SRS2026TripPlanImport/1.0'})
@@ -310,12 +365,15 @@ def main() -> None:
         else:
             root = fetch_kml(tid)
         trails_out[tid] = trail_blob(tid, root, downloaded_at)
+        trails_out[tid] = apply_gpx_track_override(tid, trails_out[tid], TRAILS[tid])
 
     payload = {
         'source': (
             'RR4W KML (processed): LineStrings greedy-chained by nearest endpoint, '
             'then longest run with edges capped at 700 m to drop telemetry spikes. '
-            'Re-run import_rr4w_moab_kml.py after RR4W updates.'
+            'Trails 37 and 38 use GPX field tracks from planning/ when present '
+            '(hell_s_revenge_kmz.gpx, top-of-the-world-2024.gpx). '
+            'Re-run import_rr4w_moab_kml.py after RR4W or GPX updates.'
         ),
         'trails': trails_out,
     }

@@ -496,9 +496,15 @@ def moab_trail_card_html(d, variant):
 def moab_rr4w_map_note_html(d):
     if d.get('type') != 'moab' or not d.get('moab_trail'):
         return ''
+    mt = d['moab_trail']
+    gpx = mt.get('geometry_source_gpx')
+    if gpx:
+        src = f'field-recorded GPX ({esc(gpx)})'
+    else:
+        src = '<strong>RR4W</strong> KML'
     return (
         '<p class="muted" style="margin:10px 2px 0;font-size:12px;line-height:1.45">'
-        '<strong>Orange line:</strong> trail centerline from <strong>RR4W</strong> KML '
+        f'<strong>Orange line:</strong> trail centerline from {src} '
         '(decimated for this page). It is a <em>planning</em> geometry, not live navigation '
         'or obstacle routing — confirm on the ground.</p>'
     )

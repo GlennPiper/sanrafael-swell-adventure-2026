@@ -47,6 +47,7 @@ def _moab_trail_public(blob: dict) -> dict[str, Any]:
         'rr4w_url': blob['rr4w_url'],
         'kml_url': blob.get('kml_url'),
         'downloaded_at': blob.get('downloaded_at'),
+        'geometry_source_gpx': blob.get('geometry_source_gpx'),
         'display_name': meta.get('display_name'),
         'moab_trails_anchor': meta.get('moab_trails_anchor'),
         'rating': meta.get('rating'),
