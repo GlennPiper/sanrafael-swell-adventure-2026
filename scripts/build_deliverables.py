@@ -2013,6 +2013,9 @@ const MAP_DATA = {map_json};
 const MAPS = {{}};
 // dayId -> {{ schedPoiId: Leaflet layer }} for backup stops toggled by row checkboxes.
 const BACKUP_MARKER_REGISTRY = {{}};
+// Optional GPS dot per map (never used for initial fitBounds).
+let __SRS_LAST_GPS = null;
+const __SRS_MY_LOC_BY_DAY = {{}};
 
 function esriLayer(name) {{
   // Online Esri tile sources; we mark failed tiles transparent so the
@@ -2107,6 +2110,52 @@ function ensureMap(dayId) {{
   }}
   addLegend(m);
   MAPS[dayId] = m;
+  syncMyLocationForDay(dayId);
+}}
+
+function syncMyLocationForDay(dayId) {{
+  const map = MAPS[dayId];
+  if (!map || __SRS_LAST_GPS == null) return;
+  const lat = __SRS_LAST_GPS.lat;
+  const lon = __SRS_LAST_GPS.lon;
+  let layer = __SRS_MY_LOC_BY_DAY[dayId];
+  if (!layer) {{
+    layer = L.circleMarker([lat, lon], {{
+      radius: 9,
+      color: '#ffffff',
+      weight: 2,
+      fillColor: '#2f80ff',
+      fillOpacity: 0.95,
+      interactive: true,
+      pane: 'markerPane',
+    }}).addTo(map);
+    layer.bindPopup('Your location (GPS, approximate)');
+    __SRS_MY_LOC_BY_DAY[dayId] = layer;
+  }} else {{
+    layer.setLatLng([lat, lon]);
+  }}
+  try {{ layer.bringToFront(); }} catch (e) {{}}
+}}
+
+function syncMyLocationAllMaps() {{
+  Object.keys(MAPS).forEach((id) => syncMyLocationForDay(id));
+}}
+
+function startMyLocationWatch() {{
+  if (!navigator.geolocation) return;
+  try {{
+    navigator.geolocation.watchPosition(
+      (pos) => {{
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        if (lat == null || lon == null || !Number.isFinite(lat) || !Number.isFinite(lon)) return;
+        __SRS_LAST_GPS = {{ lat, lon }};
+        syncMyLocationAllMaps();
+      }},
+      () => {{}},
+      {{ enableHighAccuracy: true, maximumAge: 30000, timeout: 20000 }}
+    );
+  }} catch (e) {{}}
 }}
 
 function syncBackupMarkersForDay(dayId) {{
@@ -2187,7 +2236,11 @@ function addLegend(m) {{
       row(_svgDiamond('#56d4f5', 14), "Origin (prior night's camp)") +
       '<div class="legend-row"><span class="legend-swatch">' +
         '<span class="legend-line" style="background:#ff9d45"></span>' +
-      '</span><span>Route track</span></div>';
+      '</span><span>Route track</span></div>' +
+      row(
+        '<span class="legend-dot" style="background:#2f80ff;border:2px solid #fff;box-sizing:border-box"></span>',
+        'You (GPS, if browser allows)'
+      );
     L.DomEvent.disableClickPropagation(div);
     return div;
   }};
@@ -2511,6 +2564,7 @@ document.querySelectorAll('.schedule-controls').forEach(attachSchedule);
     ensureMap('{ROUTE_OVERVIEW_ID}');
   }}
 }})();
+setTimeout(function() {{ startMyLocationWatch(); }}, 800);
 </script>
 {weather_scripts}
 {PWA_REGISTER_JS}
