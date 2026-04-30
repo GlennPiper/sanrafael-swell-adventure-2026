@@ -33,6 +33,7 @@ from trip_core import (  # noqa: E402
     print_payload_summary,
     write_payload,
 )
+from moab_layers import apply_moab_trails  # noqa: E402
 from alts.common import (  # noqa: E402
     FUEL_PLAN_SUMMARY,
     GROUP_COUNTS,
@@ -180,27 +181,30 @@ DAYS = [
         'id': 'altD_day5_moab',
         'label': 'May 7 (Thu) - Moab Day 1',
         'date_iso': '2026-05-07',
-        'title': 'Moab - Day 1 (activities TBD)',
+        'title': 'Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)',
         'type': 'moab',
-        'descr': 'Sand Flats base camp + activities TBD.',
+        'descr': (
+            'Primary trail: Hell’s Revenge Tip-Toe (RR4W 37). Optional Baby Lion warm-up: moab-trails.html#baby-lion. '
+            'Sand Flats fees; see camp block.'
+        ),
         'camp_key': 'altD_day5_moab',
     },
     {
         'id': 'altD_day6_moab',
         'label': 'May 8 (Fri) - Moab Day 2',
         'date_iso': '2026-05-08',
-        'title': 'Moab - Day 2 (activities TBD)',
+        'title': 'Moab Day 2 — Wipe-Out Hill (RR4W 44)',
         'type': 'moab',
-        'descr': 'Full Moab day.',
+        'descr': 'Primary trail: Wipe-Out Hill (RR4W 44). RR4W map geometry; use GPX when offline.',
         'camp_key': 'altD_day6_moab',
     },
     {
         'id': 'altD_day7_moab',
         'label': 'May 9 (Sat) - Moab Day 3',
         'date_iso': '2026-05-09',
-        'title': 'Moab - Day 3 (activities TBD)',
+        'title': 'Moab Day 3 — Top of the World (RR4W 38)',
         'type': 'moab',
-        'descr': 'Final Moab day. Prep for departure.',
+        'descr': 'Primary trail: Top of the World (RR4W 38). Prep for Sunday departure.',
         'camp_key': 'altD_day7_moab',
     },
     {
@@ -266,6 +270,7 @@ def build() -> pathlib.Path:
         elif d['id'] == 'altD_day8_return':
             d['synthetic_track_points'] = hw.get('sand_flats_to_boise_federal_way') or []
         days_spec.append(d)
+    days_spec = apply_moab_trails(days_spec, 'altD')
     payload = build_payload(
         days_spec=days_spec,
         camp_data=CAMPS,

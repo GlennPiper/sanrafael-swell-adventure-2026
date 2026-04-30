@@ -31,6 +31,7 @@ from trip_core import (  # noqa: E402
     print_payload_summary,
     write_payload,
 )
+from moab_layers import apply_moab_trails  # noqa: E402
 from alts.common import (  # noqa: E402
     FUEL_PLAN_SUMMARY,
     GROUP_COUNTS,
@@ -172,18 +173,25 @@ DAYS = [
         'id': 'altA_day6_moab',
         'label': 'May 8 (Fri) - Moab Day 1',
         'date_iso': '2026-05-08',
-        'title': 'Moab - Day 1 (activities TBD)',
+        'title': 'Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)',
         'type': 'moab',
-        'descr': 'Arches / Canyonlands / SR 279 petroglyphs / slickrock -- activities TBD.',
+        'descr': (
+            'Primary trail: Hell’s Revenge Tip-Toe (RR4W 37). Alt A has two full Moab trail days before return — '
+            'Top of the World (RR4W 38) is not scheduled on this variant. Optional Baby Lion warm-up: '
+            'moab-trails.html#baby-lion. Sand Flats fees at booth; see camp block.'
+        ),
         'camp_key': 'altA_day6_moab',
     },
     {
         'id': 'altA_day7_moab',
         'label': 'May 9 (Sat) - Moab Day 2',
         'date_iso': '2026-05-09',
-        'title': 'Moab - Day 2 (activities TBD)',
+        'title': 'Moab Day 2 — Wipe-Out Hill (RR4W 44)',
         'type': 'moab',
-        'descr': 'Full Moab day.',
+        'descr': (
+            'Primary trail: Wipe-Out Hill (RR4W 44). Last Moab trail day before Sunday drive home. '
+            'RR4W geometry on map; use GPX offline as needed.'
+        ),
         'camp_key': 'altA_day7_moab',
     },
     {
@@ -251,6 +259,7 @@ def build() -> pathlib.Path:
         elif d['id'] == 'altA_day8_return':
             d['synthetic_track_points'] = hw.get('sand_flats_to_boise_federal_way') or []
         days_spec.append(d)
+    days_spec = apply_moab_trails(days_spec, 'altA')
     payload = build_payload(
         days_spec=days_spec,
         camp_data=CAMPS,

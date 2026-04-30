@@ -29,6 +29,7 @@ from trip_core import (
     print_payload_summary,
     write_payload,
 )
+from moab_layers import apply_moab_trails  # noqa: E402
 
 BASE = pathlib.Path(__file__).resolve().parent.parent
 PLAN = BASE / 'planning'
@@ -136,10 +137,15 @@ DAYS = [
         'id': 'day5_moab',
         'label': 'May 7 (Thu) - Moab Day 1',
         'date_iso': '2026-05-07',
-        'title': 'Moab - Day 1 (activities TBD)',
+        'title': 'Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)',
         'type': 'moab',
-        'descr': 'Sand Flats cluster base camp + activities TBD (Arches, Canyonlands Island in the Sky, '
-                 'SR 279 petroglyphs, Hell\'s Revenge, Fins-n-Things, Slickrock, etc.)',
+        'descr': (
+            'Primary trail: Hell’s Revenge — Tip-Toe Trip (RR4W trail id 37, Sand Flats fee area). '
+            'Optional slickrock warm-up: Baby Lion’s Back this morning or Wed May 6 evening — see moab-trails.html#baby-lion. '
+            'Sand Flats day-use + camping fees at the booth; cluster FCFS pads in camp block below. '
+            'Map orange line is RR4W-published geometry (decimated for this page) — navigate with judgment; '
+            'load trip-plan.gpx in Gaia/onX if basemap tiles are offline.'
+        ),
         'mi_lo': None,
         'mi_hi': None,
         'miles': None,
@@ -149,9 +155,13 @@ DAYS = [
         'id': 'day6_moab',
         'label': 'May 8 (Fri) - Moab Day 2',
         'date_iso': '2026-05-08',
-        'title': 'Moab - Day 2 (activities TBD)',
+        'title': 'Moab Day 2 — Wipe-Out Hill (RR4W 44)',
         'type': 'moab',
-        'descr': 'Full Moab day. Activities TBD.',
+        'descr': (
+            'Primary trail: Wipe-Out Hill (RR4W trail id 44). Sand Flats / Moab-area fees as posted; '
+            'see camp block for Sand Flats cluster. Map line is RR4W geometry for planning — use live '
+            'maps + GPX in the field.'
+        ),
         'mi_lo': None,
         'mi_hi': None,
         'miles': None,
@@ -161,9 +171,13 @@ DAYS = [
         'id': 'day7_moab',
         'label': 'May 9 (Sat) - Moab Day 3',
         'date_iso': '2026-05-09',
-        'title': 'Moab - Day 3 (activities TBD)',
+        'title': 'Moab Day 3 — Top of the World (RR4W 38)',
         'type': 'moab',
-        'descr': 'Final Moab day. Activities TBD. Prep for departure.',
+        'descr': (
+            'Primary trail: Top of the World (RR4W trail id 38; Potash / SR 279 approach). '
+            'Last full Moab day — pack for Sunday departure. RR4W route on map; verify closures and '
+            'group comfort with exposure before committing.'
+        ),
         'mi_lo': None,
         'mi_hi': None,
         'miles': None,
@@ -583,6 +597,7 @@ def main() -> None:
     days_spec: list[dict] = []
     for day in DAYS:
         days_spec.append(_attach_main_highway_tracks(hw, day))
+    days_spec = apply_moab_trails(days_spec, 'main')
 
     payload = build_payload(
         days_spec=days_spec,

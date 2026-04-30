@@ -446,6 +446,64 @@ def esc(s):
     return html.escape(str(s))
 
 
+def moab_trail_card_html(d, variant):
+    """Rich links for Moab trail days (``moab_trail`` comes from ``moab_layers``)."""
+    mt = d.get('moab_trail')
+    if not mt or d.get('type') != 'moab':
+        return ''
+    gpx = esc(variant.get('gpx_filename') or 'trip-plan.gpx')
+    rr4w = esc(mt.get('rr4w_url') or '')
+    anchor = mt.get('moab_trails_anchor') or ''
+    anchor_href = esc(anchor)
+    disp = esc(mt.get('display_name') or 'Trail')
+    tid = int(mt.get('rr4w_id') or 0)
+    rating = esc(mt.get('rating') or '')
+    length = esc(mt.get('length_mi') or '')
+    tires = esc(mt.get('tires_min') or '')
+    notes = esc(mt.get('notes') or '')
+    baby = ''
+    if tid == 37:
+        baby = (
+            '<p class="muted" style="margin:8px 0 0;font-size:12px">'
+            'Optional slickrock warm-up: <a href="moab-trails.html#baby-lion">Baby Lion’s Back</a> '
+            '(short Sand Flats fin — see narrative on moab-trails.html).</p>'
+        )
+    return (
+        '<div class="info trail-card" style="margin-top:12px;line-height:1.5">'
+        '<h3 style="margin:0 0 6px">Today’s trail</h3>'
+        f'<p style="margin:0"><strong>{disp}</strong> &middot; '
+        f'<a href="{rr4w}" target="_blank" rel="noopener">RR4W trail {tid}</a>'
+        f' &middot; <a href="{anchor_href}">Trip trail notes</a></p>'
+        '<ul style="margin:8px 0 0;padding-left:1.2em">'
+        f'<li><strong>RR4W / plan:</strong> {rating}</li>'
+        f'<li><strong>Length:</strong> {length}</li>'
+        f'<li><strong>Tires (listing):</strong> {tires}</li>'
+        f'<li><strong>Note:</strong> {notes}</li>'
+        '</ul>'
+        f'{baby}'
+        '<p class="muted" style="margin:10px 0 0;font-size:12px">'
+        '<strong>Sand Flats fees:</strong> day-use + camping collected at the Sand Flats booth — see '
+        '<a href="https://www.recreation.gov/gateways/2160" target="_blank" rel="noopener">Recreation.gov '
+        'Sand Flats</a> and the camp cards below.</p>'
+        '<p class="muted" style="margin:8px 0 0;font-size:12px">'
+        '<strong>Offline:</strong> Esri basemap tiles need connectivity; the orange track and pins still '
+        f'reflect committed coordinates. Load <a href="{gpx}" download>{gpx}</a> in Gaia, onX, or Apple Maps '
+        'as a backup.</p>'
+        '</div>'
+    )
+
+
+def moab_rr4w_map_note_html(d):
+    if d.get('type') != 'moab' or not d.get('moab_trail'):
+        return ''
+    return (
+        '<p class="muted" style="margin:10px 2px 0;font-size:12px;line-height:1.45">'
+        '<strong>Orange line:</strong> trail centerline from <strong>RR4W</strong> KML '
+        '(decimated for this page). It is a <em>planning</em> geometry, not live navigation '
+        'or obstacle routing — confirm on the ground.</p>'
+    )
+
+
 STATUS_BADGE = {
     'primary': ('primary', 'Primary'),
     'backup': ('backup', 'Backup'),
@@ -918,13 +976,19 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .map-wrap.is-fullscreen .map-fs-btn .fs-icon-enter{display:none}
 .map-wrap.is-fullscreen .map-fs-btn .fs-icon-exit{display:inline}
 .map-wrap.is-fullscreen .map-fs-btn .fs-label::before{content:"Exit "}
-/* Native :fullscreen pseudo-class makes the wrapper and inner map fill the viewport. */
-.map-wrap:fullscreen,.map-wrap:-webkit-full-screen{width:100vw;height:100vh;background:#0d1117;padding:0;border-radius:0}
-.map-wrap:fullscreen .map,.map-wrap:-webkit-full-screen .map{width:100%;height:100%;border-radius:0;border:0;margin:0}
+/* Native :fullscreen pseudo-class makes the wrapper and inner map fill the viewport.
+   Flex layout: percentage heights on .map need a definite parent chain; map-stage flex:1
+   gives Leaflet a real box (fixes black fullscreen on file:// and many browsers). */
+.map-wrap:fullscreen,.map-wrap:-webkit-full-screen{width:100vw;height:100vh;background:#0d1117;padding:0;border-radius:0;
+  display:flex;flex-direction:column}
+.map-wrap:fullscreen .map-stage,.map-wrap:-webkit-full-screen .map-stage{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
+.map-wrap:fullscreen .map,.map-wrap:-webkit-full-screen .map{flex:1;min-height:0;width:100%;height:auto!important;border-radius:0;border:0;margin:0}
 .map-wrap:fullscreen .map-fs-btn,.map-wrap:-webkit-full-screen .map-fs-btn{bottom:28px;right:14px}
 /* Fallback "max" mode when the browser denies native fullscreen. */
-.map-wrap.is-fullscreen-fallback{position:fixed;inset:0;z-index:10000;width:100vw;height:100vh;margin:0;background:#0d1117;border-radius:0}
-.map-wrap.is-fullscreen-fallback .map{width:100%;height:100%;border-radius:0;border:0;margin:0}
+.map-wrap.is-fullscreen-fallback{position:fixed;inset:0;z-index:10000;width:100vw;height:100vh;margin:0;background:#0d1117;border-radius:0;
+  display:flex;flex-direction:column}
+.map-wrap.is-fullscreen-fallback .map-stage{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
+.map-wrap.is-fullscreen-fallback .map{flex:1;min-height:0;width:100%;height:auto!important;border-radius:0;border:0;margin:0}
 .map-wrap.is-fullscreen-fallback .map-fs-btn .fs-icon-enter{display:none}
 .map-wrap.is-fullscreen-fallback .map-fs-btn .fs-icon-exit{display:inline}
 .map-wrap.is-fullscreen-fallback .map-fs-btn .fs-label::before{content:"Exit "}
@@ -1335,6 +1399,7 @@ def build_itinerary_html(variant=None):
                 'Navigate with Google Maps (or similar) in real time for lanes, traffic, and closures.'
                 '</p>'
             )
+        moab_rr4w_note = moab_rr4w_map_note_html(d) if has_map else ''
         map_html = (
             f'<div class="map-wrap" id="map-wrap-{d["id"]}">'
             f'<div class="map-stage">'
@@ -1345,7 +1410,7 @@ def build_itinerary_html(variant=None):
             f'<span class="fs-label">Fullscreen</span></button>'
             f'<div id="{map_id}" class="map" data-day-id="{d["id"]}"><div class="map-offline-notice">'
             'Loading map... (requires internet for tiles; falls back to coordinates list if offline)'
-            f'</div></div></div>{hw_note}</div>'
+            f'</div></div></div>{hw_note}{moab_rr4w_note}</div>'
             if has_map else
             '<div class="info">No mapped track segment for this day (travel/transit/Moab day).</div>'
         )
@@ -1400,6 +1465,7 @@ def build_itinerary_html(variant=None):
             f'<h2>{esc(d["title"])}</h2>'
             f'<div class="muted">{esc(d.get("descr", ""))}</div>'
             f'<div class="summary-grid">{stat_html}</div>'
+            f'{moab_trail_card_html(d, variant)}'
             f'{hike_warn}'
             f'{sched_html}'
             f'{map_html}'
@@ -1443,7 +1509,10 @@ def build_itinerary_html(variant=None):
             show_statuses = {'primary', 'hike_candidate', 'backup', 'conditional'}
         for p in pois:
             if p['status'] in show_statuses and p.get('lat') and p.get('lon'):
-                markers.append({'lat': p['lat'], 'lon': p['lon'], 'name': p['name'], 'kind': 'poi'})
+                markers.append({
+                    'lat': p['lat'], 'lon': p['lon'], 'name': p['name'],
+                    'kind': p.get('map_kind') or 'poi',
+                })
         # Scheduled days with a driven track: bonus/backup rows use the same mile-sorted
         # merge as the stops table; expose them on the map only when the row checkbox
         # is checked (see sched_poi_id + syncBackupMarkersForDay in inline JS).
@@ -1725,6 +1794,8 @@ function _svgDiamond(color, size) {{
 }}
 const MARKER_STYLE = {{
   poi:             {{kind: 'circle',  color: '#238636', radius: 6, label: 'Stop'}},
+  trailhead:       {{kind: 'circle',  color: '#f0883e', radius: 8, label: 'Trailhead (RR4W)'}},
+  trail_poi:       {{kind: 'circle',  color: '#1f6feb', radius: 6, label: 'Trail landmark (RR4W)'}},
   camp_primary:    {{kind: 'tri',     color: '#a371f7', size: 20,  label: 'Camp (primary)'}},
   camp_secondary:  {{kind: 'tri',     color: '#e3a008', size: 18,  label: 'Camp (backup)'}},
   camp_tertiary:   {{kind: 'tri',     color: '#8b949e', size: 16,  label: 'Camp (last-resort)'}},
@@ -1759,6 +1830,8 @@ function addLegend(m) {{
       '<span>' + text + '</span></div>';
     div.innerHTML =
       row('<span class="legend-dot" style="background:#238636"></span>', 'Primary stop / hike') +
+      row('<span class="legend-dot" style="background:#f0883e;width:11px;height:11px;border-radius:2px;display:inline-block"></span>', 'Trailhead (RR4W)') +
+      row('<span class="legend-dot" style="background:#1f6feb"></span>', 'Trail landmark (RR4W)') +
       row(_svgTriangle('#a371f7', 14), 'Camp (primary)') +
       row(_svgTriangle('#e3a008', 14), 'Camp (backup)') +
       row(_svgTriangle('#8b949e', 14), 'Camp (last-resort)') +
@@ -1805,6 +1878,20 @@ function _fsExit() {{
 function _fsElement() {{
   return document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || null;
 }}
+function _invalidateAllMapSizes() {{
+  requestAnimationFrame(() => {{
+    Object.keys(MAPS).forEach(k => {{
+      const m = MAPS[k];
+      if (m) m.invalidateSize({{animate: false}});
+    }});
+    requestAnimationFrame(() => {{
+      Object.keys(MAPS).forEach(k => {{
+        const m = MAPS[k];
+        if (m) m.invalidateSize({{animate: false}});
+      }});
+    }});
+  }});
+}}
 document.addEventListener('click', function(e) {{
   const btn = e.target.closest('.map-fs-btn');
   if (!btn) return;
@@ -1817,12 +1904,18 @@ document.addEventListener('click', function(e) {{
     _fsExit();
   }} else {{
     const p = _fsRequest(wrap);
-    if (p && p.catch) p.catch(() => {{
-      // Fallback: if native fullscreen is denied (rare), use a CSS-only "max" mode.
-      wrap.classList.toggle('is-fullscreen-fallback');
-      const mm = MAPS[dayId];
-      if (mm) setTimeout(() => mm.invalidateSize(), 50);
-    }});
+    if (p && typeof p.then === 'function') {{
+      p.then(() => {{
+        setTimeout(_invalidateAllMapSizes, 0);
+        setTimeout(_invalidateAllMapSizes, 200);
+      }}).catch(() => {{
+        wrap.classList.toggle('is-fullscreen-fallback');
+        setTimeout(_invalidateAllMapSizes, 0);
+        setTimeout(_invalidateAllMapSizes, 200);
+      }});
+    }} else {{
+      setTimeout(_invalidateAllMapSizes, 0);
+    }}
   }}
 }});
 function _fsChange() {{
@@ -1831,11 +1924,8 @@ function _fsChange() {{
   if (fsEl && fsEl.classList && fsEl.classList.contains('map-wrap')) {{
     fsEl.classList.add('is-fullscreen');
   }}
-  // Tell Leaflet the container changed size so it repaints + recenters.
-  Object.keys(MAPS).forEach(k => {{
-    const m = MAPS[k];
-    if (m) setTimeout(() => m.invalidateSize(), 80);
-  }});
+  setTimeout(_invalidateAllMapSizes, 0);
+  setTimeout(_invalidateAllMapSizes, 150);
 }}
 document.addEventListener('fullscreenchange', _fsChange);
 document.addEventListener('webkitfullscreenchange', _fsChange);
