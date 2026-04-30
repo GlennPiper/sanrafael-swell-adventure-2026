@@ -168,6 +168,30 @@ def write_manifest() -> None:
                 'purpose': 'maskable',
             },
         ],
+        # Long-press / right-click app icon (where supported): deep links into the PWA.
+        'shortcuts': [
+            {
+                'name': 'Daily itinerary',
+                'short_name': 'Itinerary',
+                'description': 'Day-by-day route, maps, and weather strips',
+                'url': './trip-itinerary.html',
+                'icons': [{'src': 'icons/icon-192.png', 'sizes': '192x192', 'type': 'image/png'}],
+            },
+            {
+                'name': 'Trip weather',
+                'short_name': 'Weather',
+                'description': 'Dual forecast table and route variant switcher',
+                'url': './weather.html',
+                'icons': [{'src': 'icons/icon-192.png', 'sizes': '192x192', 'type': 'image/png'}],
+            },
+            {
+                'name': 'Full reference',
+                'short_name': 'Reference',
+                'description': 'Camps, fuel, links, and knowledge dump',
+                'url': './trip-reference.html',
+                'icons': [{'src': 'icons/icon-192.png', 'sizes': '192x192', 'type': 'image/png'}],
+            },
+        ],
     }
     MANIFEST_OUT.write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False),
@@ -223,7 +247,16 @@ self.addEventListener('fetch', (event) => {{
         cache.put(req, fresh.clone());
         return fresh;
       }} catch (e) {{
-        const cached = await caches.match(req) || await caches.match('index.html');
+        let cached = await caches.match(req);
+        // Precache stores weather.html; nav from itinerary uses weather.html?variant=…
+        // which does not match the cache key unless we normalize.
+        if (!cached) {{
+          const leaf = (url.pathname || '').split('/').pop() || '';
+          if (leaf === 'weather.html') {{
+            cached = await caches.match('weather.html');
+          }}
+        }}
+        if (!cached) cached = await caches.match('index.html');
         if (cached) return cached;
         throw e;
       }}

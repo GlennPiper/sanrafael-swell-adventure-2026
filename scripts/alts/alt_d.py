@@ -249,7 +249,7 @@ INTRO_HTML = (
     'May 6 split is at <strong>Wedge</strong> (not Swinging Bridge): early-leavers exit '
     'N via E Green River Cutoff Rd to hit pavement by 09:30; stay-overs run the full '
     'Buckhorn + Black Dragon string and reach Moab / Sand Flats the same evening (V1). '
-    'Planning notes: <a href="planning/trip-itinerary-alt-d.md">trip-itinerary-alt-d.md</a> '
+    'Planning notes: <code>planning/trip-itinerary-alt-d.md</code> '
     '&middot; <a href="overland-alternates.html">Alt overview</a>.'
     '</div>'
 )

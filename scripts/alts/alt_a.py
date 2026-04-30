@@ -238,7 +238,7 @@ INTRO_HTML = (
     'Sinbad cluster. Early-leavers exit <strong>May 6</strong> (~09:15) toward Boise; '
     'stay-overs hold an <em>extra Swell night</em> (Temple Mtn / Goblin) and hit Moab '
     '<strong>May 7</strong> for an easy afternoon trail (Fins N Things). '
-    'Planning notes: <a href="planning/trip-itinerary-alt-a.md">trip-itinerary-alt-a.md</a> '
+    'Planning notes: <code>planning/trip-itinerary-alt-a.md</code> '
     '&middot; <a href="overland-alternates.html">Alt overview</a>.'
     '</div>'
 )

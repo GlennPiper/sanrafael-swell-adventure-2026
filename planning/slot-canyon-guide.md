@@ -1,6 +1,6 @@
 # Slot canyons & Day 3 hikes (San Rafael Swell)
 
-Companion to **[Trip Reference — Day 3 hikes](trip-reference.html#day3-hikes)** (works offline in the PWA) and **[poi_decisions.md](poi_decisions.md)** (locked POI triage). Summarizes **trailhead → payoff** mileage, **online references**, **group constraints** (soft ~1 mi one-way to a turnaround), and **trip-specific opinions** for 2026.
+Companion to **[Trip Reference — Day 3 hikes](trip-reference.html#day3-hikes)** (works offline in the PWA) and **`planning/poi_decisions.md`** (locked POI triage; repo source, not a web link). Summarizes **trailhead → payoff** mileage, **online references**, **group constraints** (soft ~1 mi one-way to a turnaround), and **trip-specific opinions** for 2026.
 
 ---
 

@@ -2693,7 +2693,7 @@ def build_reference_html():
 
 <div class="card">
 <h2>Real-Time Info Sources</h2>
-<p class="muted">Bookmark all of these. Check weather / flash-flood alerts daily morning when connectivity is available. Full detail: <a href="planning/realtime_info_sources.md">realtime_info_sources.md</a>.</p>
+<p class="muted">Bookmark all of these. Check weather / flash-flood alerts daily morning when connectivity is available. Full detail: <code>planning/realtime_info_sources.md</code> (repo source).</p>
 {rt_html}
 </div>
 
@@ -2717,16 +2717,16 @@ def build_reference_html():
 <h2>Source Files</h2>
 <ul class="clean">
 <li><a href="san-rafael-swell-adv-route-2025.gpx">Original route GPX (OTG Crew)</a></li>
-<li><a href="Utah_Destinations_In_San_Rafael_Area.md">Utah_Destinations_In_San_Rafael_Area.md</a> (raw POI list)</li>
-<li><a href="planning/poi_decisions.md">planning/poi_decisions.md</a> (locked POI triage)</li>
-<li><a href="slot-canyon-guide.html">Slot canyon guide</a> (Day 3 hikes + links; offline) &mdash; source <a href="planning/slot-canyon-guide.md">planning/slot-canyon-guide.md</a></li>
+<li><code>Utah_Destinations_In_San_Rafael_Area.md</code> (raw POI list)</li>
+<li><code>planning/poi_decisions.md</code> (locked POI triage)</li>
+<li><a href="slot-canyon-guide.html">Slot canyon guide</a> (Day 3 hikes + links; offline) &mdash; source <code>planning/slot-canyon-guide.md</code></li>
 <li><a href="moab-camping.html">Moab camping</a> (BLM / Sand Flats / nearby options + map; offline) — edited as <code>moab-camping.html</code> in repo root</li>
 <li><a href="moab-trails.html">Moab trails</a> (BOH + RR4W ≤6 reference, links, rig notes; offline) — <code>moab-trails.html</code> in repo root</li>
-<li><a href="planning/campsite_plan.md">planning/campsite_plan.md</a> (camps + live availability check)</li>
-<li><a href="fuel-plan.html">Fuel plan</a> (full worksheet; offline) &mdash; source <a href="planning/fuel_plan.md">planning/fuel_plan.md</a></li>
-<li><a href="planning/realtime_info_sources.md">planning/realtime_info_sources.md</a></li>
+<li><code>planning/campsite_plan.md</code> (camps + live availability check)</li>
+<li><a href="fuel-plan.html">Fuel plan</a> (full worksheet; offline) &mdash; source <code>planning/fuel_plan.md</code></li>
+<li><code>planning/realtime_info_sources.md</code></li>
 <li><a href="trip-plan.gpx" download>trip-plan.gpx</a> (derived route with day splits + camps labeled)</li>
-<li><a href="overland-alternates.html">Alternate Swell routes (overview)</a> (offline) — source <a href="planning/overland_alternates.md">planning/overland_alternates.md</a>; daily alts <a href="planning/trip-itinerary-alt-a.md">alt-a</a>, <a href="planning/trip-itinerary-alt-b.md">alt-b</a>, <a href="planning/trip-itinerary-alt-d.md">alt-d</a></li>
+<li><a href="overland-alternates.html">Alternate Swell routes (overview)</a> (offline) — source <code>planning/overland_alternates.md</code>; daily alt markdown <code>planning/trip-itinerary-alt-a.md</code>, <code>planning/trip-itinerary-alt-b.md</code>, <code>planning/trip-itinerary-alt-d.md</code></li>
 </ul>
 </div>
 

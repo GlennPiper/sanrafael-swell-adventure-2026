@@ -210,7 +210,7 @@ INTRO_HTML = (
     'fresh. Day 3 ends near the highway at Black Dragon so <strong>early-leavers</strong> '
     'hit pavement by 09:30 on May 6 with minimal Swell miles. <strong>V1 stay-overs</strong> '
     'head I-70 E to Moab / Sand Flats the same evening. Planning notes: '
-    '<a href="planning/trip-itinerary-alt-b.md">trip-itinerary-alt-b.md</a> '
+    '<code>planning/trip-itinerary-alt-b.md</code> '
     '&middot; <a href="overland-alternates.html">Alt overview</a>. '
     'Fuel / resupply narrative in <a href="fuel-plan.html">Fuel plan</a> is still written '
     'forward -- read it east-to-west for this alt.'
