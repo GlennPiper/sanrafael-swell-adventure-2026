@@ -26,17 +26,73 @@ body {
   min-height: 100vh;
 }
 a { color: #58a6ff; }
-.top-nav {
-  position: sticky; top: 0; z-index: 10;
-  background: #161b22;
-  border-bottom: 1px solid #30363d;
-  padding: 12px 18px;
-  font-size: 14px;
-  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0;
-  line-height: 1.6;
+
+[data-trip-nav]{--trip-nav-link:#ff9d45}
+/* --- Link-only bar (markdown / weather pages): no title row --- */
+.top-nav[data-trip-nav]{position:sticky;top:0;z-index:10050;background:#161b22;border-bottom:1px solid #30363d;box-sizing:border-box}
+.top-nav-menu-btn{display:none;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:88px;
+  padding:0 16px;border:1px solid #484f58;border-radius:6px;background:#21262d;color:#f0f6fc;
+  font:600 15px/1 system-ui,sans-serif;cursor:pointer;flex-shrink:0}
+.top-nav-menu-btn:hover{border-color:#58a6ff;color:#58a6ff}
+.top-nav-backdrop{display:none;position:fixed;left:0;right:0;top:48px;bottom:0;background:rgba(1,4,9,.55);z-index:10048}
+.top-nav-list{list-style:none;margin:0;padding:0}
+.top-nav-list>li{margin:0;padding:0}
+.top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600}
+/* --- Branded chrome (itinerary / reference): title + meta | Menu, then links --- */
+.trip-chrome[data-trip-nav]{position:sticky;top:0;z-index:10050;background:#0d1117;border-bottom:1px solid #30363d;box-sizing:border-box}
+.trip-chrome-row1{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:14px 18px 10px}
+.trip-chrome-brand{flex:1;min-width:0}
+.trip-chrome-brand h1{margin:0 0 4px;font-size:22px;line-height:1.2;color:var(--text,#f0f6fc)}
+.trip-chrome-brand .meta{color:var(--muted,#8b949e);font-size:13px;line-height:1.45}
+.trip-chrome[data-trip-nav] .top-nav-menu-btn{margin:0;align-self:center}
+.trip-chrome[data-trip-nav] .top-nav-backdrop{display:none;position:fixed;left:0;right:0;background:rgba(1,4,9,.55);z-index:10048}
+@media (min-width:721px){
+  .top-nav[data-trip-nav]{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding:10px 18px;font-size:14px}
+  .top-nav[data-trip-nav] .top-nav-menu-btn{display:none!important}
+  .top-nav[data-trip-nav] .top-nav-backdrop{display:none!important}
+  .top-nav[data-trip-nav] .top-nav-list{display:flex!important;flex-wrap:wrap;align-items:center;gap:4px 4px;flex:1;min-width:0}
+  .top-nav[data-trip-nav] .top-nav-list>li{display:inline-block}
+  .top-nav[data-trip-nav] .top-nav-list a,.top-nav[data-trip-nav] .top-nav-list .top-nav-current{display:inline;padding:6px 4px;margin-right:8px;font-size:14px;line-height:1.5}
+  .top-nav[data-trip-nav] .top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600}
+  .top-nav[data-trip-nav] .top-nav-list a{text-decoration:none;color:var(--trip-nav-link)}
+  .top-nav[data-trip-nav] .top-nav-list a:hover{text-decoration:underline}
+  .trip-chrome[data-trip-nav] .top-nav-menu-btn{display:none!important}
+  .trip-chrome[data-trip-nav] .top-nav-backdrop{display:none!important}
+  .trip-chrome[data-trip-nav] .top-nav-list{display:flex!important;flex-wrap:wrap;align-items:center;gap:4px 8px;
+    margin:0;padding:8px 18px 12px;border-top:1px solid #30363d;background:#161b22;font-size:14px}
+  .trip-chrome[data-trip-nav] .top-nav-list>li{display:inline-block}
+  .trip-chrome[data-trip-nav] .top-nav-list a,.trip-chrome[data-trip-nav] .top-nav-list .top-nav-current{display:inline;padding:6px 4px;margin-right:8px;line-height:1.5}
+  .trip-chrome[data-trip-nav] .top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600}
+  .trip-chrome[data-trip-nav] .top-nav-list a{text-decoration:none;color:var(--trip-nav-link)}
+  .trip-chrome[data-trip-nav] .top-nav-list a:hover{text-decoration:underline}
 }
-.top-nav a { margin-right: 14px; }
-.top-nav strong { color: #f0f6fc; margin-right: 14px; }
+@media (max-width:720px){
+  .top-nav[data-trip-nav]{display:flex;align-items:center;justify-content:flex-end;padding:8px 12px;min-height:48px}
+  .top-nav[data-trip-nav] .top-nav-menu-btn{display:inline-flex!important;margin:0 0 0 auto}
+  .top-nav:not(.is-open) .top-nav-list{display:none!important}
+  .top-nav.is-open .top-nav-backdrop{display:block!important}
+  .top-nav.is-open .top-nav-list{display:block!important;position:fixed;left:0;right:0;top:48px;bottom:0;overflow-y:auto;
+    z-index:10052;background:#0d1117;border-top:1px solid #30363d;padding:8px 0 32px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  .top-nav.is-open .top-nav-list>li{border-bottom:1px solid #21262d}
+  .top-nav.is-open .top-nav-list a,.top-nav.is-open .top-nav-list .top-nav-current{display:block;padding:16px 20px;min-height:48px;font-size:16px;line-height:1.35;text-decoration:none}
+  .top-nav.is-open .top-nav-list a{color:var(--trip-nav-link)}
+  .top-nav.is-open .top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600;background:#161b22}
+  .top-nav.is-open .top-nav-list a:active{background:#21262d}
+  .trip-chrome-row1{padding:10px 14px}
+  .trip-chrome-brand h1{font-size:18px}
+  .trip-chrome-brand .meta{font-size:12px}
+  .trip-chrome[data-trip-nav] .top-nav-menu-btn{display:inline-flex!important}
+  .trip-chrome:not(.is-open) .top-nav-list{display:none!important}
+  .trip-chrome.is-open .top-nav-backdrop{display:block!important}
+  .trip-chrome.is-open .top-nav-list{display:block!important;position:fixed;left:0;right:0;bottom:0;overflow-y:auto;
+    z-index:10052;background:#0d1117;border-top:1px solid #30363d;padding:8px 0 32px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  .trip-chrome.is-open .top-nav-list>li{border-bottom:1px solid #21262d}
+  .trip-chrome.is-open .top-nav-list a,.trip-chrome.is-open .top-nav-list .top-nav-current{display:block;padding:16px 20px;min-height:48px;font-size:16px;line-height:1.35;text-decoration:none}
+  .trip-chrome.is-open .top-nav-list a{color:var(--trip-nav-link)}
+  .trip-chrome.is-open .top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600;background:#161b22}
+  .trip-chrome.is-open .top-nav-list a:active{background:#21262d}
+}
+
 article.md-page {
   max-width: 920px;
   margin: 0 auto;
@@ -94,18 +150,71 @@ article.md-page hr { border: none; border-top: 1px solid #30363d; margin: 22px 0
 }
 </style>
 </head><body>
-<nav class="top-nav" aria-label="Trip pages">
-<a href="trip-itinerary.html">Daily itinerary</a>
-<a href="overland-alternates.html">Alt routes</a>
-<a href="trip-reference.html">Full reference</a>
-<a href="weather.html">Weather</a>
-<strong>Slot canyon guide</strong>
-<a href="moab-camping.html">Moab camping</a>
-<a href="moab-trails.html">Moab trails</a>
-<a href="river-crossing.html">River crossing (Fuller Bottom)</a>
-<a href="fuel-plan.html">Fuel plan</a>
-<a href="trip-plan.gpx" download>GPX</a>
-</nav>
+<header class="trip-chrome" data-trip-nav aria-label="Trip pages"><div class="trip-chrome-row1"><div class="trip-chrome-brand"><h1>2026 San Rafael Swell Adventure + Moab</h1><div class="meta">May 1 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi</div></div><button type="button" class="top-nav-menu-btn" aria-expanded="false" aria-controls="top-nav-list">Menu</button></div><div class="top-nav-backdrop" hidden aria-hidden="true"></div><ul class="top-nav-list" id="top-nav-list"><li><a href="trip-itinerary.html">Daily itinerary</a></li><li><a href="overland-alternates.html">Alt routes</a></li><li><a href="trip-reference.html">Full reference</a></li><li><a href="weather.html">Weather</a></li><li class="top-nav-li-active"><span class="top-nav-current" aria-current="page">Slot canyon guide</span></li><li><a href="moab-camping.html">Moab camping</a></li><li><a href="moab-trails.html">Moab trails</a></li><li><a href="river-crossing.html">River crossing (Fuller Bottom)</a></li><li><a href="fuel-plan.html">Fuel plan</a></li><li><a href="trip-plan.gpx" download>GPX</a></li></ul></header>
+<script>
+(function(){
+function init(){
+  var nav=document.querySelector('[data-trip-nav]');
+  if(!nav)return;
+  var btn=nav.querySelector('.top-nav-menu-btn');
+  var list=nav.querySelector('.top-nav-list');
+  var bd=nav.querySelector('.top-nav-backdrop');
+  var row1=nav.querySelector('.trip-chrome-row1');
+  if(!btn||!list)return;
+  function syncOverlayGeom(){
+    if(!nav.classList.contains('is-open'))return;
+    var topPx=48;
+    if(row1){
+      var r=row1.getBoundingClientRect();
+      topPx=Math.max(0,Math.floor(r.bottom));
+      list.style.top=topPx+'px';
+      list.style.maxHeight=(window.innerHeight-topPx)+'px';
+      if(bd){
+        bd.style.top=topPx+'px';
+        bd.style.height=(window.innerHeight-topPx)+'px';
+      }
+    }else{
+      var rn=nav.getBoundingClientRect();
+      topPx=Math.max(0,Math.floor(rn.bottom));
+      list.style.top=topPx+'px';
+      list.style.maxHeight=(window.innerHeight-topPx)+'px';
+      if(bd){bd.style.top=topPx+'px';bd.style.height=(window.innerHeight-topPx)+'px';}
+    }
+  }
+  function clearOverlayGeom(){
+    list.style.top='';list.style.maxHeight='';
+    if(bd){bd.style.top='';bd.style.height='';}
+  }
+  function setOpen(o){
+    nav.classList.toggle('is-open',o);
+    btn.setAttribute('aria-expanded',o?'true':'false');
+    if(bd)bd.hidden=!o;
+    document.body.style.overflow=o?'hidden':'';
+    if(o){
+      syncOverlayGeom();
+      window.addEventListener('resize',syncOverlayGeom);
+    }else{
+      window.removeEventListener('resize',syncOverlayGeom);
+      clearOverlayGeom();
+    }
+  }
+  btn.addEventListener('click',function(){
+    setOpen(!nav.classList.contains('is-open'));
+  });
+  if(bd)bd.addEventListener('click',function(){setOpen(false);});
+  var links=list.querySelectorAll('a');
+  for(var i=0;i<links.length;i++){
+    links[i].addEventListener('click',function(){setOpen(false);});
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&nav.classList.contains('is-open'))setOpen(false);
+  });
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+else init();
+})();
+</script>
+
 <article class="md-page">
 <h1>Slot canyons &amp; Day 3 hikes (San Rafael Swell)</h1>
 <p>Companion to <strong><a href="trip-reference.html#day3-hikes">Trip Reference — Day 3 hikes</a></strong> (works offline in the PWA) and <strong><a href="poi_decisions.md">poi_decisions.md</a></strong> (locked POI triage). Summarizes <strong>trailhead → payoff</strong> mileage, <strong>online references</strong>, <strong>group constraints</strong> (soft ~1 mi one-way to a turnaround), and <strong>trip-specific opinions</strong> for 2026.</p>

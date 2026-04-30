@@ -212,6 +212,231 @@ PWA_REGISTER_JS = """<script>
 </script>"""
 
 
+# Linked from itinerary / reference bodies (detail alt pages: overland-alternates.html).
+ALT_ROUTES_LINKS_HTML = '<a href="overland-alternates.html">Alt routes</a>'
+
+# Itinerary HTML pages use nav_key in {'itinerary','alt-a','alt-b','alt-d'} — first nav item is "you are here".
+ITINERARY_NAV_KEYS = frozenset({'itinerary', 'alt-a', 'alt-b', 'alt-d'})
+
+# Default sticky title row for satellite trip pages (weather, slot guide, fuel, alt overview).
+TRIP_BRAND_SHARED_HTML = (
+    '<h1>2026 San Rafael Swell Adventure + Moab</h1>'
+    '<div class="meta">May 1 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi</div>'
+)
+
+# Shared trip nav: optional title row (brand left, Menu right) + link row (desktop below) or overlay (mobile).
+# Nav links use the same orange as itinerary body links (:root --accent #ff9d45) without requiring :root on every page.
+TOP_NAV_CSS = """
+[data-trip-nav]{--trip-nav-link:#ff9d45}
+/* --- Link-only bar (markdown / weather pages): no title row --- */
+.top-nav[data-trip-nav]{position:sticky;top:0;z-index:10050;background:#161b22;border-bottom:1px solid #30363d;box-sizing:border-box}
+.top-nav-menu-btn{display:none;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:88px;
+  padding:0 16px;border:1px solid #484f58;border-radius:6px;background:#21262d;color:#f0f6fc;
+  font:600 15px/1 system-ui,sans-serif;cursor:pointer;flex-shrink:0}
+.top-nav-menu-btn:hover{border-color:#58a6ff;color:#58a6ff}
+.top-nav-backdrop{display:none;position:fixed;left:0;right:0;top:48px;bottom:0;background:rgba(1,4,9,.55);z-index:10048}
+.top-nav-list{list-style:none;margin:0;padding:0}
+.top-nav-list>li{margin:0;padding:0}
+.top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600}
+/* --- Branded chrome (itinerary / reference): title + meta | Menu, then links --- */
+.trip-chrome[data-trip-nav]{position:sticky;top:0;z-index:10050;background:#0d1117;border-bottom:1px solid #30363d;box-sizing:border-box}
+.trip-chrome-row1{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:14px 18px 10px}
+.trip-chrome-brand{flex:1;min-width:0}
+.trip-chrome-brand h1{margin:0 0 4px;font-size:22px;line-height:1.2;color:var(--text,#f0f6fc)}
+.trip-chrome-brand .meta{color:var(--muted,#8b949e);font-size:13px;line-height:1.45}
+.trip-chrome[data-trip-nav] .top-nav-menu-btn{margin:0;align-self:center}
+.trip-chrome[data-trip-nav] .top-nav-backdrop{display:none;position:fixed;left:0;right:0;background:rgba(1,4,9,.55);z-index:10048}
+@media (min-width:721px){
+  .top-nav[data-trip-nav]{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding:10px 18px;font-size:14px}
+  .top-nav[data-trip-nav] .top-nav-menu-btn{display:none!important}
+  .top-nav[data-trip-nav] .top-nav-backdrop{display:none!important}
+  .top-nav[data-trip-nav] .top-nav-list{display:flex!important;flex-wrap:wrap;align-items:center;gap:4px 4px;flex:1;min-width:0}
+  .top-nav[data-trip-nav] .top-nav-list>li{display:inline-block}
+  .top-nav[data-trip-nav] .top-nav-list a,.top-nav[data-trip-nav] .top-nav-list .top-nav-current{display:inline;padding:6px 4px;margin-right:8px;font-size:14px;line-height:1.5}
+  .top-nav[data-trip-nav] .top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600}
+  .top-nav[data-trip-nav] .top-nav-list a{text-decoration:none;color:var(--trip-nav-link)}
+  .top-nav[data-trip-nav] .top-nav-list a:hover{text-decoration:underline}
+  .trip-chrome[data-trip-nav] .top-nav-menu-btn{display:none!important}
+  .trip-chrome[data-trip-nav] .top-nav-backdrop{display:none!important}
+  .trip-chrome[data-trip-nav] .top-nav-list{display:flex!important;flex-wrap:wrap;align-items:center;gap:4px 8px;
+    margin:0;padding:8px 18px 12px;border-top:1px solid #30363d;background:#161b22;font-size:14px}
+  .trip-chrome[data-trip-nav] .top-nav-list>li{display:inline-block}
+  .trip-chrome[data-trip-nav] .top-nav-list a,.trip-chrome[data-trip-nav] .top-nav-list .top-nav-current{display:inline;padding:6px 4px;margin-right:8px;line-height:1.5}
+  .trip-chrome[data-trip-nav] .top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600}
+  .trip-chrome[data-trip-nav] .top-nav-list a{text-decoration:none;color:var(--trip-nav-link)}
+  .trip-chrome[data-trip-nav] .top-nav-list a:hover{text-decoration:underline}
+}
+@media (max-width:720px){
+  .top-nav[data-trip-nav]{display:flex;align-items:center;justify-content:flex-end;padding:8px 12px;min-height:48px}
+  .top-nav[data-trip-nav] .top-nav-menu-btn{display:inline-flex!important;margin:0 0 0 auto}
+  .top-nav:not(.is-open) .top-nav-list{display:none!important}
+  .top-nav.is-open .top-nav-backdrop{display:block!important}
+  .top-nav.is-open .top-nav-list{display:block!important;position:fixed;left:0;right:0;top:48px;bottom:0;overflow-y:auto;
+    z-index:10052;background:#0d1117;border-top:1px solid #30363d;padding:8px 0 32px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  .top-nav.is-open .top-nav-list>li{border-bottom:1px solid #21262d}
+  .top-nav.is-open .top-nav-list a,.top-nav.is-open .top-nav-list .top-nav-current{display:block;padding:16px 20px;min-height:48px;font-size:16px;line-height:1.35;text-decoration:none}
+  .top-nav.is-open .top-nav-list a{color:var(--trip-nav-link)}
+  .top-nav.is-open .top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600;background:#161b22}
+  .top-nav.is-open .top-nav-list a:active{background:#21262d}
+  .trip-chrome-row1{padding:10px 14px}
+  .trip-chrome-brand h1{font-size:18px}
+  .trip-chrome-brand .meta{font-size:12px}
+  .trip-chrome[data-trip-nav] .top-nav-menu-btn{display:inline-flex!important}
+  .trip-chrome:not(.is-open) .top-nav-list{display:none!important}
+  .trip-chrome.is-open .top-nav-backdrop{display:block!important}
+  .trip-chrome.is-open .top-nav-list{display:block!important;position:fixed;left:0;right:0;bottom:0;overflow-y:auto;
+    z-index:10052;background:#0d1117;border-top:1px solid #30363d;padding:8px 0 32px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  .trip-chrome.is-open .top-nav-list>li{border-bottom:1px solid #21262d}
+  .trip-chrome.is-open .top-nav-list a,.trip-chrome.is-open .top-nav-list .top-nav-current{display:block;padding:16px 20px;min-height:48px;font-size:16px;line-height:1.35;text-decoration:none}
+  .trip-chrome.is-open .top-nav-list a{color:var(--trip-nav-link)}
+  .trip-chrome.is-open .top-nav-list .top-nav-current{color:#f0f6fc;font-weight:600;background:#161b22}
+  .trip-chrome.is-open .top-nav-list a:active{background:#21262d}
+}
+"""
+
+TRIP_NAV_MENU_JS = """
+<script>
+(function(){
+function init(){
+  var nav=document.querySelector('[data-trip-nav]');
+  if(!nav)return;
+  var btn=nav.querySelector('.top-nav-menu-btn');
+  var list=nav.querySelector('.top-nav-list');
+  var bd=nav.querySelector('.top-nav-backdrop');
+  var row1=nav.querySelector('.trip-chrome-row1');
+  if(!btn||!list)return;
+  function syncOverlayGeom(){
+    if(!nav.classList.contains('is-open'))return;
+    var topPx=48;
+    if(row1){
+      var r=row1.getBoundingClientRect();
+      topPx=Math.max(0,Math.floor(r.bottom));
+      list.style.top=topPx+'px';
+      list.style.maxHeight=(window.innerHeight-topPx)+'px';
+      if(bd){
+        bd.style.top=topPx+'px';
+        bd.style.height=(window.innerHeight-topPx)+'px';
+      }
+    }else{
+      var rn=nav.getBoundingClientRect();
+      topPx=Math.max(0,Math.floor(rn.bottom));
+      list.style.top=topPx+'px';
+      list.style.maxHeight=(window.innerHeight-topPx)+'px';
+      if(bd){bd.style.top=topPx+'px';bd.style.height=(window.innerHeight-topPx)+'px';}
+    }
+  }
+  function clearOverlayGeom(){
+    list.style.top='';list.style.maxHeight='';
+    if(bd){bd.style.top='';bd.style.height='';}
+  }
+  function setOpen(o){
+    nav.classList.toggle('is-open',o);
+    btn.setAttribute('aria-expanded',o?'true':'false');
+    if(bd)bd.hidden=!o;
+    document.body.style.overflow=o?'hidden':'';
+    if(o){
+      syncOverlayGeom();
+      window.addEventListener('resize',syncOverlayGeom);
+    }else{
+      window.removeEventListener('resize',syncOverlayGeom);
+      clearOverlayGeom();
+    }
+  }
+  btn.addEventListener('click',function(){
+    setOpen(!nav.classList.contains('is-open'));
+  });
+  if(bd)bd.addEventListener('click',function(){setOpen(false);});
+  var links=list.querySelectorAll('a');
+  for(var i=0;i<links.length;i++){
+    links[i].addEventListener('click',function(){setOpen(false);});
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&nav.classList.contains('is-open'))setOpen(false);
+  });
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+else init();
+})();
+</script>
+"""
+
+
+def _top_nav_html(
+    current: str,
+    *,
+    brand_html: str | None = None,
+    weather_href: str | None = None,
+    itinerary_href: str | None = None,
+    gpx_href: str | None = None,
+) -> str:
+    """Trip-wide nav with mobile Menu + full-height link sheet.
+
+    If ``brand_html`` is set (itinerary / reference), it is rendered in the left column
+    of the sticky chrome row with the Menu button on the right; on wide screens the
+    link list appears on a second row below. Markdown pages pass ``brand_html=None`` for
+    a compact link-only bar.
+
+    current highlights one page: 'itinerary' | 'alt-a' | 'alt-b' | 'alt-d' | 'reference' | 'weather' |
+    'slot' | 'fuel' | 'overland-alt' | 'moab' | 'trails' | 'river' | 'none'.
+
+    itinerary_href / weather_href / gpx_href override defaults for variant-specific pages.
+    """
+    weather_href = weather_href or 'weather.html'
+    itinerary_href = itinerary_href or 'trip-itinerary.html'
+    gpx_href = gpx_href or 'trip-plan.gpx'
+
+    def li_itinerary() -> str:
+        if current in ITINERARY_NAV_KEYS:
+            return '<li class="top-nav-li-active"><span class="top-nav-current" aria-current="page">Daily itinerary</span></li>'
+        return f'<li><a href="{esc(itinerary_href)}">Daily itinerary</a></li>'
+
+    def li_link(href: str, label: str, key: str, *, download: bool = False) -> str:
+        if current == key:
+            return (
+                f'<li class="top-nav-li-active"><span class="top-nav-current" aria-current="page">'
+                f'{esc(label)}</span></li>'
+            )
+        dl = ' download' if download else ''
+        return f'<li><a href="{esc(href)}"{dl}>{esc(label)}</a></li>'
+
+    lis = [
+        li_itinerary(),
+        li_link('overland-alternates.html', 'Alt routes', 'overland-alt'),
+        li_link('trip-reference.html', 'Full reference', 'reference'),
+        li_link(weather_href, 'Weather', 'weather'),
+        li_link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
+        li_link('moab-camping.html', 'Moab camping', 'moab'),
+        li_link('moab-trails.html', 'Moab trails', 'trails'),
+        li_link('river-crossing.html', 'River crossing (Fuller Bottom)', 'river'),
+        li_link('fuel-plan.html', 'Fuel plan', 'fuel'),
+        li_link(gpx_href, 'GPX', '_gpx', download=True),
+    ]
+    ul = '<ul class="top-nav-list" id="top-nav-list">' + ''.join(lis) + '</ul>'
+    btn = (
+        '<button type="button" class="top-nav-menu-btn" aria-expanded="false" '
+        'aria-controls="top-nav-list">Menu</button>'
+    )
+    backdrop = '<div class="top-nav-backdrop" hidden aria-hidden="true"></div>'
+    if brand_html:
+        return (
+            '<header class="trip-chrome" data-trip-nav aria-label="Trip pages">'
+            '<div class="trip-chrome-row1">'
+            '<div class="trip-chrome-brand">' + brand_html + '</div>'
+            + btn
+            + '</div>'
+            + backdrop
+            + ul
+            + '</header>'
+        ) + TRIP_NAV_MENU_JS
+    return (
+        '<nav class="top-nav" data-trip-nav aria-label="Trip pages">'
+        + btn
+        + backdrop
+        + ul
+        + '</nav>'
+    ) + TRIP_NAV_MENU_JS
+
+
 # Compact styles for standalone markdown pages (slot guide, fuel plan; no map widgets).
 STATIC_MD_PAGE_CSS = """
 :root { color-scheme: dark; }
@@ -225,17 +450,7 @@ body {
   min-height: 100vh;
 }
 a { color: #58a6ff; }
-.top-nav {
-  position: sticky; top: 0; z-index: 10;
-  background: #161b22;
-  border-bottom: 1px solid #30363d;
-  padding: 12px 18px;
-  font-size: 14px;
-  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0;
-  line-height: 1.6;
-}
-.top-nav a { margin-right: 14px; }
-.top-nav strong { color: #f0f6fc; margin-right: 14px; }
+""" + TOP_NAV_CSS + """
 article.md-page {
   max-width: 920px;
   margin: 0 auto;
@@ -292,39 +507,6 @@ article.md-page hr { border: none; border-top: 1px solid #30363d; margin: 22px 0
   article.md-page table { display: block; overflow-x: auto; max-width: 100vw; }
 }
 """
-
-
-# Linked from itinerary / reference headers (detail alt pages: overland-alternates.html).
-ALT_ROUTES_LINKS_HTML = '<a href="overland-alternates.html">Alt routes</a>'
-
-
-def _top_nav_html(current: str) -> str:
-    """current is 'itinerary' | 'reference' | 'weather' | 'slot' | 'fuel' | 'overland-alt' |
-    'moab' | 'trails' | 'river' | 'none'. Per-alt itinerary HTML uses the main header template,
-    not this nav.
-    """
-    def link(href, label, key):
-        if current == key:
-            return f'<strong>{label}</strong>'
-        return f'<a href="{href}">{label}</a>'
-
-    parts = [
-        '<nav class="top-nav" aria-label="Trip pages">',
-        link('trip-itinerary.html', 'Daily itinerary', 'itinerary'),
-        link('overland-alternates.html', 'Alt routes', 'overland-alt'),
-        link('trip-reference.html', 'Full reference', 'reference'),
-        link('weather.html', 'Weather', 'weather'),
-        link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
-        link('moab-camping.html', 'Moab camping', 'moab'),
-        link('moab-trails.html', 'Moab trails', 'trails'),
-        link('river-crossing.html', 'River crossing (Fuller Bottom)', 'river'),
-        link('fuel-plan.html', 'Fuel plan', 'fuel'),
-        '<a href="trip-plan.gpx" download>GPX</a>',
-        '</nav>',
-    ]
-    return '\n'.join(parts)
-
-
 def write_planning_markdown_pages():
     """Emit slot-canyon-guide.html and fuel-plan.html from planning/*.md (PWA-offline)."""
     try:
@@ -365,7 +547,7 @@ def write_planning_markdown_pages():
             continue
         raw = md_path.read_text(encoding='utf-8')
         body = markdown.markdown(raw, extensions=ext)
-        nav = _top_nav_html(nav_key)
+        nav = _top_nav_html(nav_key, brand_html=TRIP_BRAND_SHARED_HTML)
         html_page = f"""<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
@@ -512,7 +694,7 @@ def build_all_weather_day_payloads() -> dict:
 def write_weather_html() -> None:
     all_payload = build_all_weather_day_payloads()
     j = json.dumps(all_payload, ensure_ascii=False)
-    nav = _top_nav_html('weather')
+    nav = _top_nav_html('weather', brand_html=TRIP_BRAND_SHARED_HTML)
     extra_css = """
 .weather-page-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
 #weather-refresh{background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:8px 14px;border-radius:6px;cursor:pointer;font:inherit}
@@ -1033,9 +1215,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
   font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
-header{padding:16px 24px;background:#0d1117;border-bottom:1px solid var(--border)}
-header h1{margin:0 0 4px 0;font-size:22px}
-header .meta{color:var(--muted);font-size:13px}
+""" + TOP_NAV_CSS + """
 main{max-width:1400px;margin:0 auto;padding:12px}
 /* Mobile-only native day picker. Hidden on desktop where the .tabs strip
    shines; promoted on narrow screens so users get a familiar OS picker.
@@ -1244,10 +1424,7 @@ tr.skipped-row .spur-hint::before{content:"[Saving] "}
  * surface with a ::before pseudo-element. No JS changes required.
  * ---------------------------------------------------------------- */
 @media (max-width:720px){
-  /* Page chrome: tighter header + main padding */
-  header{padding:10px 14px}
-  header h1{font-size:18px}
-  header .meta{font-size:12px}
+  /* Page chrome: tighter trip chrome + main padding */
   main{padding:8px}
   .card{padding:12px}
   .card h2{font-size:17px}
@@ -1753,11 +1930,16 @@ def build_itinerary_html(variant=None):
     # downloaded). See scripts/download_offline_tiles.py.
     offline_tiles_json = json.dumps(OFFLINE_TILES)
 
-    reference_link_html = (
-        '<a href="trip-reference.html">Open reference doc</a> &middot;\n'
-        if variant.get('show_reference_link') else ''
+    brand_html = (
+        f'<h1>{esc(variant["header_h1"])}</h1><div class="meta">{variant["header_meta"]}</div>'
     )
-    gpx_href = esc(variant['gpx_filename'])
+    nav_block = _top_nav_html(
+        variant['nav_key'],
+        brand_html=brand_html,
+        weather_href=f'weather.html?variant={esc(wkey)}',
+        itinerary_href=variant['html_path'].name,
+        gpx_href=variant['gpx_filename'],
+    )
     html_out = f"""<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
@@ -1770,18 +1952,7 @@ def build_itinerary_html(variant=None):
      script that references `L` (e.g. `L.TileLayer.extend(...)`). -->
 <script>{LEAFLET_JS}</script>
 </head><body>
-<header>
-<h1>{esc(variant['header_h1'])}</h1>
-<div class="meta">{variant['header_meta']} &middot;
-{reference_link_html}{ALT_ROUTES_LINKS_HTML} &middot;
-<a href="weather.html?variant={esc(wkey)}">Weather</a> &middot;
-<a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
-<a href="moab-camping.html">Moab camping</a> &middot;
-<a href="moab-trails.html">Moab trails</a> &middot;
-<a href="river-crossing.html">River crossing (Fuller Bottom)</a> &middot;
-<a href="fuel-plan.html">Fuel plan</a> &middot;
-<a href="{gpx_href}" download>Download GPX</a></div>
-</header>
+{nav_block}
 <main>
 <div class="day-picker-wrap">
 <label class="day-picker-label" id="day-picker-label" for="day-picker">Choose a day</label>
@@ -1791,7 +1962,7 @@ def build_itinerary_html(variant=None):
 {''.join(panes)}
 <section class="card" style="margin-top:24px">
 <h2>Live NWS Utah alerts</h2>
-<div class="muted" style="margin-bottom:8px">Fetched live when online; ignore if viewing offline. Use the per-day weather links above when connectivity is available.</div>
+<div class="muted" style="margin-bottom:8px">Fetched live when online; ignore if viewing offline. Use <strong>Menu → Weather</strong> or the per-day weather blocks when connectivity is available.</div>
 <div id="live-alerts" class="alerts-banner alerts-loading">Checking live NWS Utah alerts...</div>
 </section>
 {POI_DESC_DIALOG_HTML}
@@ -2469,6 +2640,11 @@ def build_reference_html():
     ref_poi_desc_json = json.dumps(ref_poi_desc_map, ensure_ascii=False)
     ref_poi_desc_dialog_js = POI_DESC_DIALOG_JS.format(desc_json=ref_poi_desc_json)
 
+    ref_brand_html = (
+        '<h1>2026 San Rafael Swell Adventure + Moab - Reference</h1>'
+        '<div class="meta">May 1 - May 10, 2026 &middot; Full knowledge dump</div>'
+    )
+    ref_nav_block = _top_nav_html('reference', brand_html=ref_brand_html)
     html_out = f"""<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
@@ -2477,19 +2653,7 @@ def build_reference_html():
 {PWA_HEAD}
 <style>{CSS}</style>
 </head><body>
-<header>
-<h1>2026 San Rafael Swell Adventure + Moab - Reference</h1>
-<div class="meta">May 1 - May 10, 2026 &middot; Full knowledge dump &middot;
-<a href="trip-itinerary.html">Open daily itinerary</a> &middot;
-{ALT_ROUTES_LINKS_HTML} &middot;
-<a href="weather.html">Weather</a> &middot;
-<a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
-<a href="moab-camping.html">Moab camping</a> &middot;
-<a href="moab-trails.html">Moab trails</a> &middot;
-<a href="river-crossing.html">River crossing (Fuller Bottom)</a> &middot;
-<a href="fuel-plan.html">Fuel plan</a> &middot;
-<a href="trip-plan.gpx" download>Download GPX</a></div>
-</header>
+{ref_nav_block}
 <main>
 
 <div class="card">
@@ -2546,7 +2710,7 @@ def build_reference_html():
 
 <div class="card">
 <h2>Live NWS Utah alerts</h2>
-<p class="muted">Fetched live when online; ignore if viewing offline. Use the per-day weather links above when connectivity is available.</p>
+<p class="muted">Fetched live when online; ignore if viewing offline. Use <strong>Menu → Weather</strong> or the per-day weather blocks when connectivity is available.</p>
 <div id="live-alerts" class="alerts-banner alerts-loading">Checking live NWS Utah alerts...</div>
 </div>
 {POI_DESC_DIALOG_HTML}
