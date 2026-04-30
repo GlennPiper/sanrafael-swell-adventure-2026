@@ -75,6 +75,7 @@ def main():
     check_html(BASE / 'moab-camping.html')
     check_html(BASE / 'moab-trails.html')
     check_html(BASE / 'fuel-plan.html')
+    check_html(BASE / 'weather.html')
     check_gpx(BASE / 'trip-plan.gpx')
 
 

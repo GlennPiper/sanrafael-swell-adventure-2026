@@ -1,0 +1,299 @@
+{
+  "variants": {
+    "main": [
+      {
+        "day_id": "may1_boise_bonneville",
+        "date_iso": "2026-05-01",
+        "lat": 40.7472,
+        "lon": -114.0378,
+        "location_label": "Wendover / Bonneville overnight corridor"
+      },
+      {
+        "day_id": "day0_travel",
+        "date_iso": "2026-05-02",
+        "lat": 38.9953,
+        "lon": -110.1599,
+        "location_label": "Green River (I-70 staging)"
+      },
+      {
+        "day_id": "day1_swell",
+        "date_iso": "2026-05-03",
+        "lat": 39.0985,
+        "lon": -110.785,
+        "location_label": "Wedge Overlook area (Day 1 camp)"
+      },
+      {
+        "day_id": "day2_swell",
+        "date_iso": "2026-05-04",
+        "lat": 38.78,
+        "lon": -110.855,
+        "location_label": "Tomsich Butte / Reds Canyon"
+      },
+      {
+        "day_id": "day3_swell",
+        "date_iso": "2026-05-05",
+        "lat": 38.653,
+        "lon": -110.668,
+        "location_label": "Temple Mountain trailhead area"
+      },
+      {
+        "day_id": "day4_swell",
+        "date_iso": "2026-05-06",
+        "lat": 38.85,
+        "lon": -110.55,
+        "location_label": "Swell corridor (Temple Mtn toward Sinbad / I-70)"
+      },
+      {
+        "day_id": "day4_moab_transit",
+        "date_iso": "2026-05-06",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab (PM arrival / Sand Flats side)"
+      },
+      {
+        "day_id": "day5_moab",
+        "date_iso": "2026-05-07",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab town / Sand Flats"
+      },
+      {
+        "day_id": "day6_moab",
+        "date_iso": "2026-05-08",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab town / Sand Flats"
+      },
+      {
+        "day_id": "day7_moab",
+        "date_iso": "2026-05-09",
+        "lat": 38.471,
+        "lon": -109.745,
+        "location_label": "Dead Horse Point area (rim / exposure)"
+      },
+      {
+        "day_id": "day8_return",
+        "date_iso": "2026-05-10",
+        "lat": 43.615,
+        "lon": -116.2343,
+        "location_label": "Boise area (return)"
+      }
+    ],
+    "alt-a": [
+      {
+        "day_id": "altA_may1_bonneville",
+        "date_iso": "2026-05-01",
+        "lat": 40.7472,
+        "lon": -114.0378,
+        "location_label": "Wendover / Bonneville overnight corridor"
+      },
+      {
+        "day_id": "altA_day0_travel",
+        "date_iso": "2026-05-02",
+        "lat": 38.9953,
+        "lon": -110.1599,
+        "location_label": "Green River (I-70 staging)"
+      },
+      {
+        "day_id": "altA_day1_swell",
+        "date_iso": "2026-05-03",
+        "lat": 39.0905,
+        "lon": -110.655,
+        "location_label": "Buckhorn / Swinging Bridge (forward kickoff)"
+      },
+      {
+        "day_id": "altA_day2_swell",
+        "date_iso": "2026-05-04",
+        "lat": 38.78,
+        "lon": -110.855,
+        "location_label": "Tomsich / Hondu / Reds"
+      },
+      {
+        "day_id": "altA_day3_swell",
+        "date_iso": "2026-05-05",
+        "lat": 38.653,
+        "lon": -110.668,
+        "location_label": "Temple Mountain"
+      },
+      {
+        "day_id": "altA_day4_stayover",
+        "date_iso": "2026-05-06",
+        "lat": 39.0985,
+        "lon": -110.785,
+        "location_label": "Extra Swell night (Wedge / Sinbad cluster)"
+      },
+      {
+        "day_id": "altA_day5_moab_transit",
+        "date_iso": "2026-05-07",
+        "lat": 38.9953,
+        "lon": -110.1599,
+        "location_label": "Green River toward Moab (transit)"
+      },
+      {
+        "day_id": "altA_day6_moab",
+        "date_iso": "2026-05-08",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab town / Sand Flats"
+      },
+      {
+        "day_id": "altA_day7_moab",
+        "date_iso": "2026-05-09",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab town / Sand Flats"
+      },
+      {
+        "day_id": "altA_day8_return",
+        "date_iso": "2026-05-10",
+        "lat": 43.615,
+        "lon": -116.2343,
+        "location_label": "Boise area (return)"
+      }
+    ],
+    "alt-b": [
+      {
+        "day_id": "altB_may1_bonneville",
+        "date_iso": "2026-05-01",
+        "lat": 40.7472,
+        "lon": -114.0378,
+        "location_label": "Wendover / Bonneville overnight corridor"
+      },
+      {
+        "day_id": "altB_day0_travel",
+        "date_iso": "2026-05-02",
+        "lat": 38.9953,
+        "lon": -110.1599,
+        "location_label": "Green River (I-70 staging)"
+      },
+      {
+        "day_id": "altB_day1_swell",
+        "date_iso": "2026-05-03",
+        "lat": 38.653,
+        "lon": -110.668,
+        "location_label": "Temple Mtn / Sinbad side (reverse kickoff)"
+      },
+      {
+        "day_id": "altB_day2_swell",
+        "date_iso": "2026-05-04",
+        "lat": 39.0985,
+        "lon": -110.785,
+        "location_label": "Wedge / mid-Swell"
+      },
+      {
+        "day_id": "altB_day3_swell",
+        "date_iso": "2026-05-05",
+        "lat": 39.0905,
+        "lon": -110.655,
+        "location_label": "Buckhorn / Black Dragon exit"
+      },
+      {
+        "day_id": "altB_day4_moab_transit",
+        "date_iso": "2026-05-06",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab (transit / stay-overs)"
+      },
+      {
+        "day_id": "altB_day5_moab",
+        "date_iso": "2026-05-07",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab town / Sand Flats"
+      },
+      {
+        "day_id": "altB_day6_moab",
+        "date_iso": "2026-05-08",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab town / Sand Flats"
+      },
+      {
+        "day_id": "altB_day7_moab",
+        "date_iso": "2026-05-09",
+        "lat": 38.471,
+        "lon": -109.745,
+        "location_label": "Dead Horse Point area (rim / exposure)"
+      },
+      {
+        "day_id": "altB_day8_return",
+        "date_iso": "2026-05-10",
+        "lat": 43.615,
+        "lon": -116.2343,
+        "location_label": "Boise area (return)"
+      }
+    ],
+    "alt-d": [
+      {
+        "day_id": "altD_may1_bonneville",
+        "date_iso": "2026-05-01",
+        "lat": 40.7472,
+        "lon": -114.0378,
+        "location_label": "Wendover / Bonneville overnight corridor"
+      },
+      {
+        "day_id": "altD_day0_travel",
+        "date_iso": "2026-05-02",
+        "lat": 38.9953,
+        "lon": -110.1599,
+        "location_label": "Green River (I-70 staging)"
+      },
+      {
+        "day_id": "altD_day1_swell",
+        "date_iso": "2026-05-03",
+        "lat": 38.653,
+        "lon": -110.668,
+        "location_label": "Crack Canyon TH / Temple side (BTR split)"
+      },
+      {
+        "day_id": "altD_day2_swell",
+        "date_iso": "2026-05-04",
+        "lat": 38.78,
+        "lon": -110.855,
+        "location_label": "Hidden Splendor / mid-corridor"
+      },
+      {
+        "day_id": "altD_day3_swell",
+        "date_iso": "2026-05-05",
+        "lat": 39.0985,
+        "lon": -110.785,
+        "location_label": "Wedge / Buckhorn toward split"
+      },
+      {
+        "day_id": "altD_day4_moab_transit",
+        "date_iso": "2026-05-06",
+        "lat": 38.9953,
+        "lon": -110.1599,
+        "location_label": "Green River / I-70 toward Moab"
+      },
+      {
+        "day_id": "altD_day5_moab",
+        "date_iso": "2026-05-07",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab town / Sand Flats"
+      },
+      {
+        "day_id": "altD_day6_moab",
+        "date_iso": "2026-05-08",
+        "lat": 38.5733,
+        "lon": -109.5498,
+        "location_label": "Moab town / Sand Flats"
+      },
+      {
+        "day_id": "altD_day7_moab",
+        "date_iso": "2026-05-09",
+        "lat": 38.471,
+        "lon": -109.745,
+        "location_label": "Dead Horse Point area (rim / exposure)"
+      },
+      {
+        "day_id": "altD_day8_return",
+        "date_iso": "2026-05-10",
+        "lat": 43.615,
+        "lon": -116.2343,
+        "location_label": "Boise area (return)"
+      }
+    ]
+  }
+}

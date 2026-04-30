@@ -81,12 +81,20 @@ def _build_version() -> str:
         p = PLAN / name
         extra_raw += p.read_bytes() if p.exists() else b''
     # Standalone HTML not emitted from markdown (must bump SW when edited).
-    extra_html_names = ('river-crossing.html', 'moab-camping.html', 'moab-trails.html')
+    extra_html_names = (
+        'river-crossing.html',
+        'moab-camping.html',
+        'moab-trails.html',
+        'weather.html',
+        'weather-client.js',
+    )
     for name in extra_html_names:
         p = BASE / name
         extra_raw += p.read_bytes() if p.exists() else b''
     hw_tracks = PLAN / 'highway_tracks.json'
     extra_raw += hw_tracks.read_bytes() if hw_tracks.exists() else b''
+    wf = PLAN / 'weather_forecast_points.json'
+    extra_raw += wf.read_bytes() if wf.exists() else b''
     short = hashlib.sha1(raw + alt_raw + extra_raw).hexdigest()[:10]
     try:
         gen = json.loads(raw.decode('utf-8')).get('generated_at', '')
@@ -112,6 +120,8 @@ PRECACHE = [
     'river-crossing.html',
     'moab-camping.html',
     'moab-trails.html',
+    'weather.html',
+    'weather-client.js',
     'trip-itinerary-alt-a.html',
     'trip-itinerary-alt-b.html',
     'trip-itinerary-alt-d.html',

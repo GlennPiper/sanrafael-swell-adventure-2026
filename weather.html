@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Trip weather — SRS May 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d1117">
+<meta name="description" content="Offline trip itinerary, route, camps, and reference for the May 1-10, 2026 San Rafael Swell + Moab overlanding adventure.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SRS Trip">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  padding: 0 0 48px;
+  min-height: 100vh;
+}
+a { color: #58a6ff; }
+.top-nav {
+  position: sticky; top: 0; z-index: 10;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  padding: 12px 18px;
+  font-size: 14px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0;
+  line-height: 1.6;
+}
+.top-nav a { margin-right: 14px; }
+.top-nav strong { color: #f0f6fc; margin-right: 14px; }
+article.md-page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 20px 18px 40px;
+}
+article.md-page h1 {
+  font-size: clamp(22px, 4vw, 28px);
+  color: #f0f6fc;
+  margin: 8px 0 12px;
+}
+article.md-page h2 {
+  font-size: 18px;
+  color: #f0f6fc;
+  margin: 28px 0 12px;
+  padding-top: 12px;
+  border-top: 1px solid #21262d;
+}
+article.md-page h2:first-of-type { border-top: none; padding-top: 0; }
+article.md-page h3 { font-size: 16px; color: #f0f6fc; margin: 18px 0 8px; }
+article.md-page p { margin: 10px 0; }
+article.md-page ul { padding-left: 22px; }
+article.md-page li { margin: 6px 0; }
+article.md-page pre {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.45;
+}
+article.md-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 14px;
+}
+article.md-page th, article.md-page td {
+  border: 1px solid #30363d;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+article.md-page th { background: #161b22; color: #f0f6fc; }
+article.md-page code {
+  background: #21262d;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+article.md-page hr { border: none; border-top: 1px solid #30363d; margin: 22px 0; }
+@media (max-width: 640px) {
+  article.md-page { padding-left: 12px; padding-right: 12px; }
+  article.md-page table { display: block; overflow-x: auto; max-width: 100vw; }
+}
+</style>
+<style>
+.weather-page-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
+#weather-refresh{background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:8px 14px;border-radius:6px;cursor:pointer;font:inherit}
+#weather-refresh:hover{border-color:#58a6ff}
+.weather-trip-table{width:100%;font-size:14px}
+.weather-concerns,.weather-concerns-tight{margin:6px 0;padding-left:1.2em;font-size:13px}
+</style>
+</head><body>
+<nav class="top-nav" aria-label="Trip pages">
+<a href="trip-itinerary.html">Daily itinerary</a>
+<a href="overland-alternates.html">Alt routes</a>
+<a href="trip-reference.html">Full reference</a>
+<strong>Weather</strong>
+<a href="slot-canyon-guide.html">Slot canyon guide</a>
+<a href="moab-camping.html">Moab camping</a>
+<a href="moab-trails.html">Moab trails</a>
+<a href="river-crossing.html">River crossing (Fuller Bottom)</a>
+<a href="fuel-plan.html">Fuel plan</a>
+<a href="trip-plan.gpx" download>GPX</a>
+</nav>
+<article class="md-page">
+<h1>Trip weather — dual forecast</h1>
+<p class="muted">NWS (NOAA) grid forecast and Open-Meteo, matched to each itinerary day and map-click location. Fetched when online and cached in this browser for offline use (~90 minute window). This does not replace the <a href="trip-itinerary.html">live NWS Utah alerts</a> strip on the itinerary or field checks before slot hikes.</p>
+<div class="weather-page-toolbar">
+<label>Route variant <select id="weather-variant-select" style="margin-left:6px;padding:6px 10px;border-radius:6px;background:#21262d;color:#e6edf3;border:1px solid #30363d;font:inherit">
+<option value="main">Main</option>
+<option value="alt-a">Alt A</option>
+<option value="alt-b">Alt B</option>
+<option value="alt-d">Alt D</option>
+</select></label>
+<button type="button" id="weather-refresh">Refresh forecasts</button>
+</div>
+<p id="weather-status" class="muted"></p>
+<table class="weather-trip-table" id="weather-trip-table">
+<thead><tr><th>Day</th><th>NWS summary</th><th>Open-Meteo (daily)</th><th>Notable concerns</th></tr></thead>
+<tbody id="weather-trip-tbody"></tbody>
+</table>
+<p class="muted" style="margin-top:16px"><strong>Sources:</strong> <a href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noopener">api.weather.gov</a> · <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Manual: <a href="https://www.wunderground.com/weather/us/ut/moab" target="_blank" rel="noopener">WU Moab</a></p>
+</article>
+<script>window.__SRS_WEATHER_ALL__={"main": [{"day_id": "may1_boise_bonneville", "date_iso": "2026-05-01", "lat": 40.7472, "lon": -114.0378, "location_label": "Wendover / Bonneville overnight corridor", "trip_label": "May 1 (Fri) - Meet + Bonneville overnight", "trip_title": "Boise meet -> Bonneville Salt Flats area"}, {"day_id": "day0_travel", "date_iso": "2026-05-02", "lat": 38.9953, "lon": -110.1599, "location_label": "Green River (I-70 staging)", "trip_label": "May 2 (Sat) - Travel + Stage", "trip_title": "Bonneville area -> Black Dragon Canyon"}, {"day_id": "day1_swell", "date_iso": "2026-05-03", "lat": 39.0985, "lon": -110.785, "location_label": "Wedge Overlook area (Day 1 camp)", "trip_label": "May 3 (Sun) - Day 1: Black Dragon -> Wedge", "trip_title": "Day 1: Black Dragon Canyon -> Wedge Overlook"}, {"day_id": "day2_swell", "date_iso": "2026-05-04", "lat": 38.78, "lon": -110.855, "location_label": "Tomsich Butte / Reds Canyon", "trip_label": "May 4 (Mon) - Day 2: Wedge -> Tomsich / Reds", "trip_title": "Day 2: Wedge -> Eagle Canyon -> Reds Canyon"}, {"day_id": "day3_swell", "date_iso": "2026-05-05", "lat": 38.653, "lon": -110.668, "location_label": "Temple Mountain trailhead area", "trip_label": "May 5 (Tue) - Day 3: Reds -> Temple Mtn", "trip_title": "Day 3: Tomsich Butte -> Behind-the-Reef -> Temple Mtn"}, {"day_id": "day4_swell", "date_iso": "2026-05-06", "lat": 38.85, "lon": -110.55, "location_label": "Swell corridor (Temple Mtn toward Sinbad / I-70)", "trip_label": "May 6 (Wed AM) - Day 4 AM: Temple Mtn -> Sinbad", "trip_title": "Day 4 AM: Temple Mtn -> Head of Sinbad / Dutchman Arch"}, {"day_id": "day4_moab_transit", "date_iso": "2026-05-06", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab (PM arrival / Sand Flats side)", "trip_label": "May 6 (Wed PM) - Transit to Moab", "trip_title": "Head of Sinbad -> I-70 E -> Moab"}, {"day_id": "day5_moab", "date_iso": "2026-05-07", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 7 (Thu) - Moab Day 1", "trip_title": "Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)"}, {"day_id": "day6_moab", "date_iso": "2026-05-08", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 8 (Fri) - Moab Day 2", "trip_title": "Moab Day 2 — Wipe-Out Hill (RR4W 44)"}, {"day_id": "day7_moab", "date_iso": "2026-05-09", "lat": 38.471, "lon": -109.745, "location_label": "Dead Horse Point area (rim / exposure)", "trip_label": "May 9 (Sat) - Moab Day 3", "trip_title": "Moab Day 3 — Top of the World (RR4W 38)"}, {"day_id": "day8_return", "date_iso": "2026-05-10", "lat": 43.615, "lon": -116.2343, "location_label": "Boise area (return)", "trip_label": "May 10 (Sun) - Return to Boise", "trip_title": "Sand Flats (Moab) -> Boise (Federal Way meet)"}], "alt-a": [{"day_id": "altA_may1_bonneville", "date_iso": "2026-05-01", "lat": 40.7472, "lon": -114.0378, "location_label": "Wendover / Bonneville overnight corridor", "trip_label": "May 1 (Fri) - Meet + Bonneville overnight", "trip_title": "Boise meet -> Bonneville Salt Flats area"}, {"day_id": "altA_day0_travel", "date_iso": "2026-05-02", "lat": 38.9953, "lon": -110.1599, "location_label": "Green River (I-70 staging)", "trip_label": "May 2 (Sat) - Travel + Stage (Black Dragon)", "trip_title": "Bonneville area -> Black Dragon Canyon"}, {"day_id": "altA_day1_swell", "date_iso": "2026-05-03", "lat": 39.0905, "lon": -110.655, "location_label": "Buckhorn / Swinging Bridge (forward kickoff)", "trip_label": "May 3 (Sun) - Day 1: Black Dragon -> Wedge", "trip_title": "Day 1: Black Dragon Canyon -> Wedge Overlook"}, {"day_id": "altA_day2_swell", "date_iso": "2026-05-04", "lat": 38.78, "lon": -110.855, "location_label": "Tomsich / Hondu / Reds", "trip_label": "May 4 (Mon) - Day 2: Wedge -> Family Butte (SHORT)", "trip_title": "Day 2 (lightened): Wedge -> Eagle Canyon -> Family Butte"}, {"day_id": "altA_day3_swell", "date_iso": "2026-05-05", "lat": 38.653, "lon": -110.668, "location_label": "Temple Mountain", "trip_label": "May 5 (Tue) - Day 3: Family Butte -> Temple Mtn (BTR, no slots)", "trip_title": "Day 3: Family Butte -> Reds / Tomsich / Hondu -> Hidden Splendor -> BTR traverse -> Temple Mtn camp"}, {"day_id": "altA_day4_stayover", "date_iso": "2026-05-06", "lat": 39.0985, "lon": -110.785, "location_label": "Extra Swell night (Wedge / Sinbad cluster)", "trip_label": "May 6 (Wed) - Day 4: Shared AM + stay-over slot hikes + Sinbad", "trip_title": "Day 4: Temple Mtn -> Chute / Crack (stay-overs) -> Sinbad cluster -> extra Swell night"}, {"day_id": "altA_day5_moab_transit", "date_iso": "2026-05-07", "lat": 38.9953, "lon": -110.1599, "location_label": "Green River toward Moab (transit)", "trip_label": "May 7 (Thu) - Transit to Moab + easy afternoon", "trip_title": "Head of Sinbad area -> I-70 E -> Moab / Sand Flats cluster; optional Fins N Things"}, {"day_id": "altA_day6_moab", "date_iso": "2026-05-08", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 8 (Fri) - Moab Day 1", "trip_title": "Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)"}, {"day_id": "altA_day7_moab", "date_iso": "2026-05-09", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 9 (Sat) - Moab Day 2", "trip_title": "Moab Day 2 — Wipe-Out Hill (RR4W 44)"}, {"day_id": "altA_day8_return", "date_iso": "2026-05-10", "lat": 43.615, "lon": -116.2343, "location_label": "Boise area (return)", "trip_label": "May 10 (Sun) - Return to Boise", "trip_title": "Moab -> Boise"}], "alt-b": [{"day_id": "altB_may1_bonneville", "date_iso": "2026-05-01", "lat": 40.7472, "lon": -114.0378, "location_label": "Wendover / Bonneville overnight corridor", "trip_label": "May 1 (Fri) - Meet + Bonneville overnight", "trip_title": "Boise meet -> Bonneville Salt Flats area"}, {"day_id": "altB_day0_travel", "date_iso": "2026-05-02", "lat": 38.9953, "lon": -110.1599, "location_label": "Green River (I-70 staging)", "trip_label": "May 2 (Sat) - Travel + Stage (Temple Mtn side)", "trip_title": "Bonneville area -> Temple Mountain Townsite (staging)"}, {"day_id": "altB_day1_swell", "date_iso": "2026-05-03", "lat": 38.653, "lon": -110.668, "location_label": "Temple Mtn / Sinbad side (reverse kickoff)", "trip_label": "May 3 (Sun) - Day 1: Temple Mtn -> Tomsich (MEATY)", "trip_title": "Day 1 (reverse, meaty): Temple Mtn -> Dutchman -> BTR W -> Tomsich"}, {"day_id": "altB_day2_swell", "date_iso": "2026-05-04", "lat": 39.0985, "lon": -110.785, "location_label": "Wedge / mid-Swell", "trip_label": "May 4 (Mon) - Day 2: Tomsich -> Wedge", "trip_title": "Day 2 (reverse): Tomsich -> Hondu / Reds -> Lucky Strike -> Eagle Canyon cluster -> Eva Conover -> Wedge"}, {"day_id": "altB_day3_swell", "date_iso": "2026-05-05", "lat": 39.0905, "lon": -110.655, "location_label": "Buckhorn / Black Dragon exit", "trip_label": "May 5 (Tue) - Day 3: Wedge -> Black Dragon camp", "trip_title": "Day 3 (reverse): Wedge -> Buckhorn -> Black Dragon camp"}, {"day_id": "altB_day4_moab_transit", "date_iso": "2026-05-06", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab (transit / stay-overs)", "trip_label": "May 6 (Wed) - Split at Black Dragon; stay-overs I-70 E to Moab", "trip_title": "Early-leavers pavement; stay-overs I-70 E to Moab / Sand Flats cluster (V1)"}, {"day_id": "altB_day5_moab", "date_iso": "2026-05-07", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 7 (Thu) - Moab Day 1", "trip_title": "Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)"}, {"day_id": "altB_day6_moab", "date_iso": "2026-05-08", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 8 (Fri) - Moab Day 2", "trip_title": "Moab Day 2 — Wipe-Out Hill (RR4W 44)"}, {"day_id": "altB_day7_moab", "date_iso": "2026-05-09", "lat": 38.471, "lon": -109.745, "location_label": "Dead Horse Point area (rim / exposure)", "trip_label": "May 9 (Sat) - Moab Day 3", "trip_title": "Moab Day 3 — Top of the World (RR4W 38)"}, {"day_id": "altB_day8_return", "date_iso": "2026-05-10", "lat": 43.615, "lon": -116.2343, "location_label": "Boise area (return)", "trip_label": "May 10 (Sun) - Return to Boise", "trip_title": "Moab -> Boise"}], "alt-d": [{"day_id": "altD_may1_bonneville", "date_iso": "2026-05-01", "lat": 40.7472, "lon": -114.0378, "location_label": "Wendover / Bonneville overnight corridor", "trip_label": "May 1 (Fri) - Meet + Bonneville overnight", "trip_title": "Boise meet -> Bonneville Salt Flats area"}, {"day_id": "altD_day0_travel", "date_iso": "2026-05-02", "lat": 38.9953, "lon": -110.1599, "location_label": "Green River (I-70 staging)", "trip_label": "May 2 (Sat) - Travel + Stage (Temple Mtn side)", "trip_title": "Bonneville area -> Temple Mountain Townsite (staging)"}, {"day_id": "altD_day1_swell", "date_iso": "2026-05-03", "lat": 38.653, "lon": -110.668, "location_label": "Crack Canyon TH / Temple side (BTR split)", "trip_label": "May 3 (Sun) - Day 1: Temple Mtn -> Sinbad -> BTR W -> Crack camp", "trip_title": "Day 1 (reverse, BTR east half): Temple Mtn -> Dutchman -> Sinbad -> BTR W to Crack trailhead cluster"}, {"day_id": "altD_day2_swell", "date_iso": "2026-05-04", "lat": 38.78, "lon": -110.855, "location_label": "Hidden Splendor / mid-corridor", "trip_label": "May 4 (Mon) - Day 2: Crack -> BTR W + HS Overlook -> Family Butte", "trip_title": "Day 2 (reverse): Crack -> BTR west (Miner's Cabin) -> Hidden Splendor -> Tomsich / Hondu -> Reds / Lucky Strike -> Loan Warrior / Swaseys / Icebox / Eagle Canyon -> Family Butte"}, {"day_id": "altD_day3_swell", "date_iso": "2026-05-05", "lat": 39.0985, "lon": -110.785, "location_label": "Wedge / Buckhorn toward split", "trip_label": "May 5 (Tue) - Day 3: Family Butte -> Wedge (breather)", "trip_title": "Day 3 (reverse, breather): Family Butte -> Eva Conover -> Drips -> River crossing -> Fuller Bottom -> Wedge Overlook"}, {"day_id": "altD_day4_moab_transit", "date_iso": "2026-05-06", "lat": 38.9953, "lon": -110.1599, "location_label": "Green River / I-70 toward Moab", "trip_label": "May 6 (Wed) - Split at Wedge; stay-overs I-70 E to Moab", "trip_title": "Early-leavers N exit via Green River Cutoff (09:30 target); stay-overs run Buckhorn + Black Dragon string -> Sand Flats cluster (V1)"}, {"day_id": "altD_day5_moab", "date_iso": "2026-05-07", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 7 (Thu) - Moab Day 1", "trip_title": "Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)"}, {"day_id": "altD_day6_moab", "date_iso": "2026-05-08", "lat": 38.5733, "lon": -109.5498, "location_label": "Moab town / Sand Flats", "trip_label": "May 8 (Fri) - Moab Day 2", "trip_title": "Moab Day 2 — Wipe-Out Hill (RR4W 44)"}, {"day_id": "altD_day7_moab", "date_iso": "2026-05-09", "lat": 38.471, "lon": -109.745, "location_label": "Dead Horse Point area (rim / exposure)", "trip_label": "May 9 (Sat) - Moab Day 3", "trip_title": "Moab Day 3 — Top of the World (RR4W 38)"}, {"day_id": "altD_day8_return", "date_iso": "2026-05-10", "lat": 43.615, "lon": -116.2343, "location_label": "Boise area (return)", "trip_label": "May 10 (Sun) - Return to Boise", "trip_title": "Moab -> Boise"}]};</script>
+<script src="weather-client.js"></script>
+<script>(function(){var q=new URLSearchParams(location.search);var v=q.get('variant')||'main';var all=window.__SRS_WEATHER_ALL__||{};var days=all[v]||all.main||[];if(window.SRSWeather)SRSWeather.init({variantKey:v,days:days,mode:'weather_page',allVariants:all});})();</script>
+<script>
+(function(){
+  if (!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('service-worker.js').then(function(reg){
+      reg.addEventListener('updatefound', function(){
+        var nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener('statechange', function(){
+          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+            showUpdateToast(reg);
+          }
+        });
+      });
+    }).catch(function(){});
+    var refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
+    });
+  });
+  function showUpdateToast(reg){
+    if (document.getElementById('pwa-update-toast')) return;
+    var t = document.createElement('div');
+    t.id = 'pwa-update-toast';
+    t.setAttribute('role', 'status');
+    t.style.cssText = 'position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#1f6feb;color:#fff;padding:12px 16px;border-radius:8px;font:14px/1.4 system-ui,sans-serif;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.35);max-width:90vw;text-align:center;cursor:pointer';
+    t.innerHTML = 'New trip data available. <strong>Tap to reload</strong>.';
+    t.addEventListener('click', function(){
+      if (reg.waiting) reg.waiting.postMessage({type: 'SKIP_WAITING'});
+    });
+    document.body.appendChild(t);
+  }
+})();
+</script>
+</body></html>

@@ -48,6 +48,7 @@ VARIANT_MAIN = {
     ),
     'gpx_metadata_name':  '2026 San Rafael Swell Trip Plan',
     'gpx_metadata_desc':  'Day-split tracks, primary POIs, and primary/backup campsites for the May 1-10, 2026 trip.',
+    'weather_key':        'main',
 }
 
 VARIANT_ALT_A = {
@@ -69,6 +70,7 @@ VARIANT_ALT_A = {
     ),
     'gpx_metadata_name':  '2026 SRS Trip Plan - Alt A (forward, V2)',
     'gpx_metadata_desc':  'Day-split tracks, POIs, and camps for Alt A (forward direction, 4-day Swell lighten, Variant V2).',
+    'weather_key':        'alt-a',
 }
 
 VARIANT_ALT_B = {
@@ -90,6 +92,7 @@ VARIANT_ALT_B = {
     ),
     'gpx_metadata_name':  '2026 SRS Trip Plan - Alt B (reverse, V1)',
     'gpx_metadata_desc':  'Day-split tracks (reverse direction), POIs, and camps for Alt B (Variant V1, stay-overs reach Moab May 6).',
+    'weather_key':        'alt-b',
 }
 
 VARIANT_ALT_D = {
@@ -111,6 +114,7 @@ VARIANT_ALT_D = {
     ),
     'gpx_metadata_name':  '2026 SRS Trip Plan - Alt D (reverse, BTR split, V1)',
     'gpx_metadata_desc':  'Day-split tracks (reverse direction, BTR split), POIs, and camps for Alt D (Variant V1).',
+    'weather_key':        'alt-d',
 }
 
 ALL_VARIANTS = [VARIANT_MAIN, VARIANT_ALT_A, VARIANT_ALT_B, VARIANT_ALT_D]
@@ -122,6 +126,12 @@ ALL_VARIANTS = [VARIANT_MAIN, VARIANT_ALT_A, VARIANT_ALT_B, VARIANT_ALT_D]
 # (and their helpers) don't need data threaded through every call site.
 data = json.loads(MAIN_DATA_PATH.read_text(encoding='utf-8'))
 overview_track = []  # filled by prepare_variant_context()
+_WEATHER_FORECAST_PATH = PLAN / 'weather_forecast_points.json'
+WEATHER_FORECAST = (
+    json.loads(_WEATHER_FORECAST_PATH.read_text(encoding='utf-8'))
+    if _WEATHER_FORECAST_PATH.exists()
+    else {'variants': {}}
+)
 
 
 # -----------------------------------------------------------------------------
@@ -289,7 +299,7 @@ ALT_ROUTES_LINKS_HTML = '<a href="overland-alternates.html">Alt routes</a>'
 
 
 def _top_nav_html(current: str) -> str:
-    """current is 'itinerary' | 'reference' | 'slot' | 'fuel' | 'overland-alt' |
+    """current is 'itinerary' | 'reference' | 'weather' | 'slot' | 'fuel' | 'overland-alt' |
     'moab' | 'trails' | 'river' | 'none'. Per-alt itinerary HTML uses the main header template,
     not this nav.
     """
@@ -303,6 +313,7 @@ def _top_nav_html(current: str) -> str:
         link('trip-itinerary.html', 'Daily itinerary', 'itinerary'),
         link('overland-alternates.html', 'Alt routes', 'overland-alt'),
         link('trip-reference.html', 'Full reference', 'reference'),
+        link('weather.html', 'Weather', 'weather'),
         link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
         link('moab-camping.html', 'Moab camping', 'moab'),
         link('moab-trails.html', 'Moab trails', 'trails'),
@@ -444,6 +455,120 @@ def esc(s):
     if s is None:
         return ''
     return html.escape(str(s))
+
+
+def merge_weather_days(weather_key: str, trip_days: list) -> list:
+    variants = WEATHER_FORECAST.get('variants') or {}
+    template_rows = variants.get(weather_key)
+    if not template_rows:
+        raise SystemExit(
+            f'planning/weather_forecast_points.json: missing or empty variant {weather_key!r}. '
+            'Edit the file or fix weather_key on the variant.'
+        )
+    by_id = {d['id']: d for d in trip_days}
+    out = []
+    for row in template_rows:
+        did = row['day_id']
+        t = by_id.get(did)
+        if not t:
+            raise SystemExit(
+                f"Weather day_id {did!r} not found in trip_data for variant {weather_key!r}"
+            )
+        merged = {**row, 'trip_label': t.get('label', did), 'trip_title': t.get('title', '')}
+        out.append(merged)
+    return out
+
+
+def weather_day_section_html(day_id: str, weather_key: str) -> str:
+    wq = esc(weather_key)
+    return (
+        '<section class="day-weather card" data-day-weather="' + esc(day_id) + '" aria-live="polite">'
+        '<h3>Weather snapshot (this location)</h3>'
+        '<p class="muted day-weather-loc"></p>'
+        '<div class="day-weather-body muted">Loading forecasts…</div>'
+        '<p class="muted" style="margin:10px 0 0">'
+        '<a href="weather.html?variant=' + wq + '">Full trip weather page</a> — NWS + Open-Meteo; cached offline in this browser.'
+        '</p>'
+        '</section>'
+    )
+
+
+def build_all_weather_day_payloads() -> dict:
+    """Merged per-day rows for weather.html (all variants)."""
+    pairs = [
+        ('main', MAIN_DATA_PATH),
+        ('alt-a', PLAN / 'trip_data_alt_a.json'),
+        ('alt-b', PLAN / 'trip_data_alt_b.json'),
+        ('alt-d', PLAN / 'trip_data_alt_d.json'),
+    ]
+    out: dict[str, list] = {}
+    for wkey, path in pairs:
+        if not path.exists():
+            continue
+        payload = json.loads(path.read_text(encoding='utf-8'))
+        out[wkey] = merge_weather_days(wkey, payload['days'])
+    return out
+
+
+def write_weather_html() -> None:
+    all_payload = build_all_weather_day_payloads()
+    j = json.dumps(all_payload, ensure_ascii=False)
+    nav = _top_nav_html('weather')
+    extra_css = """
+.weather-page-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
+#weather-refresh{background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:8px 14px;border-radius:6px;cursor:pointer;font:inherit}
+#weather-refresh:hover{border-color:#58a6ff}
+.weather-trip-table{width:100%;font-size:14px}
+.weather-concerns,.weather-concerns-tight{margin:6px 0;padding-left:1.2em;font-size:13px}
+"""
+    boot_lines = (
+        '<script>window.__SRS_WEATHER_ALL__=' + j + ';</script>\n'
+        '<script src="weather-client.js"></script>\n'
+        '<script>'
+        '(function(){'
+        'var q=new URLSearchParams(location.search);'
+        "var v=q.get('variant')||'main';"
+        'var all=window.__SRS_WEATHER_ALL__||{};'
+        'var days=all[v]||all.main||[];'
+        "if(window.SRSWeather)SRSWeather.init({variantKey:v,days:days,mode:'weather_page',allVariants:all});"
+        '})();'
+        '</script>'
+    )
+    page = f"""<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Trip weather — SRS May 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{PWA_HEAD}
+<style>{STATIC_MD_PAGE_CSS}</style>
+<style>{extra_css}</style>
+</head><body>
+{nav}
+<article class="md-page">
+<h1>Trip weather — dual forecast</h1>
+<p class="muted">NWS (NOAA) grid forecast and Open-Meteo, matched to each itinerary day and map-click location. Fetched when online and cached in this browser for offline use (~90 minute window). This does not replace the <a href="trip-itinerary.html">live NWS Utah alerts</a> strip on the itinerary or field checks before slot hikes.</p>
+<div class="weather-page-toolbar">
+<label>Route variant <select id="weather-variant-select" style="margin-left:6px;padding:6px 10px;border-radius:6px;background:#21262d;color:#e6edf3;border:1px solid #30363d;font:inherit">
+<option value="main">Main</option>
+<option value="alt-a">Alt A</option>
+<option value="alt-b">Alt B</option>
+<option value="alt-d">Alt D</option>
+</select></label>
+<button type="button" id="weather-refresh">Refresh forecasts</button>
+</div>
+<p id="weather-status" class="muted"></p>
+<table class="weather-trip-table" id="weather-trip-table">
+<thead><tr><th>Day</th><th>NWS summary</th><th>Open-Meteo (daily)</th><th>Notable concerns</th></tr></thead>
+<tbody id="weather-trip-tbody"></tbody>
+</table>
+<p class="muted" style="margin-top:16px"><strong>Sources:</strong> <a href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noopener">api.weather.gov</a> · <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Manual: <a href="https://www.wunderground.com/weather/us/ut/moab" target="_blank" rel="noopener">WU Moab</a></p>
+</article>
+{boot_lines}
+{PWA_REGISTER_JS}
+</body></html>
+"""
+    (OUT_DIR / 'weather.html').write_text(page, encoding='utf-8')
+    print(f'Wrote weather.html ({len(page) / 1024:.1f} KB)')
 
 
 def moab_trail_card_html(d, variant):
@@ -1006,6 +1131,12 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .warn{background:#4d1a00;border:1px solid #c7450c;border-radius:6px;padding:10px 12px;margin:10px 0;color:#ffd7a8}
 .info{background:#0b2239;border:1px solid #1f6feb;border-radius:6px;padding:10px 12px;margin:10px 0}
 .muted{color:var(--muted)}
+.day-weather.card{margin-top:12px;padding:12px 14px;background:#0d1117;border:1px solid var(--border)}
+.day-weather h3{margin:0 0 8px;font-size:15px;color:var(--accent)}
+.weather-dual{margin:6px 0;line-height:1.45;font-size:13px}
+.weather-concerns{margin:8px 0 0;padding-left:1.2em;font-size:13px}
+.weather-src-links{margin:8px 0 0;font-size:12px}
+.weather-stamp{margin:6px 0 0;font-size:12px}
 .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
 ul.clean{margin:4px 0;padding-left:20px}
 ul.clean li{margin:3px 0}
@@ -1203,6 +1334,19 @@ def build_itinerary_html(variant=None):
     route-overview tab header. Defaults to VARIANT_MAIN."""
     variant = variant or VARIANT_MAIN
     days = data['days']
+    wkey = variant.get('weather_key') or 'main'
+    weather_boot_json = json.dumps(
+        {'variantKey': wkey, 'days': merge_weather_days(wkey, days)},
+        ensure_ascii=False,
+    )
+    weather_scripts = (
+        f'<script>window.__SRS_WEATHER_BOOT__={weather_boot_json};</script>\n'
+        '<script src="weather-client.js"></script>\n'
+        '<script>'
+        'if(window.SRSWeather&&window.__SRS_WEATHER_BOOT__)'
+        "SRSWeather.init(Object.assign({mode:'itinerary'},window.__SRS_WEATHER_BOOT__));"
+        '</script>'
+    )
 
     # ----- Full-route overview (first tab): stitched GPX + aggregated pins -----
     ov_markers = _collect_route_overview_markers(days)
@@ -1471,6 +1615,7 @@ def build_itinerary_html(variant=None):
             f'<h2>{esc(d["title"])}</h2>'
             f'<div class="muted">{esc(d.get("descr", ""))}</div>'
             f'<div class="summary-grid">{stat_html}</div>'
+            f'{weather_day_section_html(d["id"], wkey)}'
             f'{moab_trail_card_html(d, variant)}'
             f'{hike_warn}'
             f'{sched_html}'
@@ -1611,6 +1756,7 @@ def build_itinerary_html(variant=None):
 <h1>{esc(variant['header_h1'])}</h1>
 <div class="meta">{variant['header_meta']} &middot;
 {reference_link_html}{ALT_ROUTES_LINKS_HTML} &middot;
+<a href="weather.html?variant={esc(wkey)}">Weather</a> &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="moab-camping.html">Moab camping</a> &middot;
 <a href="moab-trails.html">Moab trails</a> &middot;
@@ -2155,6 +2301,7 @@ if (typeof L !== 'undefined') {{
   }});
 }}
 </script>
+{weather_scripts}
 {PWA_REGISTER_JS}
 </body></html>
 """
@@ -2317,6 +2464,7 @@ def build_reference_html():
 <div class="meta">May 1 - May 10, 2026 &middot; Full knowledge dump &middot;
 <a href="trip-itinerary.html">Open daily itinerary</a> &middot;
 {ALT_ROUTES_LINKS_HTML} &middot;
+<a href="weather.html">Weather</a> &middot;
 <a href="slot-canyon-guide.html">Slot canyon guide</a> &middot;
 <a href="moab-camping.html">Moab camping</a> &middot;
 <a href="moab-trails.html">Moab trails</a> &middot;
@@ -2571,6 +2719,7 @@ def main():
 
     # Standalone markdown -> HTML PWA pages (slot guide, fuel plan, alt overview).
     write_planning_markdown_pages()
+    write_weather_html()
 
 
 if __name__ == '__main__':
