@@ -85,6 +85,7 @@ def _build_version() -> str:
         'river-crossing.html',
         'moab-camping.html',
         'moab-trails.html',
+        'moab-hells-revenge-guide.html',
         'weather.html',
         'weather-client.js',
     )
@@ -120,6 +121,7 @@ PRECACHE = [
     'river-crossing.html',
     'moab-camping.html',
     'moab-trails.html',
+    'moab-hells-revenge-guide.html',
     'weather.html',
     'weather-client.js',
     'trip-itinerary-alt-a.html',
