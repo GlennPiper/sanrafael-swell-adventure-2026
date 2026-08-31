@@ -1,16 +1,17 @@
-"""Build a single consolidated trip_data.json consumed by HTML and GPX generators.
+"""Build the consolidated trip_data.json consumed by the HTML and GPX generators.
 
 Inputs:
-  planning/route_analysis.json  (waypoints ordered by mile, with track projection)
+  planning/route_analysis.json  (waypoints ordered by mile, projected on track)
   planning/route_tracks.json    (raw polylines by track name)
+  planning/highway_tracks.json  (optional OSRM polylines for travel days)
 
 Output:
   planning/trip_data.json
 
-The heavy lifting (POI catalog, track slicing, payload assembly) lives in
-``scripts/trip_core.py`` so alternate itineraries under ``scripts/alts/`` can
-share the same POI metadata and scheduler defaults while defining their own
-day boundaries.
+Trip identity (title, dates, contacts, bbox) lives in ``trip_config.py``.
+The POI catalog and scheduler heuristics live in ``trip_core.py``.
+This file owns the day split, the campground plan, the fuel plan, and the
+live-conditions link list.
 """
 from __future__ import annotations
 import pathlib
@@ -20,584 +21,643 @@ _SCRIPTS = pathlib.Path(__file__).resolve().parent
 if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
-from alts.common import bonneville_may1_camps, may1_meet_synthetic_pois  # noqa: E402
-
-from trip_core import (
+import trip_config as cfg  # noqa: E402
+from trip_core import (  # noqa: E402
     build_payload,
     load_highway_tracks,
     load_route,
     print_payload_summary,
     write_payload,
 )
-from moab_layers import apply_moab_trails  # noqa: E402
 
-BASE = pathlib.Path(__file__).resolve().parent.parent
+BASE = _SCRIPTS.parent
 PLAN = BASE / 'planning'
 
 
 # ---------------------------------------------------------------------------
-# Day split windows (miles)
+# Day split
 # ---------------------------------------------------------------------------
+# Mile windows along the 324.8-mile main track. The split is driven by where
+# established campgrounds actually sit: there is a dense cluster from mile 34
+# to 141, then an 85-mile gap with nothing developed until North Fork at 226,
+# which forces days 3 and 4 to be the long ones.
 DAYS = [
     {
-        'id': 'may1_boise_bonneville',
-        'label': 'May 1 (Fri) - Meet + Bonneville overnight',
-        'date_iso': '2026-05-01',
-        'title': 'Boise meet -> Bonneville Salt Flats area',
+        'id': 'sep8_travel',
+        'label': 'Sep 8 (Tue) - Travel to the Gorge',
+        'date_iso': '2026-09-08',
+        'title': 'Nampa, ID -> Carson, WA (Panther Creek camp)',
         'type': 'travel',
         'descr': (
-            'Meet at Albertsons / Sinclair on Federal Way (Boise). Gather noon–1:00 PM; '
-            'depart by 1:00 PM. I-84 E toward Wendover; overnight dispersed near Bonneville '
-            'Salt Flats (site TBD — see camps below).'
+            'Meet at the Sinclair Stinker Station, 1902 N Franklin Blvd, Nampa at 8:00 AM MDT; '
+            'roll out by 8:15. I-84 west through Oregon, then up the Columbia River Gorge and '
+            'across into Washington. About 376 miles and 7 hours of moving time, so plan on '
+            '8.5 to 9 hours with fuel and food stops for a six-vehicle group. You gain an hour '
+            'crossing into Pacific time, which puts arrival in camp around 3:30 to 4:30 PM PDT. '
+            'Camp at Panther Creek, roughly 11 miles up Wind River Road from Carson, and start '
+            'the loop from mile 0 in the morning.'
         ),
         'mi_lo': None,
         'mi_hi': None,
-        'miles': 340,
-        'driving_hours_est': 5.5,
-        'synthetic_pois': may1_meet_synthetic_pois(),
+        'miles': 376,
+        'driving_hours_est': 7.1,
     },
     {
-        'id': 'day0_travel',
-        'label': 'May 2 (Sat) - Travel + Stage',
-        'date_iso': '2026-05-02',
-        'title': 'Bonneville area -> Black Dragon Canyon',
-        'type': 'travel',
-        'descr': (
-            'Continue from the Bonneville / Wendover corridor via I-80 / I-15 / I-70. '
-            'Fuel in Green River. Stage at Black Dragon Canyon dispersed for Day 1 Swell '
-            'kick-off.'
-        ),
-        'mi_lo': None,
-        'mi_hi': None,
-        'miles': 280,
-        'driving_hours_est': 5.0,
-    },
-    {
-        'id': 'day1_swell',
-        'label': 'May 3 (Sun) - Day 1: Black Dragon -> Wedge',
-        'date_iso': '2026-05-03',
-        'title': 'Day 1: Black Dragon Canyon -> Wedge Overlook',
+        'id': 'day1_cascades',
+        'label': 'Sep 9 (Wed) - Day 1: Carson -> Takhlakh Lake',
+        'date_iso': '2026-09-09',
+        'title': 'Day 1: Columbia Gorge -> Indian Heaven -> Takhlakh Lake',
         'type': 'overland',
-        'descr': 'Classic intro day: Black Dragon petroglyphs, drive through Buckhorn Wash, hit the iconic pictograph panel, end the day at the Wedge rim.',
+        'descr': (
+            'The scenic-payoff day. Top off in Carson because there is no fuel for the next 154 '
+            'route miles. Climb Wind River Road past the High Bridge, skirt the Big Lava Bed, '
+            'and work north through Goose Lake and the Forlorn Lakes into the Indian Heaven '
+            'country and the Sawtooth Berry Fields. Huckleberries should still be on in early '
+            'September. Over Babyshoe Pass and finish at Takhlakh Lake, where Mount Adams '
+            'reflects in the water - the signature view of the whole route.'
+        ),
         'mi_lo': 0.0,
-        'mi_hi': 68.0,
-        'miles': 68,
-        'driving_hours_est': 5.5,
+        'mi_hi': 84.5,
+        'miles': 85,
+        'driving_hours_est': 6.0,
     },
     {
-        'id': 'day2_swell',
-        'label': 'May 4 (Mon) - Day 2: Wedge -> Tomsich / Reds',
-        'date_iso': '2026-05-04',
-        'title': 'Day 2: Wedge -> Eagle Canyon -> Reds Canyon',
+        'id': 'day2_cascades',
+        'label': 'Sep 10 (Thu) - Day 2: Takhlakh -> Walupt Lake',
+        'date_iso': '2026-09-10',
+        'title': 'Day 2: Takh Takh lava -> Upper Cispus -> Walupt Lake',
         'type': 'overland',
-        'descr': 'Meatiest day: Fuller Bottom, Dutch Flat, Eva Conover rocks, Eagle Canyon bridges, Reds Canyon scenery, Tomsich Butte mine and Hondu Arch.',
-        'mi_lo': 68.0,
-        'mi_hi': 140.0,
-        'miles': 72,
-        'driving_hours_est': 7.5,
+        'descr': (
+            'The short day, and deliberately so: 49 route miles leaves real time for the '
+            'waterfalls and the Goat Rocks edge. Start on the Takh Takh lava flow, drop into '
+            'the Upper Cispus, and pass Hamilton Buttes and Bishop Falls. Finish at Walupt '
+            'Lake, the deepest lake in the county and the trailhead gateway to the Goat Rocks '
+            'Wilderness. The Walupt Lake access road is long and rough - budget for it.'
+        ),
+        'mi_lo': 84.5,
+        'mi_hi': 133.5,
+        'miles': 49,
+        'driving_hours_est': 4.5,
     },
     {
-        'id': 'day3_swell',
-        'label': 'May 5 (Tue) - Day 3: Reds -> Temple Mtn',
-        'date_iso': '2026-05-05',
-        'title': 'Day 3: Tomsich Butte -> Behind-the-Reef -> Temple Mtn',
+        'id': 'day3_cascades',
+        'label': 'Sep 11 (Fri) - Day 3: Walupt -> North Fork',
+        'date_iso': '2026-09-11',
+        'title': 'Day 3: Packwood fuel -> High Rock Lookout -> Randle -> North Fork',
         'type': 'overland',
-        'descr': 'Technical day: Hidden Splendor, Miner\'s Cabin, then the slow Behind-the-Reef trail. Default hike: Wild Horse Window. Backup slots: Chute / Crack / full LWH-Bell loop — see slot-canyon-guide.html (PWA). Camp at Temple Mtn.',
-        'mi_lo': 140.0,
-        'mi_hi': 200.0,
-        'miles': 60,
+        'descr': (
+            'The longest day at 93 miles, but a good share of it is paved US 12, so it moves '
+            'faster than the number suggests. Fuel at Packwood around mile 156 - the first '
+            'pump since Carson. The centrepiece is High Rock Lookout: about 3 miles round trip '
+            'to a historic lookout on a cliff edge with Mount Rainier only 13 air miles away. '
+            'Fuel again at Randle, then Layser Cave and Camp Creek Falls on the way into camp '
+            'on the Cispus.'
+        ),
+        'mi_lo': 133.5,
+        'mi_hi': 226.5,
+        'miles': 93,
+        'driving_hours_est': 7.0,
+    },
+    {
+        'id': 'day4_cascades',
+        'label': 'Sep 12 (Sat) - Day 4: North Fork -> Panther Creek',
+        'date_iso': '2026-09-12',
+        'title': 'Day 4: Burley Mountain -> Elk Pass -> lava caves -> Panther Creek',
+        'type': 'overland',
+        'descr': (
+            'The volcano-and-lava day, 82 miles. Burley Mountain Lookout takes in Rainier, '
+            'Adams, St Helens and Hood from one spot. South over Elk Pass with Mount St Helens '
+            'filling the window, then down the Lewis River past Curly Creek Falls and its twin '
+            'natural basalt arches. Late in the day, the Falls Creek Lava Caves: a genuine lava '
+            'tube from the Big Lava Bed eruption. Everyone going underground needs their own '
+            'headlamp plus a backup. Finish at Panther Creek Falls and camp where the trip '
+            'started.'
+        ),
+        'mi_lo': 226.5,
+        'mi_hi': 308.5,
+        'miles': 82,
         'driving_hours_est': 6.5,
     },
     {
-        'id': 'day4_swell',
-        'label': 'May 6 (Wed AM) - Day 4 AM: Temple Mtn -> Sinbad',
-        'date_iso': '2026-05-06',
-        'title': 'Day 4 AM: Temple Mtn -> Head of Sinbad / Dutchman Arch',
-        'type': 'overland',
-        'descr': 'Short half-day: North Temple Wash narrows, under-the-freeway tunnel (height check!), Head of Sinbad pictograph, Dutchman Arch. Then group splits - some head home to Boise, others continue to Moab.',
-        'mi_lo': 200.0,
-        'mi_hi': 226.0,
-        'miles': 26,
-        'driving_hours_est': 3.0,
-    },
-    {
-        'id': 'day4_moab_transit',
-        'label': 'May 6 (Wed PM) - Transit to Moab',
-        'date_iso': '2026-05-06',
-        'title': 'Head of Sinbad -> I-70 E -> Moab',
-        'type': 'transit',
-        'descr': 'Exit route, fuel at Green River, drive to Moab / Sand Flats; claim clustered FCFS sites '
-                 '(multiple adjoining pads — double-up vehicles where site size allows).',
-        'mi_lo': None,
-        'mi_hi': None,
-        'miles': 70,
-        'driving_hours_est': 1.5,
-    },
-    {
-        'id': 'day5_moab',
-        'label': 'May 7 (Thu) - Moab Day 1',
-        'date_iso': '2026-05-07',
-        'title': 'Moab Day 1 — Hell’s Revenge Tip-Toe (RR4W 37)',
-        'type': 'moab',
-        'descr': (
-            'Primary trail: Hell’s Revenge — Tip-Toe Trip (RR4W trail id 37, Sand Flats fee area). '
-            'Optional slickrock warm-up: Baby Lion’s Back this morning or Wed May 6 evening — see moab-trails.html#baby-lion. '
-            'Sand Flats day-use + camping fees at the booth; cluster FCFS pads in camp block below. '
-            'Map orange line is a field-recorded GPX track (decimated for this page) — navigate with judgment; '
-            'load trip-plan.gpx in Gaia/onX if basemap tiles are offline.'
-        ),
-        'mi_lo': None,
-        'mi_hi': None,
-        'miles': None,
-        'driving_hours_est': None,
-    },
-    {
-        'id': 'day6_moab',
-        'label': 'May 8 (Fri) - Moab Day 2',
-        'date_iso': '2026-05-08',
-        'title': 'Moab Day 2 — Wipe-Out Hill (RR4W 44)',
-        'type': 'moab',
-        'descr': (
-            'Primary trail: Wipe-Out Hill (RR4W trail id 44). Sand Flats / Moab-area fees as posted; '
-            'see camp block for Sand Flats cluster. Map line is RR4W geometry for planning — use live '
-            'maps + GPX in the field.'
-        ),
-        'mi_lo': None,
-        'mi_hi': None,
-        'miles': None,
-        'driving_hours_est': None,
-    },
-    {
-        'id': 'day7_moab',
-        'label': 'May 9 (Sat) - Moab Day 3',
-        'date_iso': '2026-05-09',
-        'title': 'Moab Day 3 — Top of the World (RR4W 38)',
-        'type': 'moab',
-        'descr': (
-            'Primary trail: Top of the World (RR4W trail id 38; Potash / SR 279 approach). '
-            'Last full Moab day — pack for Sunday departure. Map line is field-recorded GPX; verify closures and '
-            'group comfort with exposure before committing.'
-        ),
-        'mi_lo': None,
-        'mi_hi': None,
-        'miles': None,
-        'driving_hours_est': None,
-    },
-    {
-        'id': 'day8_return',
-        'label': 'May 10 (Sun) - Return to Boise',
-        'date_iso': '2026-05-10',
-        'title': 'Sand Flats (Moab) -> Boise (Federal Way meet)',
+        'id': 'sep13_return',
+        'label': 'Sep 13 (Sun) - Close the loop + drive home',
+        'date_iso': '2026-09-13',
+        'title': 'Panther Creek -> Triangle Pass (loop close) -> Nampa, ID',
         'type': 'travel',
-        'descr': 'Early departure from Sand Flats cluster; I-70 W -> Salina -> I-15 N -> I-84 W -> '
-                 'Boise-area finish at the same Federal Way meet point as May 1 (~670 mi).',
-        'mi_lo': None,
-        'mi_hi': None,
-        'miles': 670,
-        'driving_hours_est': 10.5,
+        'descr': (
+            'Two options. Break camp early and run the final 16 route miles from Panther Creek '
+            'down to Triangle Pass to formally close the loop, then drop into the Gorge and '
+            'head east - that adds roughly an hour and a half on top of a 368-mile, near-7-hour '
+            'drive, so leaving camp by 7:00 AM matters. Or skip the last segment, drive straight '
+            'out to Carson, and be home earlier. Decide the night before based on how everyone '
+            'feels.'
+        ),
+        'mi_lo': 308.5,
+        'mi_hi': 324.81,
+        'miles': 384,
+        'driving_hours_est': 8.0,
     },
 ]
 
 
 # ---------------------------------------------------------------------------
-# Campsite plan (hand-curated from campsite_plan.md)
+# Campground plan
 # ---------------------------------------------------------------------------
+# Availability figures are a snapshot taken 2026-08-31 from Recreation.gov for
+# the relevant night. NOTHING IS BOOKED. Friday Sep 11 and Saturday Sep 12 are
+# the scarce nights because they fall on a weekend.
+#
+# For six vehicles: ordinary Gifford Pinchot sites hold one or two rigs, so the
+# group needs either a group site or several adjacent numbered sites.
+_RESGOV = 'https://www.recreation.gov/camping/campgrounds/'
+
 CAMPSITES = {
-    # NOTE: All Swell overnight coordinates below are SNAPPED to actual
-    # `<sym>campsite-24</sym>` waypoints in san-rafael-swell-adv-route-2025.gpx.
-    'may1_boise_bonneville': bonneville_may1_camps(),
-    'day0_travel': {  # May 2 night -- stage for Day 1 kickoff at Black Dragon
+    'sep8_travel': {
         'primary': {
-            'name': 'Black Dragon Canyon - "Camp site" (GPX-verified)',
-            'lat': 38.93141, 'lon': -110.42163,
+            'name': 'Panther Creek Campground (Recreation.gov 233103)',
+            'lat': 45.81972, 'lon': -121.87972,
             'status': 'primary',
-            'kind': 'dispersed',
-            'cost': 'Free (BLM)',
-            'facilities': 'None (no toilets, no water)',
-            'notes': 'GPX waypoint "Camp site" 0.80 km from Day-1 track start. '
-                     'Camp under cottonwoods; NO camping in the canyon interior (petroglyph zone).',
-            'access': 'I-70 mm 147 westbound; gated side road on N side; sandy, high-clearance recommended.',
+            'kind': 'developed_reservable',
+            'cost': 'Per-site fee; 9 of 33 sites are first-come',
+            'facilities': 'Vault toilets, potable water, tables, fire rings. No hookups.',
+            'notes': ('NOT BOOKED. 19 of 33 sites showed available for Sep 8 as of 2026-08-31. '
+                      'Forest campground about 11 miles up Wind River Rd from Carson, so it is a '
+                      'short backtrack to mile 0 in the morning. Same camp as the final night, '
+                      'which means the group only has to learn one site. Reserve several adjacent '
+                      'numbered sites for six rigs.'),
+            'access': 'WA-14 to Carson, north on Wind River Rd, right on Panther Creek Rd (FS 65).',
+            'reserve_url': _RESGOV + '233103',
         },
         'secondary': {
-            'name': 'Black Dragon Trailhead Flats (BLM dispersed, highway-adjacent)',
-            'lat': 38.92676, 'lon': -110.41852,
+            'name': 'Home Valley Campground (Skamania County park)',
+            'lat': 45.70870, 'lon': -121.77348,
             'status': 'secondary',
-            'kind': 'dispersed',
-            'cost': 'Free (BLM)',
-            'facilities': 'None (no toilets, no water; highway noise)',
-            'notes': 'Open BLM flats right off I-70 at the Black Dragon exit, only 221 m '
-                     'from the Day-1 trail start. Use when primary is full, when anyone arrives '
-                     'after dark, or when the group wants to consolidate staging right at the '
-                     'trailhead. Lower ambiance than the primary (closer to freeway) but dead '
-                     'simple to find, and large enough for the full 11-rig group.',
-            'access': 'I-70 Exit 145 (Black Dragon); pull onto the flats just past the cattleguard.',
+            'kind': 'developed_county',
+            'cost': 'County park fee',
+            'facilities': 'Showers, potable water, toilets - the only showers near the route.',
+            'notes': ('Booked through Skamania County, not Recreation.gov. Right on the Columbia '
+                      'and only 2.9 miles from route mile 0, and it is the first campground you '
+                      'reach driving in from the east. Trade-off: it sits between WA-14 and the '
+                      'BNSF main line, so expect highway and train noise.'),
+            'access': 'Directly off WA-14 at Home Valley, east of Carson.',
         },
-        'tertiary': {
-            'name': 'San Rafael Reef View Area (BLM pullout on I-70)',
-            'lat': 38.92111, 'lon': -110.43187,
-            'status': 'tertiary',
-            'kind': 'dispersed',
-            'cost': 'Free (BLM)',
-            'facilities': 'None (no toilets, no water; freeway-adjacent, expect noise)',
-            'notes': 'Signed BLM view area on the south side of I-70 ~1 mi SW of the Black Dragon '
-                     'trailhead (Day-1 track start is ~0.85 mi / 1.35 km NE). Open flats large '
-                     'enough to spread the group; use when both primary and secondary options '
-                     'are full or when late arrivals want a well-known landmark pullout. '
-                     'Negligible backtrack in the morning -- just hop back on I-70 eastbound to '
-                     'Exit 145 Black Dragon and start Day 1. Scout on arrival for the flattest '
-                     'line-up; no designated pads.',
-            'access': 'I-70 eastbound between Exit 129 and Exit 145; signed "San Rafael Reef '
-                      'View Area" pullout on the S side of the interstate.',
-        },
+        'tertiary': [
+            {
+                'name': 'Moss Creek Campground',
+                'lat': 45.79501, 'lon': -121.63444,
+                'status': 'tertiary',
+                'kind': 'developed_fcfs',
+                'cost': 'Per-site fee',
+                'facilities': 'Vault toilets, water',
+                'notes': 'First-come. On the Little White Salmon, about 20 route miles in - useful only if the group decides to bank miles on arrival evening.',
+                'access': 'FS 18 north from Willard.',
+            },
+            {
+                'name': 'Big Cedars County Park',
+                'lat': 45.80154, 'lon': -121.64364,
+                'status': 'tertiary',
+                'kind': 'developed_county',
+                'cost': 'County park fee',
+                'facilities': 'Toilets, water',
+                'notes': 'Skamania County site adjacent to Moss Creek; same purpose as a mile-banking option.',
+                'access': 'FS 18 north from Willard.',
+            },
+        ],
     },
-    'day1_swell': {  # May 3 night -- Wedge Overlook (Day-1 track end 39.09642, -110.75111)
+    'day1_cascades': {
         'primary': {
-            'name': 'Wedge Overlook Campsite #5 (GPX) - cluster anchor (#3/#4/#5/#6/#7)',
-            'lat': 39.12445, 'lon': -110.75133,
+            'name': 'Takhlakh Lake Campground (Recreation.gov 232861)',
+            'lat': 46.28083, 'lon': -121.59861,
             'status': 'primary',
-            'kind': 'designated_dispersed',
-            'cost': '$15/site honor system',
-            'facilities': 'None (no toilets, no water; very windy -- tie everything down)',
-            'notes': 'First-come only. The 8 Wedge sites are spread along the rim road; '
-                     '#3 (39.12423,-110.74498), #4 (39.12748,-110.74781), #5 (39.12445,-110.75133), '
-                     '#6 (39.12254,-110.75204), #7 (39.12563,-110.75521) form a tight cluster. '
-                     'Scout ahead during Buckhorn Wash stop mid-afternoon; claim 3-4 adjacent sites for the group. '
-                     '2.3-3.5 km N of track end at the overlook viewpoint.',
-            'access': 'Wedge Rd spur off Buckhorn Draw Rd',
-            'cluster_members': [
-                {'name': 'Wedge Overlook Campsite #3', 'lat': 39.12423, 'lon': -110.74498},
-                {'name': 'Wedge Overlook Campsite #4', 'lat': 39.12748, 'lon': -110.74781},
-                {'name': 'Wedge Overlook Campsite #6', 'lat': 39.12254, 'lon': -110.75204},
-                {'name': 'Wedge Overlook Campsite #7', 'lat': 39.12563, 'lon': -110.75521},
-            ],
+            'kind': 'developed_reservable',
+            'cost': 'Per-site fee; 18 of 54 sites are first-come',
+            'facilities': 'Vault toilets, potable water, tables, fire rings. No hookups. Non-motorised boating only.',
+            'notes': ('NOT BOOKED, AND THIS IS THE ONE TO GRAB. 22 of 54 sites showed available '
+                      'for Sep 9 as of 2026-08-31, but ZERO for Fri Sep 11 and Sat Sep 12 - which '
+                      'is exactly why Day 1 ends here on a Wednesday. Mount Adams reflected in the '
+                      'lake is the signature view of the route. Sites in the 30s and 40s were the '
+                      'most open; book adjacent ones for six rigs.'),
+            'access': 'FS 23 over Babyshoe Pass, then FS 2329. Paved most of the way with a gravel stretch over the pass.',
+            'reserve_url': _RESGOV + '232861',
         },
         'secondary': [
             {
-                'name': 'Wedge Overlook Camp #1 (GPX) - east-rim site',
-                'lat': 39.10857, 'lon': -110.70223,
+                'name': 'Council Lake Campground',
+                'lat': 46.26327, 'lon': -121.63178,
                 'status': 'secondary',
-                'kind': 'designated_dispersed',
-                'cost': '$15/site honor system',
-                'facilities': 'None',
-                'notes': 'East-side rim site, ~4.4 km E of the overlook. Designated Wedge '
-                         'site -- can be occupied on its own if the cluster is taken; good '
-                         'sunrise exposure but farthest from the iconic overlook viewpoint.',
-                'access': 'Wedge Rd east spur (continue past the east-rim turn-off)',
+                'kind': 'primitive_fcfs',
+                'cost': 'Free or low fee',
+                'facilities': 'Vault toilet. No potable water.',
+                'notes': 'First-come, not reservable, roughly 5 route miles before Takhlakh. Small and rustic - good fallback for part of the group, not all six rigs.',
+                'access': 'Short rough spur off FS 2334.',
             },
             {
-                'name': 'Wedge Overlook Camp #2 (GPX) - east-rim site',
-                'lat': 39.11221, 'lon': -110.73341,
+                'name': 'Olallie Lake Campground',
+                'lat': 46.28868, 'lon': -121.61949,
                 'status': 'secondary',
-                'kind': 'designated_dispersed',
-                'cost': '$15/site honor system',
-                'facilities': 'None',
-                'notes': 'East-side rim site ~2 km WSW of #1, roughly midway between the '
-                         'east spur and the overlook. Also stands alone; pairs well with #1 '
-                         'if two rigs split east while the main group pushes the cluster.',
-                'access': 'Wedge Rd east spur',
-            },
-            {
-                'name': 'Wedge Overlook Campsite #8 (GPX) - southern outlier',
-                'lat': 39.11674, 'lon': -110.75523,
-                'status': 'secondary',
-                'kind': 'designated_dispersed',
-                'cost': '$15/site honor system',
-                'facilities': 'None',
-                'notes': 'Southernmost Wedge site, on the same rim road as the #3-#7 '
-                         'cluster but ~900 m SSE. Use it to extend the cluster if we need '
-                         'one extra site, or as a standalone backup if the cluster is full.',
-                'access': 'Wedge Rd spur, ~900 m before the main overlook turn-off',
+                'kind': 'primitive_fcfs',
+                'cost': 'Free or low fee',
+                'facilities': 'Vault toilet. No potable water.',
+                'notes': 'First-come. Very small, in the same Midway High Lakes cluster as Takhlakh.',
+                'access': 'Spur off FS 2329.',
             },
         ],
-        'tertiary': {
-            'name': 'Buckhorn Draw Campsite 1 (GPX) - developed loop',
-            'lat': 39.16753, 'lon': -110.73766,
-            'status': 'tertiary',
-            'kind': 'developed_fcfs',
-            'cost': '$15 ind / $50 group',
-            'facilities': 'Vault toilets, fire rings, tables',
-            'notes': 'GPX has Buckhorn Draw sites 1, 7, 14, 15, 16, 17, 20, 23, 26, 30, 32. '
-                     '32 total sites + 7 group sites. First-come despite Recreation.gov listing. '
-                     '~8 km S of Wedge - requires backtrack at end of Day 1.',
-            'access': 'Buckhorn Draw Rd, on route near mi 45-50',
-        },
+        'tertiary': [
+            {
+                'name': 'Horseshoe Lake Campground',
+                'lat': 46.30978, 'lon': -121.56663,
+                'status': 'tertiary',
+                'kind': 'primitive_fcfs',
+                'cost': 'Free or low fee',
+                'facilities': 'Vault toilet. No potable water.',
+                'notes': 'First-come, just under a mile off route past Takhlakh.',
+                'access': 'FS 2329 spur.',
+            },
+            {
+                'name': 'Chain of Lakes Campground',
+                'lat': 46.29310, 'lon': -121.59633,
+                'status': 'tertiary',
+                'kind': 'primitive_fcfs',
+                'cost': 'Free or low fee',
+                'facilities': 'Vault toilet. No potable water.',
+                'notes': 'First-come, rough access road. Last-resort spillover for the High Lakes area.',
+                'access': 'Rough spur off FS 2329.',
+            },
+        ],
     },
-    'day2_swell': {  # May 4 night -- Tomsich Butte area (Day-2 track end 38.69753, -110.97621)
+    'day2_cascades': {
         'primary': {
-            'name': 'Tomsich Butte Camp (GPX)',
-            'lat': 38.68282, 'lon': -110.98900,
+            'name': 'Walupt Lake Campground (Recreation.gov 232860)',
+            'lat': 46.42306, 'lon': -121.47361,
             'status': 'primary',
-            'kind': 'dispersed',
-            'cost': 'Free (BLM)',
-            'facilities': 'None (no toilets, no water)',
-            'notes': 'GPX waypoint "Tomsich Butte Camp" 1.98 km from track end. '
-                     'Open flat area near the uranium mine ruins and Hondu Arch trailhead. '
-                     'This is the logical end-of-day-2 camp. First-come / dispersed - Monday night should be open.',
-            'access': 'Tomsich Butte Rd at the mine area',
+            'kind': 'developed_reservable',
+            'cost': 'Per-site fee; 14 of 42 sites are first-come',
+            'facilities': 'Vault toilets, potable water, boat launch. No hookups.',
+            'notes': ('NOT BOOKED. 7 of 42 sites showed available for Sep 10 as of 2026-08-31 - '
+                      'thinner than Takhlakh, so this is the second priority to reserve. Only 1 '
+                      'site was open for Fri Sep 11, so the Thursday timing matters. Goat Rocks '
+                      'trailheads leave from the campground. The access road in is long and rough.'),
+            'access': 'FS 21 then FS 2160 east - roughly 16 miles of gravel off the main route.',
+            'reserve_url': _RESGOV + '232860',
         },
         'secondary': {
-            'name': 'Dispersed Camp near Tomsich (GPX "Camp")',
-            'lat': 38.69237, 'lon': -110.99904,
+            'name': 'Chambers Lake Campground',
+            'lat': 46.46549, 'lon': -121.53183,
             'status': 'secondary',
-            'kind': 'dispersed',
-            'cost': 'Free (BLM)',
-            'facilities': 'None',
-            'notes': 'Adjacent GPX-marked camp spot ~1 km NW of Tomsich Butte Camp. '
-                     'Use if primary area is crowded; small footprint (2-3 rigs).',
-            'access': 'Tomsich Butte Rd, 1 km past primary',
+            'kind': 'primitive_fcfs',
+            'cost': 'Free or low fee',
+            'facilities': 'Vault toilet. No potable water.',
+            'notes': ('First-come and not on Recreation.gov, so availability cannot be checked in '
+                      'advance. About 8 route miles past Walupt near the Goat Rocks boundary. '
+                      'Reasonable Plan B if Walupt is full on arrival.'),
+            'access': 'FS 21 spur north of the Walupt junction.',
         },
-        'tertiary': {
-            'name': 'Family Butte Dispersed Camping (GPX) - BAIL EARLY option',
-            'lat': 38.76868, 'lon': -110.83217,
-            'status': 'tertiary',
-            'kind': 'dispersed',
-            'cost': 'Free (BLM)',
-            'facilities': 'None',
-            'notes': 'GPX-marked open dispersed area, room for 6-8 vehicles. '
-                     '~15 km NE of Tomsich - use this if Day 2 runs long and you need to bail '
-                     'before reaching Tomsich Butte. Day 3 would then start with the Family Butte -> '
-                     'Reds Canyon -> Tomsich drive (~20 min) before the usual Day 3 agenda.',
-            'access': 'Family Butte Rd spur, mid-route Day 2',
-        },
+        'tertiary': [
+            {
+                'name': 'Adams Fork Campground (Recreation.gov 232857)',
+                'lat': 46.33889, 'lon': -121.64694,
+                'status': 'tertiary',
+                'kind': 'developed_reservable',
+                'cost': 'Per-site fee; 7 of 23 sites are first-come',
+                'facilities': 'Vault toilets, tables, fire rings. No potable water.',
+                'notes': ('16 of 23 sites showed available for Sep 10. Sits at route mile 99.6, so '
+                          'choosing it shortens Day 2 to 15 miles and lengthens Day 3 to 127 - use '
+                          'it only if the group wants an easy Thursday or Walupt falls through.'),
+                'access': 'On FS 21 beside the Cispus River.',
+                'reserve_url': _RESGOV + '232857',
+            },
+            {
+                'name': 'Cat Creek Campground',
+                'lat': 46.34855, 'lon': -121.62496,
+                'status': 'tertiary',
+                'kind': 'primitive_fcfs',
+                'cost': 'Free',
+                'facilities': 'Vault toilet. No potable water.',
+                'notes': 'First-come only, very small. Route mile 101. Overflow for Adams Fork.',
+                'access': 'FS 2160 just east of Adams Fork.',
+            },
+        ],
     },
-    'day3_swell': {  # May 5 night -- Temple Mountain area (Day-3 track end 38.66431, -110.64746)
+    'day3_cascades': {
         'primary': {
-            'name': 'Temple Mountain Townsite - Site 1 (Group Site) (GPX)',
-            'lat': 38.65606, 'lon': -110.66015,
+            'name': 'North Fork Elk Group Camp (Recreation.gov 232898)',
+            'lat': 46.45250, 'lon': -121.78889,
             'status': 'primary',
-            'kind': 'developed_fcfs',
-            'cost': '$50/night',
-            'facilities': 'Vault toilets, fire rings, tables, large shade structure',
-            'notes': 'GPX waypoint "Site 1 (Group Site)" - the Temple Mtn Townsite Campground group site. '
-                     '1.43 km W of track end. First-come only. Tuesday night = very likely open. '
-                     'Scout during Behind-the-Reef slow section.',
-            'access': 'Temple Mtn Rd, Townsite Campground complex',
+            'kind': 'developed_group_reservable',
+            'cost': 'Single group-site fee for the whole party',
+            'facilities': 'Vault toilets, potable water, group shelter area, tables, fire rings.',
+            'notes': ('NOT BOOKED, AND THE MOST TIME-SENSITIVE RESERVATION OF THE TRIP. This is a '
+                      'single reservable group site, which is what six vehicles actually want, and '
+                      'as of 2026-08-31 it was open on both Fri Sep 11 and Sat Sep 12 - the two '
+                      'nights when nearly everything else in the forest is booked. One booking '
+                      'covers the whole group. If it goes, Tower Rock is the fallback.'),
+            'access': 'FS 23 south from Randle along the Cispus, near North Fork Campground.',
+            'reserve_url': _RESGOV + '232898',
         },
         'secondary': {
-            'name': 'Temple Mount East Campground (GPX)',
-            'lat': 38.65770, 'lon': -110.66224,
+            'name': 'Tower Rock Campground (Recreation.gov 232855)',
+            'lat': 46.44500, 'lon': -121.86806,
             'status': 'secondary',
-            'kind': 'developed_fcfs',
-            'cost': '$15/site',
-            'facilities': 'Vault toilets',
-            'notes': 'GPX waypoint "Temple Mount East Campground" - 10-site loop, 1.48 km from track end. '
-                     'First-come. Split group across several sites if group site is taken.',
-            'access': 'Temple Mtn Rd, E of the Townsite',
+            'kind': 'developed_reservable',
+            'cost': 'Per-site fee; 6 of 20 sites are first-come',
+            'facilities': 'Vault toilets, potable water, tables, fire rings.',
+            'notes': ('The best weekend availability found anywhere on the route: 10 of 20 sites '
+                      'open for Fri Sep 11 and 8 for Sat Sep 12 as of 2026-08-31. Route mile 228.6, '
+                      'about 2 miles past North Fork. Book several adjacent sites if the Elk group '
+                      'site is gone.'),
+            'access': 'FS 23 / FS 28 along the Cispus, south of Randle.',
+            'reserve_url': _RESGOV + '232855',
         },
-        'tertiary': {
-            'name': 'Dispersed "Camp" near track end (GPX)',
-            'lat': 38.66075, 'lon': -110.64263,
-            'status': 'tertiary',
-            'kind': 'dispersed',
-            'cost': 'Free (BLM)',
-            'facilities': 'None',
-            'notes': 'GPX waypoint "Camp" - CLOSEST GPX camp to Day-3 track end (0.58 km). '
-                     'Primitive dispersed. Multiple other GPX-marked dispersed spots within 3 km '
-                     '(e.g. 38.66500,-110.67681; 38.66549,-110.69267).',
-            'access': 'On-route near Temple Mtn area',
-        },
+        'tertiary': [
+            {
+                'name': 'North Fork Bear Group Camp (Recreation.gov 232896)',
+                'lat': 46.45083, 'lon': -121.78778,
+                'status': 'tertiary',
+                'kind': 'developed_group_reservable',
+                'cost': 'Single group-site fee',
+                'facilities': 'Same complex as Elk Group.',
+                'notes': ('The other group site at North Fork. It was open Sep 8 through 10 but '
+                          'ALREADY TAKEN for Fri Sep 11 and Sat Sep 12, so it does not work for '
+                          'this itinerary unless the day split changes.'),
+                'access': 'Same as Elk Group.',
+                'reserve_url': _RESGOV + '232896',
+            },
+            {
+                'name': 'North Fork Campground (Recreation.gov 232852)',
+                'lat': 46.45083, 'lon': -121.78778,
+                'status': 'tertiary',
+                'kind': 'developed_reservable',
+                'cost': 'Per-site fee; 7 of 19 sites are first-come',
+                'facilities': 'Vault toilets, potable water.',
+                'notes': ('Only 1 site open for Fri Sep 11 and none for Sat Sep 12 as of 2026-08-31 '
+                          '- not viable for six rigs on the weekend, but listed because the '
+                          'first-come sites could still absorb one or two vehicles.'),
+                'access': 'FS 23 south from Randle.',
+                'reserve_url': _RESGOV + '232852',
+            },
+        ],
     },
-    'day4_moab_transit': {  # May 6 night — Sand Flats FCFS cluster
+    'day4_cascades': {
         'primary': {
-            'name': 'Sand Flats Recreation Area — adjacent FCFS sites (cluster)',
-            'lat': 38.57563, 'lon': -109.52401,
+            'name': 'Panther Creek Campground (Recreation.gov 233103)',
+            'lat': 45.81972, 'lon': -121.87972,
             'status': 'primary',
-            'kind': 'developed_fcfs',
-            'cost': 'Day-use + camping fees collected at booth',
-            'facilities': 'Picnic tables, fire rings, pit toilets; haul drinking water',
-            'notes': 'No group reservation. Send scouts early afternoon if possible and grab adjoining '
-                     'numbered sites on the same loop (or neighboring loops). Up to **two rigs per pad** '
-                     'only when pads are large enough—trailers/tow combos usually need dedicated sites.',
-            'access': 'Moab: Center/400 East -> Mill Creek Dr -> Sand Flats Rd (~5 mi graded)',
-            'reserve_url': 'https://www.recreation.gov/gateways/2160',
+            'kind': 'developed_reservable',
+            'cost': 'Per-site fee; 9 of 33 sites are first-come',
+            'facilities': 'Vault toilets, potable water, tables, fire rings.',
+            'notes': ('NOT BOOKED. Only 5 of 33 sites showed available for Sat Sep 12 as of '
+                      '2026-08-31, so book this at the same time as the first night. Route mile '
+                      '308.4, right after Panther Creek Falls, and it leaves only 16 miles of loop '
+                      'to close on Sunday morning.'),
+            'access': 'Panther Creek Rd (FS 65) off Wind River Rd.',
+            'reserve_url': _RESGOV + '233103',
         },
         'secondary': {
-            'name': 'Dead Horse Point SP - Wingate (electric site)',
-            'lat': 38.4710, 'lon': -109.7450,
+            'name': 'Crest Camp',
+            'lat': 45.90889, 'lon': -121.80103,
             'status': 'secondary',
-            'kind': 'developed_reserved',
-            'cost': '$60/night',
-            'facilities': 'Electric, vault toilets, no showers',
-            'notes': '150+ sites available May 6. One site fits up to 8.',
-            'access': 'Hwy 313 W off Hwy 191',
-            'reserve_url': 'https://utahstateparks.reserveamerica.com',
+            'kind': 'primitive_fcfs',
+            'cost': 'Free',
+            'facilities': 'None. No water, no toilet.',
+            'notes': 'Small primitive site at route mile 302.7 near the Pacific Crest Trail crossing. First-come. Fits a couple of rigs at most - a bail-out, not a plan.',
+            'access': 'FS 60 near the PCT trailhead.',
         },
         'tertiary': {
-            'name': 'BLM designated dispersed pods (Mill Canyon / Cotter / Dubinky)',
-            'lat': 38.6500, 'lon': -109.7700,
+            'name': 'Home Valley Campground (Skamania County park)',
+            'lat': 45.70870, 'lon': -121.77348,
             'status': 'tertiary',
-            'kind': 'designated_dispersed',
-            'cost': 'Free where marked — obey posted waste rules',
-            'facilities': 'None (signs only)',
-            'notes': 'Last resort north of Hwy 313 / east of Hwy 191; verify brown post sites.',
-            'access': 'Spurs off Cotter Mine, Dubinky, Mill Canyon corridors',
+            'kind': 'developed_county',
+            'cost': 'County park fee',
+            'facilities': 'Showers, potable water, toilets.',
+            'notes': ('Worth considering deliberately rather than as a fallback: finishing the '
+                      'full loop to Triangle Pass on Saturday and dropping to Home Valley makes '
+                      'Saturday about 117 miles, but it means hot showers before the drive home '
+                      'and nothing left to do on Sunday but leave.'),
+            'access': 'Directly off WA-14 at Home Valley.',
         },
     },
-    'day5_moab': {
-        'primary': {
-            'name': 'Sand Flats Recreation Area — cluster camp (renew sites daily FCFS)',
-            'lat': 38.57563, 'lon': -109.52401,
-            'status': 'primary',
-            'kind': 'developed_fcfs',
-            'cost': 'Day-use + nightly camping fee per Grand County/Booth',
-            'facilities': 'Pit toilets, picnic tables, fire rings; pack water.',
-            'notes': 'Preferred Moab hub: neighboring FCFS pads, two vehicles/site when space allows '
-                     '(long trailers usually need standalone sites). Overflow loop opens when staffed.',
-            'access': 'Same Sand Flats Rd corridor as transit night.',
-            'reserve_url': 'https://www.recreation.gov/gateways/2160',
-        },
-        'secondary': {
-            'name': 'Dead Horse Point SP - Wingate (reserved backup)',
-            'lat': 38.4710, 'lon': -109.7450,
-            'status': 'secondary',
-            'kind': 'developed_reserved',
-            'cost': '$60/night',
-            'facilities': 'Electric, vault toilets',
-            'notes': 'Use if Sand Flats is untenable weather / capacity-wise — book ahead if leaning on this.',
-            'access': 'Hwy 313 W off Hwy 191',
-            'reserve_url': 'https://utahstateparks.reserveamerica.com',
-        },
-        'tertiary': {
-            'name': 'Dead Horse Kayenta loop / Utahraptor Fossil Flats primitive (fee)',
-            'lat': 38.4720, 'lon': -109.7440,
-            'status': 'tertiary',
-            'kind': 'developed_reserved',
-            'cost': 'Varies',
-            'facilities': 'Electric at Kayenta; primitive at Fossil Flats corridor',
-            'notes': 'Split-group backup options north of downtown.',
-            'access': 'Hwy 313 or Hwy 191 N',
-            'reserve_url': 'https://utahstateparks.reserveamerica.com',
-        },
-    },
-    'day6_moab': {'inherit': 'day5_moab'},
-    'day7_moab': {'inherit': 'day5_moab'},
 }
 
 
 # ---------------------------------------------------------------------------
-# Per-day scheduling defaults (only overland days get the on-page scheduler).
-# break_camp = HH:MM local; moving_mph = pure driving speed (no stops folded in).
+# Per-day scheduling defaults (only route days get the on-page scheduler)
 # ---------------------------------------------------------------------------
+# break_camp is local time; moving_mph is pure driving speed with no stops
+# folded in. Gifford Pinchot forest roads run slower than desert two-track:
+# 20-25 mph on graded gravel, less on the rough spurs, faster on the paved
+# US 12 stretch that dominates Day 3.
 SCHEDULE_DEFAULTS = {
-    'day1_swell': {'break_camp': '09:00', 'moving_mph': 20},
-    'day2_swell': {'break_camp': '08:30', 'moving_mph': 15},
-    'day3_swell': {'break_camp': '08:30', 'moving_mph': 14},
-    'day4_swell': {'break_camp': '09:00', 'moving_mph': 22},
+    'day1_cascades': {'break_camp': '08:00', 'moving_mph': 22},
+    'day2_cascades': {'break_camp': '08:30', 'moving_mph': 20},
+    'day3_cascades': {'break_camp': '07:30', 'moving_mph': 28},
+    'day4_cascades': {'break_camp': '07:30', 'moving_mph': 22},
 }
 
 
 # ---------------------------------------------------------------------------
-# Fuel plan payload (short version embedded; full is in planning/fuel_plan.md)
+# Fuel plan
 # ---------------------------------------------------------------------------
 FUEL_PLAN_SUMMARY = {
     'stations': [
-        {'name': 'Green River, UT (I-70 Exit 160)', 'lat': 38.9953, 'lon': -110.1599,
-         'role': 'Primary fill-up before Day 1 and after Day 4',
-         'brands': 'Maverik (24hr), Chevron, Shell, Love\'s, FJ Express'},
-        {'name': 'Castle Dale, UT', 'lat': 39.2163, 'lon': -111.0182,
-         'role': 'Mid-trip detour (~54 mi RT from Buckhorn Draw)',
-         'brands': 'Rocky Mountain Minute Market, Sinclair'},
-        {'name': 'Emery, UT', 'lat': 38.9227, 'lon': -111.2535,
-         'role': 'Mid-trip detour (~40-50 mi RT via Moore Cutoff Rd)',
-         'brands': 'Emery C-Store'},
-        {'name': 'Hanksville, UT', 'lat': 38.3722, 'lon': -110.7137,
-         'role': 'Day 3-4 detour (~60 mi RT from Temple Mtn)',
-         'brands': 'Hollow Mountain (inside a rock!), Whispering Sands'},
-        {'name': 'Moab, UT', 'lat': 38.5733, 'lon': -109.5498,
-         'role': 'Moab days + pre-return fill',
-         'brands': 'Maverik, Chevron, Shell, Sinclair'},
+        {'name': 'Carson, WA (route mile 2)', 'lat': 45.74106, 'lon': -121.82137,
+         'role': 'MANDATORY top-off. Last fuel for 154 route miles.',
+         'brands': 'Small-town station on Wind River Rd; also a store. Verify hours - do not arrive at 9 PM expecting to fuel.'},
+        {'name': 'Stevenson, WA (near the start, off route)', 'lat': 45.69560, 'lon': -121.88500,
+         'role': 'Backup for Carson, ~7 mi west on WA-14',
+         'brands': 'Larger selection of stations and a full grocery store.'},
+        {'name': 'Trout Lake, WA (off-route detour)', 'lat': 45.99760, 'lon': -121.52640,
+         'role': 'Optional mid-Day-1 insurance, roughly 12 miles southeast of the route via WA-141',
+         'brands': 'Single small station plus a store; limited hours. Not in the route GPX. Worth it only if someone is running low before Babyshoe Pass.'},
+        {'name': 'Packwood, WA (route mile 156)', 'lat': 46.60421, 'lon': -121.67279,
+         'role': 'First fuel since Carson. Day 3 refuel point.',
+         'brands': 'Multiple stations on US 12, plus food, store and cell service.'},
+        {'name': 'Randle, WA (route mile 217)', 'lat': 46.53564, 'lon': -121.95699,
+         'role': 'Last fuel before the final 108 miles back to the Gorge',
+         'brands': 'Station and store on US 12; Cowlitz Valley Ranger Station is here.'},
+        {'name': 'Morton, WA (off route, west on US 12)', 'lat': 46.55900, 'lon': -122.27600,
+         'role': 'Backup if Randle is closed; also the nearest hospital',
+         'brands': 'Several stations. About 20 miles west of Randle.'},
+    ],
+    'critical_gaps': [
+        {'from_mi': 2, 'to_mi': 156, 'gap_mi': 154,
+         'label': 'Carson to Packwood',
+         'note': ('The one that matters. 154 miles of mostly forest road with no fuel. At a '
+                  'degraded 13 mpg that is about 12 gallons, which most rigs handle on one tank - '
+                  'but anything with a small tank, a heavy foot, or a roof rack should carry a '
+                  'jerry can. Trout Lake is the only bail-out and it is a 24-mile round trip '
+                  'detour off Day 1.')},
+        {'from_mi': 217, 'to_mi': 325, 'gap_mi': 108,
+         'label': 'Randle to the Gorge',
+         'note': 'Fill at Randle. The last 108 miles cross Elk Pass and the Lewis River country with nothing open.'},
     ],
     'surface_breakdown': {
-        'paved_hwy_mi': 0,
-        'graded_dirt_mi': 180,
-        'rocky_2track_mi': 30,
-        'technical_mi': 15,
-        'total_mi': 225,
+        'paved_hwy_mi': 95,
+        'graded_gravel_mi': 175,
+        'rough_2track_mi': 45,
+        'technical_mi': 10,
+        'total_mi': 325,
     },
     'mpg_factors': {
         'paved_hwy_65mph': 1.00,
         'paved_local': 0.95,
-        'graded_dirt': 0.82,
-        'rocky_2track': 0.60,
-        'technical_low_range': 0.48,
+        'graded_gravel': 0.82,
+        'rough_2track': 0.65,
+        'technical_low_range': 0.50,
     },
-    'estimated_swell_gallons_16mpg_baseline': 26,
+    'notes': [
+        'Two full refuels on route: Packwood at mile 156 and Randle at mile 217.',
+        'The whole 325-mile loop at a 16 mpg baseline works out to roughly 20 gallons, but the '
+        'binding constraint is the 154-mile Carson-to-Packwood leg, not the total.',
+        'Forest-road fuel economy runs well below highway numbers. Plan on 65 to 82 percent of '
+        'your normal mpg depending on surface, and worse if you are airing down and running low range.',
+        'Fill in Nampa before departure and again somewhere in Oregon on the drive out; the '
+        'travel day is 376 highway miles.',
+    ],
 }
 
 
 # ---------------------------------------------------------------------------
-# Real-time info links (short version; full in realtime_info_sources.md)
+# Live-conditions links
 # ---------------------------------------------------------------------------
+_NWS_POINT = 'https://forecast.weather.gov/MapClick.php?lat={lat}&lon={lon}'
+
 REALTIME_LINKS = [
-    {'cat': 'Weather', 'label': 'NWS Green River', 'url': 'https://forecast.weather.gov/MapClick.php?lat=38.9953&lon=-110.1599'},
-    {'cat': 'Weather', 'label': 'NWS Wedge Overlook area', 'url': 'https://forecast.weather.gov/MapClick.php?lat=39.0985&lon=-110.7850'},
-    {'cat': 'Weather', 'label': 'NWS Temple Mountain', 'url': 'https://forecast.weather.gov/MapClick.php?lat=38.6530&lon=-110.6680'},
-    {'cat': 'Weather', 'label': 'NWS Moab', 'url': 'https://forecast.weather.gov/MapClick.php?lat=38.5733&lon=-109.5498'},
-    {'cat': 'Weather', 'label': 'NWS Dead Horse Point', 'url': 'https://forecast.weather.gov/MapClick.php?lat=38.4710&lon=-109.7450'},
-    {'cat': 'Weather', 'label': 'NWS SLC active warnings (Swell)', 'url': 'https://www.weather.gov/slc/WWA'},
-    {'cat': 'Weather', 'label': 'NWS GJT hazards (Moab)',          'url': 'https://www.weather.gov/gjt/hazards'},
-    {'cat': 'Weather', 'label': 'NWS nationwide active alerts',    'url': 'https://www.weather.gov/alerts'},
-    {'cat': 'Weather', 'label': 'NWS SLC flash-flood info',        'url': 'https://www.weather.gov/slc/flashflood'},
-    {'cat': 'Weather', 'label': 'NWS Salt Lake City (Swell)', 'url': 'https://www.weather.gov/slc'},
-    {'cat': 'Weather', 'label': 'NWS Grand Junction (Moab)', 'url': 'https://www.weather.gov/gjt'},
-    {'cat': 'Weather', 'label': 'Radar KICX (Cedar City / Swell)', 'url': 'https://radar.weather.gov/station/KICX/standard'},
-    {'cat': 'Weather', 'label': 'Radar KGJX (Moab)', 'url': 'https://radar.weather.gov/station/KGJX/standard'},
-    {'cat': 'Roads', 'label': 'UDOT Traveler Info', 'url': 'https://www.udottraffic.utah.gov/'},
-    {'cat': 'Roads', 'label': 'UDOT Region 4 news', 'url': 'https://udot.utah.gov/connect/category/region-four'},
-    {'cat': 'Roads', 'label': 'UDOT live cameras map', 'url': 'https://udottraffic.utah.gov/map'},
-    {'cat': 'Fire/Smoke', 'label': 'Utah Fire Info (official)', 'url': 'https://utahfireinfo.gov/'},
-    {'cat': 'Fire/Smoke', 'label': 'Utah fire restrictions (active)', 'url': 'https://utah-fire-info-utahdnr.hub.arcgis.com/pages/active-fire-restrictions'},
-    {'cat': 'Fire/Smoke', 'label': 'InciWeb (all active fires)', 'url': 'https://inciweb.wildfire.gov/'},
-    {'cat': 'Fire/Smoke', 'label': 'AirNow Fire & Smoke map', 'url': 'https://fire.airnow.gov/'},
-    {'cat': 'Water', 'label': 'USGS San Rafael River near Green River', 'url': 'https://waterdata.usgs.gov/monitoring-location/09328500/'},
-    {'cat': 'Water', 'label': 'USGS Muddy Creek near Emery', 'url': 'https://waterdata.usgs.gov/monitoring-location/09330500/'},
-    {'cat': 'BLM/Parks', 'label': 'BLM Price Field Office', 'url': 'https://www.blm.gov/office/price-field-office'},
-    {'cat': 'BLM/Parks', 'label': 'BLM Moab Field Office', 'url': 'https://www.blm.gov/office/moab-field-office'},
-    {'cat': 'BLM/Parks', 'label': 'BLM San Rafael Swell Rec Area', 'url': 'https://www.blm.gov/visit/san-rafael-swell-recreation-area'},
-    {'cat': 'BLM/Parks', 'label': 'Recreation.gov alerts', 'url': 'https://www.recreation.gov/alerts'},
-    {'cat': 'BLM/Parks', 'label': 'Arches NP conditions', 'url': 'https://www.nps.gov/arch/planyourvisit/conditions.htm'},
-    {'cat': 'BLM/Parks', 'label': 'Arches timed-entry', 'url': 'https://www.recreation.gov/timed-entry/10089519'},
-    {'cat': 'BLM/Parks', 'label': 'Canyonlands NP conditions', 'url': 'https://www.nps.gov/cany/planyourvisit/conditions.htm'},
-    {'cat': 'BLM/Parks', 'label': 'Dead Horse Point SP', 'url': 'https://stateparks.utah.gov/parks/dead-horse/'},
-    {'cat': 'Emergency', 'label': 'Emery County Sheriff (non-emerg)', 'url': 'tel:+14353812404'},
-    {'cat': 'Emergency', 'label': 'Grand County Sheriff (Moab)', 'url': 'tel:+14352598115'},
-    {'cat': 'Emergency', 'label': 'UT Highway Patrol (I-70)', 'url': 'tel:+18018873800'},
+    # --- Fire and smoke: the primary go/no-go risk for a September trip ---
+    {'cat': 'Fire/Smoke', 'label': 'Gifford Pinchot NF alerts & closures (official)',
+     'url': 'https://www.fs.usda.gov/r06/giffordpinchot/alerts'},
+    {'cat': 'Fire/Smoke', 'label': 'Gifford Pinchot NF fire restrictions',
+     'url': 'https://www.fs.usda.gov/detail/giffordpinchot/fire'},
+    {'cat': 'Fire/Smoke', 'label': 'InciWeb - all active incidents',
+     'url': 'https://inciweb.wildfire.gov/'},
+    {'cat': 'Fire/Smoke', 'label': 'AirNow Fire & Smoke map',
+     'url': 'https://fire.airnow.gov/'},
+    {'cat': 'Fire/Smoke', 'label': 'WA DNR wildfire dashboard',
+     'url': 'https://www.dnr.wa.gov/Wildfires'},
+    {'cat': 'Fire/Smoke', 'label': 'WA Smoke Information blog',
+     'url': 'https://wasmoke.blogspot.com/'},
+    {'cat': 'Fire/Smoke', 'label': 'Northwest Interagency Coordination Center',
+     'url': 'https://gacc.nifc.gov/nwcc/'},
+    {'cat': 'Fire/Smoke', 'label': 'WA DNR burn risk / restrictions map',
+     'url': 'https://experience.arcgis.com/experience/9b98a5b78b4b4c4e9b1b0b4c2f0e3f8b'},
+
+    # --- Weather ---
+    {'cat': 'Weather', 'label': 'NWS Carson / Wind River (route start)',
+     'url': _NWS_POINT.format(lat=45.7411, lon=-121.8214)},
+    {'cat': 'Weather', 'label': 'NWS Indian Heaven / Berry Fields',
+     'url': _NWS_POINT.format(lat=46.0882, lon=-121.7678)},
+    {'cat': 'Weather', 'label': 'NWS Takhlakh Lake (Day 1 camp)',
+     'url': _NWS_POINT.format(lat=46.2808, lon=-121.5986)},
+    {'cat': 'Weather', 'label': 'NWS Walupt Lake (Day 2 camp)',
+     'url': _NWS_POINT.format(lat=46.4231, lon=-121.4736)},
+    {'cat': 'Weather', 'label': 'NWS High Rock Lookout',
+     'url': _NWS_POINT.format(lat=46.6845, lon=-121.9014)},
+    {'cat': 'Weather', 'label': 'NWS North Fork / Cispus (Day 3 camp)',
+     'url': _NWS_POINT.format(lat=46.4525, lon=-121.7889)},
+    {'cat': 'Weather', 'label': 'NWS Panther Creek (Day 4 camp)',
+     'url': _NWS_POINT.format(lat=45.8197, lon=-121.8797)},
+    {'cat': 'Weather', 'label': 'NWS Portland office (south Cascades / Gorge)',
+     'url': 'https://www.weather.gov/pqr'},
+    {'cat': 'Weather', 'label': 'NWS Seattle office (Rainier / north)',
+     'url': 'https://www.weather.gov/sew'},
+    {'cat': 'Weather', 'label': 'NWS nationwide active alerts',
+     'url': 'https://www.weather.gov/alerts'},
+    {'cat': 'Weather', 'label': 'Radar KRTX (Portland)',
+     'url': 'https://radar.weather.gov/station/KRTX/standard'},
+    {'cat': 'Weather', 'label': 'Radar KATX (Camano / Rainier)',
+     'url': 'https://radar.weather.gov/station/KATX/standard'},
+
+    # --- Roads ---
+    {'cat': 'Roads', 'label': 'WSDOT traveler information',
+     'url': 'https://wsdot.com/travel/real-time/'},
+    {'cat': 'Roads', 'label': 'WSDOT mountain pass conditions',
+     'url': 'https://wsdot.com/travel/real-time/mountainpasses'},
+    {'cat': 'Roads', 'label': 'WSDOT US 12 / White Pass corridor',
+     'url': 'https://wsdot.com/travel/real-time/mountainpasses/white'},
+    {'cat': 'Roads', 'label': 'Gifford Pinchot road conditions',
+     'url': 'https://www.fs.usda.gov/r06/giffordpinchot/conditions'},
+    {'cat': 'Roads', 'label': 'ODOT TripCheck (I-84 drive out)',
+     'url': 'https://www.tripcheck.com/'},
+    {'cat': 'Roads', 'label': 'Idaho 511',
+     'url': 'https://511.idaho.gov/'},
+
+    # --- Camping and permits ---
+    {'cat': 'Camping/Permits', 'label': 'Recreation.gov alerts',
+     'url': 'https://www.recreation.gov/alerts'},
+    {'cat': 'Camping/Permits', 'label': 'Takhlakh Lake Campground (Day 1)',
+     'url': _RESGOV + '232861'},
+    {'cat': 'Camping/Permits', 'label': 'Walupt Lake Campground (Day 2)',
+     'url': _RESGOV + '232860'},
+    {'cat': 'Camping/Permits', 'label': 'North Fork Elk Group Camp (Day 3)',
+     'url': _RESGOV + '232898'},
+    {'cat': 'Camping/Permits', 'label': 'Tower Rock Campground (Day 3 backup)',
+     'url': _RESGOV + '232855'},
+    {'cat': 'Camping/Permits', 'label': 'Panther Creek Campground (Days 0 and 4)',
+     'url': _RESGOV + '233103'},
+    {'cat': 'Camping/Permits', 'label': 'Northwest Forest Pass',
+     'url': 'https://www.fs.usda.gov/detail/r6/passes-permits/recreation/?cid=fsbdev2_027010'},
+    {'cat': 'Camping/Permits', 'label': 'Skamania County parks (Home Valley)',
+     'url': 'https://www.skamaniacounty.org/community/parks-recreation'},
+
+    # --- Land management ---
+    {'cat': 'Forest Service', 'label': 'Gifford Pinchot National Forest',
+     'url': 'https://www.fs.usda.gov/giffordpinchot'},
+    {'cat': 'Forest Service', 'label': 'Mt Adams Ranger District (Trout Lake)',
+     'url': 'https://www.fs.usda.gov/r06/giffordpinchot/offices/mt-adams-ranger-district'},
+    {'cat': 'Forest Service', 'label': 'Cowlitz Valley Ranger District (Randle)',
+     'url': 'https://www.fs.usda.gov/r06/giffordpinchot/offices/cowlitz-valley-ranger-district'},
+    {'cat': 'Forest Service', 'label': 'Mount St Helens National Volcanic Monument',
+     'url': 'https://www.fs.usda.gov/detail/mountsthelens/home'},
+    {'cat': 'Forest Service', 'label': 'Mount Rainier National Park conditions',
+     'url': 'https://www.nps.gov/mora/planyourvisit/conditions.htm'},
+
+    # --- Emergency (public agency numbers only) ---
+    {'cat': 'Emergency', 'label': 'Skamania County Sheriff (Gorge / Wind River)',
+     'url': 'tel:+15094279490'},
+    {'cat': 'Emergency', 'label': 'Lewis County dispatch, non-emergency (Randle / Packwood)',
+     'url': 'tel:+13607401105'},
+    {'cat': 'Emergency', 'label': 'Arbor Health Morton Hospital (nearest ER, north)',
+     'url': 'tel:+13604965112'},
+    {'cat': 'Emergency', 'label': 'Skyline Hospital White Salmon (nearest ER, south)',
+     'url': 'tel:+15094931101'},
+    {'cat': 'Emergency', 'label': 'Mt Adams Ranger District',
+     'url': 'tel:+15093953402'},
+    {'cat': 'Emergency', 'label': 'Cowlitz Valley Ranger District',
+     'url': 'tel:+13604971103'},
 ]
 
 
-GROUP_COUNTS = {
-    'overland': 11,
-    'moab': 7,
-}
+INTRO_HTML = (
+    '<p>A 325-mile loop through Gifford Pinchot National Forest, starting and ending in the '
+    'Columbia River Gorge at Carson. The route runs north along the Mount Adams flank, touches '
+    'the Goat Rocks at Walupt Lake, reaches its northern limit at High Rock Lookout looking '
+    'straight at Mount Rainier, then swings back south past Mount St Helens and down the Lewis '
+    'River to close the loop at Triangle Pass.</p>'
+    '<p>Four driving days on route, bracketed by two 370-mile highway days to and from Nampa. '
+    'Day mileages are 85, 49, 93 and 82 - the split is dictated by where developed campgrounds '
+    'actually exist, since there is an 85-mile stretch in the middle of the route with nothing '
+    'established.</p>'
+    '<p><strong>Nothing is reserved yet.</strong> Campground notes in each day carry a live '
+    'availability snapshot from 2026-08-31 and a priority order for booking. The North Fork Elk '
+    'Group Camp for Friday and Saturday is the most time-sensitive one.</p>'
+)
 
 
-# Day-0 (travel/staging) gets the pre-mile-0 waypoints (mile 0..2 range + any negatives)
-DAY0_STAGE_NAMES = {'DP - Petroglyph Canyon Panel', 'DP - Spirit Arch'}
-# Waypoints we want to suppress entirely.
-DAY01_SUPPRESS_NAMES = {'San Rafael Reef Viewpoint'}
-
-
-def _attach_main_highway_tracks(hw: dict, day: dict) -> dict:
-    """Merge OSRM polylines from planning/highway_tracks.json onto main-trip day rows."""
+def _attach_highway_tracks(hw: dict, day: dict) -> dict:
+    """Merge OSRM highway polylines onto the travel days."""
     d = dict(day)
-    key = {
-        'may1_boise_bonneville': 'may1_boise_bonneville',
-        'day0_travel': 'may2_bonneville_black_dragon',
-        'day4_moab_transit': 'green_river_to_sand_flats',
-        'day8_return': 'sand_flats_to_boise_federal_way',
-    }.get(d['id'])
-    if key:
-        d['synthetic_track_points'] = hw.get(key) or []
+    if d['id'] == 'sep8_travel':
+        d['synthetic_track_points'] = hw.get('sep8_nampa_to_carson') or []
+    elif d['id'] == 'sep13_return':
+        # Sunday both closes the loop and drives home: the route slice is the
+        # main line, the highway leg is drawn alongside it.
+        d['extra_track_points'] = hw.get('sep13_carson_to_nampa') or []
     return d
 
 
 def main() -> None:
     route = load_route(PLAN)
     hw = load_highway_tracks(PLAN)
-    days_spec: list[dict] = []
-    for day in DAYS:
-        days_spec.append(_attach_main_highway_tracks(hw, day))
-    days_spec = apply_moab_trails(days_spec, 'main')
+    days_spec = [_attach_highway_tracks(hw, day) for day in DAYS]
 
     payload = build_payload(
         days_spec=days_spec,
@@ -605,28 +665,43 @@ def main() -> None:
         schedule_defaults=SCHEDULE_DEFAULTS,
         route=route,
         trip_meta={
-            'title': '2026 San Rafael Swell Adventure + Moab',
-            'dates': '2026-05-01 through 2026-05-10',
-            'route_gpx_source': 'san-rafael-swell-adv-route-2025.gpx',
+            'title': cfg.TRIP_TITLE,
+            'subtitle': cfg.TRIP_SUBTITLE,
+            'dates': f'{cfg.TRIP_DATE_START} through {cfg.TRIP_DATE_END}',
+            'dates_human': cfg.TRIP_DATES_HUMAN,
+            'route_gpx_source': cfg.ROUTE_GPX_FILENAME,
             'route_total_miles': round(route['total_mi'], 2),
             'main_track_points': len(route['main_points']),
+            'meet_point': cfg.MEET_POINT,
+            'route_start': cfg.ROUTE_START,
+            'route_end': cfg.ROUTE_END,
             'highway_tracks_note': (
                 (hw.get('source') or '').strip() or
-                'Highway polylines (when present) follow OpenStreetMap via OSRM; not live Google Maps data.'
+                'Highway polylines follow OpenStreetMap via OSRM; not live navigation data.'
+            ),
+            'highway_legs': hw.get('legs') or {},
+            'permits': cfg.PERMITS_NOTE,
+            'emergency_contacts': cfg.EMERGENCY_CONTACTS,
+            'hospitals': cfg.HOSPITALS,
+            'cell_dead_zones': cfg.CELL_DEAD_ZONES,
+            'satellite_comms_note': cfg.SATELLITE_COMMS_NOTE,
+            'reservations_status': (
+                'NOTHING IS BOOKED. Availability figures in the camp notes are a Recreation.gov '
+                'snapshot from 2026-08-31 and will drift. Book in this order: North Fork Elk Group '
+                'Camp (Fri + Sat), Takhlakh Lake (Wed), Panther Creek (Tue + Sat), Walupt Lake (Thu).'
             ),
         },
-        group_counts=GROUP_COUNTS,
+        group_counts=cfg.GROUP_COUNTS,
         fuel_plan=FUEL_PLAN_SUMMARY,
         realtime_links=REALTIME_LINKS,
-        generated_at='2026-04-16',
-        day0_stage_names=DAY0_STAGE_NAMES,
-        suppress_names=DAY01_SUPPRESS_NAMES,
+        generated_at='2026-08-31',
+        intro_html=INTRO_HTML,
     )
 
     out_path = PLAN / 'trip_data.json'
     write_payload(payload, out_path)
     print(f'Wrote {out_path} ({out_path.stat().st_size / 1024:.1f} KB)')
-    print_payload_summary(payload, label='Main trip')
+    print_payload_summary(payload, label=cfg.TRIP_TITLE)
 
 
 if __name__ == '__main__':

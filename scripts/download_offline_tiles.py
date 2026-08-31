@@ -16,12 +16,18 @@ the map). Re-run if the bbox changes or you want to refresh stale tiles.
 from __future__ import annotations
 import math
 import pathlib
+import sys
 import time
 import urllib.request
 import urllib.error
 
+_SCRIPTS = pathlib.Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
 
-BASE = pathlib.Path(__file__).resolve().parent.parent
+import trip_config as cfg  # noqa: E402
+
+BASE = _SCRIPTS.parent
 TILE_DIR = BASE / 'planning' / 'offline_tiles'
 VENDOR_DIR = BASE / 'planning' / 'vendor' / 'leaflet'
 TILE_DIR.mkdir(parents=True, exist_ok=True)
@@ -34,21 +40,15 @@ LEAFLET_ASSETS = [
     (f'https://unpkg.com/leaflet@{LEAFLET_VERSION}/dist/leaflet.css', 'leaflet.css'),
 ]
 
-# Trip bounding box with generous buffer (covers Swell + Moab + Dead Horse +
-# fuel stations at Hanksville / Castle Dale / Green River / Emery).
-BBOX = {
-    'lat_min': 38.25,
-    'lat_max': 39.35,
-    'lon_min': -111.30,
-    'lon_max': -109.10,
-}
-# Zoom levels to cache. z=7 gives a state-level overview; z=9 shows towns and
-# the main roads within the Swell. Higher zooms explode tile count fast.
-ZOOMS = [7, 8, 9]
+# Trip bounding box and zoom levels come from trip_config so a new trip only
+# needs that one file edited. z=7 gives a state-level overview; z=9 shows towns
+# and the main forest roads. Higher zooms explode tile count fast.
+BBOX = cfg.TILE_BBOX
+ZOOMS = cfg.TILE_ZOOMS
 
 TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
 # OSM policy: identify with a descriptive UA including contact info / project.
-USER_AGENT = 'SanRafaelTripBuilder/1.0 (personal trip planning; https://openstreetmap.org/copyright)'
+USER_AGENT = cfg.TILE_USER_AGENT
 RATE_LIMIT_S = 1.1  # ~1 tile/sec, OSM-polite
 
 

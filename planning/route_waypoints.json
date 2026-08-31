@@ -1,1199 +1,956 @@
 [
   {
-    "name": "Camp",
-    "lat": 39.0055352041,
-    "lon": -110.5541636977,
-    "ele": 1685.0,
-    "time": "2024-10-28T15:35:08Z",
+    "name": "Kellen Creek Campground",
+    "lat": 46.2945386,
+    "lon": -121.5494224,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Little Wild Horse Slot Canyon",
-    "lat": 38.6078020911,
-    "lon": -110.792877126,
-    "ele": 1645.0,
-    "time": "2024-10-28T16:18:21Z",
-    "sym": "cliff",
-    "desc": null
-  },
-  {
-    "name": "Dispersed Camping",
-    "lat": 38.8948280948,
-    "lon": -110.6488173205,
-    "ele": 2040.0,
-    "time": "2024-10-25T21:35:53Z",
+    "name": "Chambers Lake Campground",
+    "lat": 46.4654939,
+    "lon": -121.5318309,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Family Butte Dispersed Camping",
-    "lat": 38.768678,
-    "lon": -110.832171,
-    "ele": 2088.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - Loan Warrior Petroglyph",
-    "lat": 38.853001,
-    "lon": -110.803194,
-    "ele": 2189.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "petroglyph",
-    "desc": null
-  },
-  {
-    "name": "Green River",
-    "lat": 38.995615,
-    "lon": -110.160736,
-    "ele": 1241.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "city-24",
-    "desc": null
-  },
-  {
-    "name": "Wild Horse Window Trailhead",
-    "lat": 38.648019,
-    "lon": -110.662622,
-    "ele": 1607.0,
-    "time": "2024-10-25T21:30:39Z",
+    "name": "Langfield Falls trailhead",
+    "lat": 46.0990297,
+    "lon": -121.7201452,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "known-route",
     "desc": null
-  },
-  {
-    "name": "Camp site",
-    "lat": 38.8932206755,
-    "lon": -110.7678508759,
-    "ele": 2060.0,
-    "time": "2024-10-26T00:46:57Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - North Temple Wash",
-    "lat": 38.666217,
-    "lon": -110.6478182,
-    "ele": 1607.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "cliff",
-    "desc": null
-  },
-  {
-    "name": "Buckhorn Draw Campsites 20",
-    "lat": 39.1317580165,
-    "lon": -110.697491169,
-    "ele": 1650.0,
-    "time": "2024-10-28T15:37:15Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - Eagle Canyon Bridges",
-    "lat": 38.860725,
-    "lon": -110.864991,
-    "ele": 2067.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "bridge",
-    "desc": null
-  },
-  {
-    "name": "Wedge Overlook Campsite #7",
-    "lat": 39.1256325204,
-    "lon": -110.755212307,
-    "ele": 1841.0,
-    "time": "2024-10-25T21:44:14Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Wedge Overlook Campsite #3",
-    "lat": 39.1242342347,
-    "lon": -110.7449769974,
-    "ele": 1840.0,
-    "time": "2024-10-25T21:43:52Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Wedge Overlook Campsite #5",
-    "lat": 39.1244506379,
-    "lon": -110.7513284683,
-    "ele": 1825.0,
-    "time": "2024-10-25T21:44:01Z",
-    "sym": "campsite-24",
-    "desc": "Wedge Overlook Campsite #5 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite"
-  },
-  {
-    "name": "Petroglyph Panel Trail",
-    "lat": 38.9318197489,
-    "lon": -110.422791735,
-    "ele": 1307.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "known-route",
-    "desc": null
-  },
-  {
-    "name": "Wedge Overlook Campsite #8",
-    "lat": 39.1167429457,
-    "lon": -110.7552337646,
-    "ele": 1843.0,
-    "time": "2024-10-25T21:43:13Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Camp site",
-    "lat": 38.8898971226,
-    "lon": -110.7542681694,
-    "ele": 2177.0,
-    "time": "2024-10-26T00:46:50Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "The Twin Priests",
-    "lat": 38.9231089598,
-    "lon": -110.8207440376,
-    "ele": 2044.0,
-    "time": "2024-10-28T15:42:20Z",
-    "sym": "stone",
-    "desc": null
-  },
-  {
-    "name": "DP - Eagle Canyon Trail",
-    "lat": 38.8578051481,
-    "lon": -110.8513368592,
-    "ele": 2025.0,
-    "time": "2024-10-25T21:47:16Z",
-    "sym": "off-road",
-    "desc": "Eagle Canyon, located within Utah’s San Rafael Swell, is a dramatic and rugged canyon known for its towering sandstone cliffs, natural arches, and challenging off-road trails. The canyon cuts deeply into the Swell, offering impressive views of sheer rock walls and unique formations, such as the Eagle Canyon Arch and other natural rock spans. These arches are popular attractions, giving the canyon a distinctive character and showcasing the area’s geological complexity. The canyon’s diverse terrain is shaped by layers of ancient sedimentary rock that have been exposed by wind and water erosion, creating a landscape that feels both wild and timeless."
-  },
-  {
-    "name": "DP - Dutchman Arch",
-    "lat": 38.872668,
-    "lon": -110.787818,
-    "ele": 2135.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "stone",
-    "desc": null
-  },
-  {
-    "name": "Buckhorn Draw Campsite 16",
-    "lat": 39.1359856296,
-    "lon": -110.7048296928,
-    "ele": 1645.0,
-    "time": "2024-10-28T15:37:29Z",
-    "sym": "campsite-24",
-    "desc": "Buckhorn Draw Campsite 16 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
-  },
-  {
-    "name": "Dispersed Camping",
-    "lat": 38.7823707453,
-    "lon": -110.8322985195,
-    "ele": 2109.0,
-    "time": "2024-10-26T15:35:07Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Dispersed Camping",
-    "lat": 38.883713756,
-    "lon": -110.7776329445,
-    "ele": 2146.0,
-    "time": "2024-10-25T21:53:00Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Camp site",
-    "lat": 38.6771679669,
-    "lon": -110.7381105423,
-    "ele": 1877.0,
-    "time": "2024-10-26T00:50:08Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - Buckhorn Wash Petroglyphs",
-    "lat": 39.123613,
-    "lon": -110.693904,
-    "ele": 1647.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "petroglyph",
-    "desc": "The Buckhorn Wash Petroglyphs are among the most impressive and accessible rock art sites in Utah’s San Rafael Swell. This extensive panel stretches over 130 feet along a sandstone cliff, showcasing an array of petroglyphs created by the Fremont people, and possibly even earlier cultures like the Barrier Canyon Culture. The images include intricate anthropomorphic figures, animals, geometric shapes, and symbols that reflect the beliefs and daily lives of the people who once inhabited this remote desert area. Some figures are tall, ghostly forms with elaborate headdresses, while others are smaller, simpler shapes, possibly representing animals or spirits. The Buckhorn Wash Petroglyphs offer a rare window into the ancient cultural expressions of the region."
-  },
-  {
-    "name": "DP - Black Dragon Petroglyph",
-    "lat": 38.943193,
-    "lon": -110.425124,
-    "ele": 1357.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "petroglyph",
-    "desc": "Black Dragon Canyon, located in the eastern part of Utah’s San Rafael Swell, is a striking desert canyon named after one of its most famous rock art panels: the Black Dragon petroglyph. The petroglyph, which some say resembles a dragon or other mythical creature, was likely created by the Fremont or Barrier Canyon cultures thousands of years ago. The canyon itself is a narrow, scenic passage with sheer sandstone walls that display layers of geological history, making it popular for both its ancient artwork and dramatic natural beauty."
-  },
-  {
-    "name": "Dispersed Camping",
-    "lat": 38.8941705945,
-    "lon": -110.6521343501,
-    "ele": 2040.0,
-    "time": "2024-10-25T21:36:07Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "San Rafael Reef Viewpoint",
-    "lat": 38.9277997767,
-    "lon": -110.40122509,
-    "ele": 1363.0,
-    "time": "2024-10-26T15:50:07Z",
-    "sym": "binoculars",
-    "desc": null
-  },
-  {
-    "name": "Camp site",
-    "lat": 38.8849031501,
-    "lon": -110.7491183281,
-    "ele": 2138.0,
-    "time": "2024-10-26T00:47:09Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Buckhorn Draw Campsite 17",
-    "lat": 39.1367013028,
-    "lon": -110.6994009018,
-    "ele": 1646.0,
-    "time": "2024-10-28T15:37:22Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Buckhorn Draw Campsite 23",
-    "lat": 39.1256491665,
-    "lon": -110.6955814362,
-    "ele": 1644.0,
-    "time": "2024-10-25T21:41:50Z",
-    "sym": "campsite-24",
-    "desc": "Buckhorn Draw Campsite 23 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
-  },
-  {
-    "name": "Dispersed Camping",
-    "lat": 38.778588816,
-    "lon": -110.838080346,
-    "ele": 2193.0,
-    "time": "2024-10-26T15:34:50Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Camp site",
-    "lat": 38.8890954383,
-    "lon": -110.743432045,
-    "ele": 2182.0,
-    "time": "2024-10-26T00:47:15Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Cedar Mountain Campground",
-    "lat": 39.1760022208,
-    "lon": -110.6389760971,
-    "ele": 2315.0,
-    "time": "2024-10-25T21:41:08Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Copper Globe Mine",
-    "lat": 38.803154,
-    "lon": -110.910712,
-    "ele": 2134.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "mine",
-    "desc": null
-  },
-  {
-    "name": "Buckhorn Draw Campsite 1",
-    "lat": 39.1675349116,
-    "lon": -110.7376599312,
-    "ele": 1698.0,
-    "time": "2024-10-25T21:42:10Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - Eagle Canyon Arch",
-    "lat": 38.848106,
-    "lon": -110.833328,
-    "ele": 2074.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "stone",
-    "desc": null
-  },
-  {
-    "name": "Horizon Arch",
-    "lat": 38.7361928713,
-    "lon": -110.9866333008,
-    "ele": 2147.0,
-    "time": "2024-10-26T15:35:52Z",
-    "sym": "stone",
-    "desc": "Horizon Arch is an attraction inside of Muddy Creek Wilderness."
   },
   {
     "name": "Campsite",
-    "lat": 38.8483433212,
-    "lon": -110.8339755962,
-    "ele": 2054.0,
-    "time": "2025-05-27T17:51:54Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Camp",
-    "lat": 38.794152,
-    "lon": -110.748817,
-    "ele": 2083.0,
-    "time": "2024-10-25T21:30:39Z",
+    "lat": 45.9206814,
+    "lon": -121.694748,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
     "name": "Dispersed Camping",
-    "lat": 38.6442287699,
-    "lon": -110.7377136665,
-    "ele": 1706.0,
-    "time": "2024-10-26T00:49:35Z",
+    "lat": 46.0844247,
+    "lon": -121.7592297,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Coal Wash",
-    "lat": 38.9919917011,
-    "lon": -110.8912784504,
-    "ele": 1752.0,
-    "time": "2024-10-25T21:46:31Z",
-    "sym": "attraction",
+    "name": "Council Bluff trailhead",
+    "lat": 46.263146,
+    "lon": -121.6325718,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "known-route",
     "desc": null
   },
   {
-    "name": "Camp site",
-    "lat": 38.8806772069,
-    "lon": -110.7884716988,
-    "ele": 2158.0,
-    "time": "2024-10-25T21:53:15Z",
+    "name": "Goose Lake Campground",
+    "lat": 45.9398899,
+    "lon": -121.7578531,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Buckhorn Draw Campsite 15",
-    "lat": 39.1408287642,
-    "lon": -110.7086062431,
-    "ele": 1657.0,
-    "time": "2024-10-28T15:38:12Z",
+    "name": "Chain of Lakes Campground",
+    "lat": 46.2931032,
+    "lon": -121.5963254,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Wild Horse Canyon",
-    "lat": 38.6503198742,
-    "lon": -110.6760708959,
-    "ele": 1599.0,
-    "time": "2024-10-28T15:16:40Z",
-    "sym": "cliff",
-    "desc": null
-  },
-  {
-    "name": "Buckhorn Draw Campsite 14",
-    "lat": 39.1439741267,
-    "lon": -110.7122755051,
-    "ele": 1665.0,
-    "time": "2024-10-28T15:38:17Z",
+    "name": "Council Lake Campground",
+    "lat": 46.2632724,
+    "lon": -121.6317773,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Camp site",
-    "lat": 38.6599955536,
-    "lon": -110.7325315475,
-    "ele": 1796.0,
-    "time": "2024-10-26T15:41:32Z",
+    "name": "Smoky Creek Campground",
+    "lat": 46.0323845,
+    "lon": -121.6900511,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Old Mining Sites",
-    "lat": 38.6712675,
-    "lon": -110.6789374,
-    "ele": 1705.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "mine",
+    "name": "Steamboat Viewpoint trail",
+    "lat": 46.1347585,
+    "lon": -121.727421,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "known-route",
     "desc": null
   },
   {
     "name": "Gas Station",
-    "lat": 38.924186,
-    "lon": -111.248525,
-    "ele": 1908.0,
-    "time": "2024-10-25T21:30:39Z",
+    "lat": 46.5356434,
+    "lon": -121.9569947,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "fuel-24",
     "desc": null
   },
   {
-    "name": "Hamburger Rocks",
-    "lat": 39.1501146676,
-    "lon": -110.8547973633,
-    "ele": 1700.0,
-    "time": "2024-10-25T21:44:45Z",
-    "sym": "attraction",
-    "desc": null
-  },
-  {
-    "name": "Camp site",
-    "lat": 38.9314053183,
-    "lon": -110.4216313362,
-    "ele": 1305.0,
-    "time": "2024-10-25T21:34:25Z",
+    "name": "Horseshoe Lake Campground",
+    "lat": 46.3097794,
+    "lon": -121.5666315,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Wedge Overlook Campsite #4",
-    "lat": 39.1274802126,
-    "lon": -110.7478094101,
-    "ele": 1836.0,
-    "time": "2024-10-25T21:44:08Z",
+    "name": "Forlorn Lakes Campground",
+    "lat": 45.9620429,
+    "lon": -121.7580642,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
-    "desc": "Wedge Overlook Campsite #4 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite"
+    "desc": null
   },
   {
-    "name": "DP - Buckhorn Wash",
-    "lat": 39.1070200727,
-    "lon": -110.6736846668,
-    "ele": 1596.0,
-    "time": "2025-05-27T17:41:09Z",
-    "sym": "cliff",
+    "name": "Walupt Creek Falls Trailhead",
+    "lat": 46.4264164,
+    "lon": -121.4898867,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "known-route",
+    "desc": null
+  },
+  {
+    "name": "Cold Spring Lake Dispersed Camping",
+    "lat": 46.086326,
+    "lon": -121.7591841,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Cat Creek Campground",
+    "lat": 46.348555,
+    "lon": -121.6249554,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Curly Creek Falls Trailhead",
+    "lat": 46.060343,
+    "lon": -121.970704,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "known-route",
+    "desc": null
+  },
+  {
+    "name": "Big Cedars County Park",
+    "lat": 45.8015433,
+    "lon": -121.6436367,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "South Campground",
+    "lat": 46.1118747,
+    "lon": -121.7688007,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Campsite",
+    "lat": 46.0938489,
+    "lon": -121.7777366,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Pinto Rock Trailhead",
+    "lat": 46.3246227,
+    "lon": -121.9247544,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "known-route",
     "desc": null
   },
   {
     "name": "Camp",
-    "lat": 38.6923707774,
-    "lon": -110.9990368104,
-    "ele": 1543.0,
-    "time": "2025-05-07T22:14:12Z",
+    "lat": 46.3953691,
+    "lon": -121.6158923,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Dispersed camping",
-    "lat": 38.6654929951,
-    "lon": -110.6926705875,
-    "ele": 1680.0,
-    "time": "2025-05-29T16:04:40Z",
+    "name": "Steamboat Lake Campground",
+    "lat": 46.1324553,
+    "lon": -121.7157975,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "DP - Miner's Cabin",
-    "lat": 38.6072463252,
-    "lon": -110.8219671249,
-    "ele": 1660.0,
-    "time": "2025-05-07T22:16:44Z",
-    "sym": "building-24",
+    "name": "Campsite",
+    "lat": 46.0891629,
+    "lon": -121.7563818,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "DP - Red Canyon",
-    "lat": 39.0498649802,
-    "lon": -110.5927856597,
-    "ele": 1562.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "attraction",
+    "name": "Gas Station",
+    "lat": 45.7410648,
+    "lon": -121.8213691,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "fuel-24",
     "desc": null
   },
   {
-    "name": "Dispersed Camping",
-    "lat": 38.6795357321,
-    "lon": -110.7293193426,
-    "ele": 1981.0,
-    "time": "2024-10-26T00:49:54Z",
+    "name": "Panther Creek Campground",
+    "lat": 45.8197869,
+    "lon": -121.8798792,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Twin Falls Campground",
+    "lat": 46.2163779,
+    "lon": -121.6698939,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Adams Fork Campground",
+    "lat": 46.3389352,
+    "lon": -121.646914,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Campsite",
+    "lat": 46.3060323,
+    "lon": -121.9255096,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Campsite",
+    "lat": 46.0908091,
+    "lon": -121.756347,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Olalli Lake Campground",
+    "lat": 46.2886796,
+    "lon": -121.6194929,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Cultus Creek Campground",
+    "lat": 46.048001,
+    "lon": -121.7548077,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Little Goose Campground",
+    "lat": 46.0375929,
+    "lon": -121.71452,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Spring Creek Campground",
+    "lat": 46.3123332,
+    "lon": -121.5547254,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Tower Rock Campground",
+    "lat": 46.4457287,
+    "lon": -121.8669807,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Campsite",
+    "lat": 46.0912889,
+    "lon": -121.76107,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Walupt Lake Campground",
+    "lat": 46.423126,
+    "lon": -121.474091,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Miller Creek Falls",
+    "lat": 46.0575512,
+    "lon": -121.975125,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "waterfall",
+    "desc": null
+  },
+  {
+    "name": "North Fork Campground",
+    "lat": 46.4510935,
+    "lon": -121.7875965,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
     "name": "Camp",
-    "lat": 39.1083932124,
-    "lon": -110.6673038833,
-    "ele": 1605.0,
-    "time": "2025-05-27T17:39:52Z",
+    "lat": 46.3961164,
+    "lon": -121.6146263,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Miner's Cabin",
-    "lat": 38.6072463252,
-    "lon": -110.8219671249,
-    "ele": 1660.0,
-    "time": "2025-03-31T23:34:30Z",
-    "sym": "building-24",
+    "name": "House Rock Shelter",
+    "lat": 46.0807889,
+    "lon": -121.9637517,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Little Wild Horse Canyon Trail",
-    "lat": 38.6149456972,
-    "lon": -110.8025986551,
-    "ele": 1673.0,
-    "time": "2024-10-28T16:18:43Z",
+    "name": "Tillicum Campground",
+    "lat": 46.1235268,
+    "lon": -121.7790689,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Cold Spring Campground",
+    "lat": 46.0812257,
+    "lon": -121.7525497,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "High Rock Trailhead",
+    "lat": 46.6667202,
+    "lon": -121.8914148,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "known-route",
+    "desc": "3 mile out-and-back trail to the lookout.  <br><br>https://www.alltrails.com/trail/us/washington/high-rock-lookout-trail"
+  },
+  {
+    "name": "Takhlakh Lake Campground",
+    "lat": 46.2807141,
+    "lon": -121.5986636,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Falls Creek Caves Trailhead",
+    "lat": 45.9439056,
+    "lon": -121.8692518,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "known-route",
     "desc": null
   },
   {
     "name": "Campsite",
-    "lat": 38.8535990445,
-    "lon": -110.8002170554,
-    "ele": 2158.0,
-    "time": "2025-05-27T17:55:53Z",
+    "lat": 45.8654177,
+    "lon": -121.7088535,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "River crossing",
-    "lat": 39.1155539228,
-    "lon": -110.854119549,
-    "ele": 1603.0,
-    "time": "2024-10-25T21:45:27Z",
+    "name": "Crest Camp",
+    "lat": 45.9088932,
+    "lon": -121.8010315,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Campsite",
+    "lat": 46.0218226,
+    "lon": -121.7188625,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Iron Creek Campground",
+    "lat": 46.4297994,
+    "lon": -121.9869192,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Midway Warming Hut",
+    "lat": 46.3513268,
+    "lon": -121.5235939,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "building-24",
+    "desc": "The warming hut itself is a simple, non-reservable shelter, typically equipped with a wood-burning stove to provide respite and emergency shelter for winter enthusiasts. It serves as a base camp for accessing the area's extensive network of winter trails, which includes over 16 kilometers of marked (but ungroomed) ski and snowshoe trails, and over 150 miles of groomed snowmobile trails.\n\nAlthough the Midway High Lakes Area is best known in summer for its scenic lakes (such as Takhlakh, Council, and Olallie), the hut is essential for utilizing the high-elevation trails when the main forest roads (like NF-23) are closed due to deep snow, typically from November through May. The Sno-Park and its associated hut provide critical access to a rugged winter environment that offers views of the surrounding Cascade peaks, including Mount Adams."
+  },
+  {
+    "name": "DP - Cispus River",
+    "lat": 46.338113,
+    "lon": -121.6478366,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "water",
+    "desc": "The Cispus River is a major waterway in the southern Washington Cascades, flowing approximately 54 miles (87 km) and draining a large basin in Lewis and Skamania Counties. Its headwaters begin in a high, glacial valley near Snowgrass Flats in the Goat Rocks Wilderness within the northern boundary of the Gifford Pinchot National Forest. The river then loops southwesterly before its course is significantly altered by tributaries, notably receiving Muddy Fork, which carries glacial silt and debris from Mount Adams’s Lava Glacier. The river ultimately flows into the Cowlitz River at Lake Scanewa, near the Cowlitz Falls Dam.\n\nHistorically, the river valley has been a vital area for Indigenous peoples, with archaeological evidence pointing to use for thousands of years. The Upper Cowlitz tribe referred to residents on the river as the cispaclama. The valley also features numerous \"basket trees\"—Western Red Cedars with scars indicating that their bark was traditionally removed by Native Americans for making baskets and other essential items. The river gives its name to the Cispus Learning Center, a former Civilian Conservation Corps (CCC) camp and Job Corps site that now serves as a key outdoor education facility, preserving some of the history of the region.\n\nThe Cispus River basin is highly valued for both its ecology and recreation. Much of its upper course flows through the protected National Forest, where it is paralleled by Forest Road 21 and Forest Road 23, providing access to campgrounds like Adams Fork and North Fork. The surrounding area is known for its old-growth Douglas fir forests, and the river itself is popular for fishing, particularly for brook trout. However, the water below the confluence with Muddy Fork is often cloudy with glacial silt, making fishing more challenging there."
+  },
+  {
+    "name": "DP - Hamilton Buttes",
+    "lat": 46.3903281,
+    "lon": -121.6065591,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "peak",
+    "desc": "Hamilton Buttes is a group of elevated summits located in the Cowlitz Valley Ranger District of the Gifford Pinchot National Forest, Washington. The primary butte reaches an elevation of approximately 5,772 feet (1,759 meters) and is a prominent landmark in the rugged Dark Divide Roadless Area. The Buttes are a central feature of a high-country trail network that includes the Hamilton Ridge Trail and the Blue Lake Butte Trail, and are prized for their sweeping, long-distance views.\n\nThe site is historically recognized as an important post for forest protection. A fire lookout structure was built on nearby Hamilton Peak in 1929 to monitor the vast expanse of the forest. The lookout was actively staffed for decades, but like many remote fire watch stations, it was ultimately abandoned in the 1960s in favor of more modern fire detection methods. Remnants of this history, such as sections of the old telephone line that connected the lookout to the world below, can still be found along the connecting trails.\n\nToday, the Hamilton Buttes area is a popular, multi-use recreation destination. The Hamilton Buttes Trail (#118) is open to hikers, horses, bicycles, and motorcycles. The ascent to the open, upper meadows offers clear, unparalleled vistas. From the summit area, visitors can achieve panoramic sightlines of the major Cascade volcanoes, including Mount Rainier to the north, Mount Adams to the east, Mount St. Helens to the southwest, and the jagged crests of the Goat Rocks Wilderness to the northeast.\n\nThe high-elevation meadows and ridges surrounding the Buttes are known for their late summer display of wildflowers and their abundance of huckleberries, making the area a seasonal favorite for recreational harvesting. Due to its challenging access via a network of rough, high-clearance Forest Service roads, the area maintains a feeling of remoteness."
+  },
+  {
+    "name": "DP - Bishop Falls",
+    "lat": 46.4372196,
+    "lon": -121.6869999,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "waterfall",
+    "desc": "Bishop Falls is a hidden, multi-tiered waterfall located on a small, unnamed creek that drains a portion of Bishop Ridge in the Lewis County section of the Gifford Pinchot National Forest. Situated in the North Fork Cispus River drainage, the falls are not well-known due to their remote location within a deep, steep-sided canyon, making them challenging to access.\n\nThe falls are believed to be divided into at least two substantial drops, occurring in immediate succession below Forest Road 78. The upper tier of Bishop Falls is estimated to plunge approximately 60 feet, starting with a slide down a pitched formation before making an S-bend and dropping to the canyon floor. A short distance downstream lies a second tier, often referred to as Lower Bishop Falls, which is also estimated to be over 60 to 75 feet high. The overall drop of the feature is significant, making the small creek one of the most tumultuous in the North Fork Cispus drainage.\n\nThe unofficial name for the waterfall, Bishop Falls, was suggested because the creek originates from the higher ground of Bishop Ridge. The ridge itself is traversed by Bishop Ridge Trail (#272), a rigorous and exposed path known for its technical difficulty, which is popular with hikers, horses, and motorcycles. The area is part of the extensive trail network within the rugged Dark Divide Roadless Area, offering excellent views down into the North Fork of the Cispus River valley."
+  },
+  {
+    "name": "DP - Gilbert Peak",
+    "lat": 46.48861302797761,
+    "lon": -121.40836715698242,
+    "ele": null,
+    "time": "2025-10-08T14:11:29Z",
+    "sym": "peak",
+    "desc": "Gilbert Peak (also known as Mount Curtis Gilbert) is the highest summit in the rugged Goat Rocks Wilderness, situated in the Cascade Range of Washington State. It has an elevation of 8,184 feet (2,494 meters), although some sources place the benchmark at 8,201 feet. The peak straddles the border of the Gifford Pinchot National Forest (Cowlitz Valley Ranger District) to the west and the Yakama Indian Reservation and Okanogan-Wenatchee National Forest to the east.\n\nGeologically, the Goat Rocks are the heavily eroded remnants of a massive, extinct Pliocene stratovolcano that was active approximately two million years ago. Intense glaciation and erosion have since carved the volcano’s interior, creating the distinct, exposed alpine landscape characterized by jagged ridges and open meadows. Gilbert Peak itself retains permanent ice and snow features, including the Conrad Glacier on its north slope and the Meade Glacier on its southeastern slopes.\n\nThe peak is a challenging and strenuous objective for experienced hikers and scramblers. The climb often involves snow travel, requiring the use of specialized gear such as ice axes and crampons, and the final ascent to the summit block involves a Class 3 scramble over loose rock. The primary non-technical routes, such as the Klickton Divide route, typically begin from the Conrad Meadows Trailhead and follow trails through the high alpine parklands of the wilderness area.\n\nThe summit provides truly expansive views that span across most of Washington's southern Cascades. From the top, climbers are rewarded with spectacular sightlines to the surrounding volcanoes: Mount Rainier to the north, Mount Adams to the south-southeast, and Mount St. Helens to the southwest. The name honors Curtis Gilbert, a longtime Boy Scout leader from Yakima who was instrumental in fostering youth access to the region."
+  },
+  {
+    "name": "Goat Ridge Lookout",
+    "lat": 46.4811976,
+    "lon": -121.5152929,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "binoculars",
     "desc": null
   },
   {
-    "name": "Wedge Overlook Camp #1",
-    "lat": 39.108568,
-    "lon": -110.702228,
-    "ele": 1955.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
+    "name": "DP - Walupt Creek Falls",
+    "lat": 46.4314153,
+    "lon": -121.4983625,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "waterfall",
+    "desc": "Walupt Creek Falls is a spectacular, multi-tiered waterfall located in a remote part of the Gifford Pinchot National Forest in Lewis County, Washington. It flows along Walupt Creek, a significant tributary that feeds the Cispus River. The falls are unofficially estimated to be approximately 220 to 245 feet (67 to 75 meters) high and are noted for their unique characteristic: the water tumbles down the steep, rugged basalt rock face, often flowing in multiple directions before collecting on a plateau and continuing its descent.\n\nThe falls sit at an elevation of approximately 3,500 feet on the northwest flank of the Goat Rocks Wilderness, an area famous for its alpine meadows and jagged, eroded volcanic peaks. Unlike many waterfalls in the region, Walupt Creek Falls is considered an \"off-grid dynamo\" and lacks an official, maintained U.S. Forest Service trail. The route is often a steep, unmaintained use-trail that requires scrambling over fallen trees and a careful crossing of Walupt Creek, making it a challenging destination for only experienced hikers.\n\nThe remoteness and lack of crowds contribute to the falls’ allure, allowing the visitor to experience the full, awesome power of the water in a quiet, untamed wilderness setting. The creek that feeds the falls is sourced from the higher-elevation Walupt Lake, the second-largest lake in the Gifford Pinchot National Forest, which acts as a reservoir, ensuring a healthy flow throughout the summer and fall. The trailhead is generally accessed via Forest Road 21 near the Walupt Horse Camp, a short distance from the Goat Rocks Wilderness boundary."
   },
   {
-    "name": "Dispersed Camping",
-    "lat": 38.5667582079,
-    "lon": -110.959131127,
-    "ele": 1465.0,
-    "time": "2025-05-27T18:00:33Z",
-    "sym": "campsite-24",
-    "desc": null
+    "name": "DP - Walupt Lake",
+    "lat": 46.4167818,
+    "lon": -121.4638236,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "lake",
+    "desc": "Walupt Lake is a large, freshwater ribbon lake located at an elevation of 3,927 feet (1,197 meters) in Lewis County, Washington, near the town of Packwood. It is the second-largest lake in the Gifford Pinchot National Forest, covering an area of approximately 350 acres (140 hectares), and is the deepest lake in the county, plunging to a maximum depth of 300 feet. The lake lies at the end of a long, glaciated valley and was formed by an ancient landslide that slid down from the northwest end of the ridge, creating a natural dam that allowed the basin to fill with water.\n\nThe lake is a central feature of the rugged landscape surrounding the Goat Rocks Wilderness; its eastern half is technically within the Wilderness boundary. Its name, Walupt, is of Yakama origin, given by surveyor Albert Hale Sylvester, who learned from Native Americans that it was the traditional Yakama name for the region. Walupt Creek is both the main inflow (fed by perennial snowmelt) and the outflow, exiting the lake on its northwestern corner and flowing toward the Cispus River.\n\nWalupt Lake is a highly popular, high-elevation destination for recreation, typically accessible by vehicle only from late May to late October due to snow. The Walupt Lake Campground is a major staging area for the Goat Rocks Wilderness, with the Nannie Ridge Trail ($#98)andWaluptLakeTrail(#$101) providing access to the Pacific Crest National Scenic Trail (PCT). The lake itself is known for excellent fishing for Rainbow and Cutthroat Trout, and non-motorized activities such as boating, kayaking, and swimming are common on its clear mountain waters."
   },
   {
-    "name": "Temple Mount East Campground",
-    "lat": 38.657705,
-    "lon": -110.662236,
-    "ele": 1618.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
+    "name": "DP - High Rock Lookout",
+    "lat": 46.6844957,
+    "lon": -121.9013926,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "fire-lookout",
+    "desc": "High Rock Lookout is an iconic and historic fire lookout station located atop High Rock, the most prominent point along the Sawtooth Ridge in the Gifford Pinchot National Forest, Washington. Situated near the northern boundary of the forest, the lookout provides one of the most stunning panoramic views in the South Cascades, with a direct, in-your-face sightline of Mount Rainier only 13 air miles away, as well as clear views of the Tatoosh Range, Mount Adams, and Mount St. Helens.\n\nThe lookout structure, a 14x14-foot gable roof L-4 ground house, was originally constructed in 1929-1931 with materials hauled in by pack mule from Mineral, Washington. Its location at an elevation of 5,685 feet (1,732 meters), perched on the edge of a sheer cliff with a vertical 600-foot drop on its north face, made it a crucial and strategic fire detection post for the Forest Service until it was last staffed in 2004. The lookout is now listed on the National Historic Lookout Register.\n\nThe site is accessed via the popular and moderately steep High Rock Trail ($#$266), a 1.6-mile path that climbs approximately 1,350 feet from the Towhead Gap trailhead. Due to years of neglect, extreme weather, and vandalism, the lookout structure underwent a community-driven, multi-phased restoration effort that began in the 2020s. This effort required the temporary removal of the structure for off-site restoration and foundation work."
   },
   {
-    "name": "DP - The Icebox",
-    "lat": 38.8348605461,
-    "lon": -110.8108091354,
-    "ele": 2206.0,
-    "time": "2025-05-27T17:52:20Z",
+    "name": "DP - Mt Rainier",
+    "lat": 46.8522657,
+    "lon": -121.7605771,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "volcano",
+    "desc": "Mount Rainier (known as Tahoma or Takhoma by the Puyallup and other Indigenous tribes, meaning \"the great snowy mountain\") is the highest mountain in the U.S. state of Washington and the tallest peak in the entire Cascade Volcanic Arc, rising to an officially recognized summit elevation of 14,410 feet (4,392 meters) at the Columbia Crest. Located approximately 60 miles southeast of Seattle, the massive stratovolcano is the centerpiece of Mount Rainier National Park, which was established on March 2, 1899, as the fifth national park in the country.\n\nThe mountain is a highly active volcano that began building its present cone approximately 500,000 years ago. Geologically, it is the most topographically prominent mountain in the contiguous United States, rising abruptly from its surrounding landscape. Its complex history includes multiple eruptions, lava flows, and destructive lahars (volcanic mudflows). The most significant lahar was the Osceola Mudflow approximately 5,600 years ago, which sent a torrent of mud and debris all the way to Puget Sound and may have carried away much of the mountain's original summit. Today, the U.S. Geological Survey (USGS) extensively monitors the volcano to provide advance warning of future hazards.\n\nMount Rainier is the most heavily glaciated peak in the contiguous United States, covered by an extensive system of 25 named glaciers and large permanent snowfields that total about 35 square miles (91 km$&$sup2;). These glaciers, which include the largest by area (Emmons Glacier) and largest by volume (Carbon Glacier), are vital water sources, feeding the headwaters of five major rivers, including the Nisqually, Puyallup, and Cowlitz rivers. Scientists rely on the mountain's glaciers as sensitive indicators of climatic change, noting that the mountain has lost approximately 40$%$ of its glacier area since the 1900s.\n\nThe entire area encompasses a dramatic ecological gradient. Below the permanent ice line, the mountain features high-elevation forests dominated by subalpine fir and mountain hemlock, which transition into spectacular subalpine meadows that erupt in a famous display of wildflowers during the short summer season (typically mid-July to mid-August). The mountain is a world-class destination for mountaineering, with the Disappointment Cleaver route being the most common, non-technical ascent route to the summit."
+  },
+  {
+    "name": "DP - Burley Mountain Fire Lookout",
+    "lat": 46.4073397,
+    "lon": -121.8658948,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "fire-lookout",
+    "desc": "Burley Mountain Fire Lookout is a historic fire lookout station located on Burley Mountain in the Cowlitz Valley Ranger District of the Gifford Pinchot National Forest, Washington. Situated at an elevation of 5,154 feet (1,571 meters), the lookout stands at a central position in the southern Cascades, offering spectacular 360-degree views that encompass four major volcanoes: Mount Rainier to the north, Mount Adams to the east, Mount St. Helens to the southwest, and Mount Hood to the south.\n\nThe structure is a classic, 14-by-14-foot L-4 ground house built in 1934 by the U.S. Forest Service as part of the massive fire detection network established following the devastating \"Big Blowup\" fires of 1910. Burley Mountain was historically a crucial sentinel, and although the Forest Service phased out most manned lookouts by the 1960s, Burley was one of only three lookouts remaining on the Gifford Pinchot by 1973. The site was added to the National Historic Lookout Register in 2000.\n\nThe mountain's surrounding forest is a testament to the region's fire history, being largely composed of even-aged second-growth that sprung up after the massive fires in the Cispus Valley in the early 1900s. The trail to the lookout itself climbs through a landscape noted for its abundant huckleberries and wildflowers in late summer. The lookout is still occasionally staffed for fire detection during the summer season and, at times, has been made available for overnight rentals."
+  },
+  {
+    "name": "DP - Cowlitz River",
+    "lat": 46.5324678,
+    "lon": -121.9561945,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "water",
+    "desc": "The Cowlitz River is a historically and ecologically significant waterway in southwest Washington, a major tributary of the Columbia River. The river’s source is fed by the glaciers of Mount Rainier and it gathers wild runoff from the slopes of both Mount Adams and Mount St. Helens. The Cowlitz is approximately 105 miles (169 km) long and drains an expansive 2,586-square-mile (6,698 km$&$sup2;) basin that extends across the Cascade Range.\n\nHistorically, the river valley was the home of the Upper Cowlitz (Taidnapam) Indians, with a large village situated near the present-day town of Packwood. The Cowlitz Trail, an ancient Native American travel route, followed the river and connected the Cowlitz Valley with the Yakima River drainage across the Cascades.\n\nToday, the lower Cowlitz River is heavily impacted by hydroelectric power generation. Two major dams—Mayfield Dam and Mossyrock Dam (forming Riffe Lake)—impound the river, creating large reservoirs that have altered the natural flow regime and blocked historical fish migration. However, the river remains one of Washington’s most important systems for recovering imperiled native fish, supporting runs of Chinook salmon, coho salmon, and summer and winter steelhead, which compete with large hatchery runs.\n\nA significant portion of its headwaters and main tributaries, particularly the Cispus River and the Clear Fork Cowlitz River, flow through the Cowlitz Valley Ranger District of the Gifford Pinchot National Forest. This area, which includes the Goat Rocks Wilderness, offers diverse recreational opportunities, including hiking, camping, and wildlife viewing, featuring old-growth forests and important habitat for elk. The Cowlitz is best known among sport fishermen for the stretch below the Barrier Dam, where it is often one of the state's most productive fishing rivers year-round."
+  },
+  {
+    "name": "Layser Cave",
+    "lat": 46.4601156,
+    "lon": -121.8604313,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "cave",
-    "desc": "Tucked within a narrow sandstone alcove, the Icebox is a natural refrigerator—an unusual rock formation where cool air and shade combine to preserve lower temperatures, even in the heat of summer. This shaded crevice collects cold air overnight, and because it sees very little direct sunlight, the interior remains noticeably cooler than the surrounding desert. In the past, cowboys and ranchers discovered they could use the Icebox to store perishable supplies like meat and dairy, taking advantage of its natural insulation.\n\nThe Icebox isn’t just a practical feature; it’s also a striking example of how geology and microclimate interact. The walls are high and close, creating a sense of enclosure, and the cool, damp air contrasts sharply with the dry heat just a few feet outside. Water sometimes seeps through the rock, encouraging moss or lichen growth along the walls. For those who stumble upon it today, the Icebox offers a welcome and surprising reprieve from the desert sun—a hidden pocket of coolness carved by time and preserved by shade."
+    "desc": "ayser Cave (or the Layser Cave Archaeological Interpretive Area) is a small but highly significant natural rock shelter located in the Cowlitz Valley Ranger District of the Gifford Pinchot National Forest, situated above the Cispus River valley south of Randle, Washington. The site is recognized as one of the most extensive and important archaeological sites in the western Cascade Range, providing a continuous record of human use dating back at least 7,000 years (5000 BCE).\n\nThe cave’s geological formation is a subject of debate among experts. While it was initially suspected to be a lava tube due to the region's volcanic nature, geological evidence suggests it is a pseudokarst—a feature formed by the structural folding and fissuring of the underlying basalt rock during the Miocene uplift of the Cascade Range, not by flowing lava. The rock shelter is small, measuring approximately 20 feet wide and 32 feet deep, with a low ceiling, and its floor contains distinct layers of volcanic ash (tephra), including layers from ancient Mount St. Helens eruptions.\n\nFor thousands of years, the cave served as a long-term communal shelter and seasonal work site for the Indigenous peoples of the region, notably the Upper Cowlitz (Taitnapam) Indians. Archaeological excavations, which began after the cave's rediscovery by Forest Service employee Tim Layser in 1982, uncovered thousands of artifacts, including stone tools, animal bones (primarily deer and elk), and even obsidian arrowheads sourced from Oregon, providing evidence of trade and early Holocene migration patterns.\n\nThe archaeological record shows a notable period of abandonment between approximately 2,000 and 4,000 years ago, which is hypothesized to have occurred suddenly around 3,400 to 3,500 years ago, coinciding with a massive eruption of Mount St. Helens that buried settlements under a thick layer of pumice. Today, the site is managed by the U.S. Forest Service, which has installed interpretive signs along a short (0.25 mile), steep trail to explain the cave’s history and significance, offering visitors a unique perspective on the long human history of the Gifford Pinchot National Forest."
   },
   {
-    "name": "DP - Old San Rafael Swinging Bridge",
-    "lat": 39.081287,
-    "lon": -110.6661,
-    "ele": 1554.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "bridge",
-    "desc": "The Old San Rafael Swinging Bridge is an iconic historical landmark in the San Rafael Swell, spanning the San Rafael River just west of the town of Green River, Utah. Built in 1937 by the Civilian Conservation Corps (CCC), this suspension bridge was designed to support vehicles crossing the river, providing vital access for ranchers, travelers, and local communities. The bridge stretches roughly 160 feet across and hangs suspended between two sturdy concrete towers, showcasing the engineering capabilities of its time. Although it no longer supports vehicle traffic, the bridge has been preserved as a pedestrian walkway and historical site, allowing visitors to experience a piece of the area’s history while enjoying views of the river and surrounding landscape.\n\nToday, the Old San Rafael Swinging Bridge serves as a popular spot for photography and exploration. Its rustic, weathered structure against the backdrop of the Swell’s rugged terrain makes it a charming relic of the past, linking modern-day visitors to the region’s pioneering days. The bridge’s construction was an important accomplishment during the Great Depression, providing jobs and improving access to the isolated San Rafael Swell. As a rare remaining example of Depression-era suspension bridges in Utah, it’s now a cherished part of the Swell’s heritage, offering both a scenic and historical highlight for those traveling through this remote desert region."
+    "name": "Camp Creek Falls",
+    "lat": 46.4514302,
+    "lon": -121.8312832,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "waterfall",
+    "desc": null
   },
   {
-    "name": "DP - Hondu Arch",
-    "lat": 38.6721088156,
-    "lon": -111.0157299042,
-    "ele": 2014.0,
-    "time": "2025-05-27T17:57:31Z",
-    "sym": "stone",
-    "desc": "Hondu Arch is an attraction inside of Muddy Creek Wilderness."
-  },
-  {
-    "name": "DP - The Sinkhole",
-    "lat": 38.921673,
-    "lon": -110.600985,
-    "ele": 1983.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "attraction",
-    "desc": "Formed by a natural collapse of limestone bedrock, the Sinkhole is a wide, deep depression with steep, rocky walls, offering visitors a fascinating look at the power of erosion and subsurface water movement. It’s believed to have been created when water eroded an underground cavern, eventually causing the surface to collapse and form a massive pit. Over time, rain and sediment have altered its shape slightly, but it remains a dramatic example of the Swell’s dynamic geology."
-  },
-  {
-    "name": "Camp",
-    "lat": 38.579119,
-    "lon": -110.921585,
-    "ele": 1660.0,
-    "time": "2024-10-25T21:30:39Z",
+    "name": "Home Valley Campground",
+    "lat": 45.7087047,
+    "lon": -121.7734799,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
-  },
-  {
-    "name": "DP - Reds Canyon",
-    "lat": 38.7544645783,
-    "lon": -110.9243170904,
-    "ele": 1787.0,
-    "time": "2024-10-26T15:35:30Z",
-    "sym": "cliff",
-    "desc": null
-  },
-  {
-    "name": "DP - Eva Conover Trail",
-    "lat": 38.9544738175,
-    "lon": -110.886052603,
-    "ele": 1792.0,
-    "time": "2024-10-25T21:46:17Z",
-    "sym": "off-road",
-    "desc": "The Eva Conover Trail was originally constructed as an access route in the 1960s during the building of the I-70 bridges over Eagle Canyon. Carved through the rugged heart of the San Rafael, the trail allowed construction crews to transport equipment and materials into one of the most remote and challenging segments of the new interstate. It wasn’t built with recreation in mind, but rather as a practical solution to a massive engineering problem—how to bridge deep sandstone canyons in an untamed desert.\n\nThe trail was later named after Eva Conover, a longtime Emery County supervisor who played a key role during this period of development. She was known for her deep knowledge of the land and strong advocacy for her community. Conover worked closely with state and federal agencies to ensure local needs were represented during the I-70 project, and her name became associated with the access route used during construction. Naming the trail after her was a tribute to her leadership and service during a transformative time for the region."
   },
   {
     "name": "Campsite",
-    "lat": 39.0780771229,
-    "lon": -110.6542674932,
-    "ele": 1550.0,
-    "time": "2025-05-27T17:44:43Z",
+    "lat": 46.3596703,
+    "lon": -121.8880052,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "campsite-24",
     "desc": null
   },
   {
-    "name": "Buckhorn Draw Campsites",
-    "lat": 39.159731637,
-    "lon": -110.7304661554,
-    "ele": 1686.0,
-    "time": "2024-10-28T15:39:32Z",
-    "sym": "campsite-24",
-    "desc": null
+    "name": "DP - Pinto Rock",
+    "lat": 46.3266906,
+    "lon": -121.9236918,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "cliff",
+    "desc": "Pinto Rock is a prominent geological feature and popular rock climbing crag located in the Cowlitz Valley Ranger District of the Gifford Pinchot National Forest, situated east of the Mount St. Helens National Volcanic Monument. The peak reaches an elevation of 5,123 feet (1,561 meters).\n\nGeologically, Pinto Rock is a striking formation of welded-tuff breccia, a type of volcanic rock characterized by a rough surface heavily studded with knobs and blocks. This feature is responsible for the peak's renown as a climbing area. The cliff walls, which are up to 400 feet high, offer a unique combination of sport and traditional climbing routes. The climbing is often described as high-exposure friction climbing, with the most popular multi-pitch route being the Bowling Alley (Regular Route), rated at 5.4.\n\nPinto Rock is accessible via a network of rough, high-clearance Forest Service roads, including NF-25 and NF-77, and sits near the Boundary Trail (#1). Its isolated position contributes to an alpine feel, despite its modest elevation. From the summit, visitors are rewarded with a superb 360-degree panoramic view that includes the major Cascade volcanoes: Mount Adams, Mount Hood, Mount St. Helens, and Mount Rainier, making it a highly desirable viewpoint in the southern Cascades.\n\nThe area is also associated with Pinto Rock Falls, a small, unofficially named waterfall located on an unnamed stream to the south of the rock formation. The falls, a 44-foot vertical curtain over a basalt ledge, are a secondary feature of the remote, rugged landscape near the Cispus River watershed."
   },
   {
-    "name": "Camp site",
-    "lat": 38.6422994723,
-    "lon": -110.7451915741,
-    "ele": 1669.0,
-    "time": "2025-05-27T18:02:49Z",
-    "sym": "campsite-24",
-    "desc": null
+    "name": "DP - Mt St Helens",
+    "lat": 46.1919593,
+    "lon": -122.1912594,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "volcano",
+    "desc": "Mount St. Helens (known as Lawetlat'la by the Cowlitz and Loowit or Louwala-Clough, the 'Smoking Mountain,' by the Klickitat) is a highly active stratovolcano in the Cascade Range of Washington. Before its catastrophic 1980 eruption, the mountain stood at 9,677 feet (2,950 meters) and was admired for its symmetrical, snow-capped cone, earning it the nickname \"Mount Fuji of America.\" The mountain is the central feature of the Mount St. Helens National Volcanic Monument, established in 1982 to preserve the area for scientific study, recreation, and education.\n\nThe volcano’s modern cone formed within the last 4,000 years, making it the youngest major volcano in the Cascades. Its most defining moment occurred on the morning of May 18, 1980. After weeks of precursory earthquakes and the rapid outward growth of a large bulge on its north flank, a magnitude 5.1 earthquake triggered the largest subaerial landslide in recorded history. This collapse suddenly relieved the pressure inside the volcano, resulting in a massive, high-velocity lateral blast of gas, steam, and rock debris that was directed north, devastating an area of nearly 600 square kilometers.\n\nThe eruption reduced the mountain's summit elevation by over 1,300 feet to its current height of 8,363 feet (2,549 meters), replacing the symmetrical cone with a massive, horseshoe-shaped crater that opens to the north. The blast and subsequent pyroclastic flows and lahars (volcanic mudflows) killed 57 people, destroyed vast tracts of forest (over 4 billion board feet of timber), and caused over $1 billion in damage. Lahars traveled down the Toutle and Cowlitz Rivers, sending sediment all the way to the Columbia River.\n\nFollowing the 1980 eruption, a new lava dome began to slowly grow within the crater, a process that continues intermittently. The area is now a unique ecological laboratory where scientists study how life recovers from immense natural devastation. While the volcano’s dramatic topography and geology have stabilized since the end of its last eruptive episode in 2008, the entire area remains under constant monitoring by the U.S. Geological Survey (USGS) due to its high potential for future activity."
   },
   {
-    "name": "Camp site",
-    "lat": 38.8799422345,
-    "lon": -110.7655119896,
-    "ele": 2164.0,
-    "time": "2024-10-25T21:52:57Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - San Rafael River",
-    "lat": 39.078932,
-    "lon": -110.661934,
-    "ele": 1552.0,
-    "time": "2024-10-25T21:30:39Z",
+    "name": "DP - Columbia River Gorge",
+    "lat": 45.7083642,
+    "lon": -121.8266111,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "water",
-    "desc": "The San Rafael River is a lifeline within the arid landscape of Utah’s San Rafael Swell, winding through deep canyons and supporting a surprising amount of plant and animal life along its banks. Originating in the Wasatch Plateau, the river flows southeast through rugged terrain, cutting canyons and gorges into the rock over millions of years. This carving has created scenic landmarks like the Little Grand Canyon, a dramatic and picturesque stretch where the river flows between towering sandstone cliffs. For visitors, the river’s lush riparian zones stand in stark contrast to the surrounding desert, providing a refreshing oasis in an otherwise dry environment.\n\nThe San Rafael River is popular among adventurers for kayaking, canoeing, and hiking along its canyons. During the spring runoff, the river’s flow can swell, creating opportunities for paddlers to navigate its scenic but remote waterway. Wildlife, such as mule deer, beavers, and various bird species, thrives along the river, drawn to the water and greenery. While the river is relatively small compared to major Western rivers, its scenic beauty and role in shaping the Swell make it a cherished natural feature, adding to the area’s rugged appeal and allure for outdoor enthusiasts."
-  },
-  {
-    "name": "Buckhorn Draw Campsite 30",
-    "lat": 39.098577425,
-    "lon": -110.6657123566,
-    "ele": 1576.0,
-    "time": "2024-10-25T21:40:38Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Camp site",
-    "lat": 38.8833831757,
-    "lon": -110.790746212,
-    "ele": 2149.0,
-    "time": "2024-10-26T00:47:04Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Buckhorn Draw Campsite 26",
-    "lat": 39.1223698106,
-    "lon": -110.6903672218,
-    "ele": 1632.0,
-    "time": "2024-10-25T21:41:42Z",
-    "sym": "campsite-24",
-    "desc": "Buckhorn Draw Campsite 26 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
-  },
-  {
-    "name": "DP - Behind the Reef trail",
-    "lat": 38.6174483344,
-    "lon": -110.8121358239,
-    "ele": 1733.0,
-    "time": "2025-05-27T18:01:50Z",
-    "sym": "off-road",
-    "desc": null
-  },
-  {
-    "name": "Calf Canyon",
-    "lat": 39.1183371127,
-    "lon": -110.6589062301,
-    "ele": 1625.0,
-    "time": "2025-05-27T17:40:36Z",
-    "sym": "cliff",
-    "desc": null
-  },
-  {
-    "name": "DP - Wild Horse Window Arch",
-    "lat": 38.653784,
-    "lon": -110.676269,
-    "ele": 1722.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "stone",
-    "desc": "The Wild Horse Window is a captivating natural rock arch located in the San Rafael Swell, known for its impressive size and unique shape. This geological feature is formed from layers of sandstone that have been eroded over time, creating a large, open window-like opening in the rock. The arch stands out against the surrounding rugged landscape, making it a popular spot for photographers and hikers seeking stunning views."
-  },
-  {
-    "name": "Untitled Waypoint",
-    "lat": 39.1513642994,
-    "lon": -110.7181219805,
-    "ele": 1670.0,
-    "time": "2024-10-25T21:42:00Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "San Rafael Bridge Campground",
-    "lat": 39.079717,
-    "lon": -110.666071,
-    "ele": 1555.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - Head of Sinbad Petroglyph",
-    "lat": 38.8807455,
-    "lon": -110.7710685212,
-    "ele": 2169.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "petroglyph",
-    "desc": "The Head of Sinbad Petroglyphs is a fascinating archaeological site located in the San Rafael Swell, showcasing ancient rock art created by the Fremont culture. The petroglyphs are etched into the sandstone cliff faces at the Head of Sinbad, which is named for its distinctive rock formation that resembles a mythological figure. This site features a remarkable collection of petroglyphs, including human figures, animals, and geometric designs, many of which are believed to hold cultural and spiritual significance for the ancient peoples who inhabited the region.\n\nAccessing the Head of Sinbad Petroglyphs involves a short hike, making it a popular destination for visitors interested in both history and outdoor exploration. The petroglyphs are well-preserved and provide valuable insight into the daily lives, beliefs, and artistic expressions of the Fremont people. The area's striking desert landscape, with its towering cliffs and expansive views, enhances the experience, creating a striking backdrop for the ancient art. Visitors are encouraged to approach the site with respect, preserving its integrity for future generations and appreciating the cultural heritage captured in these timeless carvings."
-  },
-  {
-    "name": "Hanksville",
-    "lat": 38.373229,
-    "lon": -110.71468,
-    "ele": 1307.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "city-24",
-    "desc": null
-  },
-  {
-    "name": "DP - Little Grand Canyon",
-    "lat": 39.0985168307,
-    "lon": -110.7359099575,
-    "ele": 1583.0,
-    "time": "2025-05-27T17:46:49Z",
-    "sym": "cliff",
-    "desc": null
-  },
-  {
-    "name": "DP - Black Dragon Canyon",
-    "lat": 38.9459627007,
-    "lon": -110.4330221305,
-    "ele": 1368.0,
-    "time": "2024-10-25T21:34:48Z",
-    "sym": "cliff",
-    "desc": "Black Dragon Canyon, located in the eastern part of Utah’s San Rafael Swell, is a striking desert canyon named after one of its most famous rock art panels: the Black Dragon petroglyph. The petroglyph, which some say resembles a dragon or other mythical creature, was likely created by the Fremont or Barrier Canyon cultures thousands of years ago. The canyon itself is a narrow, scenic passage with sheer sandstone walls that display layers of geological history, making it popular for both its ancient artwork and dramatic natural beauty."
-  },
-  {
-    "name": "Maverik",
-    "lat": 39.2123551427,
-    "lon": -111.0055375099,
-    "ele": 1720.0,
-    "time": "2024-10-28T16:58:00Z",
-    "sym": "fuel-24",
-    "desc": null
-  },
-  {
-    "name": "Wedge Overlook Camp #2",
-    "lat": 39.112209,
-    "lon": -110.733415,
-    "ele": 1885.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Dispersed camping",
-    "lat": 38.6649954353,
-    "lon": -110.67680854,
-    "ele": 1641.0,
-    "time": "2025-05-29T16:04:12Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - Tomsich Butte Uranium Mine",
-    "lat": 38.683909739,
-    "lon": -110.9917396426,
-    "ele": 1579.0,
-    "time": "2025-05-27T17:58:37Z",
-    "sym": "mine",
-    "desc": "The Tomsich Butte uranium mine is a relic of the uranium boom that swept through the American Southwest in the mid-20th century. During the 1950s and early 1960s, prospectors fanned out across the desert searching for carnotite and other uranium-bearing minerals, driven by Cold War demand for nuclear fuel and weapons. Tomsich Butte became one of many remote sites where mining operations were hastily set up to extract ore from the sandstone layers of the Morrison Formation.\n\nThough modest in scale compared to larger operations, the Tomsich Butte mine featured a network of adits, tailings piles, and rusted machinery that remain visible today. Ore was hauled out by truck or mule, sometimes stockpiled nearby for later transport. Like many such sites, the operation was short-lived—once the market collapsed and federal subsidies dried up, the mine was abandoned, leaving behind a scatter of equipment and scarred rock."
-  },
-  {
-    "name": "DP - Petroglyph Canyon Panel",
-    "lat": 38.9275660778,
-    "lon": -110.4332184792,
-    "ele": 1361.0,
-    "time": "2024-10-25T21:34:04Z",
-    "sym": "petroglyph",
-    "desc": "Petroglyph Canyon Panel in the San Rafael Swell is a remarkable testament to the ancient peoples who once inhabited the area, particularly the Fremont and possibly the earlier Barrier Canyon Culture. Located within the maze of sandstone canyons, these petroglyphs represent unique images etched onto cliff faces and rock surfaces, depicting anthropomorphic and zoomorphic figures, geometric designs, and symbolic motifs. The artwork here is more than just visually striking; it offers insights into the cultural practices, beliefs, and daily lives of those who lived in this rugged landscape. The panels serve as a reminder of the deep connection between the land and its early inhabitants, capturing both their artistic expression and spiritual connections to their surroundings.\n\nThe San Rafael Swell’s geologic formations, with their towering red rock walls and narrow canyons, provide the perfect natural canvas for these ancient artists. Over centuries, wind and weather have left their mark on the petroglyphs, but many images remain remarkably well-preserved. Visitors to Petroglyph Canyon Panel are often struck by the contrast between the intricate artwork and the vast, isolated desert landscape. To protect and preserve this cultural site, it’s important for modern-day explorers to approach with respect, ensuring that future generations can experience the mystery and beauty of these ancient etchings."
-  },
-  {
-    "name": "Camp",
-    "lat": 38.653775,
-    "lon": -110.717571,
-    "ele": 1697.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Camp site",
-    "lat": 38.6252360442,
-    "lon": -110.7661128044,
-    "ele": 1557.0,
-    "time": "2024-10-26T15:40:52Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Campsite",
-    "lat": 38.8526501296,
-    "lon": -110.8007786742,
-    "ele": 2163.0,
-    "time": "2025-05-27T17:56:23Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Tomsich Butte Camp",
-    "lat": 38.682824,
-    "lon": -110.989002,
-    "ele": 1585.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - Swasey's Cabin",
-    "lat": 38.835759,
-    "lon": -110.807499,
-    "ele": 2195.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "building-24",
-    "desc": "Swasey’s Canyon is a stunning and rugged canyon located in the San Rafael Swell, known for its striking scenery and rich geological features. Named after the Swasey family, early pioneers who settled in the area, the canyon is characterized by its colorful rock layers, towering cliffs, and narrow passageways that draw visitors into its depths. The canyon is easily accessible via a well-maintained dirt road, making it a popular destination for hikers, photographers, and those looking to explore the natural beauty of the Swell."
-  },
-  {
-    "name": "Camp",
-    "lat": 39.0590449724,
-    "lon": -110.6341036139,
-    "ele": 1549.0,
-    "time": "2024-10-25T21:37:35Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Freeway Access",
-    "lat": 38.8802428188,
-    "lon": -110.6580508072,
-    "ele": 2024.0,
-    "time": "2024-10-25T21:52:08Z",
-    "sym": "attraction",
-    "desc": null
-  },
-  {
-    "name": "Camp",
-    "lat": 38.819212,
-    "lon": -110.76945,
-    "ele": 2123.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Lucky Strike Mine",
-    "lat": 38.755407,
-    "lon": -110.948559,
-    "ele": 1767.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "mine",
-    "desc": null
-  },
-  {
-    "name": "Goblin Valley State Park",
-    "lat": 38.5763923,
-    "lon": -110.7102433,
-    "ele": 1511.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "attraction",
-    "desc": "The rock formations within the park are characterized by their whimsical and otherworldly appearance, featuring an array of hoodoos, spires, and goblin-like shapes that seem to emerge from the landscape. These formations are primarily composed of soft, sedimentary rock, which has been sculpted by wind and water erosion over thousands of years. The unique shapes vary widely, with some resembling creatures or characters, leading to the park's playful name.\n\nThe colors of the rock formations range from vibrant reds and oranges to soft yellows and browns, creating striking contrasts against the blue sky and surrounding desert environment. Some formations stand tall and narrow, while others are more bulbous or rounded, adding to the diversity of the landscape. The terrain is often interspersed with stretches of smooth, flat rock and sandy washes, providing a dynamic backdrop for exploration and photography. The surreal shapes and vivid colors of the rock formations make this area a popular destination for outdoor enthusiasts, photographers, and those seeking a unique connection with nature's artistry."
-  },
-  {
-    "name": "Wedge Overlook Campsite #6",
-    "lat": 39.122536279,
-    "lon": -110.7520365715,
-    "ele": 1838.0,
-    "time": "2024-10-25T21:44:22Z",
-    "sym": "campsite-24",
-    "desc": "Wedge Overlook Campsite #6 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite"
-  },
-  {
-    "name": "Temple Mountain Viewpoint",
-    "lat": 38.6994105876,
-    "lon": -110.734269619,
-    "ele": 1939.0,
-    "time": "2024-10-28T15:17:10Z",
-    "sym": "binoculars",
-    "desc": "Temple Mountain Viewpoint is a viewpoint inside of San Rafael Swell Recreation Area.\n\nAmenities: viewpoint"
-  },
-  {
-    "name": "Swinging Bridge Equestrian Campground",
-    "lat": 39.0801906844,
-    "lon": -110.662214756,
-    "ele": 1561.0,
-    "time": "2024-10-25T21:37:09Z",
-    "sym": "campsite-24",
-    "desc": "Swinging Bridge Equestrian Campground is a campsite inside of San Rafael Swell Recreation Area.\n\nActivities: , \nAmenities: campsite"
-  },
-  {
-    "name": "DP - Chute Canyon",
-    "lat": 38.6187227373,
-    "lon": -110.7610813765,
-    "ele": 1538.0,
-    "time": "2024-10-26T15:40:07Z",
-    "sym": "cliff",
-    "desc": "Chute Canyon is characterized by its dramatic, narrow passageways and steep, towering sandstone walls. The canyon is a striking example of erosion at work, with its walls exhibiting a range of colors, from deep reds to golden hues, shaped by the geological processes of wind and water over millions of years. The canyon floor is often rocky and uneven, leading to a series of natural features such as small alcoves, rock outcroppings, and interesting geological formations.\n\nAs you traverse Chute Canyon, you'll notice the varying widths of the canyon, which can narrow significantly in some sections, creating a sense of enclosure and intimacy with the surrounding landscape. Sunlight filtering through the canyon creates dynamic light patterns on the walls, enhancing the visual appeal of this rugged environment. The area is also dotted with desert vegetation, including sagebrush and scrub, which adds to the natural beauty and biodiversity of the canyon. Overall, Chute Canyon presents a striking mix of geological diversity and natural beauty, making it a captivating destination for outdoor enthusiasts."
-  },
-  {
-    "name": "Buckhorn Draw Campsite 7",
-    "lat": 39.1657381805,
-    "lon": -110.7349777222,
-    "ele": 1696.0,
-    "time": "2024-10-28T15:39:57Z",
-    "sym": "campsite-24",
-    "desc": "Buckhorn Draw Campsite 7 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
-  },
-  {
-    "name": "DP - Wedge Overlook",
-    "lat": 39.0955288221,
-    "lon": -110.7490264424,
-    "ele": 1917.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "binoculars",
-    "desc": "The Wedge Overlook, often referred to as the “Little Grand Canyon,” offers one of the most breathtaking viewpoints in the San Rafael Swell. From this overlook, visitors are treated to sweeping views of the San Rafael River carving its way through deep, rugged canyon walls that stretch as far as the eye can see. The canyon resembles a miniature version of the Grand Canyon with its layered cliffs, winding river, and expansive desert backdrop. The Wedge Overlook is especially popular at sunrise and sunset when the sunlight bathes the rock formations in shades of red, orange, and purple, creating a striking and unforgettable landscape.\n\nThe area around the Little Grand Canyon is ideal for hiking, camping, and photography, and the relatively easy access by vehicle makes it a favorite destination for outdoor enthusiasts exploring the Swell. Several hiking trails lead down into the canyon, allowing for closer encounters with the San Rafael River and the vibrant desert flora and fauna that thrive along its banks. With its blend of natural beauty, geological intrigue, and remote solitude, the Wedge Overlook and Little Grand Canyon capture the essence of the San Rafael Swell and offer visitors a unique desert experience."
-  },
-  {
-    "name": "Hondu Arch Viewpoint",
-    "lat": 38.6845382759,
-    "lon": -110.9988212585,
-    "ele": 1543.0,
-    "time": "2024-10-26T15:36:18Z",
-    "sym": "binoculars",
-    "desc": "Hondoo Arch Viewpoint is a viewpoint inside of San Rafael Swell Recreation Area.\n\nAmenities: viewpoint"
-  },
-  {
-    "name": "Site 1 (Group Site)",
-    "lat": 38.6560578834,
-    "lon": -110.6601548195,
-    "ele": 1612.0,
-    "time": "2025-05-29T16:03:54Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Crack Canyon Trailhead",
-    "lat": 38.643607,
-    "lon": -110.745181,
-    "ele": 1678.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "known-route",
-    "desc": null
-  },
-  {
-    "name": "Buckhorn Draw Campsite 32",
-    "lat": 39.0968955039,
-    "lon": -110.66614151,
-    "ele": 1571.0,
-    "time": "2024-10-25T21:40:32Z",
-    "sym": "campsite-24",
-    "desc": "Buckhorn Draw Campsite 32 is a campsite inside of San Rafael Swell Recreation Area.\n\nAmenities: campsite\nCamping: fee required"
-  },
-  {
-    "name": "DP - Dinosaur Footprint",
-    "lat": 39.1604974527,
-    "lon": -110.7292699814,
-    "ele": 1693.0,
-    "time": "2024-10-28T15:38:37Z",
-    "sym": "attraction",
-    "desc": "The dinosaur footprint in Buckhorn Draw, part of Utah’s San Rafael Swell, is a remarkable glimpse into the area’s prehistoric past. Preserved in sandstone, the footprint is believed to be from a large theropod dinosaur, possibly a relative of Allosaurus, that roamed this landscape approximately 150 million years ago during the Jurassic period. The single footprint is large and distinct, displaying three clawed toes typical of theropod tracks. The fossilized print provides a vivid reminder of the time when dinosaurs roamed what is now a rugged desert, and it stands out as an unexpected piece of ancient history amid the Swell’s human-made petroglyphs and natural formations."
-  },
-  {
-    "name": "DP - Temple Wash Petroglpyphs",
-    "lat": 38.661013,
-    "lon": -110.669472,
-    "ele": 1633.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "petroglyph",
-    "desc": "The Temple Wash Petroglyphs are an impressive collection of ancient rock art located in the San Rafael Swell, Utah. This site features numerous petroglyphs carved into the canyon walls, primarily attributed to the Fremont culture, which inhabited the area from approximately 600 to 1300 AD. The petroglyphs include a variety of anthropomorphic figures, animal representations, and geometric designs, showcasing the artistic expressions and cultural beliefs of the people who lived in this region.\n\nThe petroglyphs are situated in a scenic wash surrounded by stunning sandstone cliffs, providing a striking backdrop for these ancient carvings. Visitors to Temple Wash can explore the area through a short hike that leads to the petroglyph panels, where interpretive signs help provide context about the artwork and its significance. The site is also notable for its preservation efforts, as it has been protected from vandalism and weathering, allowing the intricate designs to be appreciated by modern audiences. The Temple Wash Petroglyphs serve as a vital link to the past, offering insights into the lives and beliefs of the early inhabitants of the San Rafael Swell while highlighting the region's rich archaeological heritage."
-  },
-  {
-    "name": "DP - Crack Canyon",
-    "lat": 38.6323158128,
-    "lon": -110.7394259487,
-    "ele": 1632.0,
-    "time": "2024-10-26T15:41:02Z",
-    "sym": "cliff",
-    "desc": "Crack Canyon is known for its dramatic geological features and narrow, winding passageways. The canyon is characterized by deep, narrow slots flanked by towering sandstone walls that can reach heights of over 200 feet. The rock formations exhibit striking striations and layered patterns, showcasing the different geological eras and the erosional processes that have shaped the landscape over time.\n\nThe canyon floor is typically rocky and can vary from sandy stretches to more challenging, uneven terrain. Crack Canyon also features a series of small alcoves and overhangs, which provide unique perspectives and enhance the visual drama of the environment. As visitors make their way through the canyon, they may encounter interesting rock formations and natural sculptures created by years of weathering. The interplay of light and shadow throughout the day further accentuates the canyon’s rugged beauty, making it a compelling destination for those seeking to explore the diverse geological characteristics of the San Rafael Swell."
-  },
-  {
-    "name": "DP - Hidden Splendor Overlook",
-    "lat": 38.565817619,
-    "lon": -110.9536743164,
-    "ele": 1466.0,
-    "time": "2024-10-26T15:36:54Z",
-    "sym": "binoculars",
-    "desc": null
-  },
-  {
-    "name": "Toilets",
-    "lat": 39.174754646,
-    "lon": -110.7892870903,
-    "ele": 1713.0,
-    "time": "2024-10-28T15:40:47Z",
-    "sym": "toilets-24",
-    "desc": null
-  },
-  {
-    "name": "Dispersed Camping",
-    "lat": 38.6737250574,
-    "lon": -110.7131471241,
-    "ele": 1806.0,
-    "time": "2024-10-26T00:50:12Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Swinging Bridge North Campground",
-    "lat": 39.0816065005,
-    "lon": -110.6650686264,
-    "ele": 1559.0,
-    "time": "2024-10-25T21:37:03Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - The Drips",
-    "lat": 39.0139987505,
-    "lon": -110.8998799324,
-    "ele": 1719.0,
-    "time": "2025-05-27T17:47:53Z",
-    "sym": "natural-spring",
-    "desc": "Towering walls of Navajo Sandstone encase a narrow side canyon where “The Drips” come to life. Here, countless mineral-stained rivulets trickle down from seeps high above, leaving behind dark streaks that paint the rock face in mesmerizing patterns. During wetter seasons, the constant dripping forms hanging gardens of moss and ferns, a vivid contrast to the otherwise arid environment. The steady rhythm of water hitting rock creates a serene, echoing soundtrack that amplifies the sense of isolation and stillness.\n\nOver time, the slow movement of water has carved delicate alcoves and overhangs into the canyon walls. The mineral deposits left behind—shades of deep red, brown, black, and green—tell a story of geologic patience, each layer a marker of past flows and chemical reactions. While the main draw is the visual beauty, there’s also something tactile about the place; the air is cooler and damper, and the rock surfaces are smooth to the touch where water has polished them for centuries. It’s a hidden, almost meditative spot—a place where time feels suspended and the desert reveals a softer side."
+    "desc": "The Columbia River Gorge is a spectacular river canyon, approximately 80 to 85 miles long and up to 4,000 feet deep, that carves the only sea-level passage through the Cascade Mountain Range. It serves as the border between the states of Washington (to the north) and Oregon (to the south). The area around Hood River sits in the transition zone of the Gorge, marked by a dramatic shift in ecology from the temperate rainforests of the west to the dry grasslands of the east, thanks to the Cascade Mountains' rain shadow effect.\n\nThe Gorge’s formation began tens of millions of years ago, but its present, dramatic form was created by two major geological events. The first was the colossal Columbia River Basalt Group flows between 17 and 6 million years ago, which extruded hundreds of flows from eastern vents, laying down layers of basalt up to 2,000 feet thick. The Columbia River maintained its course, continually eroding the land as the Cascade Range slowly uplifted. The second, and most defining, event occurred at the end of the last Ice Age, when the cataclysmic Missoula Floods repeatedly crashed through the canyon, scouring away loose sediment, exposing the layers of basalt, and carving the steep cliffs and numerous hanging waterfalls visible today.\n\nFor over 13,000 years, the Columbia River has been a crucial travel corridor and center of trade for Indigenous peoples, including the Chinookan and Sahaptin-speaking tribes. They referred to it as Nch'i-W'ana (The Great River). The river was, and remains, a source of sustenance, particularly for the enormous salmon runs. Following European contact in the late 18th century and the arrival of the Lewis and Clark Expedition in 1805, the Gorge became an essential route for fur traders and, later, for pioneers on the Oregon Trail, who often used the river or the strenuous Barlow Road bypass around Mount Hood.\n\nToday, the Columbia River Gorge is protected as the Columbia River Gorge National Scenic Area, established by Congress in 1986. This designation protects its scenic, natural, cultural, and recreational resources across 292,000 acres managed by the U.S. Forest Service and the bi-state Columbia River Gorge Commission. The river remains an active commercial corridor, featuring two major railroads and barge navigation, and is a world-class destination for hiking, windsurfing, and sightseeing, especially near the town of Hood River."
   },
   {
     "name": "Gas Station",
-    "lat": 38.9946473122,
-    "lon": -110.1847156402,
-    "ele": 1255.0,
-    "time": "2024-10-25T21:30:39Z",
+    "lat": 46.6042132,
+    "lon": -121.6727858,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "fuel-24",
     "desc": null
   },
   {
-    "name": "Chute Canyon Trailhead",
-    "lat": 38.629651,
-    "lon": -110.763442,
-    "ele": 1567.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "known-route",
-    "desc": null
-  },
-  {
-    "name": "DP - Spirit Arch",
-    "lat": 38.929849,
-    "lon": -110.434566,
-    "ele": 1404.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "stone",
-    "desc": null
-  },
-  {
-    "name": "Camp",
-    "lat": 39.0673018655,
-    "lon": -110.6414891067,
-    "ele": 1549.0,
-    "time": "2024-10-25T21:37:53Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Camp",
-    "lat": 38.6607543,
-    "lon": -110.6426342,
-    "ele": 1602.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "Gas Station",
-    "lat": 38.375062,
-    "lon": -110.708736,
-    "ele": 1311.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "fuel-24",
-    "desc": null
-  },
-  {
-    "name": "Temple Mountain Campground",
-    "lat": 38.668351,
-    "lon": -110.685222,
-    "ele": 1658.0,
-    "time": "2024-10-25T21:30:39Z",
-    "sym": "campsite-24",
-    "desc": null
-  },
-  {
-    "name": "DP - Split Rock",
-    "lat": 39.108821338,
-    "lon": -110.666389351,
-    "ele": 1604.0,
-    "time": "2025-05-27T17:40:12Z",
-    "sym": "stone",
-    "desc": null
-  },
-  {
-    "name": "Tunnel / Freeway Underpass",
-    "lat": 38.8681032783,
-    "lon": -110.7791170217,
-    "ele": 2115.0,
-    "time": "2024-10-25T21:51:36Z",
+    "name": "Elk Pass",
+    "lat": 46.288818,
+    "lon": -121.96659,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "attraction",
-    "desc": "Large/tall vehicles may have issues fitting through the tunnel"
+    "desc": null
   },
   {
-    "name": "DP - Eagle Canyon Overlook",
-    "lat": 38.8630858974,
-    "lon": -110.8679080009,
-    "ele": 2089.0,
-    "time": "2024-10-25T21:46:58Z",
+    "name": "Moss Creek Campground",
+    "lat": 45.7950053,
+    "lon": -121.6344417,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - High Bridge",
+    "lat": 45.758434,
+    "lon": -121.8372234,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "bridge",
+    "desc": "The High Bridge along the Wind River, officially known as the Conrad Lundy Wind River Bridge, is a significant vehicular crossing located in Skamania County, Washington, near the southern boundary of the Gifford Pinchot National Forest. The bridge carries Wind River Road (often designated as Forest Road 30) high above the deep, steep-sided canyon carved by the Wind River. The structure is an essential gateway, providing access to the upper Wind River Valley, the Wind River Experimental Forest, and the wilderness areas to the north.\n\nThe bridge deck sits approximately 260 feet above the river, a height that required specialized construction and maintenance techniques. The impressive drop provides a dramatic overlook of the river's course as it rushes through the gorge. The structure is a modern replacement for older crossings and was engineered to withstand the challenging terrain and conditions of the Cascade foothills.\n\nThe Wind River itself is a major tributary that flows south from the Cascade Mountains and empties into the Columbia River near the town of Carson, Washington. It is recognized as a scenic river and is highly valued for its recreational opportunities, including white-water rafting and kayaking. Ecologically, the river is critical, providing vital habitat and spawning grounds for various anadromous fish species, such as salmon and steelhead, which migrate from the Columbia River system."
+  },
+  {
+    "name": "DP - Wind River",
+    "lat": 45.7593874,
+    "lon": -121.835913,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "water",
+    "desc": "The Wind River is a major tributary of the Columbia River, originating in the Cascade Range of Washington, south of Mount Adams and Mount St. Helens, before flowing generally south through the Gifford Pinchot National Forest. Its entire course of approximately 30 miles (48 km) lies within Skamania County, and it joins the Columbia River near the town of Carson in the Columbia River Gorge.\n\nHistorically, the river was noted by the Lewis and Clark Expedition in 1805, who referred to it as the \"New Timbered River.\" Its watershed encompasses roughly 224 square miles (580 km$&$sup2;). The river's rapid descent through a deep, basalt cliff-lined gorge has created an outstanding scenic corridor. Ecologically, the Wind River is a vital Tier I Key Watershed under the Northwest Forest Plan and is designated as a Wild Steelhead Gene Bank by the Washington Department of Fish and Wildlife.\n\nThe river is most famous for its wild summer steelhead run, which historically numbered in the thousands. The naturally difficult migratory conditions created by Shipherd Falls, near the river mouth, meant that only the more athletic summer steelhead and lamprey could historically pass. While fish populations declined due to historical logging practices, the construction of a splash dam that blocked migration until 1947, and external harvest pressures, extensive conservation efforts have been ongoing since the late 20th century to restore habitat and maintain the wild genetic stock.\n\nRecreationally, the Wind River is a destination for experienced boaters. Its short, intense season, driven by rainfall and snowmelt, offers Class IV+ and Class V whitewater, particularly in the Upper Wind River section, which is known for its technical rapids like the \"Ram's Horn Sequence.\" Furthermore, the Wind River valley is home to the Wind River Experimental Forest, established in 1909, and the Wind River Arboretum, the oldest arboretum in the Pacific Northwest, providing unique opportunities for hiking and nature observation within the Gifford Pinchot National Forest."
+  },
+  {
+    "name": "Triangle Pass",
+    "lat": 45.7855023,
+    "lon": -121.7365882,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "attraction",
+    "desc": null
+  },
+  {
+    "name": "DP - Curly Creek Falls",
+    "lat": 46.0581617,
+    "lon": -121.9723141,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "waterfall",
+    "desc": "Curly Creek Falls is one of the most geologically unique waterfalls in the Pacific Northwest, located on Curly Creek just upstream from its confluence with the Lewis River, within the Gifford Pinchot National Forest in Washington. The falls are most famous for being one of the very few waterfalls in the world—perhaps only a handful—that has two natural basalt rock arches spanning its face, a feature resulting from the erosion of volcanic rock. In conditions of very low flow, a third arch may sometimes become visible.\n\nThe falls are a dramatic tiered plunge, estimated to drop approximately 78 to 86 feet in total. The unique geology suggests that the creek may have cut through an ancient lava tube or a highly fractured basalt structure. The flow is highly seasonal; the water level is greatest during spring melt (May and June), when the lower arch can be inundated and disappear beneath the water. In contrast, the creek is prone to running completely dry in late summer and early fall, as its flow is often diverted into sinkholes or lava tubes upstream.\n\nThe falls are an easily accessible destination via a short, gentle trail (part of the Lewis River Trail system) from the Curly Creek Falls Trailhead. The trail leads to a viewpoint across the Lewis River where visitors can look across the canyon at the unique rock arches. Located in the Lewis River Recreation Area, the falls are situated in a deep canyon surrounded by a magnificent old-growth forest of Douglas fir, western red cedar, and big leaf maple."
+  },
+  {
+    "name": "DP - Big Lava Bed",
+    "lat": 45.8532238,
+    "lon": -121.7203839,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "volcano",
+    "desc": "he Big Lava Bed is a vast, rugged, and geologically young lava flow located in the southern part of the Indian Heaven Volcanic Field within the Gifford Pinchot National Forest in Skamania County, Washington. The field itself is situated between Mount St. Helens and Mount Adams. The Big Lava Bed is recognized as the most recent eruption in the Indian Heaven field, occurring approximately 8,200 years ago (6250 BCE $&$plusmn; 100 years).\n\nThe flow originated from a single vent—a cinder cone that rises to an elevation of 4,195 feet. This basaltic lava flowed southward, traveling an impressive 13 to 25 kilometers (8 to 15 miles) from its source, covering an area of around 20 square miles (52 km$&$sup2;) and having a volume of approximately 0.9 cubic kilometers. The flow is primarily composed of ʻaʻā and block lava, which resulted in an extremely broken, sharp, and jumbled landscape, earning it its name.\n\nThe Big Lava Bed is a significant speleological area, containing a large, complex network of lava tubes and caves, such as the Big Huckleberry system. The broken surface of the flow, known as microtopography, is largely due to the process of flow inflation, where the crust hardened while molten lava continued to push beneath it. This highly porous geology dictates the hydrology of the area, notably at nearby South Prairie Lake, which forms seasonally as snowmelt collects, but quickly drains away as the weather warms and the ice \"plugs\" in the lava tubes melt.\n\nThe terrain is notoriously difficult to traverse; the dense jumble of broken basalt blocks lacks marked roads or trails across its interior. Vegetation consists mainly of sparse, stunted lodgepole pine and other pioneer plants that struggle to establish roots in the fractured rock. The remoteness and difficult access have preserved the Big Lava Bed as one of the least explored and most pristine areas in the South Cascades."
+  },
+  {
+    "name": "Rush Creek Falls",
+    "lat": 46.0670247,
+    "lon": -121.9278136,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "waterfall",
+    "desc": null
+  },
+  {
+    "name": "DP - Falls Creek Lava Caves",
+    "lat": 45.9447262,
+    "lon": -121.8680716,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "cave",
+    "desc": "Falls Creek Lava Caves (sometimes referred to collectively as the Falls Creek Cave System) is an extensive and highly significant geological feature located in the Wind River valley of the Gifford Pinchot National Forest, near Carson, Washington. This system is a large lava tube, formed during a basaltic flow from the nearby Big Lava Bed eruption approximately 8,200 years ago.\n\nThe main cave, Falls Creek Cave, is estimated to be over 1.2 miles (2,000 meters) long, making it one of the longer unmaintained lava tubes in Washington State. It is characterized by three distinct breakdown pits (collapsed sections of the tube) visible from the surface. The entrance is typically accessed through the second of these pits, requiring a challenging descent over piles of jagged boulders. The interior is generally unlit, pitch black, and features numerous side passages, slippery clay floors, and challenging scrambles over massive rockfalls, demanding caution and multiple reliable light sources.\n\nGeologically, the cave preserves unique features of its volcanic origin, including solidified lava drippings (known as lavacicles) and evidence of flow dynamics. The cave is part of a complex system where the surface creek, Falls Creek, seasonally sinks into the lava tube system through sinkholes and fissures before emerging further downstream. Due to its unmaintained status, the cave offers a rugged and challenging spelunking experience, contrasting with the more accessible and developed Ape Cave near Mount St. Helens.\n\nThe cave is located near the trailhead for the scenic Falls Creek Falls, and is often included in a longer recreational loop. Access is via a spur road off Wind River Road (Forest Road 30), and due to the high-elevation location and winter road closures, exploration is typically restricted to the snow-free season. The remote location and challenging nature of the cave require all visitors to be self-sufficient and practice strict Leave No Trace principles.\n\n\n\n\n\n\n\n\n\n\n\n\nTools"
+  },
+  {
+    "name": "DP - Goose Lake",
+    "lat": 45.9412627,
+    "lon": -121.7636038,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "lake",
+    "desc": "Goose Lake is a scenic, 58-acre lake located within the Mount Adams Ranger District of the Gifford Pinchot National Forest in Skamania County, Washington, at an elevation of approximately 3,110 feet (950 meters). The lake’s formation is a direct result of the volcanic history of the region. Approximately 8,200 years ago, a massive lava flow from the Big Lava Bed—a part of the Indian Heaven Volcanic Field—dammed a nearby stream, creating the basin that filled to become the lake.\n\nThe geological impact of this damming event is clearly visible today. The lake is characterized by a haunting landscape feature: a stand of dead, submerged trees that rise from its waters, marking the original forest that was drowned when the lava flow blocked the natural drainage. The highly porous basalt of the surrounding Big Lava Bed ensures that Goose Lake’s hydrology is dominated by surface inflow and seepage, with no significant surface outlet.\n\nGoose Lake is a popular recreational destination, particularly during the late summer and early autumn when the weather is warm and the surrounding forest is prime for huckleberry picking. The lake is regularly stocked with fish, making it a favorite spot for anglers seeking brook, brown, and coastal cutthroat trout. Its calm waters and lack of motorized boat traffic make it ideal for non-motorized activities such as kayaking, canoeing, and swimming.\n\nThe lake is accessible via Forest Road 60 (Carson Guler Road), which connects the area to both the communities of Trout Lake and Carson. The nearby attractions include the aforementioned Big Lava Bed, which features trails through its rugged basalt landscape, and the vast Indian Heaven Wilderness to the north. Goose Lake Campground offers primitive, walk-in tent sites on the hillside above the lake, providing a remote, rustic camping experience within the Cascade mountains."
+  },
+  {
+    "name": "Monte Cristo Slab",
+    "lat": 45.9249927,
+    "lon": -121.6629149,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "cliff",
+    "desc": "The Monte Cristo Slab (MCS) is a popular rock-climbing destination located on the western slope of the Monte Cristo Range in the southern portion of the Gifford Pinchot National Forest, near the community of Trout Lake, Washington. Although the name \"Monte Cristo\" is also associated with a historical mining town and a peak in the North Cascades, this particular slab is a distinct, high-altitude climbing area in the South Cascades.\n\nGeologically, the slab is composed of diorite, an intrusive granitic stock that is darker in color than typical granite due to a lack of quartz. This rock forms a large, continuous face, or slab, that provides a unique friction-climbing experience. The climbing routes primarily range from easy to moderate difficulty, generally falling between 5.3 and 5.9, making the area exceptionally well-suited for beginner climbers, family cragging, and those looking to practice smearing and slab technique.\n\nThe Monte Cristo Slab is well-regarded for its extensive development as a sport climbing area, with the majority of its routes being bolted, allowing for straightforward lead climbing and protection. The height of the slab is considerable, with some routes extending approximately 250 feet, which are typically climbed in a single pitch. Climbers can descend via designated rappel anchors, including a central \"ravine rappel\" or a walk-off option."
+  },
+  {
+    "name": "Red Mountain Fire Lookout",
+    "lat": 45.9356072,
+    "lon": -121.821375,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "fire-lookout",
+    "desc": "The Red Mountain Fire Lookout is a historic and popular destination in the southern portion of the Gifford Pinchot National Forest, situated near the boundary of the Indian Heaven Wilderness in Skamania County, Washington. At an elevation of 4,965 feet, the lookout offers one of the most comprehensive panoramic views in the South Cascades, encompassing Mount Rainier, Mount St. Helens, Mount Adams, and Mount Hood.\n\nThe site on Red Mountain holds a distinguished place in the history of forest fire prevention for the region. The first lookout structure was established on the summit in 1910, making it the first lookout point identified in what was then the Columbia National Forest (now the Gifford Pinchot). The current structure is the fourth on the site, built in 1959, featuring a 10-foot timber tower with a standard Forest Service R-6 flattop cab. The site was historically critical; during World War II (1942-1943), it was staffed 24 hours a day as an Aircraft Warning Station to monitor for enemy aircraft. The original Civilian Conservation Corps (CCC) garage, converted to living quarters for the wartime spotters, still stands on the site.\n\nAlthough the lookout is no longer staffed by the Forest Service for fire detection (which is now primarily done via satellites), the structure has been preserved and is maintained by volunteer efforts, notably after a severe windstorm in 2006 caused significant damage. It is a key recreational destination, with hikers typically accessing the site via the Indian Racetrack Trail (#171), or by hiking a gated access road (Forest Road 6048). The trail passes through a unique landscape, including the Indian Racetrack meadow, an area rich in huckleberries, before climbing to the summit."
+  },
+  {
+    "name": "DP - Panther Creek Falls",
+    "lat": 45.8671944,
+    "lon": -121.8288441,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "waterfall",
+    "desc": "Panther Creek Falls is one of the most impressive and complex waterfalls in the Wind River Valley, located within the Gifford Pinchot National Forest, north of Carson, Washington. It is a highly popular and easily accessible destination in the Mt. Adams Ranger District. The total drop of the falls is estimated to be approximately 130 to 136 feet over a series of steps and plunges, distinguishing it from many single-drop waterfalls in the region.\n\nThe falls are characterized by a unique, multi-channel flow where Panther Creek and a large spring converge over a steep, mossy cliff face. Most of the creek's flow is channeled into a deep groove that steers the water over a two-tier plunge, while a separate, significant portion of water emerges from the canyon wall as a broad veil of springs, cascading down a sheer, moss-laden rock face before merging with the creek’s main flow in the plunge pool below. This complexity of water sources and varied drops makes for a mesmerizing, high-volume spectacle, particularly during high water.\n\nThe area is maintained by the U.S. Forest Service (Trail $#$137) and offers a very short, downhill hike (less than 0.7 miles round-trip) to two distinct viewpoints. The upper viewpoint provides a dramatic view of the convergence of the water over the upper tier, while the lower viewpoint (which is a more technical descent) offers a magnificent, close-up perspective of the main plunge and the mossy rock walls."
+  },
+  {
+    "name": "DP - Forlorn Lakes",
+    "lat": 45.9581497,
+    "lon": -121.7558541,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "lake",
+    "desc": "The Forlorn Lakes are a chain of small, picturesque mountain lakes situated in the Mount Adams Ranger District of the Gifford Pinchot National Forest, Washington, at an approximate elevation of 3,700 feet. The cluster includes around 12 separate bodies of water, which are a major focal point for recreation in the southern part of the forest, located near the boundary of the Indian Heaven Wilderness.\n\nThe location is renowned for its huckleberry fields. The surrounding forest, primarily consisting of fir, spruce, and hemlock, transitions into meadows dense with low-growing shrubs, making the area extremely popular during the late summer and early autumn harvest season. Due to the beauty and popularity, the Forlorn Lakes Campground is a primary destination, offering 25 first-come, first-served campsites scattered around the shores of the largest lakes.\n\nRecreational activities focus on the water and the surrounding trails. Fishing is popular in the larger lakes, which are typically stocked with trout. Non-motorized water activities like kayaking, canoeing, and swimming are common during the warmer months. Furthermore, the lakes provide nearby access to the Indian Heaven Wilderness via the East Crater Trailhead, allowing hikers and backpackers to enter a high plateau noted for its abundant alpine lakes and volcanic features."
+  },
+  {
+    "name": "Peterson Prairie Campground",
+    "lat": 45.9686020584555,
+    "lon": -121.65794134140015,
+    "ele": null,
+    "time": "2025-10-08T13:55:01Z",
+    "sym": "campsite-24",
+    "desc": "Peterson Prairie Campground is a campsite inside of Gifford Pinchot National Forest.\n\nActivities: , \nAmenities: campsite\nCamping: RVs\n\nWebsites:\nhttps://www.recreation.gov/camping/campgrounds/232895"
+  },
+  {
+    "name": "Interpretive Site: Peterson Prairie",
+    "lat": 45.97018294192685,
+    "lon": -121.65952920913696,
+    "ele": null,
+    "time": "2025-10-08T13:55:10Z",
+    "sym": "information",
+    "desc": null
+  },
+  {
+    "name": "Meadow Creek Indian Campground",
+    "lat": 46.069404787927425,
+    "lon": -121.75580978393555,
+    "ele": null,
+    "time": "2025-10-08T13:57:20Z",
+    "sym": "campsite-24",
+    "desc": "Meadow Creek Indian Campground is a campsite inside of Gifford Pinchot National Forest.\n\nAmenities: campsite"
+  },
+  {
+    "name": "Indian Viewpoint",
+    "lat": 46.0538329,
+    "lon": -121.7504926,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
     "sym": "binoculars",
-    "desc": "Eagle Canyon Overlook is a viewpoint inside of San Rafael Swell Recreation Area.\n\nAmenities: viewpoint"
+    "desc": null
+  },
+  {
+    "name": "DP - Basket Tree Interpretive Site",
+    "lat": 46.095372594088246,
+    "lon": -121.71658246202995,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "attraction",
+    "desc": "The Basket Tree Interpretive Site is a culturally significant location within the Gifford Pinchot National Forest, situated near the Wind River and the community of Trout Lake, Washington. This site preserves an important record of the traditional resource use by the Indigenous peoples of the region, notably the Cowlitz Indian Tribe and Klickitat, for whom the forest was a vital resource.\n\nThe site’s primary focus is a stand of Western Red Cedar ( Thuja plicata ) trees that bear distinct, vertical scars. These scars are a result of a sustainable harvesting practice where Native Americans carefully removed the outer and inner bark from the living tree, a process known as peeling. The highly valued, flexible inner bark was then used to weave essential items such as baskets, clothing, mats, and rope. The scars on these trees indicate that they have been harvested in this manner over centuries.\n\nBy selectively removing a strip of bark without girdling (circling) the tree, the Indigenous people ensured the tree would continue to live and grow, sometimes for hundreds of years afterward, allowing the same tree to be harvested multiple times across generations. This practice demonstrates a deep, conservation-minded relationship with the forest and provides invaluable archaeological and historical evidence of traditional lifeways and material culture in the Cascade Mountains.\n\nThe site features an accessible loop trail with interpretive signs that explain the practice of cedar bark removal, the cultural significance of the cedar tree, and the resulting historical and archaeological context of the peeled cedars. The interpretive trail provides a quiet, educational experience set within an old-growth forest environment, often near Langfield Falls, making it a point of historical and natural interest within the Mount Adams Ranger District."
+  },
+  {
+    "name": "DP - Langfield Falls",
+    "lat": 46.0985052,
+    "lon": -121.7186593,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "waterfall",
+    "desc": "Langfield Falls is a scenic waterfall located in the Gifford Pinchot National Forest in Skamania County, Washington, nestled in the area west of Mount Adams. It is a popular, easily accessible destination known for its short, family-friendly trail. The falls are situated on Big Mosquito Creek, a tributary within the larger White Salmon River watershed, and the water descends over a prominent ledge of volcanic rock known as conglomerated breccia.\n\nThe waterfall has an official height of approximately 57 to 59 feet (17 to 18 meters), cascading in a single drop that typically takes a horsetail form. While the volume and width of the falls vary greatly with the season, in high-flow conditions—such as during spring melt—the water spreads wide, dramatically altering the character of the site. In late summer, the flow can be more concentrated, often limited to one side of the cliff face.\n\nThe falls and the surrounding area are named in honor of Karl C. Langfield (K.C. Langfield), a longtime Forest Service Ranger in the Mt. Adams Ranger District who served from 1933 to 1956. The short trail (around 0.3 miles round-trip) leading to the base of the falls was built as a memorial to him, and a commemorative plaque is often found near the main viewpoint. The location is easily accessed via Forest Road 88, near the Big Tire Junction.\n\nThe lush forest along the trail is dominated by tall Douglas firs, vine maples, and a ground cover of mountain huckleberry bushes. The trail descends through a series of switchbacks to the base of the falls, where the small pool and scattered boulders allow for viewing and, in summer, opportunities to cool off near the water. The surrounding area once hosted an old mill, the stone remnants of which can still be discerned near the creek bed."
+  },
+  {
+    "name": "Camp site",
+    "lat": 46.09061474770098,
+    "lon": -121.75909280776978,
+    "ele": null,
+    "time": "2025-10-08T13:59:19Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Berry Fields Interpretive Site",
+    "lat": 46.0881532,
+    "lon": -121.7678311,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "attraction",
+    "desc": "The Berry Fields Interpretive Site is a highly significant cultural and ecological location within the Gifford Pinchot National Forest, situated near the northern border of the Indian Heaven Wilderness, often referred to as the Sawtooth Berry Fields. For over 9,000 years, this area has been a traditional gathering place for numerous Northwest Indigenous tribes, including the Yakama, Klickitat, Wasco, and Umatilla, who referred to the broader area as Sahalee Tyee (often translated as \"The Great God’s Country\" or \"The High Place\").\n\nThe primary focus of the site is the abundant thinleaf huckleberry (Vaccinium membranaceum), or wíwnu, which is a vital traditional food source. The interpretive signs focus on the history and culture of the annual harvest, which served not only as an essential food-gathering activity (the berries were dried for winter use) but also as a crucial social and spiritual event. The gatherings included ceremonies, trading, horse racing on the nearby Indian Racetrack meadow, and the playing of traditional games like palyúut (the bone game).\n\nThe rich productivity of the fields is partially a result of traditional land management practices. Historically, Native Americans would conduct low-intensity, controlled burns to clear out competing conifers and encourage huckleberry growth. This practice maintained the open fields necessary for maximizing the harvest. Following the Great Fires of 1902 and subsequent U.S. Forest Service fire suppression policies, these fields began to shrink, leading to collaborative efforts between the Forest Service and tribal nations for conservation.\n\nThe location holds continued cultural importance today. A Handshake Agreement established in 1932 between the Forest Service and the Yakama Nation officially designated a portion of the Sawtooth Berry Fields (east of Forest Road 24) for the exclusive use of local Indian peoples for their traditional food gathering, a commitment that remains part of the Forest’s current Land and Resource Management Plan. The site serves as a vital reminder of the deep, enduring cultural connection between the land and its first inhabitants."
+  },
+  {
+    "name": "Camp",
+    "lat": 46.09498732585038,
+    "lon": -121.76572838859153,
+    "ele": null,
+    "time": "2025-10-08T14:00:36Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Trail camp",
+    "lat": 46.092307938185485,
+    "lon": -121.76558966193689,
+    "ele": null,
+    "time": "2025-10-08T14:00:06Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "Camp",
+    "lat": 46.09453141230148,
+    "lon": -121.76526691615902,
+    "ele": null,
+    "time": "2025-10-08T14:00:29Z",
+    "sym": "campsite-24",
+    "desc": null
+  },
+  {
+    "name": "DP - Steamboat Mountain Lookout",
+    "lat": 46.1379788,
+    "lon": -121.7277398,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "binoculars",
+    "desc": "Steamboat Mountain is a prominent peak located in the Gifford Pinchot National Forest, situated northwest of Mount Adams in Skamania County, Washington, with an elevation of 5,424 feet. The peak is a distinctive feature of the local landscape and serves as a major viewpoint for the surrounding Cascade Mountains.\n\nThe mountain's summit was historically the location of the Steamboat Mountain Fire Lookout. Developed with a 14x14-foot cabin in 1928, the site was later upgraded. A 20-foot tall treated timber tower with an R-6 flattop cab was constructed in 1956. The lookout was actively staffed for several years but was subsequently decommissioned and removed around 1966, reflecting the Forest Service's shift from manned lookouts to aerial and satellite fire detection. Today, only the footings of the old fire tower remain, along with a 1937 USDA Forest Service brass survey marker.\n\nSteamboat Mountain is a popular hiking destination, particularly in the late summer, when the trail passes through dense, mature huckleberry bushes. The approximately half-mile trail to the summit (Trail #14, Steamboat Viewpoint) is often accessed via a network of Forest Service roads, including Forest Road 8851 and 8854, near the Big Tire intersection. The area is part of a non-motorized recreation zone and is known for its spectacular 360-degree views.\n\nFrom the exposed summit, hikers can attain panoramic views of the major Cascade volcanoes, including the imposing Mount Adams immediately to the east, as well as Mount Rainier, Mount St. Helens, and Mount Hood. Below the peak to the southeast is Steamboat Lake, and to the southwest is Big Mosquito Lake, adding to the scenic value of the viewpoint.\n\n\n\n\n\n\n\n\n\n\n\n\nTools"
+  },
+  {
+    "name": "Mt Adams Viewpoint",
+    "lat": 46.1536338,
+    "lon": -121.6284801,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "binoculars",
+    "desc": null
+  },
+  {
+    "name": "Swampy Meadows",
+    "lat": 46.1638419,
+    "lon": -121.6384314,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "marsh",
+    "desc": "Swampy Meadows is a high-elevation meadow and subalpine ecosystem located on the western slope of Mount Adams, within the Gifford Pinchot National Forest in Washington State. It is situated in the Mount Adams Ranger District, near the Midway High Lakes Area, at an approximate elevation of 3,750 feet (1,143 meters). The meadows are characterized by a mosaic of forested areas and marshy, open ground created by poor natural drainage, which contributes to the name \"Swampy.\"\n\nThe meadow area serves as the headwaters and drainage basin for several small creeks and runoff channels, most notably giving rise to the unnamed tributary that forms the scenic Swampy Creek Falls before it joins the White Salmon River system. The ground is typically saturated through the spring and early summer due to heavy snowmelt, supporting a rich biodiversity of moisture-loving plants. The meadow is seasonally popular for its abundance of wildflowers and for attracting wildlife, including elk and various bird species."
+  },
+  {
+    "name": "DP - Takhlakh Lake",
+    "lat": 46.2782671,
+    "lon": -121.5963891,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "lake",
+    "desc": "Takhlakh Lake is a stunning, natural, high-elevation lake situated at 4,390 feet in the Cowlitz Valley Ranger District of the Gifford Pinchot National Forest, approximately 7.3 miles northwest of Mount Adams in Washington State. The lake is the centerpiece of the popular Midway High Lakes Area and is renowned for offering one of the most picturesque and classic views of Mount Adams, whose snowy cone is perfectly reflected in the lake's still, non-motorized waters on clear mornings.\n\nThe lake itself is a direct product of the volcanic history of Mount Adams. It was formed when the Takh Takh Lava Flow—a significant eruption that occurred on the mountain’s flank approximately 3,500 to 1,000 years ago—flowed downhill and naturally dammed the drainage basin of a small tributary feeding into the Cispus River system. The resulting basin filled with water to create the 33-acre lake. The name Takhlakh originates from a Native American word, takh, meaning \"meadows,\" referring to the adjacent, often swampy Takh Takh Meadows that bloom with wildflowers.\n\nTakhlakh Lake is a highly sought-after recreational destination, offering a popular campground with 54 sites that are generally open from early July through September. The lake is reserved exclusively for non-motorized uses, attracting anglers, kayakers, and canoeists. An accessible, 1.1-mile loop trail, the Takhlakh Loop Trail (#134), encircles the lake, providing multiple viewpoints of the mountain and access to the Takh Takh Meadows Trail (#136), which climbs onto the ancient lava flow itself."
+  },
+  {
+    "name": "DP - Mt Adams",
+    "lat": 46.2030763,
+    "lon": -121.4914944,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "volcano",
+    "desc": "Mount Adams (known as Pahto or Pah-to by the Yakama Nation and Klickitat people) is the second-highest peak in Washington State, towering to an elevation of 12,276 feet (3,742 meters). It is a massive, active stratovolcano situated in the Cascade Range, approximately 30 miles north of the Columbia River, and is considered the second most voluminous volcano in the Cascades after Mount Shasta. The mountain’s broad, 18-mile-wide base and distinctive flat-topped summit profile are the result of multiple eruptive vents and long periods of glaciation, which eroded the structure over its 520,000-year history.\n\nGeologically, Mount Adams is composed mainly of andesite and basaltic lavas, and it is the central and largest feature of the 500-square-mile Mount Adams Volcanic Field. Its most recent lava flow is estimated to be about 1,000 years old, although significant debris avalanches, such as the Trout Lake Mudflow (approximately 6,000 years ago), have occurred more recently, posing the greatest future hazard to downstream communities. The summit and its upper flanks are covered by a permanent icecap and 10 active glaciers, including the Klickitat, White Salmon, and Adams Glaciers, which are vital sources for the White Salmon and Lewis River systems.\n\nFor the Indigenous peoples of the region, Pahto is a sacred landmark and a source of essential resources, notably huckleberries from the surrounding subalpine meadows. Its eastern half lies within the Yakama Nation Indian Reservation and is closed to most public recreation, while the western half, including the summit, is managed as the Mount Adams Wilderness by the U.S. Forest Service, part of the Gifford Pinchot National Forest. The mountain was designated as a Wilderness Area in 1964.\n\nClimbing Mount Adams is a popular objective for mountaineers. The most frequented route is the non-technical South Climb, which begins near Trout Lake and involves a strenuous 6,700-foot elevation gain, typically requiring snow travel, an ice axe, and crampons to reach the summit. An historic, partially preserved fire lookout cupola, dating from 1922, stands near the summit, making it the highest former lookout in Washington State, a relic of early 20th-century forest protection efforts."
+  },
+  {
+    "name": "DP - Council Bluff",
+    "lat": 46.2716463,
+    "lon": -121.6379407,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "cliff",
+    "desc": "Council Bluff is a prominent, semi-open summit located in the Cowlitz Valley Ranger District of the Gifford Pinchot National Forest, Washington, within the Midway High Lakes Area near Mount Adams. The bluff reaches an elevation of approximately 4,800 feet and offers a short but rewarding climb for hikers seeking panoramic mountain views.\n\nThe site is historically significant as the location of an early Forest Service fire observation post. A fire lookout structure was first built on top of Council Bluff in 1932. Although the lookout structure was removed in the 1960s as fire detection methods shifted, the area remains a highly valued viewpoint. Today, only the footings and other minor relics of the former lookout remain on the summit.\n\nThe bluff's primary draw is the sweeping, multi-peak vista it provides. From the top, visitors can clearly see the west slope of Mount Adams directly to the east. By scanning the horizon, they can also typically spot three other major Cascade volcanoes: Mount Rainier to the north, Mount Hood to the south, and Mount St. Helens to the west (though views of St. Helens can sometimes be partially obscured by trees). Below the bluff to the southeast lies Council Lake, a small, accessible lake that serves as the starting point for the hike.\n\nAccess to the summit is provided by the short Council Bluff Trail (#117), which branches off the Boundary Trail (#1). While the initial section of the trail from the Council Lake Campground follows an old, rocky road that is shared with off-road motorcyclists, the final section to the summit is generally reserved for hiker use, climbing through a subalpine forest before emerging onto the open, often windswept bluff."
+  },
+  {
+    "name": "DP - Council Lake",
+    "lat": 46.2646371,
+    "lon": -121.6315627,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "lake",
+    "desc": "Council Lake is a high-elevation, naturally occurring lake located within the Gifford Pinchot National Forest in Skamania County, Washington, near the western base of Mount Adams. Situated at an elevation of approximately 4,200 feet, the lake is a popular destination within the Midway High Lakes Area, known for its scenic views and rustic recreation opportunities.\n\nThe lake is relatively small, but its peaceful, non-motorized waters make it ideal for canoeing, kayaking, and fishing. Council Lake is regularly stocked with fish, attracting anglers in search of rainbow and cutthroat trout. Its shores are lined with dense subalpine forest, creating a tranquil environment for campers, particularly during the short summer season (typically May through October, depending on snow conditions).\n\nA primary function of the lake is to serve as the trailhead and base camp for the nearby Council Bluff summit. The Council Lake Campground, which features a limited number of primitive, free campsites, offers direct access to the Boundary Trail (#1) and the short Council Bluff Trail (#117). This proximity makes the lake a starting point for hikers who seek the panoramic views of Mount Adams, Mount Rainier, and Mount Hood from the old lookout site above.\n\nLike many lakes in the Mount Adams area, the hydrology of Council Lake is deeply connected to the region's volcanic and glacial history, fed primarily by snowmelt and seasonal runoff. The area is also part of a wider ecosystem that supports a variety of wildlife, including elk and black bears, requiring visitors to be diligent about proper food storage while recreating."
+  },
+  {
+    "name": "DP - Babyshoe Pass",
+    "lat": 46.2681516,
+    "lon": -121.6046563,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "attraction",
+    "desc": "Babyshoe Pass is a high mountain pass located in the Gifford Pinchot National Forest in Skamania County, Washington, nestled on the northwest flank of Mount Adams. The pass has an elevation of approximately 4,350 feet (1,326 meters) and is a critical point in the forest's transportation network, as it is traversed by Forest Route 23 (NF-23). This route provides a main north-south access corridor on the east side of the forest, connecting the communities of Trout Lake to the south and Randle to the north.\n\nThe pass is geographically significant because it marks a subtle hydrographic divide. It separates the headwaters and drainage areas of the Lewis River Watershed to the west from the Cispus River drainage to the north. The surrounding area is part of the Midway High Lakes Area, a popular recreation zone that includes several high-elevation lakes such as Takhlakh Lake, Forlorn Lakes, and Council Lake, all within a short radius.\n\nAccessing the pass is a major part of the journey. While much of NF-23 is paved, the section that traverses Babyshoe Pass is characterized by a roughly 12-mile stretch of gravel road. This unpaved portion is typically only open during the snow-free months, generally from early summer through late fall, and is known to be rough and dusty, particularly in late summer.\n\nThe area is valued for its scenery and serves as a trailhead for various recreational activities. It provides access to multiple trails within or near the Mount Adams Wilderness and offers rewarding views of the surrounding Cascade Range, including the dramatic presence of Mount Adams. The surrounding area is also the source for the small stream that forms the similarly named Babyshoe Falls."
+  },
+  {
+    "name": "DP - Takh Takh Lava Flow",
+    "lat": 46.2723377,
+    "lon": -121.5850195,
+    "ele": null,
+    "time": "2022-07-13T23:46:12Z",
+    "sym": "volcano",
+    "desc": "The Takh Takh Lava Flow is a geologically young and prominent basaltic lava field located on the northwest flank of Mount Adams, within the Gifford Pinchot National Forest in Washington State. This flow originated from a flank vent low on the main volcano's edifice, and it traveled approximately 10 kilometers (6 miles) northwest, flowing past the current location of Takhlakh Lake. The flow consists of blocky, rubbly gray boulders of andesite, creating a stark, jumbled, and difficult-to-traverse landscape that contrasts sharply with the surrounding dense forest.\n\nThe flow’s age is significant in the context of Mount Adams’s history, with the eruption believed to have occurred during the Holocene epoch, and it is known to be overlain by tephra (ash) layers dating to about 3,500 years ago. The lava flow is responsible for the formation of nearby Takhlakh Lake and the associated Takh Takh Meadows. The eruption effectively dammed the natural drainages of the area, allowing the basin to fill with water and form the lake, which is now famous for its clear reflection of Mount Adams.\n\nThe Takh Takh Lava Flow is a key recreational feature in the popular Midway High Lakes Area. The Takh Takh Meadows Trail (#136) is a specific, well-maintained route that climbs a portion of the flow. This section of the trail, which has been cut through the volcanic rock, provides hikers with stunning views to the north of Mount Rainier and the jagged peaks of the Goat Rocks Wilderness, while views of Mount Adams are often best observed from the edge of the adjacent Takh Takh Meadow. An interpretive sign is often located at the base of the flow, providing insights into its age and volcanic origin."
+  },
+  {
+    "name": "DP - Lewis River",
+    "lat": 46.25534875800656,
+    "lon": -121.60873747043782,
+    "ele": null,
+    "time": "2025-10-08T14:05:40Z",
+    "sym": "water",
+    "desc": "The Lewis River is a major tributary of the Columbia River, originating from the Adams Glacier on the west flank of Mount Adams in southwest Washington State. It flows for approximately 95 miles (153 km), draining a vast basin of about 1,046 square miles, before joining the Columbia River near Woodland. Unlike nearby Lewis County, the river was named for an early pioneer, A. Lee Lewis, who settled near its mouth. Historically, the river and its abundant salmon runs were central to the life and culture of Indigenous peoples, including the Cowlitz, Yakama, Klickitat, and Chinook.\n\nThe river's course is now characterized by its extensive hydroelectric development. The river's North Fork is impounded by a series of four major dams—Swift Dam (forming Swift Reservoir), Yale Dam (forming Yale Lake), and Merwin Dam (forming Lake Merwin)—constructed between 1931 and 1958. These facilities provide power and create popular reservoirs for recreation like boating, camping, and fishing, but they have also blocked anadromous fish, such as salmon and steelhead, from accessing over 170 miles of historical spawning and rearing habitat in the upper basin.\n\nA significant portion of the river flows through the Lewis River Recreation Area in the Gifford Pinchot National Forest, an area known for its lush, moss-cloaked old-growth forest. This section is famous for the Lewis River Falls, a sequence of large, spectacular waterfalls including the Lower Lewis River Falls (43 feet high and over 200 feet wide) and the Upper Lewis River Falls (58 feet high). The Lewis River Trail runs alongside the river, offering a 14-mile route that connects various recreation sites and provides access to the major falls.\n\nOngoing efforts, formalized through a 2004 settlement agreement and subsequent regulatory action by the Federal Energy Regulatory Commission (FERC), require the dam operators to implement upstream and downstream fish passage facilities at the dams. These projects, which have faced delays, are critical for restoring access to the high-quality upstream spawning grounds and are a key component of salmon and bull trout recovery for the entire Lower Columbia River ecosystem."
   }
 ]

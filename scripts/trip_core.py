@@ -1,165 +1,209 @@
-"""Shared library for building a consolidated trip_data JSON payload.
-
-This module factors out the pieces previously embedded in
-``scripts/build_trip_data.py`` so the main itinerary AND each alternate
-itinerary (A / B / D) can share POI metadata, scheduling defaults, track
-slicing, and POI minute heuristics.
+"""Shared library for building the consolidated trip_data JSON payload.
 
 Public entry points:
 
 * ``load_route(plan_dir)`` -- one-time load of ``route_analysis.json`` +
   ``route_tracks.json`` into a dict used by every subsequent call.
-* ``build_payload(...)`` -- turns a ``days_spec`` list (same shape as the
-  current ``DAYS`` with optional ``track_segments`` for alternates) plus
-  camp data + schedule defaults into the JSON payload written to disk.
+* ``build_payload(...)`` -- turns a ``days_spec`` list plus camp data and
+  schedule defaults into the JSON payload written to disk.
 
-POI catalog (``POI_STATUS``, ``POI_SPUR_OVERRIDES``, ``default_minutes``) is
-defined once here and shared by both main and alternates -- the alternates
-just re-key the same POI facts onto new day boundaries.
+The POI catalog (``POI_STATUS``, ``POI_RENAME``, ``POI_SPUR_OVERRIDES``,
+``default_minutes``) lives here. Waypoints are matched by their exact ``<name>``
+from the source GPX, so keep the keys byte-identical to the GPX -- including
+typos.
+
+POI status values
+-----------------
+``primary``         Planned stop. Checked by default in the ETA scheduler.
+``hike_candidate``  Hike or activity to triage. NOT checked by default, so the
+                    day's ETA starts realistic and the group opts in.
+``backup``          Lower-priority option. Not checked.
+``landmark``        A distant peak or reference marker, not somewhere you drive
+                    to. Zero stop minutes and never checked -- without this the
+                    scheduler would try to add a 25-mile round trip for a
+                    waypoint that just labels Mount Rainier.
+``logistics``       Fuel and services.
+``skip``            Deliberately excluded (usually a trailhead waypoint that
+                    duplicates the destination waypoint next to it).
 """
 from __future__ import annotations
 import json
 import math
 import pathlib
+import sys
 from typing import Any
+
+_SCRIPTS = pathlib.Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+import trip_config as cfg  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
 # POI catalog
 # ---------------------------------------------------------------------------
-# Explicit POI status map from planning/poi_decisions.md (manual transcription)
-# status: primary | backup | skip | conditional | hike_candidate
 POI_STATUS: dict[str, tuple[str, str]] = {
-    # Day 0 / May 2 staging POIs (Black Dragon arrival) and bonuses
-    'DP - Petroglyph Canyon Panel':        ('backup',   'Bonus if arrive with daylight on May 2'),
-    'DP - Spirit Arch':                    ('backup',   'Bonus if arrive with daylight on May 2'),
+    # --- Day 1: Carson -> Takhlakh Lake (mi 0-84.5) ---------------------
+    'DP - Columbia River Gorge':      ('primary', 'Trip start. Only sea-level breach of the Cascade Range.'),
+    'Gas Station':                    ('logistics', 'Fuel stop'),
+    'DP - High Bridge':               ('primary', 'Wind River Rd crossing high above the canyon.'),
+    'DP - Wind River':                ('backup', 'Same pullout as High Bridge.'),
+    'Triangle Pass':                  ('backup', 'Loop junction. The route returns through here at mi 324.8 on the final day.'),
+    'DP - Big Lava Bed':              ('primary', 'Rugged 8,200-year-old basalt flow from the Indian Heaven volcanic field.'),
+    'Monte Cristo Slab':              ('backup', 'Rock-climbing crag ~1.9 mi off route.'),
+    'DP - Goose Lake':                ('primary', 'Lava-dammed lake; the Big Lava Bed flow created it.'),
+    'Interpretive Site: Peterson Prairie': ('backup', '~3.4 mi off route, next to Peterson Prairie Campground.'),
+    'DP - Forlorn Lakes':             ('primary', 'Chain of about a dozen small lakes at ~3,700 ft.'),
+    'Indian Viewpoint':               ('primary', 'Roadside viewpoint on the Indian Heaven shoulder.'),
+    'DP - Berry Fields Interpretive Site': ('primary', 'Sawtooth Berry Fields - a tribal gathering place for over 9,000 years. Ripe huckleberries in September; the fields are reserved for tribal harvest in places, so read the posted signs.'),
+    'Langfield Falls trailhead':      ('skip', 'Trailhead marker; DP - Langfield Falls is the destination.'),
+    'DP - Basket Tree Interpretive Site': ('primary', 'Preserved cedar showing traditional bark harvesting.'),
+    'DP - Langfield Falls':           ('hike_candidate', 'Short, easy trail to the falls on Big Mosquito Creek. Good first stretch-the-legs stop.'),
+    'Steamboat Viewpoint trail':      ('skip', 'Trailhead marker; DP - Steamboat Mountain Lookout is the destination.'),
+    'DP - Steamboat Mountain Lookout': ('hike_candidate', 'Former lookout site at 5,424 ft. Steep but short; big Cascades panorama.'),
+    'Mt Adams Viewpoint':             ('primary', 'Roadside Mount Adams view.'),
+    'Swampy Meadows':                 ('backup', 'Subalpine meadow, good wildlife stop.'),
+    'DP - Lewis River':               ('backup', 'Headwaters draining Adams Glacier.'),
+    'DP - Council Lake':              ('primary', 'Small high lake at ~4,200 ft.'),
+    'DP - Council Bluff':             ('hike_candidate', 'Short steep climb to a ~4,800 ft summit with a panoramic payoff. Historic council site.'),
+    'Council Bluff trailhead':        ('skip', 'Trailhead marker; DP - Council Bluff is the destination.'),
+    'DP - Babyshoe Pass':             ('primary', '~4,350 ft pass on FS 23. Gravel over the top.'),
+    'DP - Takhlakh Lake':             ('primary', 'The signature view of the route: Mount Adams reflected in the lake. Day 1 camp is here.'),
 
-    # Day 1
-    'DP - Black Dragon Petroglyph':        ('primary',  ''),
-    'DP - Black Dragon Canyon':            ('primary',  ''),
-    'DP - The Sinkhole':                   ('primary',  ''),
-    'DP - Old San Rafael Swinging Bridge': ('primary',  'Drive-by photo only'),
-    'DP - San Rafael River':               ('backup',   ''),
-    'DP - Red Canyon':                     ('primary',  ''),
-    'DP - Split Rock':                     ('primary',  'Drive-by photo only'),
-    'DP - Buckhorn Wash':                  ('primary',  'The canyon drive itself'),
-    'DP - Buckhorn Wash Petroglyphs':      ('primary',  'Famous 130-ft panel'),
-    'DP - Dinosaur Footprint':             ('primary',  ''),
-    'DP - Little Grand Canyon':            ('primary',  'Combined with Wedge Overlook'),
-    'DP - Wedge Overlook':                 ('primary',  'End-of-day highlight'),
-    'Petroglyph Panel Trail':              ('skip',     'Trailhead reference only; Black Dragon Petroglyph is the destination'),
-    'Calf Canyon':                         ('skip',     '1.7 km off-route cliff viewpoint; not on plan'),
+    # --- Day 2: Takhlakh -> Walupt Lake (mi 84.5-133.5) -----------------
+    'DP - Takh Takh Lava Flow':       ('primary', 'Young basalt flow off Mount Adams, right beside Takhlakh Lake.'),
+    'DP - Mt Adams':                  ('landmark', 'Reference marker for the 12,276 ft summit - view it, do not drive to it.'),
+    'Midway Warming Hut':             ('backup', 'Simple non-reservable winter shelter; hub of the Midway trail network.'),
+    'DP - Cispus River':              ('primary', 'Upper Cispus, fed from Snowgrass Flats in the Goat Rocks.'),
+    'DP - Hamilton Buttes':           ('hike_candidate', '5,772 ft summit in the Dark Divide. Longer climb; big views.'),
+    'DP - Bishop Falls':              ('hike_candidate', 'Hidden multi-tier falls in a steep, remote canyon. Access is rough - scout before committing.'),
+    'DP - Walupt Creek Falls':        ('hike_candidate', 'Roughly 220-245 ft of tiered falls.'),
+    'Walupt Creek Falls Trailhead':   ('skip', 'Trailhead marker; DP - Walupt Creek Falls is the destination.'),
+    'DP - Walupt Lake':               ('primary', 'Second-largest lake in the forest and the deepest in the county. Day 2 camp; Goat Rocks trailheads start here.'),
+    'DP - Gilbert Peak':              ('landmark', 'Reference marker for the 8,184 ft high point of the Goat Rocks.'),
 
-    # Day 2
-    'DP - The Drips':                      ('primary',  'Natural spring, on-route'),
-    'River crossing':                      ('primary',  'Fuller Bottom ford of the San Rafael River (Upper San Rafael River WMA, BLM Fuller Bottom road = NF-3516 / BLM 6767, becomes Little Wedge Road / BLM 629 south of the crossing). Added per group request -- water crossings desirable for overlanders.'),
-    'Coal Wash':                           ('backup',   ''),
-    'DP - Eva Conover Trail':              ('primary',  'Trail section (blue rating)'),
-    'DP - Eagle Canyon Overlook':          ('primary',  ''),
-    'DP - Eagle Canyon Bridges':           ('primary',  'I-70 bridges from below'),
-    'DP - Eagle Canyon Trail':             ('primary',  'Trail section; full-size caution'),
-    'DP - Eagle Canyon Arch':              ('primary',  'Short walk'),
-    'DP - The Icebox':                     ('primary',  'Short walk into cool grotto'),
-    "DP - Swasey's Cabin":                 ('primary',  'Historic cabin'),
-    'DP - Loan Warrior Petroglyph':        ('primary',  'Short hike; panel sits ~1.5 mi off the main trail (spur drive budgeted in stop time)'),
-    'DP - Reds Canyon':                    ('primary',  'Scenic drive-through'),
-    'Lucky Strike Mine':                   ('primary',  'Mine of interest -- added to the route as a primary stop.'),
-    'Copper Globe Mine':                   ('skip',     '4.1 km off-route; Lucky Strike covers mine interest'),
-    'The Twin Priests':                    ('skip',     '3.7 km off-route'),
-    'Hamburger Rocks':                     ('skip',     '2.1 km off-route'),
-    'Horizon Arch':                        ('skip',     '2.2 km off-route'),
+    # --- Day 3: Walupt -> North Fork (mi 133.5-226.5) -------------------
+    'Goat Ridge Lookout':             ('backup', '~2.3 mi off route.'),
+    'DP - High Rock Lookout':         ('hike_candidate', 'About 3 miles round trip to a historic lookout perched over a cliff, with Mount Rainier only 13 air miles away. The best view on the route and the single most worthwhile hike. Access road is rough; the last stretch is narrow.'),
+    'High Rock Trailhead':            ('skip', 'Trailhead marker; DP - High Rock Lookout is the destination.'),
+    'DP - Mt Rainier':                ('landmark', 'Reference marker for the 14,410 ft summit - view it, do not drive to it.'),
+    'DP - Cowlitz River':             ('backup', 'Glacier-fed Cowlitz, alongside US 12.'),
+    'Layser Cave':                    ('primary', 'Interpreted rock shelter above the Cispus valley and one of the most significant archaeological sites in the western Cascades. Short walk from the parking area.'),
+    'Camp Creek Falls':               ('primary', 'Short roadside waterfall stop.'),
 
-    # Day 3
-    'DP - Tomsich Butte Uranium Mine':     ('primary',  'Mine ruins + equipment'),
-    'Hondu Arch Viewpoint':                ('backup',   ''),
-    'DP - Hondu Arch':                     ('primary',  ''),
-    'DP - Hidden Splendor Overlook':       ('primary',  ''),
-    "DP - Miner's Cabin":                  ('primary',  'Historic structure'),
-    "Miner's Cabin":                       ('skip',     'Exact duplicate of DP version -- removed'),
-    'DP - Behind the Reef trail':          ('primary',  'Technical trail section - slow'),
-    # Day 3 tactical hikes (Hike (tactical) badge; checked by default; uncheck ones you skip)
-    'DP - Wild Horse Window Arch':         ('hike_candidate', 'Default Day 3 hike; route author #1 geology; 2 mi RT; BLM not GSVP gate; set up camp before this hike and carpool to the trailhead; see slot-canyon-guide.html + AllTrails WHW'),
-    'DP - Chute Canyon':                   ('hike_candidate', 'Tactical slot/wash; easier; wide ~first mi; ~0.8 mi to first narrowing (GCT); partial OAB typical; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
-    'DP - Crack Canyon':                   ('hike_candidate', 'Tactical slot; ~5 mi RT typical (Utah.com); ~10 ft drop ~1 mi in; see slot-canyon-guide.html + AllTrails Crack Canyon Wilderness'),
-    'Little Wild Horse Canyon Trail':      ('backup',       'LWH/Bell TH; skip OAB from Behind-the-Reef unless full ~8 mi LWH/Bell loop + party OK scrambling; FLASH FLOOD RISK — slot-canyon-guide.html'),
-    'Little Wild Horse Slot Canyon':       ('backup',       'Full LWH/Bell loop waypoint only; same caveats — slot-canyon-guide.html'),
-    'DP - Temple Wash Petroglpyphs':       ('primary',  'Roadside panel (GPX name has a typo, kept exact for lookup)'),
-    'Wild Horse Window Trailhead':         ('skip',     'Trailhead reference only; Wild Horse Window Arch is the destination hike'),
-    # Day 3 skips
-    'Goblin Valley State Park':            ('skip',     'Off-route side trip; time budget'),
-    'Chute Canyon Trailhead':              ('backup',   'Chute Canyon hike parking — slot-canyon-guide.html'),
-    'Crack Canyon Trailhead':              ('backup',   'Crack Canyon hike parking; camping nearby possible — slot-canyon-guide.html'),
-    'Wild Horse Canyon':                   ('backup',   'AllTrails Wild Horse Canyon trail; lower priority — slot-canyon-guide.html'),
-    'Old Mining Sites':                    ('skip',     'Generic waypoint'),
-
-    # Day 4 AM
-    'DP - North Temple Wash':              ('primary',  'Scenic narrows drive-through'),
-    'Tunnel / Freeway Underpass':          ('primary',  'HEIGHT CHECK for tall rigs; Freeway Access bypass if too tall'),
-    'DP - Head of Sinbad Petroglyph':      ('primary',  ''),
-    'DP - Dutchman Arch':                  ('primary',  ''),
-    'Temple Mountain Viewpoint':           ('skip',     '2.7 km off-route'),
-    'Freeway Access':                      ('skip',     'Alt-route anchor waypoint for tunnel bypass (tall rigs); rendered as alternate track on map'),
+    # --- Day 4: North Fork -> Panther Creek (mi 226.5-308.5) ------------
+    'DP - Burley Mountain Fire Lookout': ('primary', 'Historic lookout at 5,154 ft with a 360-degree view taking in Rainier, Adams, St Helens and Hood. Drivable to near the top; narrow road.'),
+    'DP - Pinto Rock':                ('primary', 'Striking welded-tuff breccia crag at 5,123 ft.'),
+    'Pinto Rock Trailhead':           ('skip', 'Trailhead marker; DP - Pinto Rock is the destination.'),
+    'Elk Pass':                       ('primary', 'High point on the route between the Cispus and Lewis drainages.'),
+    'DP - Mt St Helens':              ('landmark', 'Reference marker for the volcano - view it, do not drive to it.'),
+    'Miller Creek Falls':             ('backup', 'Near the Curly Creek pullout.'),
+    'Curly Creek Falls Trailhead':    ('skip', 'Trailhead marker; DP - Curly Creek Falls is the destination.'),
+    'DP - Curly Creek Falls':         ('primary', 'One of a tiny handful of waterfalls on earth with two natural basalt arches spanning its face. Short walk from the road.'),
+    'Rush Creek Falls':               ('backup', 'Same pullout area as Curly Creek Falls.'),
+    'Falls Creek Caves Trailhead':    ('skip', 'Trailhead marker; DP - Falls Creek Lava Caves is the destination.'),
+    'DP - Falls Creek Lava Caves':    ('hike_candidate', 'LAVA TUBE. A large cave system formed by the Big Lava Bed flow ~8,200 years ago. Every person going in needs their own headlamp plus a backup light and spare batteries; the cave is pitch dark, the floor is uneven basalt, and it stays cold year round. Boots, gloves and a helmet or beanie are worth having. Check for seasonal bat closures before entering.'),
+    'Red Mountain Fire Lookout':      ('hike_candidate', 'Lookout at 4,965 ft on the Indian Heaven boundary; panorama of four volcanoes. ~1.7 mi off route.'),
+    'DP - Panther Creek Falls':       ('primary', 'About 130 ft of tiered falls with a built viewing platform a short walk from the road. Final-night camp is just up the road.'),
 }
 
 
-# Per-POI "spur miles saved if skipped" overrides. These are round-trip miles
-# that would be avoided if the stop is un-checked in the scheduler.
+# Some source waypoints share a generic name. Re-label them by
+# (exact GPX name, integer route mile) so the itinerary reads clearly.
+POI_RENAME: dict[tuple[str, int], str] = {
+    ('Gas Station', 2):   'Fuel - Carson, WA',
+    ('Gas Station', 155): 'Fuel - Packwood, WA',
+    ('Gas Station', 216): 'Fuel - Randle, WA',
+}
+
+# Notes that replace the generic catalog note for a specific instance.
+POI_NOTE_OVERRIDE: dict[tuple[str, int], str] = {
+    ('Gas Station', 2): 'TOP OFF HERE. Last fuel for 154 route miles until Packwood at mi 156.',
+    ('Gas Station', 155): 'First fuel since Carson. Packwood also has food and a store.',
+    ('Gas Station', 216): 'Randle. Last fuel before the final 108 miles back to the Gorge.',
+}
+
+
+# Per-POI "spur miles saved if skipped" -- round-trip miles avoided when the
+# stop is unchecked in the scheduler.
 POI_SPUR_OVERRIDES: dict[str, float] = {
-    'DP - Red Canyon':                15.3,
-    'DP - Hidden Splendor Overlook':  19.7,
+    'DP - High Rock Lookout': 9.0,
+    'Red Mountain Fire Lookout': 3.4,
+    'DP - Burley Mountain Fire Lookout': 6.0,
+    'Interpretive Site: Peterson Prairie': 6.8,
+    'Monte Cristo Slab': 3.8,
+    'Goat Ridge Lookout': 4.6,
+    'DP - Hamilton Buttes': 2.5,
 }
 
 
 # Stops that get checked by default in the itinerary scheduler.
+# hike_candidate is deliberately False: with a dozen hikes on the route, the
+# group triages which ones to do rather than starting from "all of them".
 DEFAULT_CHECKED_BY_STATUS = {
     'primary':         True,
-    'hike_candidate':  True,
     'conditional':     True,
+    'hike_candidate':  False,
     'backup':          False,
+    'landmark':        False,
     'skip':            False,
     'logistics':       False,
     'unclassified':    False,
 }
 
-
-# Day-0 staging bonus POIs (pre-mile-0 waypoints we expose on the travel day).
-DAY0_STAGE_NAMES: set[str] = {'DP - Petroglyph Canyon Panel', 'DP - Spirit Arch'}
-# Waypoints we want to suppress entirely (not surfaced on any day).
-SUPPRESS_NAMES: set[str] = {'San Rafael Reef Viewpoint'}
+# Statuses that contribute no driving detour and no stop time.
+ZERO_TIME_STATUSES = {'landmark'}
 
 
 def default_minutes(name: str, sym: str, status: str, note: str) -> int:
     """Stop-time default seeds for the itinerary scheduler inputs."""
     n = (name or '').lower()
     s = (sym or '').lower()
-    nl = (note or '').lower()
-    if 'wild horse window' in n:
-        return 90
-    if 'little wild horse canyon trail' in n:   return 120
-    if 'little wild horse slot' in n:           return 0
-    if 'dp - crack canyon' == n:
-        return 210
-    if 'dp - chute canyon' == n:
-        return 150
-    if 'eva conover' in n:                      return 60
-    if 'behind the reef' in n:                  return 75
-    if 'tomsich butte' in n:                    return 45
-    if 'lucky strike' in n:                     return 45
-    if 'icebox' in n:                           return 30
-    if 'loan warrior' in n or 'lone warrior' in n:
-        return 35
-    if 'tunnel / freeway' in n:                 return 10
-    if 'buckhorn wash petroglyphs' in n:        return 30
-    if 'wedge overlook' in n:                   return 30
-    if 'little grand canyon' in n:              return 20
-    if 'head of sinbad' in n:                   return 25
-    if 'drive-by' in nl or 'drive by' in nl:    return 5
-    if s in ('mine', 'cave', 'building-24'):    return 30
-    if s == 'natural-spring':                   return 15
-    if s in ('cliff', 'stone', 'arch', 'bridge', 'petroglyph'): return 20
-    if s in ('binoculars', 'attraction'):       return 15
-    if s == 'water':                            return 15
-    if s == 'off-road':                         return 30
+
+    if status == 'landmark':
+        return 0
+
+    # Named hikes and activities, longest first.
+    if 'high rock lookout' in n:            return 150
+    if 'hamilton buttes' in n:              return 120
+    if 'falls creek lava caves' in n:       return 90
+    if 'council bluff' in n:                return 75
+    if 'steamboat mountain' in n:           return 60
+    if 'bishop falls' in n:                 return 60
+    if 'walupt creek falls' in n:           return 60
+    if 'red mountain fire lookout' in n:    return 45
+    if 'burley mountain' in n:              return 45
+    if 'layser cave' in n:                  return 30
+    if 'panther creek falls' in n:          return 30
+    if 'takh takh' in n:                    return 30
+    if 'langfield falls' in n:              return 25
+    if 'curly creek falls' in n:            return 25
+    if 'berry fields' in n:                 return 25
+    if 'takhlakh lake' in n:                return 30
+    if 'basket tree' in n:                  return 20
+    if 'big lava bed' in n:                 return 20
+    if 'pinto rock' in n:                   return 20
+    if 'camp creek falls' in n:             return 20
+    if 'rush creek falls' in n:             return 20
+    if 'miller creek falls' in n:           return 15
+    if 'babyshoe pass' in n:                return 10
+    if 'elk pass' in n:                     return 10
+    if 'triangle pass' in n:                return 5
+    if 'high bridge' in n:                  return 10
+    if 'columbia river gorge' in n:         return 15
+    if n.startswith('fuel - '):             return 25
+
+    # Fall back on the GPX symbol.
+    if s == 'fuel-24':                      return 25
+    if s == 'cave':                         return 45
+    if s == 'fire-lookout':                 return 45
+    if s == 'waterfall':                    return 25
+    if s == 'lake':                         return 20
+    if s in ('binoculars', 'attraction', 'information'): return 15
+    if s in ('cliff', 'peak', 'volcano', 'bridge'):      return 15
+    if s in ('water', 'marsh'):             return 10
+    if s == 'building-24':                  return 15
     return 20
 
 
@@ -177,7 +221,7 @@ def _haversine_m(a, b):
 
 
 def load_highway_tracks(planning_dir: pathlib.Path) -> dict[str, Any]:
-    """Load optional OSRM polylines for May 1–2 highway legs (``planning/highway_tracks.json``)."""
+    """Load optional OSRM polylines for the highway travel legs."""
     p = planning_dir / 'highway_tracks.json'
     if not p.exists():
         return {}
@@ -189,9 +233,12 @@ def load_route(plan_dir: pathlib.Path) -> dict[str, Any]:
     analysis = json.loads((plan_dir / 'route_analysis.json').read_text(encoding='utf-8'))
     tracks = json.loads((plan_dir / 'route_tracks.json').read_text(encoding='utf-8'))
 
-    main_track = next(t for t in tracks if t['name'] == 'San Rafael Swell Adventure Route')
-    freeway_access = next((t for t in tracks if t['name'] == 'Freeway Access'), None)
-    devils_racetrack = next((t for t in tracks if t['name'] == 'Devils Racetrack Alternate Route'), None)
+    main_track = next((t for t in tracks if t['name'] == cfg.MAIN_TRACK_NAME), None)
+    if main_track is None:
+        raise SystemExit(
+            f'Main track {cfg.MAIN_TRACK_NAME!r} not in route_tracks.json. '
+            f'Available: {[t["name"] for t in tracks]}'
+        )
 
     pts = main_track['points']
     cum_mi = [0.0]
@@ -201,15 +248,12 @@ def load_route(plan_dir: pathlib.Path) -> dict[str, Any]:
     ordered = analysis['waypoints_ordered']
     by_name: dict[str, list[dict]] = {}
     for w in ordered:
-        nm = w.get('name') or ''
-        by_name.setdefault(nm, []).append(w)
+        by_name.setdefault(w.get('name') or '', []).append(w)
 
     return {
         'main_track': main_track,
         'main_points': pts,
         'cum_mi': cum_mi,
-        'freeway_access': freeway_access,
-        'devils_racetrack': devils_racetrack,
         'ordered': ordered,
         'by_name': by_name,
         'total_mi': analysis['track_miles'],
@@ -228,11 +272,7 @@ def slice_track(route: dict[str, Any], mi_lo: float | None, mi_hi: float | None)
 
 
 def build_day_track(route: dict[str, Any], segments: list[dict]) -> list[list[float]]:
-    """Concatenate track slices (optionally reversed) into one day polyline.
-
-    ``segments`` is a list of ``{'mi_lo': ..., 'mi_hi': ..., 'reverse': bool}``.
-    Duplicate boundary points between consecutive segments are elided.
-    """
+    """Concatenate track slices (optionally reversed) into one day polyline."""
     out: list[list[float]] = []
     for seg in segments:
         sliced = slice_track(route, seg.get('mi_lo'), seg.get('mi_hi'))
@@ -247,36 +287,45 @@ def build_day_track(route: dict[str, Any], segments: list[dict]) -> list[list[fl
 # ---------------------------------------------------------------------------
 # POI assembly
 # ---------------------------------------------------------------------------
-def _waypoint_to_poi(w: dict, route: dict, day_mile: float, status_info: tuple[str, str] | None) -> dict | None:
-    """Convert a raw waypoint into the POI dict consumed by HTML/GPX builders.
-
-    ``day_mile`` is the mile-along-driven-day value used by the scheduler
-    (monotonically increasing from 0 at the day's start, regardless of whether
-    the day runs forward or reverse along the master track).
-    """
+def _waypoint_to_poi(w: dict, route: dict, day_mile: float,
+                     status_info: tuple[str, str] | None) -> dict | None:
+    """Convert a raw waypoint into the POI dict consumed by HTML/GPX builders."""
     nm = w.get('name') or ''
+    sym = w.get('sym') or ''
     if status_info is None:
-        sym = w.get('sym') or ''
+        # Campsites are handled by the CAMPSITES table, not as POIs.
         if sym == 'campsite-24':
             return None
         if sym in ('fuel-24', 'city-24', 'toilets-24'):
-            status = 'logistics'
-            note = sym
+            status, note = 'logistics', sym
         else:
-            status = 'unclassified'
-            note = ''
+            status, note = 'unclassified', ''
     else:
         status, note = status_info
+
+    raw_mile_key = int(w.get('mile') or 0)
+    display_name = POI_RENAME.get((nm, raw_mile_key), nm)
+    note = POI_NOTE_OVERRIDE.get((nm, raw_mile_key), note)
+
+    off_m = round(w.get('dist_to_track_m', 0), 1)
+    spur = POI_SPUR_OVERRIDES.get(nm, 0.0)
+    if status in ZERO_TIME_STATUSES:
+        # Never let the scheduler route the group to a distant summit marker.
+        off_m = 0.0
+        spur = 0.0
+
     return {
-        'name': nm,
+        'name': display_name,
+        'gpx_name': nm,
         'lat': w['lat'], 'lon': w['lon'], 'ele': w.get('ele'),
         'mile': round(day_mile, 2),
-        'dist_to_track_m': round(w.get('dist_to_track_m', 0), 1),
+        'dist_to_track_m': off_m,
+        'true_off_track_m': round(w.get('dist_to_track_m', 0), 1),
         'sym': w.get('sym'),
         'status': status,
         'note': note,
         'desc': (w.get('desc') or '').strip(),
-        'spur_mi': POI_SPUR_OVERRIDES.get(nm, 0.0),
+        'spur_mi': spur,
     }
 
 
@@ -288,18 +337,11 @@ def pois_for_segments(
     extra_status: dict[str, tuple[str, str]] | None = None,
     use_day_mi: bool = True,
 ) -> list[dict]:
-    """Collect POIs covered by a list of mile segments in driven order.
+    """Collect POIs covered by a list of mile segments, in driven order.
 
-    When ``use_day_mi`` is True (default; used by alternates including any
-    reverse/multi-segment days), each POI's ``mile`` is recalculated as
-    mile-along-the-day -- starting at 0 for the first segment and accumulating
-    across segments -- so the HTML scheduler's ``mile - prevMile`` leg math
-    stays correct regardless of master-track direction.
-
-    When ``use_day_mi`` is False, POIs keep their absolute ``mile`` as
-    measured along the master track (legacy behavior used by the main
-    forward-only trip so its trip_data.json remains byte-identical to the
-    pre-refactor output).
+    When ``use_day_mi`` is True each POI's ``mile`` is recalculated as
+    mile-along-the-day starting at 0, so the scheduler's ``mile - prevMile`` leg
+    math stays correct even for reversed or multi-segment days.
     """
     suppress_names = suppress_names or set()
     extra_status = extra_status or {}
@@ -313,14 +355,8 @@ def pois_for_segments(
             continue
         seg_len = max(0.0, mi_hi - mi_lo)
         reverse = bool(seg.get('reverse'))
-        in_win = []
-        for w in route['ordered']:
-            mi = w.get('mile')
-            if mi is None:
-                continue
-            if not (mi_lo <= mi < mi_hi):
-                continue
-            in_win.append(w)
+        in_win = [w for w in route['ordered']
+                  if w.get('mile') is not None and mi_lo <= w['mile'] < mi_hi]
         in_win.sort(key=lambda w: -(w['mile']) if reverse else (w['mile']))
         for w in in_win:
             nm = w.get('name') or ''
@@ -338,7 +374,7 @@ def pois_for_segments(
             seen.add(key)
             status_info = extra_status.get(nm) or poi_status.get(nm)
             poi = _waypoint_to_poi(w, route, emit_mi, status_info)
-            if poi is not None:
+            if poi is not None and poi['status'] != 'skip':
                 out.append(poi)
         running_day_mi += seg_len
     return out
@@ -363,98 +399,48 @@ def build_payload(
     schedule_defaults: dict[str, dict],
     route: dict[str, Any],
     trip_meta: dict[str, Any],
-    group_counts: dict[str, int],
+    group_counts: dict[str, Any],
     fuel_plan: dict[str, Any],
     realtime_links: list[dict[str, str]],
     generated_at: str,
-    day0_stage_names: set[str] | None = None,
     suppress_names: set[str] | None = None,
     poi_status: dict[str, tuple[str, str]] | None = None,
-    alternate_tracks: dict[str, Any] | None = None,
     intro_html: str | None = None,
-    include_alternate_tracks: bool = True,
 ) -> dict[str, Any]:
     """Build a full trip-data payload from a days-spec + camp + schedule set.
 
-    ``days_spec`` items mirror the original ``DAYS`` list with optional fields:
-      * ``track_segments``: list of ``{mi_lo, mi_hi, reverse}``. If present,
-        takes precedence over the legacy ``mi_lo/mi_hi`` scalar fields when
-        both POIs and the track polyline are computed.
-      * ``poi_names_override``: optional explicit list of POI names for the
-        day. Short-circuits the mile-window POI extraction.
+    ``days_spec`` items support:
+      * ``mi_lo`` / ``mi_hi``: mile window along the main track.
+      * ``track_segments``: list of ``{mi_lo, mi_hi, reverse}``; takes
+        precedence over the scalar window.
       * ``synthetic_pois`` / ``synthetic_track_points``: injected POIs or
-        lat/lon polylines (e.g. May 1–2 highway legs); not copied verbatim into
-        output day dicts — polylines become ``track_points``.
+        lat/lon polylines for highway travel legs that aren't on the route.
     """
     poi_status = poi_status or POI_STATUS
-    day0_stage_names = day0_stage_names or set()
     suppress_names = suppress_names or set()
 
     out_days: list[dict] = []
     for d in days_spec:
         d_copy = {k: v for k, v in d.items() if k not in (
-            'track_segments', 'poi_names_override', 'poi_extra_status', 'synthetic_pois',
-            'synthetic_track_points',
+            'track_segments', 'poi_extra_status', 'synthetic_pois', 'synthetic_track_points',
         )}
 
-        # Determine the segment set: explicit > legacy mi_lo/mi_hi.
-        # `legacy_window` signals the main-trip forward-only case where we
-        # synthesized a single segment from scalar mi_lo/mi_hi; in that mode
-        # POIs keep their absolute master-track mileage so trip_data.json
-        # stays byte-identical to the pre-refactor output.
         segments = d.get('track_segments')
-        legacy_window = False
         if not segments and d.get('mi_lo') is not None and d.get('mi_hi') is not None:
             segments = [{'mi_lo': d['mi_lo'], 'mi_hi': d['mi_hi'], 'reverse': False}]
-            legacy_window = True
         segments = segments or []
 
         # POIs.
         if d.get('synthetic_pois') is not None:
             d_copy['pois'] = [dict(p) for p in d['synthetic_pois']]
-        elif d['id'] == 'day0_travel' or d.get('include_day0_staging_pois'):
-            # Day-0 staging days only surface the pre-mile-0 bonus POIs,
-            # tagged as backup (light blue "bonus if arrive with daylight").
-            poi_list = []
-            for w in route['ordered']:
-                if (w.get('name') or '') in day0_stage_names:
-                    poi_list.append({
-                        'name': w['name'],
-                        'lat': w['lat'], 'lon': w['lon'], 'ele': w.get('ele'),
-                        'mile': round(w.get('mile', 0), 2),
-                        'dist_to_track_m': round(w.get('dist_to_track_m', 0), 1),
-                        'sym': w.get('sym'),
-                        'status': 'backup',
-                        'note': 'May 2 bonus if arrive with daylight',
-                        'desc': (w.get('desc') or '').strip(),
-                    })
-            d_copy['pois'] = poi_list
-        elif d.get('poi_names_override') is not None:
-            # Explicit POI list: emit them in the given order, renumbering
-            # ``mile`` as day-mile (0, 1, 2, ...) so the scheduler leg math
-            # still works. Callers use this for Moab / transit days that
-            # don't map onto the main track.
-            names = d['poi_names_override']
-            poi_list = []
-            for idx, nm in enumerate(names):
-                w_list = route['by_name'].get(nm)
-                if not w_list:
-                    continue
-                w = w_list[0]
-                status_info = (d.get('poi_extra_status') or {}).get(nm) or poi_status.get(nm)
-                poi = _waypoint_to_poi(w, route, float(idx), status_info)
-                if poi is not None:
-                    poi_list.append(poi)
-            d_copy['pois'] = poi_list
         else:
             d_copy['pois'] = pois_for_segments(
                 route, segments, poi_status,
-                suppress_names=day0_stage_names | suppress_names,
+                suppress_names=suppress_names,
                 extra_status=d.get('poi_extra_status'),
-                use_day_mi=not legacy_window,
             )
 
-        # Track polyline for this day (Swell segments, or optional highway polyline).
+        # Track polyline for this day.
         synth = d.get('synthetic_track_points')
         if synth:
             d_copy['track_points'] = [[float(p[0]), float(p[1])] for p in synth]
@@ -463,31 +449,30 @@ def build_payload(
         else:
             d_copy['track_points'] = []
 
+        # Extra polyline drawn alongside the day's main line (e.g. the drive
+        # home on a day that also finishes a stretch of route).
+        extra = d.get('extra_track_points')
+        if extra:
+            d_copy['extra_track_points'] = [[float(p[0]), float(p[1])] for p in extra]
+
         # Camp selection.
         camp_key = d.get('camp_key', d['id'])
-        camp_spec = _resolve_camp(camp_data.get(camp_key), camp_data)
-        d_copy['camps'] = camp_spec or None
+        d_copy['camps'] = _resolve_camp(camp_data.get(camp_key), camp_data) or None
 
         # Schedule annotations (only for days that opt into it).
         sched = schedule_defaults.get(d['id'])
         if sched and d_copy['track_points']:
             first_pt = d_copy['track_points'][0]
-            # ``mi_lo`` here is day-mile = 0 when using the new
-            # segment-based model (POIs are already renumbered), or the
-            # legacy raw-mile offset for the main trip.
-            if d.get('track_segments'):
-                mi_lo = 0.0
-            else:
-                mi_lo = d.get('mi_lo') or 0.0
             d_copy['schedule'] = {
                 'break_camp_time': sched['break_camp'],
                 'moving_mph':      sched['moving_mph'],
                 'start_lat':       first_pt[0],
                 'start_lon':       first_pt[1],
-                'mi_lo':           mi_lo,
+                'mi_lo':           0.0,
             }
             for p in d_copy['pois']:
-                p['default_minutes'] = default_minutes(p['name'], p.get('sym'), p['status'], p.get('note'))
+                p['default_minutes'] = default_minutes(
+                    p['name'], p.get('sym'), p['status'], p.get('note'))
                 p['default_checked'] = DEFAULT_CHECKED_BY_STATUS.get(p['status'], False)
 
         out_days.append(d_copy)
@@ -496,26 +481,16 @@ def build_payload(
         'trip': trip_meta,
         'group_counts': group_counts,
         'days': out_days,
-        'alternate_tracks': (
-            {
-                'devils_racetrack': route.get('devils_racetrack'),
-                'freeway_access': route.get('freeway_access'),
-            }
-            if include_alternate_tracks else {}
-        ),
         'fuel': fuel_plan,
         'realtime_links': realtime_links,
         'generated_at': generated_at,
     }
-    if alternate_tracks is not None:
-        payload['alternate_tracks'] = alternate_tracks
     if intro_html:
         payload['intro_html'] = intro_html
     return payload
 
 
 def write_payload(payload: dict[str, Any], out_path: pathlib.Path) -> None:
-    """Write a payload to disk in the same pretty-printed format as before."""
     out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding='utf-8')
 
 
@@ -525,4 +500,8 @@ def print_payload_summary(payload: dict[str, Any], label: str) -> None:
     for d in days:
         pois = d.get('pois') or []
         tp = d.get('track_points') or []
-        print(f"  {d['id']:22s} {d['label']:55s} pois={len(pois):3d} track_pts={len(tp):5d}")
+        by_status: dict[str, int] = {}
+        for p in pois:
+            by_status[p['status']] = by_status.get(p['status'], 0) + 1
+        bits = ' '.join(f'{k}={v}' for k, v in sorted(by_status.items()))
+        print(f"  {d['id']:18s} {d['label']:46s} pois={len(pois):3d} track={len(tp):5d}  {bits}")
