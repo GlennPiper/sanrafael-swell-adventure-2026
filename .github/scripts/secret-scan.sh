@@ -25,9 +25,13 @@ fi
 # local-only Participants.md roster. Adding names here only matters for the
 # scan -- they never appear in any tracked file.
 #
+# NOTE: this list carries over from the previous trip. Update it with the
+# Washington Cascades roster once the final head count is known; the carried-over
+# entries are harmless (they simply keep being blocked) but they do not protect
+# anyone new.
+#
 # "Glenn" is intentionally omitted: the public site may credit the trip
-# organizer by first name (e.g. moab-trails.html shortlist). Phone and email
-# scans still protect contact info.
+# organizer by first name. Phone and email scans still protect contact info.
 NAMES=(
   "Vahnessa"
   "Helligso"
@@ -50,14 +54,21 @@ NAMES=(
 # Public agency / emergency contacts (allowed to appear in published HTML).
 # We accept each number in three forms: the tel: URL form (with or without
 # +1), the (NNN) NNN-NNNN display form, and the bare NNN-NNN-NNNN form.
+#
+# Keep this in sync with EMERGENCY_CONTACTS and HOSPITALS in
+# scripts/trip_config.py -- those are the only phone numbers the build is
+# allowed to publish.
 ALLOW_NUMBERS=(
-  "4353812404"   # Emery County Sheriff / SAR
-  "4352598115"   # Grand County Sheriff
-  "8018873800"   # Utah Highway Patrol
-  "4356363600"   # BLM Price
-  "4352592100"   # BLM Moab
-  "4352592444"   # Sand Flats Recreation Area (Grand County / fee program)
-  "4352597155"   # Manti-La Sal NF / La Sal Ranger District (public line on trip pages)
+  "5094279490"   # Skamania County Sheriff
+  "3607401105"   # Lewis County dispatch (non-emergency)
+  "5093953402"   # Gifford Pinchot NF - Mt Adams Ranger District (Trout Lake)
+  "3604971103"   # Gifford Pinchot NF - Cowlitz Valley Ranger District (Randle)
+  "3608915000"   # Gifford Pinchot National Forest HQ
+  "3604965112"   # Arbor Health - Morton Hospital (ER)
+  "5094931101"   # Skyline Hospital, White Salmon (ER)
+  "3604963777"   # Arbor Health - Packwood Clinic
+  "3604973333"   # Arbor Health - Randle Clinic
+  "8774446777"   # Recreation.gov reservation line
 )
 
 ALLOW_PHONE_RE=""
