@@ -5,11 +5,11 @@
 # licence -- it must be completely empty or the push will be rejected).
 #
 # Usage:
-#   scripts/migrate_to_new_repo.sh <new-repo-url> [--squash] [--remote NAME]
+#   scripts/migrate_to_new_repo.sh <new-repo-url> [--squash] [--skip-build-check] [--remote NAME]
 #
 # Examples:
-#   scripts/migrate_to_new_repo.sh git@github.com:GlennPiper/wa-cascades-adventure-2026.git
-#   scripts/migrate_to_new_repo.sh https://github.com/GlennPiper/wa-cascades-adventure-2026.git --squash
+#   scripts/migrate_to_new_repo.sh https://github.com/GlennPiper/Washington_Cascades_Adventure_Route_2026.git
+#   scripts/migrate_to_new_repo.sh https://github.com/GlennPiper/Washington_Cascades_Adventure_Route_2026.git --squash
 #
 # Default behaviour keeps the full commit history, which preserves the record of
 # how the app was retargeted from the previous trip. Pass --squash for a single
@@ -26,10 +26,12 @@ note() { printf '%s\n' "${BLD}==>${RST} $*"; }
 NEW_URL=""
 SQUASH=0
 REMOTE_NAME="newrepo"
+SKIP_BUILD=0
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --squash) SQUASH=1; shift ;;
+    --skip-build-check) SKIP_BUILD=1; shift ;;
     --remote) REMOTE_NAME="${2:?--remote needs a value}"; shift 2 ;;
     # Print the leading comment block only: skip the shebang, stop at the first
     # line that isn't a comment.
@@ -57,24 +59,34 @@ echo "    commits:        $(git rev-list --count HEAD)"
 echo "    new remote:     $REMOTE_NAME -> $NEW_URL"
 echo "    history mode:   $([[ $SQUASH -eq 1 ]] && echo 'squash to one initial commit' || echo 'preserve full history')"
 
-# A build must succeed before we hand this to a new repo whose first push
-# triggers a deploy.
-note "Verifying the build runs clean"
-python3 scripts/parse_route_gpx.py    >/dev/null
-python3 scripts/analyze_route.py      >/dev/null
-python3 scripts/build_trip_data.py    >/dev/null
-python3 scripts/build_pwa_icons.py    >/dev/null
-python3 scripts/build_deliverables.py >/dev/null
-SITE_URL="" python3 scripts/build_pwa_assets.py >/dev/null
-echo "    build OK"
+# A build should succeed before we hand this to a new repo whose first push
+# triggers a deploy. This needs the optional build deps, so it degrades to a
+# warning rather than blocking a migration from a machine that lacks them.
+if [[ $SKIP_BUILD -eq 1 ]]; then
+  note "Skipping the build check (--skip-build-check)"
+elif ! python3 -c 'import markdown, PIL' >/dev/null 2>&1; then
+  note "Skipping the build check"
+  printf '%s\n' "    Build deps not installed here. To run it:"
+  printf '%s\n' "      pip install markdown pillow 'qrcode[pil]'"
+  printf '%s\n' "    Safe to skip: CI rebuilds everything from source on push."
+else
+  note "Verifying the build runs clean"
+  python3 scripts/parse_route_gpx.py    >/dev/null
+  python3 scripts/analyze_route.py      >/dev/null
+  python3 scripts/build_trip_data.py    >/dev/null
+  python3 scripts/build_pwa_icons.py    >/dev/null
+  python3 scripts/build_deliverables.py >/dev/null
+  SITE_URL="" python3 scripts/build_pwa_assets.py >/dev/null
+  echo "    build OK"
 
-# The build regenerates tracked HTML; if that produced a diff, the committed
-# deliverables were stale. Surface it rather than pushing a mismatch.
-if [[ -n "$(git status --porcelain)" ]]; then
-  git status --short
-  printf '%s\n' "${YEL}warning:${RST} the build changed tracked files, meaning the committed"
-  printf '%s\n' "         deliverables were stale. Commit these before migrating."
-  exit 1
+  # The build regenerates tracked HTML; if that produced a diff, the committed
+  # deliverables were stale. Surface it rather than pushing a mismatch.
+  if [[ -n "$(git status --porcelain)" ]]; then
+    git status --short
+    printf '%s\n' "${YEL}warning:${RST} the build changed tracked files, meaning the committed"
+    printf '%s\n' "         deliverables were stale. Commit these before migrating."
+    exit 1
+  fi
 fi
 
 # ---- Push ----------------------------------------------------------------
