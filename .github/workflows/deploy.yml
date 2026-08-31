@@ -2,9 +2,7 @@ name: Build and deploy trip site to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
-      - Washington_Cascades_Adventure_Route
+    branches: [main]
   workflow_dispatch:
 
 permissions:
