@@ -553,10 +553,13 @@ def prepare_variant_context(payload):
     for d in payload['days']:
         n_pts = len(d.get('track_points') or [])
         if n_pts > 0:
-            every_n = max(1, n_pts // 120)
-            d['_map_points'] = decimate(d['track_points'], every_n)
+            d['_map_points'] = decimate(d['track_points'], max(1, n_pts // 120))
         else:
             d['_map_points'] = []
+        extra = d.get('extra_track_points') or []
+        # The highway leg is far longer than any route segment, so thin it just
+        # as hard to keep the embedded payload small.
+        d['_map_extra_points'] = decimate(extra, max(1, len(extra) // 120)) if extra else []
     # Overview = full trip, decimated hard (~400 pts total).
     full_track = []
     for d in payload['days']:
@@ -1769,6 +1772,8 @@ def build_itinerary_html(variant=None):
                         })
 
         map_payload[d['id']] = {'track': pts, 'markers': markers}
+        if d.get('_map_extra_points'):
+            map_payload[d['id']]['extra_track'] = d['_map_extra_points']
 
         # Update rolling "previous primary camp" for the next day's origin marker.
         # When primary is a list (multiple equal-rank sites), anchor on the first
@@ -1948,6 +1953,12 @@ function ensureMap(dayId) {{
   if (hasTrack) {{
     const line = L.polyline(spec.track, {{color:'#ff9d45', weight:3}}).addTo(m);
     bounds.extend(line.getBounds());
+  }}
+  // Highway leg on days that also drive to or from the route: dimmer and
+  // dashed so it never reads as part of the trail route.
+  if (spec.extra_track && spec.extra_track.length) {{
+    const hw = L.polyline(spec.extra_track, {{color:'#58a6ff', weight:2, opacity:0.65, dashArray:'6,6'}}).addTo(m);
+    bounds.extend(hw.getBounds());
   }}
   if (!BACKUP_MARKER_REGISTRY[dayId]) BACKUP_MARKER_REGISTRY[dayId] = {{}};
   spec.markers.forEach(mk => {{
