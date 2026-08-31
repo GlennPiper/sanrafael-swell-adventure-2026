@@ -109,10 +109,19 @@ else
 fi
 
 # ---- Next steps ----------------------------------------------------------
-OWNER_REPO="$(printf '%s' "$NEW_URL" \
-  | sed -E 's#^git@github.com:##; s#^https://github.com/##; s#\.git$##')"
-OWNER="${OWNER_REPO%%/*}"
-REPO="${OWNER_REPO##*/}"
+# Only derive github.com URLs when the remote actually is one; a local path or
+# another host would otherwise produce nonsense like https://github.com//tmp/x.
+if [[ "$NEW_URL" =~ ^(git@github\.com:|https://github\.com/)([^/]+)/(.+?)(\.git)?$ ]]; then
+  OWNER="${BASH_REMATCH[2]}"
+  REPO="${BASH_REMATCH[3]%.git}"
+  OWNER_REPO="$OWNER/$REPO"
+else
+  printf '\n%s\n' "${GRN}Pushed.${RST} Remote is not a github.com URL, so the"
+  printf '%s\n' "  usual next steps (enable Pages with Source: GitHub Actions, re-run the"
+  printf '%s\n' "  deploy, then check https://<owner>.github.io/<repo>/) do not apply verbatim."
+  printf '%s\n\n' "  The old remote is untouched."
+  exit 0
+fi
 
 cat <<EOF
 
