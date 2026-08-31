@@ -2453,6 +2453,28 @@ setTimeout(function() {{ startMyLocationWatch(); }}, 800);
     return html_out
 
 
+def _daylight_table_html() -> str:
+    """Sunrise/sunset per trip day, from trip_config.DAYLIGHT."""
+    rows = ''
+    for row in cfg.DAYLIGHT:
+        day = ''
+        for d in data['days']:
+            if d.get('date_iso') == row['date_iso']:
+                day = (d.get('label') or '').split(' - ')[0]
+                break
+        rows += (f'<tr><td>{esc(row["date_iso"])}</td><td>{esc(day)}</td>'
+                 f'<td class="num">{esc(row["sunrise"])}</td>'
+                 f'<td class="num">{esc(row["sunset"])}</td>'
+                 f'<td class="num">{esc(row["hours"])}</td></tr>')
+    return (
+        '<h3>Daylight</h3>'
+        '<table><thead><tr><th>Date</th><th>Day</th><th>Sunrise</th><th>Sunset</th>'
+        '<th>Daylight</th></tr></thead><tbody>' + rows + '</tbody></table>'
+        '<p class="muted">Pacific Daylight Time at the route mid-latitude. '
+        'Regenerate with <code>scripts/daylight_table.py</code>.</p>'
+    )
+
+
 # -----------------------------------------------------------------------------
 # Full REFERENCE HTML (everything in one linear document)
 # -----------------------------------------------------------------------------
@@ -2571,10 +2593,12 @@ def build_reference_html():
             'drop. Fine for careful adults, worth thinking about with kids or dogs.</li>'
             '<li><strong>Northwest Forest Pass</strong> is required to park at most of these '
             'trailheads. Every vehicle needs its own displayed.</li>'
-            '<li><strong>September daylight:</strong> sunset runs about 7:30 PM early in the month and '
-            'drops fast in timbered country. Start long hikes before mid-afternoon.</li>'
+            '<li><strong>September daylight:</strong> see the table below. Usable light in dense '
+            'timber and deep valleys ends well before official sunset, so start the long hikes '
+            'before mid-afternoon.</li>'
             '</ul>'
-            '</div>'
+            + _daylight_table_html()
+            + '</div>'
         )
 
     # Emergency card, driven from trip_config.

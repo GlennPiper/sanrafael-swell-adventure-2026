@@ -163,6 +163,24 @@ SATELLITE_COMMS_NOTE = (
 )
 
 # ---------------------------------------------------------------------------
+# Daylight
+# ---------------------------------------------------------------------------
+# Sunrise/sunset at the route mid-latitude (46.3N, 121.6W) in Pacific Daylight
+# Time, from the NOAA solar position algorithm. Regenerate with
+# scripts/daylight_table.py if the dates or area change.
+#
+# Usable light in dense timber and deep valleys ends noticeably before official
+# sunset, which is why the long hikes carry a "start before mid-afternoon" note.
+DAYLIGHT = [
+    {'date_iso': '2026-09-08', 'sunrise': '06:34', 'sunset': '19:34', 'hours': '13h00m'},
+    {'date_iso': '2026-09-09', 'sunrise': '06:35', 'sunset': '19:33', 'hours': '12h57m'},
+    {'date_iso': '2026-09-10', 'sunrise': '06:37', 'sunset': '19:31', 'hours': '12h54m'},
+    {'date_iso': '2026-09-11', 'sunrise': '06:38', 'sunset': '19:29', 'hours': '12h51m'},
+    {'date_iso': '2026-09-12', 'sunrise': '06:39', 'sunset': '19:27', 'hours': '12h47m'},
+    {'date_iso': '2026-09-13', 'sunrise': '06:40', 'sunset': '19:25', 'hours': '12h44m'},
+]
+
+# ---------------------------------------------------------------------------
 # Permits and passes
 # ---------------------------------------------------------------------------
 PERMITS_NOTE = [
