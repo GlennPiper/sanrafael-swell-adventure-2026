@@ -182,7 +182,8 @@
     if (/snow|sleet|ice|wintry/.test(txt)) {
       out.push('Winter mix possible — check Babyshoe Pass and the High Rock spur, and verify US 12 / White Pass before the drive home.');
     }
-    if (!out.length) out.push('No major automated flags — still check NWS alerts and the fire &amp; closures page.');
+    // Concern strings are HTML-escaped before rendering, so write plain text here.
+    if (!out.length) out.push('No major automated flags — still check NWS alerts and the fire & closures page.');
     return out;
   }
 
