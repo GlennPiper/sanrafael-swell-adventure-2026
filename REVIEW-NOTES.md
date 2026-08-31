@@ -98,20 +98,52 @@ this route.
 
 ---
 
-## 4. Two bugs I found and fixed
+## 4. Bugs I found and fixed
 
-Worth knowing because both would have bitten you in the field:
+Worth knowing because several would have bitten you in the field:
 
 1. **The Saturday camp had no GPX waypoint.** Camps were de-duplicated by location,
    and Panther Creek serves both your first and last night, so it emitted once
    labeled "Sep 8". Anyone navigating from the GPX would have found no pin for their
    final camp. Now reads `[CAMP PRIMARY] Sep 8 (Tue) + Sep 12 (Sat)`.
 
-2. **The offline map was capped at zoom 9** by a hardcoded `maxNativeZoom`. I
+2. **The per-day weather never loaded.** A JavaScript syntax error killed the boot
+   script on the itinerary page, so every day's forecast panel would have sat on
+   "Loading forecasts…" indefinitely. Caused by my own prefix rename landing on a
+   plain string instead of an f-string, which shipped `{cfg.JS_PREFIX}` literally
+   into the page. Found by syntax-checking each inline script block.
+
+3. **The offline map was capped at zoom 9** by a hardcoded `maxNativeZoom`. I
    deepened the cache to zoom 10, which without that fix would have downloaded 35
-   tiles that were never requested. Also: Recreation.gov reports North Fork
-   Campground and North Fork Bear Group Camp at identical coordinates, which was
-   silently deleting one of them.
+   tiles that were never requested.
+
+4. **Leaflet was requesting three images that 404'd.** Its CSS references
+   `images/layers.png` and friends by relative URL, and because the CSS is inlined
+   into the page those resolved against the page path. The layers control was
+   missing its icon and the page wasn't truly self-contained. Now inlined as data
+   URIs, so the map makes zero requests offline.
+
+5. Recreation.gov reports North Fork Campground and North Fork Bear Group Camp at
+   identical coordinates, which was silently deleting one of them.
+
+### Verified in a real browser
+
+I drove all seven pages in headless Chrome. Result: **no JavaScript errors and no
+failed requests on any page**, and all six inline script blocks parse.
+
+- All 7 day tabs render maps with offline tiles, route polylines and markers.
+- Sunday's map correctly shows two lines: solid orange for the loop closure and
+  dashed blue for the drive home.
+- The scheduler moves in both directions and resets: baseline 3:33 PM → uncheck
+  three stops → 2:43 PM → add Council Bluff → 4:40 PM → Reset → 3:33 PM.
+- POI description dialogs open (17 of them on Day 1 alone).
+- Map fullscreen toggles in and out.
+- Live weather fetches: Takhlakh Lake showed 71°F/41°F for Sep 9.
+
+One thing that caught my eye in that live data: **Saturday Sep 12 currently
+forecasts a high of 55°F and a low of 37°F**, a sharp drop from the mid-to-high
+70s earlier in the week. Nine days out that will move, but it is the kind of swing
+worth watching — that is your lava-caves-and-Burley-Mountain day.
 
 ---
 
