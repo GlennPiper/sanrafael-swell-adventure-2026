@@ -233,20 +233,50 @@ then rerun `download_offline_tiles.py`.
 
 ## Deployment
 
-GitHub Actions builds and publishes to GitHub Pages on push to `main` or
-`Washington_Cascades_Adventure_Route`. `SITE_URL` is set by the workflow from the
-repository owner and name and is only used for the QR code, so the artifact itself
-is host-agnostic — every internal link is relative.
-
-**Moving to a different repository:** nothing is hardcoded to the current
-repository name. Add the new remote, push, enable Pages, and update the branch
-trigger in `deploy.yml`. The QR code regenerates against the new URL on the next
-build.
+GitHub Actions builds and publishes to GitHub Pages on push to `main`. `SITE_URL`
+is derived by the workflow from the repository owner and name and is used only for
+the QR code, so the artifact itself is host-agnostic — every internal link is
+relative. Nothing in the source references a repository name.
 
 The deploy stages only the public files into `_publish/`. Source, planning notes
 and the KML Viewer stay out of the published artifact, and a PII guard
 (`.github/scripts/secret-scan.sh`) fails the build if a participant name, an
 email, or a non-allow-listed phone number reaches the output.
+
+### Moving to a new repository
+
+Each trip deserves its own repository, since the published Pages URL is derived
+from the repository name.
+
+1. Create a **completely empty** repo on GitHub — no README, no `.gitignore`, no
+   licence, or the first push is rejected.
+2. Run the migration script from a clean working tree:
+
+```bash
+scripts/migrate_to_new_repo.sh git@github.com:OWNER/NEW-REPO.git
+```
+
+It verifies the tree is clean, runs a full build, and confirms the build produces
+no diff against the committed deliverables — a stale-output check worth having
+before the first push triggers a deploy. Then it pushes to the new remote as
+`main` and prints the remaining steps.
+
+Full history is kept by default, which preserves the record of how the app was
+retargeted. Pass `--squash` for a single initial commit instead; both modes push
+byte-identical file trees, so the choice is purely about `git log`.
+
+3. In the new repo, set **Settings → Pages → Source: GitHub Actions**. The first
+   deploy usually fails at the publish step because Pages was not enabled yet —
+   re-run the workflow afterwards.
+4. Confirm `https://OWNER.github.io/NEW-REPO/` loads and the itinerary map renders.
+   The QR code regenerates against the new URL automatically.
+
+The old repository is left untouched and makes a reasonable archive.
+
+**One caveat if you want an agent to keep working there:** a Cursor agent's token
+is scoped to a single repository, so an agent running against the old repo cannot
+see or push to the new one. Authorize the Cursor GitHub App on the new repository
+and start a fresh agent there.
 
 ---
 
