@@ -2626,9 +2626,9 @@ def build_reference_html():
 <div class="summary-stat"><div class="val">4</div><div class="lab">Days on route</div></div>
 <div class="summary-stat"><div class="val">{cfg.GROUP_COUNTS["vehicles"]}</div><div class="lab">Vehicles</div></div>
 <div class="summary-stat"><div class="val">5</div><div class="lab">Nights out</div></div>
-<div class="summary-stat"><div class="val">745</div><div class="lab">Highway miles r/t</div></div>
+<div class="summary-stat"><div class="val">744</div><div class="lab">Highway miles r/t</div></div>
 </div>
-<p>{esc(data["trip"].get("subtitle") or "")} &mdash; a loop starting and ending in the Columbia River Gorge at Carson, WA.
+<p>{esc(data["trip"].get("subtitle") or "")}, starting and ending in the Columbia River Gorge at Carson, WA.
 Surface is mostly graded Forest Service gravel with paved stretches on US 12, FS 23 and FS 90, plus rough
 narrow spurs to High Rock Lookout, Burley Mountain and Walupt Lake. No water crossings and no technical
 obstacles; the challenges here are distance, fuel range, weather and fire closures rather than terrain.</p>
