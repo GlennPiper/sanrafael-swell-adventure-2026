@@ -8,8 +8,8 @@
 #   scripts/migrate_to_new_repo.sh <new-repo-url> [--squash] [--skip-build-check] [--remote NAME]
 #
 # Examples:
-#   scripts/migrate_to_new_repo.sh https://github.com/GlennPiper/Washington_Cascades_Adventure_Route_2026.git
-#   scripts/migrate_to_new_repo.sh https://github.com/GlennPiper/Washington_Cascades_Adventure_Route_2026.git --squash
+#   scripts/migrate_to_new_repo.sh https://github.com/GlennPiper/washington_cascades_adventure_2026.git
+#   scripts/migrate_to_new_repo.sh https://github.com/GlennPiper/washington_cascades_adventure_2026.git --squash
 #
 # Default behaviour keeps the full commit history, which preserves the record of
 # how the app was retargeted from the previous trip. Pass --squash for a single
