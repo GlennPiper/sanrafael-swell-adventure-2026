@@ -35,9 +35,16 @@ VENDOR_DIR.mkdir(parents=True, exist_ok=True)
 
 # Leaflet assets to inline into the HTML so the map engine itself works offline.
 LEAFLET_VERSION = '1.9.4'
+# leaflet.css references three images by relative URL. Because the CSS is
+# inlined into the HTML, those URLs resolve against the *page* path and 404.
+# We vendor them so build_deliverables.py can rewrite the CSS to data URIs and
+# the map is genuinely self-contained offline.
 LEAFLET_ASSETS = [
     (f'https://unpkg.com/leaflet@{LEAFLET_VERSION}/dist/leaflet.js',  'leaflet.js'),
     (f'https://unpkg.com/leaflet@{LEAFLET_VERSION}/dist/leaflet.css', 'leaflet.css'),
+    (f'https://unpkg.com/leaflet@{LEAFLET_VERSION}/dist/images/layers.png',      'images/layers.png'),
+    (f'https://unpkg.com/leaflet@{LEAFLET_VERSION}/dist/images/layers-2x.png',   'images/layers-2x.png'),
+    (f'https://unpkg.com/leaflet@{LEAFLET_VERSION}/dist/images/marker-icon.png', 'images/marker-icon.png'),
 ]
 
 # Trip bounding box and zoom levels come from trip_config so a new trip only

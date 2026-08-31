@@ -93,8 +93,28 @@ def _read_vendor(name, fallback=''):
     return p.read_text(encoding='utf-8') if p.exists() else fallback
 
 
+def _inline_css_images(css: str) -> str:
+    """Rewrite leaflet.css's relative image URLs to base64 data URIs.
+
+    The CSS is inlined into the HTML, so `url(images/layers.png)` resolves
+    against the page path rather than a stylesheet directory and 404s. Inlining
+    keeps the layers control and default marker working with zero requests,
+    which is the whole point of an offline-first page.
+    """
+    for name in ('layers.png', 'layers-2x.png', 'marker-icon.png'):
+        img = VENDOR_DIR / 'images' / name
+        if not img.exists():
+            print(f'Warning: {img.relative_to(BASE)} missing; '
+                  f'leaflet.css will still request it and 404. '
+                  f'Run scripts/download_offline_tiles.py.')
+            continue
+        uri = 'data:image/png;base64,' + base64.b64encode(img.read_bytes()).decode('ascii')
+        css = css.replace(f'url(images/{name})', f'url({uri})')
+    return css
+
+
 LEAFLET_JS = _read_vendor('leaflet.js')
-LEAFLET_CSS = _read_vendor('leaflet.css')
+LEAFLET_CSS = _inline_css_images(_read_vendor('leaflet.css'))
 
 
 # -----------------------------------------------------------------------------
@@ -1402,12 +1422,17 @@ def build_itinerary_html(variant=None):
         {'variantKey': wkey, 'days': merge_weather_days(wkey, days)},
         ensure_ascii=False,
     )
+    # Every line that interpolates JS_PREFIX must be an f-string. A plain string
+    # here silently ships the literal "{cfg.JS_PREFIX}" into the page, which is a
+    # syntax error that kills the whole block and leaves the per-day forecasts
+    # stuck on "Loading forecasts...".
+    boot_global = f'window.__{cfg.JS_PREFIX}_WEATHER_BOOT__'
     weather_scripts = (
-        f'<script>window.__{cfg.JS_PREFIX}_WEATHER_BOOT__={weather_boot_json};</script>\n'
+        f'<script>{boot_global}={weather_boot_json};</script>\n'
         '<script src="weather-client.js"></script>\n'
         '<script>'
-        'if(window.TripWeather&&window.__{cfg.JS_PREFIX}_WEATHER_BOOT__)'
-        "TripWeather.init(Object.assign({mode:'itinerary'},window.__{cfg.JS_PREFIX}_WEATHER_BOOT__));"
+        f'if(window.TripWeather&&{boot_global})'
+        f"TripWeather.init(Object.assign({{mode:'itinerary'}},{boot_global}));"
         '</script>'
     )
 
