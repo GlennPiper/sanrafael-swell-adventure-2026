@@ -383,8 +383,11 @@ CAMPSITES = {
                 'reserve_url': _RESGOV + '232896',
             },
             {
+                # Recreation.gov reports this facility at the same coordinate as
+                # Bear Group Camp; use the source GPX campground waypoint instead
+                # so the two don't land on top of each other on the map and in GPX.
                 'name': 'North Fork Campground (Recreation.gov 232852)',
-                'lat': 46.45083, 'lon': -121.78778,
+                'lat': 46.45109, 'lon': -121.78760,
                 'status': 'tertiary',
                 'kind': 'developed_reservable',
                 'cost': 'Per-site fee; 7 of 19 sites are first-come',

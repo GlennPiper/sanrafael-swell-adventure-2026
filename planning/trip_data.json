@@ -20695,8 +20695,8 @@
           },
           {
             "name": "North Fork Campground (Recreation.gov 232852)",
-            "lat": 46.45083,
-            "lon": -121.78778,
+            "lat": 46.45109,
+            "lon": -121.7876,
             "status": "tertiary",
             "kind": "developed_reservable",
             "cost": "Per-site fee; 7 of 19 sites are first-come",

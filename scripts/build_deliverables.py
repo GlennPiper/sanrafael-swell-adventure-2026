@@ -2732,9 +2732,26 @@ def build_gpx(variant=None):
                f'<desc>{_gpx_esc(gpx_desc)}</desc>'
                f'<time>{data.get("generated_at", cfg.TRIP_DATE_START)}T00:00:00Z</time></metadata>')
 
+    # Camps first, so a camp reused on more than one night collapses into a
+    # single pin carrying every night it serves. Emitting per-day instead would
+    # either stack duplicate pins at identical coordinates, or -- if deduped
+    # naively -- silently drop the later night's label, which is how the final
+    # night's camp went missing from an earlier build.
+    camp_nights: dict[tuple, dict] = {}
+    for d in data['days']:
+        camps = d.get('camps') or {}
+        for key, idx, total, c in _iter_camp_entries(camps):
+            if not _camp_has_coords(c):
+                continue
+            ck = (round(c['lat'], 5), round(c['lon'], 5), key, idx)
+            entry = camp_nights.setdefault(ck, {'camp': c, 'tier': key, 'idx': idx,
+                                                'total': total, 'nights': []})
+            night = (d.get('label') or '').split(' - ')[0]
+            if night not in entry['nights']:
+                entry['nights'].append(night)
+            entry['total'] = max(entry['total'], total)
+
     # Waypoints: POIs (primary / hike) + campsites (primary/secondary tagged).
-    # Dedupe camps by (lat, lon) so days that reuse a camp don't repeat it.
-    seen_camps = set()
     for d in data['days']:
         for p in (d.get('pois') or []):
             if p['status'] in ('primary', 'hike_candidate', 'conditional', 'backup'):
@@ -2759,47 +2776,39 @@ def build_gpx(variant=None):
                 ]
                 out.append(''.join(x for x in lines if x))
 
-        camps = d.get('camps') or {}
-        tag_base = {'primary': '[CAMP PRIMARY]', 'secondary': '[CAMP BACKUP]', 'tertiary': '[CAMP LAST-RESORT]'}
-        for key, idx, total, c in _iter_camp_entries(camps):
-            if not _camp_has_coords(c):
-                continue
-            camp_key = (round(c['lat'], 5), round(c['lon'], 5), key)
-            if camp_key in seen_camps:
-                continue
-            seen_camps.add(camp_key)
-            tag = tag_base[key]
-            if total > 1:
-                tag = tag[:-1] + f'-{chr(ord("A") + idx - 1)}]'
-            name = f'{tag} {d["label"]} - {c.get("name", "")}'
-            desc = (f'{c.get("cost", "")} | {c.get("facilities", "")} | {c.get("notes", "")} | Access: {c.get("access", "")}').strip(' |')
-            lines = [
-                f'<wpt lat="{c["lat"]}" lon="{c["lon"]}">',
-                f'<name>{_gpx_esc(name)}</name>',
-                f'<desc>{_gpx_esc(desc)}</desc>',
-                '<sym>Campground</sym>',
-                '</wpt>',
-            ]
-            out.append(''.join(lines))
-            # Primary cluster members: emit each as its own waypoint so offline
-            # mapping apps see the full cluster layout, not just the anchor.
-            if key == 'primary' and isinstance(c.get('cluster_members'), list):
-                for m in c['cluster_members']:
-                    if not _camp_has_coords(m):
-                        continue
-                    m_key = (round(m['lat'], 5), round(m['lon'], 5), 'primary_cluster')
-                    if m_key in seen_camps:
-                        continue
-                    seen_camps.add(m_key)
-                    m_name = f'[CAMP PRIMARY-CLUSTER] {d["label"]} - {m.get("name", "")}'
-                    m_desc = f'Designated site in the primary cluster anchored at {c.get("name", "")}'
-                    out.append(''.join([
-                        f'<wpt lat="{m["lat"]}" lon="{m["lon"]}">',
-                        f'<name>{_gpx_esc(m_name)}</name>',
-                        f'<desc>{_gpx_esc(m_desc)}</desc>',
-                        '<sym>Campground</sym>',
-                        '</wpt>',
-                    ]))
+    # Camp waypoints, one per distinct (location, tier), labeled with every
+    # night it covers.
+    tag_base = {'primary': '[CAMP PRIMARY]', 'secondary': '[CAMP BACKUP]',
+                'tertiary': '[CAMP LAST-RESORT]'}
+    for entry in camp_nights.values():
+        c = entry['camp']
+        tag = tag_base[entry['tier']]
+        if entry['total'] > 1:
+            tag = tag[:-1] + f'-{chr(ord("A") + entry["idx"] - 1)}]'
+        nights = ' + '.join(entry['nights'])
+        name = f'{tag} {nights} - {c.get("name", "")}'
+        desc = (f'{c.get("cost", "")} | {c.get("facilities", "")} | '
+                f'{c.get("notes", "")} | Access: {c.get("access", "")}').strip(' |')
+        out.append(''.join([
+            f'<wpt lat="{c["lat"]}" lon="{c["lon"]}">',
+            f'<name>{_gpx_esc(name)}</name>',
+            f'<desc>{_gpx_esc(desc)}</desc>',
+            '<sym>Campground</sym>',
+            '</wpt>',
+        ]))
+        # Cluster members get their own waypoint so offline mapping apps show
+        # the full site layout rather than just the anchor.
+        if entry['tier'] == 'primary' and isinstance(c.get('cluster_members'), list):
+            for m in c['cluster_members']:
+                if not _camp_has_coords(m):
+                    continue
+                out.append(''.join([
+                    f'<wpt lat="{m["lat"]}" lon="{m["lon"]}">',
+                    f'<name>{_gpx_esc("[CAMP PRIMARY-CLUSTER] " + nights + " - " + (m.get("name") or ""))}</name>',
+                    f'<desc>{_gpx_esc("Designated site in the primary cluster anchored at " + (c.get("name") or ""))}</desc>',
+                    '<sym>Campground</sym>',
+                    '</wpt>',
+                ]))
 
     # Tracks: one <trk> per day
     for d in data['days']:
