@@ -142,7 +142,7 @@ wa-cascades-adv-route-2025.gpx
 
 | File | Owns |
 |---|---|
-| `scripts/trip_config.py` | **Trip identity.** Title, dates, source GPX, main track name, map bbox, meet point, agency and hospital contacts, cell dead zones, permits |
+| `scripts/trip_config.py` | **Trip identity.** Title, dates, source GPX, main track name, map bbox, meet point, agency and hospital contacts, cell dead zones, daylight table, gear notes, permits |
 | `scripts/build_trip_data.py` | Day split, campground plan, fuel plan, live-conditions links |
 | `scripts/trip_core.py` | POI catalog (status + note per waypoint), scheduler stop-time defaults, payload assembly |
 | `scripts/build_deliverables.py` | All HTML and GPX generation |
@@ -258,6 +258,10 @@ email, or a non-allow-listed phone number reaches the output.
   `cd "KML Viewer" && npm install && npm run dev`
 - **`scripts/check_availability.py`** — queries live Recreation.gov availability
   for the campgrounds on this route.
+- **`scripts/daylight_table.py`** — regenerates `trip_config.DAYLIGHT` (sunrise,
+  sunset and total daylight per trip day) from the NOAA solar algorithm.
+- **`REVIEW-NOTES.md`** — decisions taken without the trip organiser present,
+  assumptions that need confirming, and the open questions.
 - **`Planning prompt.md`** — the brief this trip was planned from.
 
 ## Not in here

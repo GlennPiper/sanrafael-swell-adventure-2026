@@ -2642,6 +2642,18 @@ def build_reference_html():
     _permit_lis = ''.join(
         f'<li><strong>{esc(t)}</strong>: {esc(b)}</li>' for t, b in cfg.PERMITS_NOTE
     )
+    _gear_lis = ''.join(
+        f'<li><strong>{esc(t)}</strong><div class="muted" style="font-size:13px">{esc(b)}</div></li>'
+        for t, b in cfg.GEAR_NOTES
+    )
+    gear_html = (
+        '<div class="card" id="gear">'
+        '<h2>Trip-specific gear</h2>'
+        '<p class="muted">Not a general camping list &mdash; these are the items this route and '
+        'season make non-obvious, pulled together from the fuel, camping and fire pages.</p>'
+        '<ul class="clean">' + _gear_lis + '</ul>'
+        '</div>'
+    )
     emerg_html = (
         '<div class="card" id="emergency">'
         '<h2>Emergency Contacts &amp; Cell Coverage</h2>'
@@ -2718,6 +2730,8 @@ Top off in Carson without exception.</p>
 {''.join(day_sections)}
 
 {hike_detail}
+
+{gear_html}
 
 {emerg_html}
 

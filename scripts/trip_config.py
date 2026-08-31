@@ -181,6 +181,53 @@ DAYLIGHT = [
 ]
 
 # ---------------------------------------------------------------------------
+# Trip-specific gear
+# ---------------------------------------------------------------------------
+# Deliberately NOT a general camping checklist -- the group knows how to camp.
+# These are the items this particular route and season make non-obvious, several
+# of which are otherwise buried on separate pages.
+GEAR_NOTES = [
+    ('Headlamp per person, plus a backup light and spare batteries',
+     'The Falls Creek Lava Caves are a real lava tube on Day 4: pitch dark, uneven basalt '
+     'floor, cold year round. One shared light for the group is not enough. Gloves and a '
+     'helmet or at minimum a beanie are worth having.'),
+    ('A gas stove, regardless of the forecast',
+     'Gifford Pinchot runs tiered fire restrictions in late summer. Stage 1 allows fires only '
+     'in developed campground rings, which every planned camp has. A Stage 2 order in a dry '
+     'year removes campfires everywhere. Do not plan a meal that depends on a fire.'),
+    ('Bedding rated well below the forecast low',
+     'Takhlakh sits at 4,390 ft and Walupt at 3,927 ft. Frost and near-freezing overnight '
+     'lows are normal in mid-September even when daytime highs are in the 70s.'),
+    ('Rain gear that actually works',
+     'This is the west side of the Cascades. September can be dry or it can rain for three '
+     'days straight.'),
+    ('Northwest Forest Pass, one per vehicle that parks at a trailhead',
+     '$5/day or $30/year. An America the Beautiful pass also covers it. Required at most of '
+     'the trailheads on this route including High Rock, Council Bluff and Falls Creek.'),
+    ('Extra fuel if your usable range is under about 200 forest-road miles',
+     'There is no fuel for 154 miles between Carson and Packwood. Bring a funnel too -- '
+     'both Rotopax and NATO cans pour badly into capless fillers without one.'),
+    ('A saw, and recovery gear you can reach',
+     'Blowdown across a Forest Service road is common in timber and minor roads are not '
+     'cleared quickly. This route has few alternates, so a downed tree can mean backtracking '
+     'a long way.'),
+    ('Shovel and a fire extinguisher or a few gallons of water per vehicle',
+     'Forest orders during fire season frequently require these of anyone driving off '
+     'pavement. Check the current order before departure.'),
+    ('Water for a dry camp',
+     'The developed camps on the plan have potable water, but the primitive High Lakes '
+     'fallbacks (Council, Olallie, Chain of Lakes, Horseshoe, Cat Creek, Chambers) do not.'),
+    ('Tire repair kit and a real spare',
+     'Basalt and pumice on forest roads are hard on sidewalls, and the nearest tire shop is '
+     'Packwood, Randle or Morton.'),
+    ('Small bills',
+     'First-come campground fee tubes and some trailheads take cash.'),
+    ('Satellite device, with the check-in schedule agreed before departure',
+     'Assume zero cellular coverage between Carson and Packwood. Load the emergency contacts '
+     'from this page into it, and make sure someone not on the trip knows the plan.'),
+]
+
+# ---------------------------------------------------------------------------
 # Permits and passes
 # ---------------------------------------------------------------------------
 PERMITS_NOTE = [

@@ -183,11 +183,24 @@ They now show as reference markers contributing zero miles and zero time.
   for next time — including the specific traps, since the whole point of this pass
   was to make trip number three cheap.
 
-## 7. What I would do next, if you want more
+## 7. One thing I added on my own judgement
 
-- Set the real head count and swap the PII roster.
-- Decide Saturday's shape (§1.3), then book (§1.1).
-- Optional: a short packing/gear page. You did not ask for one and I did not
-  presume, but the lava caves need per-person lights, fires may be restricted so a
-  gas stove is mandatory, and the 4,000 ft camps will be near freezing. Those three
-  facts are currently scattered across three pages.
+A **trip-specific gear list**, as a card on the reference page rather than a new
+page — you said you did not want extra pages, and this did not warrant nav clutter.
+
+It is deliberately not a general camping checklist; you know how to camp. It is the
+dozen items this particular route and season make non-obvious, several of which
+were otherwise buried on separate pages: per-person headlamps for the lava caves, a
+gas stove because a Stage 2 fire order would remove campfires entirely, bedding for
+the low 30s at the 4,000 ft camps, a jerry can for small-tank rigs, a saw for
+blowdown, and the Northwest Forest Pass per vehicle. Edit it in
+`scripts/trip_config.py` under `GEAR_NOTES`.
+
+Delete the card if you disagree — it is one entry in the reference page body.
+
+## 8. What I would do next
+
+- Set the real head count and swap the PII roster (§1.2, §1.5).
+- Decide Saturday's shape (§1.3), then book (§1.1). That is the only thing with a
+  clock on it.
+- Preview the live site once the branch deploys, then decide on the repo move (§1.4).
