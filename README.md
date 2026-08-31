@@ -1,362 +1,264 @@
-# 2026 San Rafael Swell Adventure + Moab
+# Washington Cascades Adventure Route — September 8–13, 2026
 
-Trip planning workspace for the **May 1 - 10, 2026** overlanding trip to Utah.
+Trip-planning workspace and an offline-first Progressive Web App for a 325-mile
+overlanding loop through Gifford Pinchot National Forest.
 
-- **11 overlanders** do the San Rafael Swell route (**May 3-6**; **May 1-2** are Boise meet + Bonneville night + staging travel)
-- **7 of those continue** to Moab (May 6-10); rest head back to Boise May 6
-- Route: OTG Crew 225-mi San Rafael Swell Adventure loop
-
-This README is the "where is everything" index. Read it first any time you come back to make changes.
-
----
-
-## For trip participants
-
-The trip companion is a small offline web app -- install it on your phone once
-on cell signal and it works in the Swell with no internet.
-
-**Site:** https://glennpiper.github.io/sanrafael-swell-adventure-2026/
-
-**Scan to install:** see `assets/qr.png` after the first deploy generates it
-(the landing page also displays the QR).
-
-### iPhone / iPad
-
-1. Open the site in **Safari** (must be Safari, not Chrome).
-2. Tap **Share** (the square-with-up-arrow at the bottom).
-3. Tap **Add to Home Screen** -> **Add**.
-4. Open **SRS Trip** from the home screen, then open it once more on cell
-   signal so it can finish caching the maps.
-
-### Android
-
-1. Open the site in **Chrome**.
-2. Tap the menu (three dots) -> **Install app** (or **Add to Home screen**).
-3. Open **SRS Trip** from the home screen, then open it once more on cell
-   signal so it can finish caching the maps.
-
-### Updates
-
-When you make a new release (push to `main`), every installed phone shows a
-small "New trip data available -- tap to reload" toast on its next online
-launch. No app-store review, no manual file shuffling.
-
-### What's in the app
-
-- `trip-itinerary.html` -- tabbed view: **Full route (Swell)** (stitched GPX + all overland stops), then one tab per day with maps, POIs, camps, schedule
-- `trip-reference.html` -- single-page knowledge dump (fuel, emergency,
-  decision matrix, every camp + POI including backups, all real-time links)
-- `slot-canyon-guide.html` -- Day 3 slot/hike detail + links (offline with the PWA)
-- `fuel-plan.html` -- Full fuel worksheet + stations + MPG notes (offline with the PWA)
-- `trip-plan.gpx` -- import into Gaia / CalTopo / Garmin / OnX
+The app is generated. A Python pipeline reads the source route GPX plus the
+planning tables in this repo and writes self-contained HTML with the maps, POIs,
+campgrounds and schedule data baked in, so it works with no cell signal — which
+matters, because there is none between Carson and Packwood.
 
 ---
 
-## Primary deliverables (what the group actually uses)
+## The trip
 
-These live at the **project root** and are regenerated from scripts. Do NOT hand-edit them.
-
-| File | What it is | How to use |
-|---|---|---|
-| `trip-itinerary.html` | Browser view: first tab is the **full Swell route** (combined track + pins); then one tab per day with map, POIs, camps, quick real-time links. Offline-first (maps degrade gracefully if no internet). | Double-click to open in a browser. Share with group. |
-| `trip-reference.html` | Full knowledge dump on one page: overview, fuel, camps (incl. backups), POIs (incl. skips), Day-3 hike decision matrix, emergency info, all real-time sources. | Utilitarian reference; print-friendly. |
-| `slot-canyon-guide.html` | **Generated** from `planning/slot-canyon-guide.md`. Day 3 slot/hike detail + links; precached offline in the PWA. | Linked from itinerary, reference, install page. |
-| `fuel-plan.html` | **Generated** from `planning/fuel_plan.md`. Stations, surface/MPG, per-vehicle worksheet; precached offline in the PWA. | Linked from itinerary, reference, install page. |
-| `trip-plan.gpx` | Route + labeled waypoints for Gaia / CalTopo / Garmin / OnX. 5 tracks (4 day splits + Freeway Access bypass). 59 waypoints tagged `[BACKUP]`, `[HIKE]`, `[CAMP PRIMARY]`, `[CAMP BACKUP]`, `[CAMP LAST-RESORT]`. | Import into your nav app before the trip. |
-
-## Source planning files (the "why" behind each decision)
-
-All inside `planning/`:
-
-| File | Purpose |
+| | |
 |---|---|
-| `poi_decisions.md` | Locked POI triage per day (primary / backup / skip / hike). Includes Day-3 hike decision matrix. |
-| `slot-canyon-guide.md` | Slot canyons + Day 3 hikes — source for **slot-canyon-guide.html** (PWA). |
-| `campsite_plan.md` | Primary / secondary / tertiary camps per night. Built from live availability checks (see `check_availability.py`, `check_moab_availability.py`). |
-| `fuel_plan.md` | Per-vehicle fuel worksheet, route surface breakdown, MPG factors, fuel stops — source for **fuel-plan.html** (PWA). |
-| `realtime_info_sources.md` | NWS point forecasts for each waypoint, UDOT, BLM, fire, water, emergency, and park alert links. |
-| `poi_menu.md` | Original POI candidate list (now superseded by `poi_decisions.md`; retained for context). |
-| `campsite_menu.md` | Original campsite candidate list (now superseded by `campsite_plan.md`). |
-| `trip_data.json` | The single source-of-truth dataset that drives all three deliverables. Generated; do not hand-edit. |
-| `highway_tracks.json` | OSRM highway polylines for paved / transit days — see **`highway_tracks.md`**. |
-| `route_analysis.json` / `route_waypoints.json` / `route_tracks.json` | Intermediate parsed GPX data. Generated. |
-| `moab_availability_raw.txt` / `recgov_*.json` | Raw API responses from live availability checks. |
+| **Route** | 324.8-mile loop, Gifford Pinchot National Forest |
+| **Dates** | Tue Sep 8 – Sun Sep 13, 2026 |
+| **Start / end** | Carson, WA (Columbia River Gorge) → Triangle Pass |
+| **Meet** | Sinclair Stinker Station, 1902 N Franklin Blvd, Nampa ID. Gather 8:00 AM MDT, depart 8:15 |
+| **Group** | ~6 vehicles, no split. Head count TBC |
+| **Highway legs** | 376 mi out, 368 mi back (~7 hr moving each way) |
+| **Fuel on route** | Carson (mi 2), Packwood (mi 156), Randle (mi 217) |
 
-## Source inputs (what we started from)
+### Day split
 
-| File | Purpose |
-|---|---|
-| `san-rafael-swell-adv-route-2025.gpx` | Source route GPX from the OTG Crew (133 waypoints, 3 tracks). |
-| `Utah_Destinations_In_San_Rafael_Area.md` | Raw POI research notes. |
-| `Planning prompt.md` | Original planning ask that seeded this project. |
-| `Participants.md` (gitignored, local only) | Personal roster with phone numbers; never pushed to GitHub. |
-| `Collected Location Info/` (gitignored) | Raw narrative + research source material; not needed by the build pipeline. |
+The split is dictated by where developed campgrounds actually exist. There is an
+85-mile stretch in the middle of the route with nothing established, which forces
+days 3 and 4 to be the long ones.
 
----
-
-## How to regenerate after changes
-
-**Everything flows from `scripts/build_trip_data.py`** - that's where POI status, camps, fuel, and real-time links are defined in code.
-
-### One-liner (full rebuild + verify)
-
-```powershell
-py -m pip install markdown
-py scripts\build_trip_data.py
-py scripts\build_deliverables.py
-py scripts\build_pwa_assets.py
-py scripts\verify_outputs.py
-```
-
-`build_deliverables.py` emits **slot-canyon-guide.html** and **fuel-plan.html** from Markdown in `planning/` (requires the `markdown` package). Run **`build_pwa_assets.py` after** `build_deliverables.py` so the service worker precache includes both pages.
-
-First-time setup also requires populating the offline map assets (runs once; idempotent thereafter):
-
-```powershell
-py scripts\download_offline_tiles.py
-```
-
-### Full publish-style rebuild (matches the CI flow)
-
-```powershell
-py -m pip install pillow "qrcode[pil]" markdown
-py scripts\build_trip_data.py
-py scripts\build_pwa_icons.py
-py scripts\build_deliverables.py
-$env:SITE_URL = "https://YOURUSER.github.io/YOURREPO"   # optional: for QR
-py scripts\build_pwa_assets.py
-```
-
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs these steps (deliverables **before** PWA assets so `slot-canyon-guide.html` and `fuel-plan.html` are precached), then the secret-scan PII guard on `_publish/`, then GitHub Pages.
-
-### Script-by-script
-
-| Script | Reads | Writes | When to run |
+| Day | Route miles | Distance | Camp |
 |---|---|---|---|
-| `scripts/parse_route_gpx.py` | `san-rafael-swell-adv-route-2025.gpx` | `planning/route_waypoints.json`, `planning/route_tracks.json` | Only if the source GPX changes |
-| `scripts/analyze_route.py` | `planning/route_*.json` | `planning/route_analysis.json` (waypoints ordered along track with mile + off-track distance) | Only if parsed GPX changes |
-| `scripts/check_availability.py` | (live Recreation.gov API) | `planning/recgov_*.json`, console output | Anytime we want to re-check Swell campground status |
-| `scripts/check_moab_availability.py` | (live Recreation.gov API) | `planning/moab_availability_raw.txt` | Anytime we want to re-check Moab camp status |
-| **`scripts/build_trip_data.py`** | `planning/route_analysis.json`, `planning/route_tracks.json`, `planning/highway_tracks.json` + hardcoded `POI_STATUS` + `CAMPSITES` + `FUEL_PLAN_SUMMARY` + `REALTIME_LINKS` + `GROUP_COUNTS` | `planning/trip_data.json` | Anytime a POI, camp, link, or count changes |
-| **`scripts/build_deliverables.py`** | `planning/trip_data.json`, `planning/slot-canyon-guide.md`, `planning/fuel_plan.md` | `trip-itinerary.html`, `trip-reference.html`, `trip-plan.gpx`, **`slot-canyon-guide.html`**, **`fuel-plan.html`** | After `build_trip_data.py`; needs `pip install markdown` |
-| `scripts/build_pwa_assets.py` | `planning/trip_data.json`, those two `.md` files, env `SITE_URL` | `manifest.webmanifest`, `service-worker.js`, `robots.txt`, `assets/qr.png` | **After** `build_deliverables.py` (precache includes both standalone pages) |
-| `scripts/build_pwa_icons.py` | `assets/icon-source.svg` | `icons/icon-192.png`, `icon-512.png`, `icon-512-maskable.png`, `apple-touch-icon.png` | Whenever the icon source changes |
-| `scripts/verify_outputs.py` | deliverables | console output | Sanity check (HTML balance, GPX parse, waypoint / track counts) |
+| Tue Sep 8 | travel | 376 mi highway | Panther Creek CG |
+| Wed Sep 9 | 0 → 84.5 | 85 mi | **Takhlakh Lake CG** |
+| Thu Sep 10 | 84.5 → 133.5 | 49 mi | Walupt Lake CG |
+| Fri Sep 11 | 133.5 → 226.5 | 93 mi | **North Fork Elk Group Camp** |
+| Sat Sep 12 | 226.5 → 308.5 | 82 mi | Panther Creek CG |
+| Sun Sep 13 | 308.5 → 324.8 | 16 mi + 368 mi home | — |
 
-The bold scripts are the two you'll touch 95% of the time.
-
----
-
-## Common change recipes
-
-### Change a POI's status (primary -> skip, etc.)
-
-Edit `POI_STATUS` dict in `scripts/build_trip_data.py`. Keys are the exact waypoint names from the GPX (prefixed with `DP - ` for most). Values are `(status, note)` tuples where status is one of:
-
-- `'primary'` - scheduled stop
-- `'backup'` - fallback / bonus if time allows
-- `'skip'` - intentionally not stopping (kept documented so we know we considered it)
-- `'hike_candidate'` - **Hike (tactical)** on the itinerary (Day 3: Wild Horse Window, Chute Canyon, Crack Canyon — checked by default; uncheck skips)
-- `'conditional'` - stop only if a condition is met (rare)
-
-Then rebuild. The status flows to:
-- The HTML daily tabs (primary table / backup table / skip list)
-- GPX waypoint name prefix (`[BACKUP]`, `[HIKE]`, etc.)
-- `poi_decisions.md` is **not** auto-updated - if you want that file to stay canonical, update it by hand too (it's human-readable narrative; the script data is the source of truth for deliverables).
-
-### Change a campsite
-
-Edit `CAMPSITES` dict in `scripts/build_trip_data.py`. Each day key maps to `{primary, secondary, tertiary}` each with fields `name, lat, lon, kind, cost, facilities, notes, access, reserve_url (optional)`.
-
-**Coordinate sourcing rule (important):** For any Swell overnight, **snap `lat`/`lon` to an actual `<sym>campsite-24</sym>` waypoint in `san-rafael-swell-adv-route-2025.gpx`** rather than estimating. The GPX has 67 mapped camp waypoints. Quick way to list them:
-
-```powershell
-py -c "import xml.etree.ElementTree as ET; ns={'g':'http://www.topografix.com/GPX/1/1'}; [print(f\"{w.find('g:name',ns).text:<40s} {w.get('lat')},{w.get('lon')}\") for w in ET.parse('san-rafael-swell-adv-route-2025.gpx').getroot().findall('g:wpt',ns) if (w.find('g:sym',ns) is not None and (w.find('g:sym',ns).text or '')=='campsite-24')]"
-```
-
-After editing, spot-check that each primary camp is within ~4 km of the relevant day's track start (Day 0) or end (Day 1-3) by rebuilding and opening the itinerary map. The camp should appear inside the day's map extent with no long leader line to the route. Moab-area camps aren't on the overland track; real ReserveAmerica / Recreation.gov coords are fine there.
-
-For a Moab day that shares camps with another day, use `{'inherit': 'day5_moab'}`.
-
-Then rebuild.
-
-### Change fuel data (new station, different MPG factor)
-
-Edit `FUEL_PLAN_SUMMARY` dict in `scripts/build_trip_data.py` for the embedded / HTML version. Edit `planning/fuel_plan.md` for the full per-vehicle worksheet (manually, not generated).
-
-### Update highway / OSRM polylines (May 1–2, Moab transit, return)
-
-See **`planning/highway_tracks.md`**. Edit `planning/highway_tracks.json` (or regenerate geometry via OSRM), then rebuild. Main-trip wiring is in `_attach_main_highway_tracks()` in `scripts/build_trip_data.py`; alternates wire the same keys in `scripts/alts/alt_*.py`.
-
-### Update the group counts
-
-Edit `GROUP_COUNTS` in `scripts/build_trip_data.py` (overland / moab integers). The deliverables show counts only, never names. Keep `Participants.md` (gitignored, local only) in sync by hand for your own reference.
-
-### Add a new real-time info link
-
-Edit `REALTIME_LINKS` list in `scripts/build_trip_data.py`. Category shows up as a heading in the reference doc.
-
-### Refresh live camp availability
-
-```powershell
-py scripts\check_availability.py         # Swell BLM campgrounds
-py scripts\check_moab_availability.py    # Moab-area campgrounds
-```
-
-These hit the Recreation.gov public API (no auth required) and print availability per target date. Outputs are informational - if availability changes significantly, update `CAMPSITES` in `build_trip_data.py` and rebuild.
-
-### Change day structure / add a rest day / resize a window
-
-Edit the `DAYS` list in `scripts/build_trip_data.py`. `mi_lo` / `mi_hi` defines what section of the main track and which waypoints (by mile) belong to each overland day. Also update `CAMPSITES` keys to match any new day IDs.
-
-### Tune the on-page scheduler (break-camp time, driving speed, stop durations)
-
-The itinerary's per-day scheduler (checkboxes, ETA column, camp ETA) is driven by three knobs in `scripts/build_trip_data.py`:
-
-- `SCHEDULE_DEFAULTS` (per day): `break_camp` time and `moving_mph` (pure driving speed, no stops folded in). Only the days listed here get a scheduler UI - today that's `day1_swell` through `day4_swell`. Add a key to enable scheduling on another day (needs a sliced track and POIs to be useful).
-- `DEFAULT_CHECKED_BY_STATUS`: which POI statuses are checked by default. Primary / hike_candidate / conditional are on; backups off.
-- `_default_minutes(name, sym, status, note)`: seeds the "Stop (min)" input for each POI. Tune special cases at the top (by name), then fall back to symbol-based defaults. Changes only affect *default* values - users can override inline on the page, and their edits are saved in `localStorage` per day.
-- `POI_SPUR_OVERRIDES` (per POI name): round-trip miles saved if the POI is un-checked. Used for out-and-back spurs where the main track drives in and back out to reach the POI; skipping the stop avoids the full detour, not just the dwell time. Currently set for `DP - Red Canyon` (15.3 mi) and `DP - Hidden Splendor Overlook` (19.7 mi). See "Audit spurs" below.
-
-On the page itself, each scheduled day has a `Reset day` button that clears its localStorage entry (`sched-v1-<dayId>`) and restores the defaults from the freshly rebuilt HTML. The scheduler math: each leg = `|mile_delta| + 2 * off_track_m / 1609` at `moving_mph`; if any POI between the previous and current included stop has `spur_mi > 0` and was un-checked, that value is subtracted from the leg (capped at zero). Camp ETA = straight-line haversine from last included stop * 1.3 winding factor (spur savings do not cascade into the camp leg).
-
-### Audit spurs (which primary POIs add meaningful detour miles?)
-
-```powershell
-py scripts\spur_audit.py
-```
-
-Scans the unified 225-mile track and, for each primary / hike_candidate / conditional POI, detects whether the track goes out and doubles back to reach it (an out-and-back spur). Prints one row per POI with detected spur length in miles; POIs with spur ≥ 2 mi are flagged with `*`. The tail of the output calls out specific POIs of interest (see the `targets` list inside the script).
-
-Use the printed "Spur length" values to populate `POI_SPUR_OVERRIDES` in `scripts/build_trip_data.py`, then rebuild. The auto-detection is a heuristic (pinches at 60 m tolerance, 25 mi search window) — it handles clean out-and-back spurs well, but you should eyeball the GPX before trusting big numbers (loops and braided tracks can mis-detect).
-
-### POI description pop-ups
-
-Every POI that has a `<desc>` element in `san-rafael-swell-adv-route-2025.gpx` (27 of them, ranging from one-liner hints like "Large/tall vehicles may have issues fitting through the tunnel" to multi-paragraph descriptions of Wedge Overlook, Head of Sinbad, etc.) gets a small document-icon button next to its name in both `trip-itinerary.html` and `trip-reference.html`. Click it to open a native `<dialog>` showing the full description plus mile, type, off-track distance, and a Google Maps link. Works fully offline (all descriptions are embedded into the page as a JS object at build time).
-
-To add or edit descriptions, edit the `<desc>` elements directly in the source GPX and rebuild — `parse_route_gpx.py -> build_trip_data.py -> build_deliverables.py` will thread them through automatically.
+> **Nothing is booked.** See [`planning/camping_plan.md`](planning/camping_plan.md)
+> for the Recreation.gov availability snapshot and the booking priority order.
+> Friday and Saturday are a weekend and most of the forest is already full on
+> those nights.
 
 ---
 
-## Pre-trip action items (time-sensitive)
+## What gets built
 
-These must be done by **a human** - they require a real reservation or phone call:
+| Output | What it is |
+|---|---|
+| `index.html` | Landing page with per-platform install instructions and a QR code |
+| `trip-itinerary.html` | **The main app.** Tabbed day-by-day itinerary with Leaflet maps, POI tables, campground cards, and a live arrival-time scheduler |
+| `trip-reference.html` | Everything in one linear document: overview, live links, fuel, every day, hikes, emergency contacts, permits |
+| `camping-plan.html` | Booking priority order and availability snapshot |
+| `fuel-plan.html` | Station list, the two fuel gaps, per-vehicle range worksheet |
+| `fire-and-closures.html` | Go/no-go page: forest alerts, restriction stages, smoke thresholds |
+| `weather.html` | Dual NWS + Open-Meteo forecast for every camp |
+| `trip-plan.gpx` | Derived route with day-split tracks and labeled camps, for Gaia / onX / CalTopo / Garmin |
+| `manifest.webmanifest`, `service-worker.js`, `icons/*` | PWA plumbing (generated, gitignored) |
 
-1. **Coordinate Sand Flats cluster camping May 6–9, 2026** — Multiple adjacent first-come/first-served sites in Sand Flats (no Ken’s Lake group reservation). Aim for midday arrivals on turnover-heavy days so the group can snag neighboring pads (two rigs per pad only where space allows).
+### The itinerary page in more detail
 
-2. **Reserve Dead Horse Point SP - Wingate Loop (1 standard electric site) for May 7, 8, 9** (optional backup — skip if staying entirely in Sand Flats or other picks)
-   - [utahstateparks.reserveamerica.com](https://utahstateparks.reserveamerica.com)
-   - $60/night * 3 nights = ~$180 total, max 8 people / site (we have 7)
+Each day tab carries a Leaflet map, the day's stops in route-mile order, and the
+campground options for that night ranked primary / secondary / tertiary.
 
-3. **Circulate the per-vehicle fuel worksheet** in `planning/fuel_plan.md`. Each driver fills in their baseline MPG, tank capacity, aux fuel, and the resulting "can do 255 mi @ 11 MPG?" verdict. Share the filled-in table so the group knows who has aux capacity.
+The **arrival-time scheduler** is the part worth understanding. Each stop has a
+checkbox and an editable stop duration. Given a break-camp time and a moving
+speed, the page computes a running ETA down the day and an arrival time at camp,
+and persists your edits to `localStorage`. Hikes deliberately start **unchecked**
+so the day's estimate begins as driving-only; you tick the ones you want and watch
+the arrival time move. That is the entire point — it turns "can we fit this?" into
+a number.
 
-4. **Confirm at least one satellite messenger** (Garmin InReach / Zoleo / SPOT) is active for the Swell portion, with a non-traveling emergency contact.
+POI statuses drive the badges and the scheduler defaults:
 
-5. **Check Arches NP timed-entry reservation requirements** for May 6-9, 2026, at [recreation.gov/timed-entry/10089519](https://www.recreation.gov/timed-entry/10089519) - if active, reserve.
+| Status | Meaning | Checked by default |
+|---|---|---|
+| `primary` | Planned stop | yes |
+| `hike_candidate` | Hike or activity to triage | no |
+| `backup` | Lower-priority option | no |
+| `landmark` | A distant peak marker, not a place you drive to | no, and contributes zero miles |
+| `logistics` | Fuel and services | no |
+| `skip` | Excluded (usually a trailhead that duplicates its destination) | n/a |
 
-6. **Morning of May 1 or May 2** - run the pre-trip checklist in `planning/realtime_info_sources.md` (NWS forecasts, flash-flood watches, UDOT, fire restrictions, stream gauges).
+`landmark` exists because the source GPX marks Mount Rainier, Mount Adams, Mount
+St Helens and Gilbert Peak as waypoints 5–13 miles off the track. Without a status
+that zeroes their offset, the scheduler would cheerfully add a 25-mile round trip
+to go visit the summit of Rainier.
 
 ---
 
-## Environment & tooling
+## Build it
 
-- Python 3.10+ required. The core build pipeline (`build_trip_data.py`, `build_deliverables.py`, `download_offline_tiles.py`, `verify_outputs.py`) uses only the stdlib (`json`, `xml.etree.ElementTree`, `urllib.request`, `pathlib`, `math`, `html`, `base64`, `re`).
-- The PWA scripts add two optional deps:
-  - `scripts/build_pwa_icons.py` -- needs `pillow`.
-  - `scripts/build_pwa_assets.py` -- needs `qrcode[pil]` (only for the QR code; manifest / service worker / robots are written without it).
-  - Install both: `pip install pillow "qrcode[pil]"`. CI installs them automatically.
-- Windows PowerShell is the expected shell (all commands use `py` launcher).
-- No virtual env required.
-- **Leaflet + offline tiles are bundled into `trip-itinerary.html`.** See "Offline map assets" below.
+Requires Python 3.10+.
 
----
+```bash
+pip install markdown pillow "qrcode[pil]"
 
-## Offline map assets (map works with zero internet)
-
-`trip-itinerary.html` is fully self-contained for offline use:
-
-1. **Leaflet 1.9.4 JS + CSS are inlined** into the HTML (from `planning/vendor/leaflet/`). The map engine loads without any CDN request.
-2. **A low-res OpenStreetMap tile cache is base64-embedded** into the HTML (from `planning/offline_tiles/`). It covers the full trip bounding box (~38.25 to 39.35 N, -111.30 to -109.10 W) at zoom levels 7-9, about 22 tiles, ~430 KB base64. At higher zooms Leaflet auto-stretches the zoom-9 tile into a pixelated-but-recognizable background.
-3. **When online, Esri Topo / Satellite / Street tiles render on top** of the offline baseline. Failed Esri tiles are set to a transparent PNG so the low-res background shows through offline.
-4. The layer control (top-right of each map) exposes both the three Esri base layers and the always-on offline baseline.
-
-To (re)populate the caches:
-
-```powershell
-py scripts\download_offline_tiles.py
-py scripts\build_deliverables.py
+python scripts/download_offline_tiles.py   # once; also vendors Leaflet
+python scripts/fetch_highway_tracks.py     # once; needs network (OSRM)
+python scripts/parse_route_gpx.py
+python scripts/analyze_route.py
+python scripts/build_trip_data.py
+python scripts/build_pwa_icons.py
+python scripts/build_deliverables.py
+python scripts/build_pwa_assets.py
 ```
 
-The download script is idempotent (skips files already on disk), rate-limits at ~1 tile/sec per OSM's usage policy, and uses a descriptive `User-Agent`. If the bbox or zoom range in `scripts/download_offline_tiles.py` changes, delete `planning/offline_tiles/` to force a fresh fetch.
+Then preview:
 
-Attribution: offline tiles are OpenStreetMap raster tiles; the Leaflet map renders the required `© OpenStreetMap contributors (cached)` credit in the attribution control. Online Esri tiles render their own attribution when active.
+```bash
+python -m http.server 8899
+# open http://localhost:8899/index.html
+```
+
+A plain `file://` open mostly works, but service workers and the PWA install
+prompt need to be served over HTTP.
+
+### Pipeline shape
+
+```
+wa-cascades-adv-route-2025.gpx
+  │
+  ├─ parse_route_gpx.py ──► planning/route_waypoints.json
+  │                          planning/route_tracks.json
+  │                          planning/waypoint_sym_counts.json
+  │
+  ├─ analyze_route.py ────► planning/route_analysis.json   (waypoints + route mile)
+  │
+  ├─ fetch_highway_tracks.py ► planning/highway_tracks.json (OSRM, travel days)
+  │
+  ├─ build_trip_data.py ──► planning/trip_data.json         ◄── the single payload
+  │       reads trip_config.py + trip_core.py                    everything renders from
+  │
+  ├─ build_deliverables.py ► *.html + trip-plan.gpx
+  │       + planning/*.md for the companion pages
+  │
+  └─ build_pwa_assets.py ─► manifest, service worker, robots, QR
+```
+
+### Which file owns what
+
+| File | Owns |
+|---|---|
+| `scripts/trip_config.py` | **Trip identity.** Title, dates, source GPX, main track name, map bbox, meet point, agency and hospital contacts, cell dead zones, permits |
+| `scripts/build_trip_data.py` | Day split, campground plan, fuel plan, live-conditions links |
+| `scripts/trip_core.py` | POI catalog (status + note per waypoint), scheduler stop-time defaults, payload assembly |
+| `scripts/build_deliverables.py` | All HTML and GPX generation |
+| `planning/*.md` | Source text for the companion pages |
+| `planning/weather_forecast_points.json` | One forecast point per day, placed at each night's camp |
 
 ---
 
-## Scripts directory map
+## Retargeting to a new trip
 
-Current-use scripts (the ones above). The rest in `scripts/` are legacy one-off data-collection scripts from earlier phases of this project (Google Takeout extraction, Overpass / Nominatim geocoding, etc.) - kept for provenance but no longer part of the active pipeline.
+This has been done once (San Rafael Swell 2026 → Washington Cascades 2026), and
+the pipeline was refactored during it specifically to make the next one easier.
+Work in this order.
 
-Safe to ignore unless re-doing the raw-data pull:
-- `extract_places.py`, `clean_places.py`, `match_takeout.py`, `filter_*_by_area.py`
-- `geocode_*.py`, `validate_geocodes.py`, `complete_coords.py`, `patch_outliers.py`
-- `overpass_*.py`, `nominatim_*.py`
-- `md_to_kml_gpx.py`, `generate_outputs.py`
-- `build_poi_menu.py`, `build_campsite_menu.py` (superseded by the decision-locked versions in the pipeline)
+**1. Drop in the new source GPX** at the repo root.
+
+**2. Edit `scripts/trip_config.py`.** This is most of the work:
+
+- `TRIP_TITLE`, `TRIP_DATES_HUMAN`, `TRIP_DATE_START` / `_END`
+- `JS_PREFIX` — change it. It namespaces `localStorage` and the service-worker
+  cache, so reusing the old prefix lets a phone with the previous trip installed
+  serve stale pages.
+- `ROUTE_GPX_FILENAME`, `MAIN_TRACK_NAME` (must match a `<trk><name>` exactly),
+  `IGNORED_TRACK_NAMES`
+- `TILE_BBOX`, `MAP_FALLBACK_CENTER`
+- `NWS_ALERT_AREA` — the two-letter state for the live alerts strip
+- `MEET_POINT`, `ROUTE_START`, `ROUTE_END`, `GROUP_COUNTS`
+- `EMERGENCY_CONTACTS`, `HOSPITALS`, `CELL_DEAD_ZONES`, `PERMITS_NOTE`
+
+**3. Run parse and analyze**, then read the output. `analyze_route.py` prints
+every waypoint with its route mile, which is exactly what you need to choose day
+boundaries and spot the campground gaps:
+
+```bash
+python scripts/parse_route_gpx.py && python scripts/analyze_route.py
+```
+
+**4. Write the POI catalog** in `scripts/trip_core.py`. Keys must match the GPX
+`<name>` byte-for-byte, typos included. Waypoints with `sym` of `campsite-24` are
+dropped automatically since campgrounds are handled separately. Use `POI_RENAME`
+for generic duplicate names (the three waypoints all called "Gas Station"), and
+update `default_minutes()` with stop budgets for the new stops.
+
+**5. Write the day split, camps, fuel and links** in `scripts/build_trip_data.py`.
+Day mile windows come from the analyze output. Check live campground availability
+before committing to a split — it constrained this trip's split more than terrain did:
+
+```bash
+python scripts/check_availability.py
+```
+
+**6. Rewrite `planning/*.md`** for the companion pages, and delete or add pages by
+editing the `pages` list in `write_planning_markdown_pages()` plus the nav list in
+`_top_nav_html()`, both in `build_deliverables.py`.
+
+**7. Regenerate `planning/weather_forecast_points.json`** — one entry per day,
+with `day_id` matching the day ids in `build_trip_data.py`.
+
+**8. Update by hand:**
+- `index.html` — title, tagline, and the button list. It is static, not generated.
+- `.github/scripts/secret-scan.sh` — the `ALLOW_NUMBERS` allow-list must contain
+  every public phone number in `trip_config.py`, or the deploy fails. Also refresh
+  the participant `NAMES` list for the new roster.
+- `.github/workflows/deploy.yml` — the staged file list and the branch trigger.
+
+**9. Re-download offline tiles** for the new bbox: `rm -rf planning/offline_tiles`
+then rerun `download_offline_tiles.py`.
+
+### Things that will bite you
+
+- **`MAIN_TRACK_NAME` must match exactly.** Both parse and analyze fail loudly if
+  it does not, which is deliberate.
+- **Any waypoint far off the track needs `landmark` status**, or it wrecks the
+  scheduler's mileage.
+- **The secret scan runs on the published output, not the source.** A new phone
+  number in `trip_config.py` that is not in the allow-list fails the deploy.
+- **Offline tiles are coarse on purpose.** Zooms 7–9 only, about 420 KB, because
+  they get base64-embedded into the HTML. They are for orientation. Real
+  navigation is the GPX in a proper mapping app. Adding zoom 10 roughly quadruples
+  the page weight.
+- **`generated_at` in `build_trip_data.py`** feeds the service-worker cache
+  version. Bump it when shipping changes to the group.
 
 ---
 
-## At-a-glance summary
+## Deployment
 
-```
-root/
-  README.md                         <-- you are here
-  index.html                        <-- LANDING + INSTALL INSTRUCTIONS (PWA entry)
-  trip-itinerary.html               <-- DAILY VIEW (primary deliverable)
-  trip-reference.html               <-- FULL REFERENCE (primary deliverable)
-  trip-plan.gpx                     <-- NAV DATA (primary deliverable)
-  Planning prompt.md
-  san-rafael-swell-adv-route-2025.gpx  (source GPX from the OTG Crew)
-  Utah_Destinations_In_San_Rafael_Area.md
+GitHub Actions builds and publishes to GitHub Pages on push to `main` or
+`Washington_Cascades_Adventure_Route`. `SITE_URL` is set by the workflow from the
+repository owner and name and is only used for the QR code, so the artifact itself
+is host-agnostic — every internal link is relative.
 
-  assets/icon-source.svg            <-- icon source (rasterized by build_pwa_icons.py)
-  manifest.webmanifest              <-- GENERATED (gitignored; built by CI)
-  service-worker.js                 <-- GENERATED (gitignored; built by CI)
-  robots.txt                        <-- GENERATED (gitignored; built by CI)
-  icons/*.png                       <-- GENERATED (gitignored; built by CI)
-  assets/qr.png                     <-- GENERATED (gitignored; built by CI)
+**Moving to a different repository:** nothing is hardcoded to the current
+repository name. Add the new remote, push, enable Pages, and update the branch
+trigger in `deploy.yml`. The QR code regenerates against the new URL on the next
+build.
 
-  .github/workflows/deploy.yml      <-- Pages deploy + secret-scan on every push to main
-  .github/scripts/secret-scan.sh    <-- PII guard run against the staged publish dir
+The deploy stages only the public files into `_publish/`. Source, planning notes
+and the KML Viewer stay out of the published artifact, and a PII guard
+(`.github/scripts/secret-scan.sh`) fails the build if a participant name, an
+email, or a non-allow-listed phone number reaches the output.
 
-  Participants.md          (gitignored - local-only personal roster)
-  Collected Location Info/ (gitignored - raw narrative + research)
-  Takeout/                 (gitignored - Google Maps Takeout dump)
+---
 
-  planning/
-    poi_decisions.md                <-- locked POI triage (human-readable)
-    campsite_plan.md                <-- locked camps (human-readable)
-    fuel_plan.md                    <-- per-vehicle fuel worksheet
-    realtime_info_sources.md        <-- every live-data link in one place
-    trip_data.json                  <-- GENERATED source-of-truth
-    route_*.json                    <-- GENERATED intermediate
-    offline_tiles/{z}/{x}/{y}.png   <-- GENERATED OSM tiles for offline map
-    vendor/leaflet/{leaflet.js,.css}<-- GENERATED local Leaflet bundle
-    poi_menu.md / campsite_menu.md  <-- earlier drafts, kept for context
+## Also in here
 
-  scripts/
-    build_trip_data.py              <-- *** main edit point for data changes ***
-    build_deliverables.py           <-- HTML + GPX generator
-    build_pwa_assets.py             <-- manifest + service-worker + robots + QR
-    build_pwa_icons.py              <-- rasterize assets/icon-source.svg -> icons/*.png
-    download_offline_tiles.py       <-- one-time: cache OSM tiles + Leaflet locally
-    spur_audit.py                   <-- detect out-and-back spurs in the GPX
-    verify_outputs.py               <-- sanity check
-    check_availability.py           <-- Swell live availability
-    check_moab_availability.py      <-- Moab live availability
-    parse_route_gpx.py              <-- parse source GPX
-    analyze_route.py                <-- project waypoints onto track
-    ... legacy scripts ...
-```
+- **`KML Viewer/`** — a standalone React + Vite tool for previewing KML/KMZ/GPX
+  files locally. Not part of the trip site and not deployed. Genuinely useful when
+  you get handed a new route file and want to look at it before wiring it in.
+  `cd "KML Viewer" && npm install && npm run dev`
+- **`scripts/check_availability.py`** — queries live Recreation.gov availability
+  for the campgrounds on this route.
+- **`Planning prompt.md`** — the brief this trip was planned from.
 
-To rebuild everything: `py scripts\build_trip_data.py && py scripts\build_deliverables.py && py scripts\verify_outputs.py`
+## Not in here
+
+Gitignored: `Participants.md` (names, phone numbers, rig details), the generated
+PWA files (`manifest.webmanifest`, `service-worker.js`, `robots.txt`, `icons/*.png`,
+`assets/qr.png`), and `_publish/`. CI regenerates all of it.

@@ -1,22 +1,78 @@
-I am leading an overlanding trip in the San Rafael Swell area in Utah.   We now have a basic route, and many, many points of interest, defined in @san-rafael-swell-adv-route-2025.gpx and @Utah_Destinations_In_San_RaSfael_Area.md 
+I am leading an overlanding trip on the **Washington Cascades Adventure Route**, a loop
+through Gifford Pinchot National Forest in southern Washington. We have a route and a large
+set of points of interest defined in @wa-cascades-adv-route-2025.gpx (106 waypoints, a
+324.8-mile main track, plus a Pimlico Road / FS 7807 track we are **not** using).
 
-We will **meet in Boise** at **Albertsons / Sinclair on Federal Way** on **May 1** (gather **noon–1:00 PM**, **depart by 1:00 PM**), then overnight dispersed near the **Bonneville Salt Flats**. On **May 2** we continue toward the Swell and stage at **Black Dragon** (fuel in **Green River**). We overland **May 3 - 5**, with our final campsite of that trek on the evening of **May 5**. On **May 6**, some people leave the San Rafael Swell area to head back to Boise, the rest drive to Moab and find camp in or near Moab. Again, find the campsite well before dark so we can stay flexible on dispersed sites (or reserve — see Moab research). We camp in Moab **May 6 through the morning of May 10**, then leave early for Boise.
-
+We **meet in Nampa, Idaho** at the **Sinclair Stinker Station, 1902 N Franklin Blvd** on
+**September 8, 2026** (gather **8:00 AM MDT**, **depart by 8:15 AM**), and drive to the
+Columbia River Gorge to camp near the route start at Carson. We overland the loop
+**September 9 through 12**, and drive home **Sunday September 13**. The group is not
+splitting this time — roughly 6 vehicles, head count to be confirmed.
 
 We need to do several things:
-- verify the overland route through the San Rafael Swell area is understood, and is open for travel.
-- If we can find sources online for checking things like closures, fires, extreme weather warnings, etc, we should do so, and we will want to show those links in our documentation.
-- Pick primary campsites for each night along the overland route.  Then, pick secondary campsites in case they are not available  or do not have space for the entire group.  Then, compile a list of alternative options in each area as last-ditch fall-back locations in case both options are not available.
-  * The gpx has suggested campsite areas. We are not limited to these, but they are some recommended locations.  We need to take travel time into account, and be sure we have time to get to each campsite, while still being able to see other things.  We need to get through the overlanding route defined in the GPX in the days allowed.
-- Pick a list of stops and points of interest along the route that we will stop at. We need to budget our time to allow for these, and to allow for enough time at each as appropriate.  We should work together to define a list of primary points for each day, but also suggested backups in case of unexpecded issues, or the group would prefer something other that one of our primary choices. 
-- We should generate a HTML document, with each day's plans grouped together. If the HTML file can show a map section with that day's route and stops, that would be a bonus.  We probably should design it to show one day at a time, via a tab control or something, so that it is easier to view.  It would be best if this HTML page did not need an active internet connection to be viewed. (If the map requires internet, but the rest does not, that is acceptable)
-This HTML file will be for convenient viewing of each day's plans. If we found real-time warning sites (i.e. for road closures or weather, etc) we should try to integrate those. Obviously, these would require internet access to fuction, but they shuold not hinder the use of the page if we are offline.
-- We should have another HTML file that lists ALL of the details we decided, including the backup locations.  This does not need to only show one day at a time, it may be more utilitarian, as it will be our knowledge dump and reference document for if that is needed.
-- we should create a gpx file that contains our route and the primary options, and our first-order backup campsites.  The backup campsites should be labeled as backups. 
-- We need to plan gas usage. Where we can fill up, how many miles we need to go between fill-ups, and what kind of MPG impacts we anticipate between them (i.e. highway vs local paved roads, vs dirt roads, vs 2-track or rough trails), as these will affect how much gas we need to carry.
 
-As you review and plan our actions, please try not to make assumptions, but ask if you need more information from me, and feel free to make suggestions for any other actions we may wish to consider doing.
+- Verify the route is understood and open for travel. September is the tail of fire season,
+  so forest orders, road closures and area closures are the real risk on this trip rather
+  than terrain.
+- Find and surface live sources for closures, fires, smoke, and extreme weather, and show
+  those links in the documentation. Fire and smoke deserve their own page.
+- Pick primary campsites for each night, then secondary options in case the primary is full
+  or cannot hold the group, then a last-ditch fallback list per area. Prefer **established
+  campgrounds** where possible.
+  * The GPX marks 49 campsite waypoints. We are not limited to these, but they are a starting
+    point. Take travel time into account so we can reach camp with daylight while still seeing
+    things along the way, and still finish the route in the days available.
+  * Six vehicles is the binding constraint: ordinary Forest Service sites hold one or two
+    rigs, so we need group sites or several adjacent sites. Check live availability before
+    committing to a day split.
+- Pick the stops and points of interest we will actually make, budgeting time for each.
+  Define primary stops per day plus backups for unexpected issues or if the group prefers
+  something else. Treat hikes as ordinary points of interest to triage rather than a
+  separate category — we do not have fixed hike plans.
+- Generate an HTML document with each day's plans grouped together, showing one day at a time
+  via tabs, with a map of that day's route and stops. It must be usable without an internet
+  connection. (If the map needs internet but the rest does not, that is acceptable.)
+  Integrate the real-time warning sources where possible; they obviously need connectivity,
+  but they must not hinder offline use.
+- Generate a second HTML file listing **all** the details we decided, including backups. This
+  one does not need day-at-a-time behaviour — it is the knowledge dump and reference.
+- Create a GPX containing our route, the primary stops, and the first-order backup campsites,
+  with the backups labeled as such.
+- Plan fuel: where we can fill up, how far between fill-ups, and expected MPG impact by
+  surface (highway, paved local, gravel, rough two-track). Only three stations sit on this
+  route, and there is a long gap in the middle, so this matters more than the total burn.
 
+As you review and plan, please try not to make assumptions — ask if you need more information,
+and feel free to suggest other actions worth considering.
 
+---
 
+## What was decided
 
+Recorded here so the reasoning survives. See `README.md` for how the app is built and
+`planning/` for the detail.
+
+**Day split.** Four route days at 85 / 49 / 93 / 82 miles. The shape is dictated by
+campground placement, not by preference: developed campgrounds cluster from route mile 34 to
+141, then there is an 85-mile stretch with nothing established until North Fork at 226. That
+forces days 3 and 4 to be the long ones. Day 3 is the longest at 93 miles but a good share of
+it is paved US 12, so it moves faster than the number suggests.
+
+**Why Takhlakh Lake on Wednesday.** It is the signature camp of the area — Mount Adams
+reflected in the lake — and Recreation.gov showed 22 sites open on Wednesday September 9 but
+**zero** on Friday or Saturday. The whole split is arranged around reaching it midweek.
+
+**Why North Fork Elk Group Camp on Friday.** Friday and Saturday are a weekend and the forest
+is largely booked. Elk Group is a single reservable group site, which is the right shape for
+six vehicles, and it was open on both weekend nights when almost nothing else was.
+
+**Pages built.** Itinerary, reference, camping plan, fuel plan, weather, and fire/closures.
+Dropped from the previous trip: alternate route variants, and the hazard-specific pages
+(river crossing, slot canyons) which have no equivalent here. Fire and closures replaces them
+as the trip's go/no-go page.
+
+**Hikes default to unchecked** in the arrival-time scheduler, so each day's estimate starts as
+driving-only and the group opts in and watches the ETA move.
+
+**Open items.** Nothing is booked. Final head count unknown. Whether to close the last 16
+miles of loop on Sunday morning or drive straight home is a decision for the night before.
