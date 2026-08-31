@@ -1,12 +1,12 @@
 /**
  * Dual-source trip weather (NWS grid forecast + Open-Meteo) with localStorage cache.
- * Init via SRSWeather.init(opts) from itinerary or weather.html.
+ * Init via TripWeather.init(opts) from itinerary or weather.html.
  */
 (function (global) {
   'use strict';
 
   var TZ = 'America/Denver';
-  var CACHE_PREFIX = 'srs-weather-cache-v1-';
+  var CACHE_PREFIX = 'wca-weather-cache-v1-';
   var TTL_MS = 90 * 60 * 1000;
   var NWS_DELAY_MS = 150;
 
@@ -37,9 +37,6 @@
     return 'https://forecast.weather.gov/MapClick.php?lat=' + lat + '&lon=' + lon;
   }
 
-  function wuMoabUrl() {
-    return 'https://www.wunderground.com/weather/us/ut/moab';
-  }
 
   function openMeteoDocsUrl() {
     return 'https://open-meteo.com/en/docs';
@@ -162,30 +159,30 @@
     if (om && om.pop != null) pop = om.pop;
     if (pop == null && nws && nws.pop != null) pop = nws.pop;
     if (pop != null && pop >= 40) {
-      out.push('Elevated rain chance (' + pop + '%) — slot canyons / flash-flood awareness if hiking.');
+      out.push('Elevated rain chance (' + pop + '%) — gravel turns greasy and the lookout spurs get slick.');
     }
     var wind = null;
     if (om && om.windMph != null) wind = om.windMph;
     if (wind == null && nws && nws.windMph != null) wind = nws.windMph;
     if (wind != null && wind >= 25) {
-      out.push('Breezy / windy (to ~' + Math.round(wind) + ' mph) — exposed rims and dust on dirt roads.');
+      out.push('Breezy / windy (to ~' + Math.round(wind) + ' mph) — watch for falling limbs in timber and exposure at the lookouts.');
     }
     var hi = null;
     if (om && om.hi != null) hi = om.hi;
     if (hi == null && nws && nws.hi != null) hi = nws.hi;
-    if (hi != null && hi >= 95) out.push('Very hot daytime — extra water and engine cooling slack.');
+    if (hi != null && hi >= 90) out.push('Hot daytime — extra water, and expect high fire danger and possible restrictions.');
     var lo = null;
     if (om && om.lo != null) lo = om.lo;
     if (lo == null && nws && nws.lo != null) lo = nws.lo;
-    if (lo != null && lo <= 32) out.push('Near or below freezing overnight — layer for camp.');
+    if (lo != null && lo <= 36) out.push('Near or below freezing overnight — normal for the 4,000 ft camps in September. Bring a real sleeping bag and expect frost on the tents.');
     var txt = ((nws && nws.shortForecast) || '').toLowerCase();
     if (/thunder|t-storm|lightning/.test(txt)) {
-      out.push('Thunder risk in NWS wording — avoid high/exposed slots and standing water.');
+      out.push('Thunder risk in NWS wording — get off the exposed lookouts (High Rock, Burley, Council Bluff) and out of the lava caves.');
     }
     if (/snow|sleet|ice|wintry/.test(txt)) {
-      out.push('Winter mix possible — verify passes (I-70) if traveling.');
+      out.push('Winter mix possible — check Babyshoe Pass and the High Rock spur, and verify US 12 / White Pass before the drive home.');
     }
-    if (!out.length) out.push('No major automated flags — check NWS alerts and slot guide before hikes.');
+    if (!out.length) out.push('No major automated flags — still check NWS alerts and the fire &amp; closures page.');
     return out;
   }
 
@@ -208,11 +205,6 @@
     if (o && o.windMph != null) return Number(o.windMph);
     if (n && n.windMph != null) return n.windMph;
     return null;
-  }
-
-  function isMoabCorridor(lat, lon) {
-    if (lat == null || lon == null) return false;
-    return lat >= 37.5 && lat <= 39.5 && lon >= -111.5 && lon <= -108.5;
   }
 
   function teaserText(n, o) {
@@ -325,11 +317,6 @@
       '<a href="' + esc(nwsHref) + '" target="_blank" rel="noopener">NWS point forecast</a>',
       '<a href="' + esc(openMeteoDocsUrl()) + '" target="_blank" rel="noopener">Open-Meteo docs</a>',
     ];
-    if (isMoabCorridor(row.lat, row.lon)) {
-      linkBits.push(
-        '<a href="' + esc(wuMoabUrl()) + '" target="_blank" rel="noopener">WU Moab (manual)</a>'
-      );
-    }
     var linkRow = '<p class="wx-link-row">' + linkBits.join(' · ') + '</p>';
 
     var nwsFull =
@@ -595,5 +582,5 @@
     });
   }
 
-  global.SRSWeather = { init: init };
+  global.TripWeather = { init: init };
 })(typeof window !== 'undefined' ? window : this);

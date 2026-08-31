@@ -10,9 +10,8 @@
 The ``BUILD_VERSION`` baked into ``service-worker.js`` is the cache namespace.
 Bumping it forces installed clients to re-download on next visit. We derive it
 from ``planning/trip_data.json`` (``generated_at`` + content hash) **and** the
-Markdown sources for standalone PWA pages (slot, fuel, overland alternates,
-alt itineraries), plus ``river-crossing.html``, ``moab-camping.html``, and ``moab-trails.html``, so
-edits invalidate the cache even when ``trip_data.json`` is unchanged.
+Markdown sources for the standalone PWA pages, so edits invalidate the cache
+even when ``trip_data.json`` is unchanged.
 
 The site's public URL is read from the ``SITE_URL`` env var (set by the GitHub
 Actions workflow). For local builds we fall back to a sensible
@@ -28,8 +27,15 @@ import hashlib
 import json
 import os
 import pathlib
+import sys
 
-BASE = pathlib.Path(__file__).resolve().parent.parent
+_SCRIPTS = pathlib.Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+import trip_config as cfg  # noqa: E402
+
+BASE = _SCRIPTS.parent
 PLAN = BASE / 'planning'
 ASSETS = BASE / 'assets'
 
@@ -39,12 +45,12 @@ SW_OUT = BASE / 'service-worker.js'
 ROBOTS_OUT = BASE / 'robots.txt'
 QR_OUT = ASSETS / 'qr.png'
 
-APP_NAME = '2026 San Rafael Swell Adventure'
-APP_SHORT = 'SRS Trip'
-APP_DESC = (
-    'Offline trip itinerary, route, camps, and reference for the May 1-10, 2026 '
-    'San Rafael Swell + Moab overlanding adventure.'
-)
+APP_NAME = f'{cfg.TRIP_TITLE} {cfg.TRIP_DATE_START[:4]}'
+# Cache namespace prefix. Distinct per trip so a phone that still has the
+# previous trip's PWA installed can't serve its cached pages for this one.
+CACHE_SLUG = cfg.JS_PREFIX.lower() + '-trip'
+APP_SHORT = cfg.PWA_SHORT_NAME
+APP_DESC = cfg.META_DESCRIPTION
 THEME_COLOR = '#0d1117'
 BACKGROUND_COLOR = '#0d1117'
 
@@ -52,51 +58,21 @@ SITE_URL = os.environ.get('SITE_URL', '').rstrip('/')
 
 
 def _build_version() -> str:
-    """Cache namespace = trip_data*.json + planning markdown sources for standalone pages.
+    """Cache namespace = trip_data.json + the sources of every standalone page.
 
-    Now includes the alternate-itinerary JSON payloads (trip_data_alt_*.json)
-    so edits to any alternate route -- new POIs, camp changes, re-split days --
-    invalidate installed PWAs even when the main trip_data.json is unchanged.
+    Anything that can change the shipped HTML without touching trip_data.json
+    needs to be hashed here, otherwise installed PWAs keep serving stale pages.
     """
     raw = TRIP_DATA.read_bytes() if TRIP_DATA.exists() else b'no-data'
-    alt_json_names = (
-        'trip_data_alt_a.json',
-        'trip_data_alt_b.json',
-        'trip_data_alt_d.json',
-    )
-    alt_raw = b''
-    for name in alt_json_names:
-        p = PLAN / name
-        alt_raw += p.read_bytes() if p.exists() else b''
-    extra_md_names = (
-        'slot-canyon-guide.md',
-        'fuel_plan.md',
-        'overland_alternates.md',
-        'trip-itinerary-alt-a.md',
-        'trip-itinerary-alt-b.md',
-        'trip-itinerary-alt-d.md',
-    )
     extra_raw = b''
-    for name in extra_md_names:
-        p = PLAN / name
-        extra_raw += p.read_bytes() if p.exists() else b''
-    # Standalone HTML not emitted from markdown (must bump SW when edited).
-    extra_html_names = (
-        'river-crossing.html',
-        'moab-camping.html',
-        'moab-trails.html',
-        'moab-hells-revenge-guide.html',
-        'weather.html',
-        'weather-client.js',
-    )
-    for name in extra_html_names:
-        p = BASE / name
-        extra_raw += p.read_bytes() if p.exists() else b''
-    hw_tracks = PLAN / 'highway_tracks.json'
-    extra_raw += hw_tracks.read_bytes() if hw_tracks.exists() else b''
-    wf = PLAN / 'weather_forecast_points.json'
-    extra_raw += wf.read_bytes() if wf.exists() else b''
-    short = hashlib.sha1(raw + alt_raw + extra_raw).hexdigest()[:10]
+    for name in ('fuel_plan.md', 'fire_and_closures.md', 'camping_plan.md',
+                 'weather_forecast_points.json', 'highway_tracks.json'):
+        pth = PLAN / name
+        extra_raw += pth.read_bytes() if pth.exists() else b''
+    for name in ('weather.html', 'weather-client.js', 'index.html'):
+        pth = BASE / name
+        extra_raw += pth.read_bytes() if pth.exists() else b''
+    short = hashlib.sha1(raw + extra_raw).hexdigest()[:10]
     try:
         gen = json.loads(raw.decode('utf-8')).get('generated_at', '')
     except Exception:
@@ -115,22 +91,12 @@ PRECACHE = [
     'index.html',
     'trip-itinerary.html',
     'trip-reference.html',
-    'slot-canyon-guide.html',
     'fuel-plan.html',
-    'overland-alternates.html',
-    'river-crossing.html',
-    'moab-camping.html',
-    'moab-trails.html',
-    'moab-hells-revenge-guide.html',
+    'fire-and-closures.html',
+    'camping-plan.html',
     'weather.html',
     'weather-client.js',
-    'trip-itinerary-alt-a.html',
-    'trip-itinerary-alt-b.html',
-    'trip-itinerary-alt-d.html',
     'trip-plan.gpx',
-    'trip-plan-alt-a.gpx',
-    'trip-plan-alt-b.gpx',
-    'trip-plan-alt-d.gpx',
     'manifest.webmanifest',
     'icons/icon-192.png',
     'icons/icon-512.png',
@@ -182,14 +148,21 @@ def write_manifest() -> None:
             {
                 'name': 'Trip weather',
                 'short_name': 'Weather',
-                'description': 'Dual forecast table and route variant switcher',
+                'description': 'Dual NWS and Open-Meteo forecast for every camp',
                 'url': './weather.html',
+                'icons': [{'src': 'icons/icon-192.png', 'sizes': '192x192', 'type': 'image/png'}],
+            },
+            {
+                'name': 'Fire & closures',
+                'short_name': 'Fire',
+                'description': 'Go/no-go checks: forest alerts, restrictions, smoke',
+                'url': './fire-and-closures.html',
                 'icons': [{'src': 'icons/icon-192.png', 'sizes': '192x192', 'type': 'image/png'}],
             },
             {
                 'name': 'Full reference',
                 'short_name': 'Reference',
-                'description': 'Camps, fuel, links, and knowledge dump',
+                'description': 'Camps, fuel, hikes, emergency contacts, links',
                 'url': './trip-reference.html',
                 'icons': [{'src': 'icons/icon-192.png', 'sizes': '192x192', 'type': 'image/png'}],
             },
@@ -204,11 +177,12 @@ def write_manifest() -> None:
 
 def write_service_worker() -> None:
     precache_js = json.dumps(PRECACHE, indent=2)
+    cache_slug = CACHE_SLUG
     sw = f"""// Generated by scripts/build_pwa_assets.py -- do not hand-edit.
 // Bump BUILD_VERSION (auto, derived from trip_data.json) to force a refresh on installed clients.
 
 const BUILD_VERSION = {json.dumps(BUILD_VERSION)};
-const CACHE_NAME = 'srs-trip-' + BUILD_VERSION;
+const CACHE_NAME = '{cache_slug}-' + BUILD_VERSION;
 const PRECACHE = {precache_js};
 
 self.addEventListener('install', (event) => {{

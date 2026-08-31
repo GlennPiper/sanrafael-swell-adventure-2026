@@ -22,18 +22,28 @@ import math
 import pathlib
 import sys
 
-BASE = pathlib.Path(__file__).resolve().parent.parent
+_SCRIPTS = pathlib.Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+import trip_config as cfg  # noqa: E402
+
+BASE = _SCRIPTS.parent
 ICONS = BASE / 'icons'
 
+# Cascade palette: cold blue sky, snow-capped volcanic cones, evergreen
+# foreground, warm route line so it reads at 192px.
 THEME_COLOR = (13, 17, 23, 255)         # matches build_pwa_assets.THEME_COLOR (#0d1117)
-SKY_TOP = (28, 35, 48, 255)
+SKY_TOP = (26, 42, 60, 255)
 SKY_BOTTOM = (13, 17, 23, 255)
-REEF_TOP = (210, 105, 30, 255)
-REEF_BOTTOM = (139, 58, 15, 255)
-SUN_CORE = (255, 213, 107, 255)
-SUN_EDGE = (241, 162, 58, 255)
-ROUTE_COLOR = (245, 194, 82, 255)
-TEXT_COLOR = (245, 194, 82, 255)
+PEAK_TOP = (226, 236, 245, 255)         # snowfield
+PEAK_BOTTOM = (74, 105, 132, 255)       # shadowed rock
+FOREST_TOP = (32, 78, 62, 255)
+FOREST_BOTTOM = (16, 38, 30, 255)
+SUN_CORE = (255, 235, 186, 255)
+SUN_EDGE = (150, 190, 220, 255)
+ROUTE_COLOR = (245, 176, 82, 255)
+TEXT_COLOR = (226, 236, 245, 255)
 
 
 def _ensure_pil():
@@ -91,15 +101,15 @@ def _scale_polygon(points_512, size):
 
 
 def _draw_route(draw, size):
-    """Bezier-ish route line tracing across the reef, drawn as a polyline."""
+    """The loop route, drawn as a polyline across the forest foreground."""
     s = size / 512
     # Sample points along the same curve that the SVG path uses.
     samples = []
     # Approximate two cubic-ish segments with manual sampling.
     ctrl_pts = [
-        (70, 420), (130, 380), (170, 360), (210, 350),
-        (250, 340), (290, 320), (330, 330),
-        (370, 340), (410, 360), (450, 380),
+        (60, 452), (120, 436), (170, 424), (215, 420),
+        (258, 416), (300, 410), (338, 416),
+        (378, 422), (418, 434), (458, 448),
     ]
     for i in range(0, len(ctrl_pts) - 3, 3):
         p0, p1, p2, p3 = ctrl_pts[i: i + 4]
@@ -145,7 +155,7 @@ def _draw_year(draw, size):
     s = size / 512
     font_px = max(10, int(round(34 * s)))
     font = _load_font(font_px)
-    text = '2026'
+    text = cfg.TRIP_DATE_START[:4]
     try:
         bbox = draw.textbbox((0, 0), text, font=font, stroke_width=0)
         tw = bbox[2] - bbox[0]
@@ -172,21 +182,39 @@ def _render_icon(size):
 
     draw = ImageDraw.Draw(img, 'RGBA')
 
-    # Reef silhouette: gradient fill via two-step trick (paint solid then
-    # overlay vertical gradient masked by the polygon shape).
-    reef_pts = [
-        (56, 400), (110, 300), (150, 360), (200, 250), (240, 330),
-        (280, 220), (320, 310), (360, 260), (400, 340), (456, 300),
-        (456, 470), (56, 470),
+    # Three volcanic cones for the peaks the route circles: St Helens (left,
+    # blunt since the 1980 eruption), Rainier (centre, tallest), Adams (right,
+    # broad and flat-topped). Gradient fill via a polygon mask.
+    cone_pts = [
+        (30, 400),
+        (96, 300), (120, 288), (150, 300),          # Mount St Helens
+        (196, 372),
+        (250, 250), (256, 240), (262, 250),         # Mount Rainier
+        (318, 366),
+        (368, 292), (392, 282), (404, 288), (420, 300),  # Mount Adams
+        (482, 400),
     ]
-    reef_poly = _scale_polygon(reef_pts, size)
-
-    # Build a mask the size of the bounding box of the reef and paint a
-    # gradient inside it.
+    cone_poly = _scale_polygon(cone_pts, size)
     mask = Image.new('L', (size, size), 0)
-    ImageDraw.Draw(mask).polygon(reef_poly, fill=255)
-    grad = _vertical_gradient(size, REEF_TOP, REEF_BOTTOM)
+    ImageDraw.Draw(mask).polygon(cone_poly, fill=255)
+    grad = _vertical_gradient(size, PEAK_TOP, PEAK_BOTTOM)
     img.paste(grad, (0, 0), mask)
+
+    # Evergreen foreground band with a ragged treeline, so the cones read as
+    # distant and the route line has something to sit on.
+    tree_pts = [(30, 470), (482, 470), (482, 396)]
+    x = 482
+    up = True
+    while x > 30:
+        step = int(18 * (1 if up else 1))
+        x -= step
+        tree_pts.append((x, 380 if up else 404))
+        up = not up
+    tree_poly = _scale_polygon(tree_pts, size)
+    tmask = Image.new('L', (size, size), 0)
+    ImageDraw.Draw(tmask).polygon(tree_poly, fill=255)
+    tgrad = _vertical_gradient(size, FOREST_TOP, FOREST_BOTTOM)
+    img.paste(tgrad, (0, 0), tmask)
 
     _draw_route(draw, size)
     _draw_year(draw, size)

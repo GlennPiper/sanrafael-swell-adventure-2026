@@ -11,21 +11,33 @@ import base64
 import html
 import json
 import pathlib
+import sys
 
-BASE = pathlib.Path(__file__).resolve().parent.parent
+_SCRIPTS = pathlib.Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+import trip_config as cfg  # noqa: E402
+
+BASE = _SCRIPTS.parent
 PLAN = BASE / 'planning'
 OUT_DIR = BASE
 TILE_DIR = PLAN / 'offline_tiles'
 VENDOR_DIR = PLAN / 'vendor' / 'leaflet'
 
 # -----------------------------------------------------------------------------
-# Variant registry: main itinerary + three alternates. Each variant loads its
-# own trip_data*.json and renders trip-itinerary*.html + trip-plan*.gpx. The
-# main variant is the only one that emits trip-reference.html; alternates share
-# the main reference (same POI catalog, same fuel plan, same emergency info).
+# Variant registry. This trip has a single itinerary; the list is kept so the
+# render loop stays generic if a future trip needs alternates again.
+# All trip-identity strings come from trip_config.
 # -----------------------------------------------------------------------------
 MAIN_DATA_PATH = PLAN / 'trip_data.json'
 MAIN_GPX_FILENAME = 'trip-plan.gpx'
+
+_HEADER_META = (
+    f'{cfg.TRIP_DATES_HUMAN} &middot; '
+    f'{cfg.GROUP_COUNTS["vehicles"]} vehicles &middot; '
+    f'Route: ~325 mi loop'
+)
 
 VARIANT_MAIN = {
     'key':                'main',
@@ -33,91 +45,27 @@ VARIANT_MAIN = {
     'html_path':          OUT_DIR / 'trip-itinerary.html',
     'gpx_path':           OUT_DIR / 'trip-plan.gpx',
     'gpx_filename':       'trip-plan.gpx',
-    'page_title':         '2026 San Rafael Swell + Moab - Itinerary',
-    'header_h1':          '2026 San Rafael Swell Adventure + Moab',
-    'header_meta':        'May 1 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi',
+    'page_title':         f'{cfg.TRIP_TITLE} - Itinerary',
+    'header_h1':          cfg.TRIP_TITLE,
+    'header_meta':        _HEADER_META,
     'nav_key':            'itinerary',
     'show_reference_link': True,
-    'overview_title':     'Full San Rafael Swell route',
+    'overview_title':     'Full route (325 mi loop)',
     'overview_desc_html': (
-        'Stitched <strong>GPX driving corridor</strong> (Day 1 through Day 4 AM segments) '
-        'plus <strong>travel + overland POIs and camps</strong> (rows marked <em>skip</em> in data are omitted). '
-        'Highway travel (May 1 meet + Bonneville, May 2 staging) and the return leg are not '
-        'part of this polyline \u2014 '
-        'use per-day tabs for those.'
+        'The stitched <strong>GPX driving corridor</strong> for all four route days, plus every '
+        '<strong>POI and campground</strong> along it. The Sep 8 drive out from Nampa and the '
+        'Sep 13 drive home are highway legs, not part of this polyline \u2014 '
+        'use the per-day tabs for those.'
     ),
-    'gpx_metadata_name':  '2026 San Rafael Swell Trip Plan',
-    'gpx_metadata_desc':  'Day-split tracks, primary POIs, and primary/backup campsites for the May 1-10, 2026 trip.',
+    'gpx_metadata_name':  f'{cfg.TRIP_TITLE} Trip Plan',
+    'gpx_metadata_desc':  (
+        f'Day-split tracks, POIs, and primary/backup campgrounds for the '
+        f'{cfg.TRIP_DATES_HUMAN} trip.'
+    ),
     'weather_key':        'main',
 }
 
-VARIANT_ALT_A = {
-    'key':                'alt-a',
-    'data_path':          PLAN / 'trip_data_alt_a.json',
-    'html_path':          OUT_DIR / 'trip-itinerary-alt-a.html',
-    'gpx_path':           OUT_DIR / 'trip-plan-alt-a.gpx',
-    'gpx_filename':       'trip-plan-alt-a.gpx',
-    'page_title':         'Alt A - 2026 SRS Itinerary (forward, 4-day, V2)',
-    'header_h1':          'Alt A - 2026 San Rafael Swell Adventure + Moab',
-    'header_meta':        'May 1 - May 10, 2026 &middot; Variant A-V2 (forward, 4-day Swell lighten) &middot; 11 overlanders + 7 Moab',
-    'nav_key':            'alt-a',
-    'show_reference_link': True,
-    'overview_title':     'Full Swell route (Alt A)',
-    'overview_desc_html': (
-        'Same direction as the main plan but with <strong>Day 2 shortened</strong> to end at Family Butte. '
-        'Reds / Lucky Strike / Hondu / Hidden Splendor roll to Day 3; Chute/Crack/LWH slots and the '
-        'Sinbad cluster move to <strong>May 6</strong> for stay-overs. Extra Swell night, Moab <strong>May 7</strong>.'
-    ),
-    'gpx_metadata_name':  '2026 SRS Trip Plan - Alt A (forward, V2)',
-    'gpx_metadata_desc':  'Day-split tracks, POIs, and camps for Alt A (forward direction, 4-day Swell lighten, Variant V2).',
-    'weather_key':        'alt-a',
-}
-
-VARIANT_ALT_B = {
-    'key':                'alt-b',
-    'data_path':          PLAN / 'trip_data_alt_b.json',
-    'html_path':          OUT_DIR / 'trip-itinerary-alt-b.html',
-    'gpx_path':           OUT_DIR / 'trip-plan-alt-b.gpx',
-    'gpx_filename':       'trip-plan-alt-b.gpx',
-    'page_title':         'Alt B - 2026 SRS Itinerary (reverse, V1)',
-    'header_h1':          'Alt B - 2026 San Rafael Swell Adventure + Moab',
-    'header_meta':        'May 1 - May 10, 2026 &middot; Variant B-V1 (reverse, stay-overs Moab May 6) &middot; 11 overlanders + 7 Moab',
-    'nav_key':            'alt-b',
-    'show_reference_link': True,
-    'overview_title':     'Full Swell route (Alt B, reverse)',
-    'overview_desc_html': (
-        'Runs the Swell <strong>west -> east</strong>: Temple Mtn / Sinbad side first, '
-        'Buckhorn / Black Dragon last. Day 1 is the meaty day (fresh group). '
-        'Day 3 ends near the highway at Black Dragon for a clean May 6 split.'
-    ),
-    'gpx_metadata_name':  '2026 SRS Trip Plan - Alt B (reverse, V1)',
-    'gpx_metadata_desc':  'Day-split tracks (reverse direction), POIs, and camps for Alt B (Variant V1, stay-overs reach Moab May 6).',
-    'weather_key':        'alt-b',
-}
-
-VARIANT_ALT_D = {
-    'key':                'alt-d',
-    'data_path':          PLAN / 'trip_data_alt_d.json',
-    'html_path':          OUT_DIR / 'trip-itinerary-alt-d.html',
-    'gpx_path':           OUT_DIR / 'trip-plan-alt-d.gpx',
-    'gpx_filename':       'trip-plan-alt-d.gpx',
-    'page_title':         'Alt D - 2026 SRS Itinerary (reverse, BTR split, V1)',
-    'header_h1':          'Alt D - 2026 San Rafael Swell Adventure + Moab',
-    'header_meta':        'May 1 - May 10, 2026 &middot; Variant D-V1 (reverse, BTR split, Crack camp D1) &middot; 11 overlanders + 7 Moab',
-    'nav_key':            'alt-d',
-    'show_reference_link': True,
-    'overview_title':     'Full Swell route (Alt D, reverse, BTR split)',
-    'overview_desc_html': (
-        'Reverse direction with <strong>Behind-the-Reef split across May 3-4</strong>. '
-        'May 3 camps near Crack Canyon trailhead (not mid-BTR); May 4 drives Hidden Splendor + mid-corridor. '
-        'May 6 split is at <strong>Wedge</strong>: early-leavers N via Green River Cutoff; stay-overs finish Buckhorn + Black Dragon and reach Moab same evening.'
-    ),
-    'gpx_metadata_name':  '2026 SRS Trip Plan - Alt D (reverse, BTR split, V1)',
-    'gpx_metadata_desc':  'Day-split tracks (reverse direction, BTR split), POIs, and camps for Alt D (Variant V1).',
-    'weather_key':        'alt-d',
-}
-
-ALL_VARIANTS = [VARIANT_MAIN, VARIANT_ALT_A, VARIANT_ALT_B, VARIANT_ALT_D]
+ALL_VARIANTS = [VARIANT_MAIN]
 
 
 # Module-level `data`, `overview_track`, `ov_markers` get reassigned per
@@ -161,8 +109,8 @@ LEAFLET_CSS = _read_vendor('leaflet.css')
 # f-string never reparses their contents, so JS object literals inside them
 # do NOT need doubled braces.
 # -----------------------------------------------------------------------------
-PWA_HEAD = """<meta name="theme-color" content="#0d1117">
-<meta name="description" content="Offline trip itinerary, route, camps, and reference for the May 1-10, 2026 San Rafael Swell + Moab overlanding adventure.">
+PWA_HEAD = f"""<meta name="theme-color" content="#0d1117">
+<meta name="description" content="{cfg.META_DESCRIPTION}">
 <meta name="robots" content="noindex,nofollow">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
@@ -170,7 +118,7 @@ PWA_HEAD = """<meta name="theme-color" content="#0d1117">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="SRS Trip">
+<meta name="apple-mobile-web-app-title" content="{cfg.PWA_TITLE}">
 <meta name="mobile-web-app-capable" content="yes">"""
 
 
@@ -212,16 +160,13 @@ PWA_REGISTER_JS = """<script>
 </script>"""
 
 
-# Linked from itinerary / reference bodies (detail alt pages: overland-alternates.html).
-ALT_ROUTES_LINKS_HTML = '<a href="overland-alternates.html">Alt routes</a>'
+# Itinerary HTML pages use nav_key 'itinerary' — first nav item is "you are here".
+ITINERARY_NAV_KEYS = frozenset({'itinerary'})
 
-# Itinerary HTML pages use nav_key in {'itinerary','alt-a','alt-b','alt-d'} — first nav item is "you are here".
-ITINERARY_NAV_KEYS = frozenset({'itinerary', 'alt-a', 'alt-b', 'alt-d'})
-
-# Default sticky title row for satellite trip pages (weather, slot guide, fuel, alt overview).
+# Default sticky title row for satellite trip pages (weather, fuel, fire).
 TRIP_BRAND_SHARED_HTML = (
-    '<h1>2026 San Rafael Swell Adventure + Moab</h1>'
-    '<div class="meta">May 1 - May 10, 2026 &middot; 11 overlanders + 7 Moab &middot; Route: ~225 mi</div>'
+    f'<h1>{cfg.TRIP_TITLE}</h1>'
+    f'<div class="meta">{_HEADER_META}</div>'
 )
 
 # Shared trip nav: optional title row (brand left, Menu right) + link row (desktop below) or overlay (mobile).
@@ -376,8 +321,8 @@ def _top_nav_html(
     link list appears on a second row below. Markdown pages pass ``brand_html=None`` for
     a compact link-only bar.
 
-    current highlights one page: 'itinerary' | 'alt-a' | 'alt-b' | 'alt-d' | 'reference' | 'weather' |
-    'slot' | 'fuel' | 'overland-alt' | 'moab' | 'trails' | 'river' | 'none'.
+    current highlights one page: 'itinerary' | 'reference' | 'weather' | 'fuel' |
+    'fire' | 'camping' | 'none'.
 
     itinerary_href / weather_href / gpx_href override defaults for variant-specific pages.
     """
@@ -403,11 +348,8 @@ def _top_nav_html(
         li_itinerary(),
         li_link('fuel-plan.html', 'Fuel plan', 'fuel'),
         li_link(weather_href, 'Weather', 'weather'),
-        li_link('river-crossing.html', 'River crossing (Fuller Bottom)', 'river'),
-        li_link('slot-canyon-guide.html', 'Slot canyon guide', 'slot'),
-        li_link('moab-camping.html', 'Moab camping', 'moab'),
-        li_link('moab-trails.html', 'Moab trails', 'trails'),
-        li_link('overland-alternates.html', 'Alt routes', 'overland-alt'),
+        li_link('fire-and-closures.html', 'Fire & closures', 'fire'),
+        li_link('camping-plan.html', 'Camping plan', 'camping'),
         li_link('trip-reference.html', 'Full reference', 'reference'),
         li_link(gpx_href, 'GPX', '_gpx', download=True),
     ]
@@ -508,7 +450,7 @@ article.md-page hr { border: none; border-top: 1px solid #30363d; margin: 22px 0
 }
 """
 def write_planning_markdown_pages():
-    """Emit slot-canyon-guide.html and fuel-plan.html from planning/*.md (PWA-offline)."""
+    """Emit the standalone companion pages from planning/*.md (PWA-offline)."""
     try:
         import markdown
     except ImportError as e:
@@ -519,27 +461,23 @@ def write_planning_markdown_pages():
     ext = ['tables', 'fenced_code']
     pages = [
         (
-            PLAN / 'slot-canyon-guide.md',
-            OUT_DIR / 'slot-canyon-guide.html',
-            'Slot canyons & Day 3 hikes - SRS Trip',
-            'slot',
-        ),
-        (
             PLAN / 'fuel_plan.md',
             OUT_DIR / 'fuel-plan.html',
-            'Fuel plan - SRS Trip',
+            f'Fuel plan - {cfg.PWA_TITLE}',
             'fuel',
         ),
         (
-            PLAN / 'overland_alternates.md',
-            OUT_DIR / 'overland-alternates.html',
-            'Alternate Swell routes (overview) - SRS Trip',
-            'overland-alt',
+            PLAN / 'fire_and_closures.md',
+            OUT_DIR / 'fire-and-closures.html',
+            f'Fire & closures - {cfg.PWA_TITLE}',
+            'fire',
         ),
-        # Note: Alt A / B / D itinerary pages are NOT rendered from markdown
-        # anymore -- they're full interactive HTML pages emitted by
-        # render_variant() from planning/trip_data_alt_*.json. The markdown
-        # files in planning/ remain as the authoritative planning notes.
+        (
+            PLAN / 'camping_plan.md',
+            OUT_DIR / 'camping-plan.html',
+            f'Camping plan - {cfg.PWA_TITLE}',
+            'camping',
+        ),
     ]
     for md_path, out_path, title, nav_key in pages:
         if not md_path.exists():
@@ -601,7 +539,7 @@ def decimate(points, every_n):
     return [p for i, p in enumerate(points) if i % every_n == 0 or i == len(points) - 1]
 
 
-# First itinerary tab: full Swell GPX corridor + aggregated stops (not a trip_data day).
+# First itinerary tab: full route GPX corridor + aggregated stops (not a trip_data day).
 ROUTE_OVERVIEW_ID = 'route_overview'
 
 
@@ -675,13 +613,8 @@ def weather_day_section_html(day_id: str) -> str:
 
 
 def build_all_weather_day_payloads() -> dict:
-    """Merged per-day rows for weather.html (all variants)."""
-    pairs = [
-        ('main', MAIN_DATA_PATH),
-        ('alt-a', PLAN / 'trip_data_alt_a.json'),
-        ('alt-b', PLAN / 'trip_data_alt_b.json'),
-        ('alt-d', PLAN / 'trip_data_alt_d.json'),
-    ]
+    """Merged per-day rows for weather.html."""
+    pairs = [('main', MAIN_DATA_PATH)]
     out: dict[str, list] = {}
     for wkey, path in pairs:
         if not path.exists():
@@ -703,22 +636,22 @@ def write_weather_html() -> None:
 .weather-concerns,.weather-concerns-tight{margin:6px 0;padding-left:1.2em;font-size:13px}
 """
     boot_lines = (
-        '<script>window.__SRS_WEATHER_ALL__=' + j + ';</script>\n'
+        f'<script>window.__{cfg.JS_PREFIX}_WEATHER_ALL__=' + j + ';</script>\n'
         '<script src="weather-client.js"></script>\n'
         '<script>'
         '(function(){'
         'var q=new URLSearchParams(location.search);'
         "var v=q.get('variant')||'main';"
-        'var all=window.__SRS_WEATHER_ALL__||{};'
+        f'var all=window.__{cfg.JS_PREFIX}_WEATHER_ALL__||{{}};'
         'var days=all[v]||all.main||[];'
-        "if(window.SRSWeather)SRSWeather.init({variantKey:v,days:days,mode:'weather_page',allVariants:all});"
+        "if(window.TripWeather)TripWeather.init({variantKey:v,days:days,mode:'weather_page',allVariants:all});"
         '})();'
         '</script>'
     )
     page = f"""<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
-<title>Trip weather — SRS May 2026</title>
+<title>Trip weather — {cfg.PWA_TITLE}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {PWA_HEAD}
 <style>{STATIC_MD_PAGE_CSS}</style>
@@ -727,14 +660,9 @@ def write_weather_html() -> None:
 {nav}
 <article class="md-page">
 <h1>Trip weather — dual forecast</h1>
-<p class="muted">NWS (NOAA) grid forecast and Open-Meteo, matched to each itinerary day and map-click location. Fetched when online and cached in this browser for offline use (~90 minute window). This does not replace the <a href="trip-itinerary.html">live NWS Utah alerts</a> strip on the itinerary or field checks before slot hikes.</p>
+<p class="muted">NWS (NOAA) grid forecast and Open-Meteo, matched to each itinerary day and its camp location. Fetched when online and cached in this browser for offline use (about a 90-minute window). This does not replace the <a href="trip-itinerary.html">live NWS Washington alerts</a> strip on the itinerary, or the <a href="fire-and-closures.html">fire and closures</a> checks before departure.</p>
+<p class="muted"><strong>September in the Cascades:</strong> the camps on this route sit between 3,900 and 4,400 ft and the passes go higher. Expect large day/night swings, real rain potential on the west side, and an outside chance of an early snow event at elevation. Freezing overnight temperatures at Takhlakh and Walupt are normal in mid-September.</p>
 <div class="weather-page-toolbar">
-<label>Route variant <select id="weather-variant-select" style="margin-left:6px;padding:6px 10px;border-radius:6px;background:#21262d;color:#e6edf3;border:1px solid #30363d;font:inherit">
-<option value="main">Main</option>
-<option value="alt-a">Alt A</option>
-<option value="alt-b">Alt B</option>
-<option value="alt-d">Alt D</option>
-</select></label>
 <button type="button" id="weather-refresh">Refresh forecasts</button>
 </div>
 <p id="weather-status" class="muted"></p>
@@ -742,7 +670,7 @@ def write_weather_html() -> None:
 <thead><tr><th>Day</th><th>NWS summary</th><th>Open-Meteo (daily)</th><th>Notable concerns</th></tr></thead>
 <tbody id="weather-trip-tbody"></tbody>
 </table>
-<p class="muted" style="margin-top:16px"><strong>Sources:</strong> <a href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noopener">api.weather.gov</a> · <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Manual: <a href="https://www.wunderground.com/weather/us/ut/moab" target="_blank" rel="noopener">WU Moab</a></p>
+<p class="muted" style="margin-top:16px"><strong>Sources:</strong> <a href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noopener">api.weather.gov</a> · <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Offices: <a href="https://www.weather.gov/pqr" target="_blank" rel="noopener">NWS Portland</a> · <a href="https://www.weather.gov/sew" target="_blank" rel="noopener">NWS Seattle</a></p>
 </article>
 {boot_lines}
 {PWA_REGISTER_JS}
@@ -752,72 +680,9 @@ def write_weather_html() -> None:
     print(f'Wrote weather.html ({len(page) / 1024:.1f} KB)')
 
 
-def moab_trail_card_html(d, variant):
-    """Rich links for Moab trail days (``moab_trail`` comes from ``moab_layers``)."""
-    mt = d.get('moab_trail')
-    if not mt or d.get('type') != 'moab':
-        return ''
-    gpx = esc(variant.get('gpx_filename') or 'trip-plan.gpx')
-    rr4w = esc(mt.get('rr4w_url') or '')
-    anchor = mt.get('moab_trails_anchor') or ''
-    anchor_href = esc(anchor)
-    disp = esc(mt.get('display_name') or 'Trail')
-    tid = int(mt.get('rr4w_id') or 0)
-    rating = esc(mt.get('rating') or '')
-    length = esc(mt.get('length_mi') or '')
-    tires = esc(mt.get('tires_min') or '')
-    notes = esc(mt.get('notes') or '')
-    baby = ''
-    if tid == 37:
-        baby = (
-            '<p class="muted" style="margin:8px 0 0;font-size:12px">'
-            'Optional slickrock warm-up: <a href="moab-trails.html#baby-lion">Baby Lion’s Back</a> '
-            '(short Sand Flats fin — see narrative on moab-trails.html).</p>'
-        )
-    return (
-        '<div class="info trail-card" style="margin-top:12px;line-height:1.5">'
-        '<h3 style="margin:0 0 6px">Today’s trail</h3>'
-        f'<p style="margin:0"><strong>{disp}</strong> &middot; '
-        f'<a href="{rr4w}" target="_blank" rel="noopener">RR4W trail {tid}</a>'
-        f' &middot; <a href="{anchor_href}">Trip trail notes</a></p>'
-        '<ul style="margin:8px 0 0;padding-left:1.2em">'
-        f'<li><strong>RR4W / plan:</strong> {rating}</li>'
-        f'<li><strong>Length:</strong> {length}</li>'
-        f'<li><strong>Tires (listing):</strong> {tires}</li>'
-        f'<li><strong>Note:</strong> {notes}</li>'
-        '</ul>'
-        f'{baby}'
-        '<p class="muted" style="margin:10px 0 0;font-size:12px">'
-        '<strong>Sand Flats fees:</strong> day-use + camping collected at the Sand Flats booth — see '
-        '<a href="https://www.recreation.gov/gateways/2160" target="_blank" rel="noopener">Recreation.gov '
-        'Sand Flats</a> and the camp cards below.</p>'
-        '<p class="muted" style="margin:8px 0 0;font-size:12px">'
-        '<strong>Offline:</strong> Esri basemap tiles need connectivity; the orange track and pins still '
-        f'reflect committed coordinates. Load <a href="{gpx}" download>{gpx}</a> in Gaia, onX, or Apple Maps '
-        'as a backup.</p>'
-        '</div>'
-    )
-
-
-def moab_rr4w_map_note_html(d):
-    if d.get('type') != 'moab' or not d.get('moab_trail'):
-        return ''
-    mt = d['moab_trail']
-    gpx = mt.get('geometry_source_gpx')
-    if gpx:
-        src = f'field-recorded GPX ({esc(gpx)})'
-    else:
-        src = '<strong>RR4W</strong> KML'
-    return (
-        '<p class="muted" style="margin:10px 2px 0;font-size:12px;line-height:1.45">'
-        f'<strong>Orange line:</strong> trail centerline from {src} '
-        '(decimated for this page). It is a <em>planning</em> geometry, not live navigation '
-        'or obstacle routing — confirm on the ground.</p>'
-    )
-
-
 STATUS_BADGE = {
     'primary': ('primary', 'Primary'),
+    'landmark': ('logistics', 'Landmark'),
     'backup': ('backup', 'Backup'),
     'skip': ('skip', 'Skip'),
     'logistics': ('logistics', 'Logistics'),
@@ -1535,11 +1400,11 @@ def build_itinerary_html(variant=None):
         ensure_ascii=False,
     )
     weather_scripts = (
-        f'<script>window.__SRS_WEATHER_BOOT__={weather_boot_json};</script>\n'
+        f'<script>window.__{cfg.JS_PREFIX}_WEATHER_BOOT__={weather_boot_json};</script>\n'
         '<script src="weather-client.js"></script>\n'
         '<script>'
-        'if(window.SRSWeather&&window.__SRS_WEATHER_BOOT__)'
-        "SRSWeather.init(Object.assign({mode:'itinerary'},window.__SRS_WEATHER_BOOT__));"
+        'if(window.TripWeather&&window.__{cfg.JS_PREFIX}_WEATHER_BOOT__)'
+        "TripWeather.init(Object.assign({mode:'itinerary'},window.__{cfg.JS_PREFIX}_WEATHER_BOOT__));"
         '</script>'
     )
 
@@ -1621,7 +1486,7 @@ def build_itinerary_html(variant=None):
         f'{ov_intro_html}'
         f'<div class="summary-grid">{ov_stat_html}</div>'
         f'{ov_map_html}'
-        '<h3>All Swell stops (route mile order)</h3>'
+        '<h3>All stops (route mile order)</h3>'
         f'<table class="stops-table">{OVERVIEW_STOPS_HEADER}<tbody>{ov_table_body}</tbody></table>'
         '</div></div>'
     )
@@ -1631,10 +1496,10 @@ def build_itinerary_html(variant=None):
     # JS keeps both in sync so a user resizing across the breakpoint never
     # sees a stale "active" indicator.
     tabs = [
-        f'<button class="tab-btn active" data-tgt="pane-{ROUTE_OVERVIEW_ID}">Full route (Swell)</button>',
+        f'<button class="tab-btn active" data-tgt="pane-{ROUTE_OVERVIEW_ID}">Full route</button>',
     ]
     options = [
-        f'<option value="{ROUTE_OVERVIEW_ID}" selected>Full route (Swell)</option>',
+        f'<option value="{ROUTE_OVERVIEW_ID}" selected>Full route</option>',
     ]
     panes = [ov_pane]
 
@@ -1682,7 +1547,7 @@ def build_itinerary_html(variant=None):
         # POI tables.
         # On scheduled days we merge primary + backup + hike_candidate into one
         # mile-sorted table with checkboxes and ETAs. On unscheduled days
-        # (travel/transit/Moab) we keep the original split tables.
+        # (the two highway travel days) we keep the original split tables.
         poi_tables = []
         if is_scheduled:
             merged = sorted(
@@ -1709,16 +1574,25 @@ def build_itinerary_html(variant=None):
                 poi_tables.extend(poi_row(p, day_id=d['id'], allow_focus=day_has_map) for p in backup)
                 poi_tables.append('</tbody></table>')
 
-        # Hike-candidate warning for Day 3
+        # Hikes are opt-in: they start unchecked so the ETA is realistic, and the
+        # group ticks the ones it wants and watches the arrival time move.
         hike_warn = ''
-        if any(p.get('status') == 'hike_candidate' for p in pois):
+        hike_names = [p['name'] for p in pois if p.get('status') == 'hike_candidate']
+        if hike_names:
+            listed = ', '.join(f'<strong>{esc(n)}</strong>' for n in hike_names)
+            gear = ''
+            if any('Lava Cave' in n for n in hike_names):
+                gear = (
+                    ' <br><strong>Lava caves:</strong> every person going underground needs their own '
+                    'headlamp plus a backup light and spare batteries. The cave is pitch dark and stays '
+                    'cold year round; the floor is uneven basalt. Boots and gloves recommended. '
+                    'Check for seasonal bat closures before entering.'
+                )
             hike_warn = (
-                '<div class="warn"><strong>Day 3 hikes (tactical):</strong> <strong>Wild Horse Window</strong>, <strong>Chute Canyon</strong>, and '
-                '<strong>Crack Canyon</strong> are all <strong>checked by default</strong> — uncheck any your group will skip. '
-                'Still read <a href="slot-canyon-guide.html">Slot canyon guide</a> (offline in the PWA) and the Reference &quot;Day 3 Hikes&quot; card. '
-                '<strong>Little Wild Horse / Bell</strong> stays a bonus (backup) unless the whole party wants the full loop. '
-                '<strong>Flash floods:</strong> check forecast before Chute, Crack, or any slot.'
-                '</div>'
+                f'<div class="warn"><strong>Hikes and activities to triage:</strong> {listed}. '
+                'These start <strong>unchecked</strong> so the day\'s arrival estimate reflects driving only. '
+                'Tick the ones you want and watch the ETA move — that is the whole point of the scheduler.'
+                f'{gear}</div>'
             )
 
         # Camps block
@@ -1744,7 +1618,6 @@ def build_itinerary_html(variant=None):
                 'Navigate with Google Maps (or similar) in real time for lanes, traffic, and closures.'
                 '</p>'
             )
-        moab_rr4w_note = moab_rr4w_map_note_html(d) if has_map else ''
         map_html = (
             f'<div class="map-wrap" id="map-wrap-{d["id"]}">'
             f'<div class="map-stage">'
@@ -1755,44 +1628,39 @@ def build_itinerary_html(variant=None):
             f'<span class="fs-label">Fullscreen</span></button>'
             f'<div id="{map_id}" class="map" data-day-id="{d["id"]}"><div class="map-offline-notice">'
             'Loading map... (requires internet for tiles; falls back to coordinates list if offline)'
-            f'</div></div></div>{hw_note}{moab_rr4w_note}</div>'
+            f'</div></div></div>{hw_note}</div>'
             if has_map else
-            '<div class="info">No mapped track segment for this day (travel/transit/Moab day).</div>'
+            '<div class="info">No mapped track segment for this day.</div>'
         )
 
-        # Quick links for this day (weather + alerts). May 2 staging travel uses
-        # Green River / I-70 links; May 1 uses Wendover / I-80 corridor; alternates'
-        # alt*_day0_travel IDs share the May 2 date without hardcoding ids.
-        is_may1_travel = d['type'] == 'travel' and d.get('date_iso') == '2026-05-01'
-        is_may2_staging_travel = d['type'] == 'travel' and d.get('date_iso') == '2026-05-02'
+        # Quick links for this day. Travel days get the highway corridor; route
+        # days get the forest, fire and pass links that actually matter out there.
+        is_outbound_travel = d.get('date_iso') == '2026-09-08'
+        is_return_travel = d.get('date_iso') == '2026-09-13'
         quick_links = []
-        if d['type'] in ('overland', 'travel') and not is_may2_staging_travel and not is_may1_travel:
+        if is_outbound_travel:
             quick_links = [
-                {'label': 'Swell weather (Wedge)',    'url': 'https://forecast.weather.gov/MapClick.php?lat=39.0985&lon=-110.7850'},
-                {'label': 'SLC flash-flood info',     'url': 'https://www.weather.gov/slc/flashflood'},
-                {'label': 'SLC active warnings',      'url': 'https://www.weather.gov/slc/WWA'},
-                {'label': 'UDOT Region 4 news',       'url': 'https://udot.utah.gov/connect/category/region-four'},
-                {'label': 'Utah Fire Info',           'url': 'https://utahfireinfo.gov/'},
+                {'label': 'Idaho 511',                'url': 'https://511.idaho.gov/'},
+                {'label': 'ODOT TripCheck (I-84)',    'url': 'https://www.tripcheck.com/'},
+                {'label': 'WSDOT real-time',          'url': 'https://wsdot.com/travel/real-time/'},
+                {'label': 'Carson weather',           'url': 'https://forecast.weather.gov/MapClick.php?lat=45.7411&lon=-121.8214'},
+                {'label': 'GPNF alerts',              'url': 'https://www.fs.usda.gov/r06/giffordpinchot/alerts'},
             ]
-        elif d['type'] in ('moab', 'transit'):
+        elif is_return_travel:
             quick_links = [
-                {'label': 'Moab weather',             'url': 'https://forecast.weather.gov/MapClick.php?lat=38.5733&lon=-109.5498'},
-                {'label': 'Dead Horse Point weather', 'url': 'https://forecast.weather.gov/MapClick.php?lat=38.4710&lon=-109.7450'},
-                {'label': 'GJT hazards (Moab)',       'url': 'https://www.weather.gov/gjt/hazards'},
-                {'label': 'UDOT I-70/191',            'url': 'https://www.udottraffic.utah.gov/'},
-                {'label': 'Arches NP alerts',         'url': 'https://www.nps.gov/arch/planyourvisit/conditions.htm'},
+                {'label': 'WSDOT real-time',          'url': 'https://wsdot.com/travel/real-time/'},
+                {'label': 'ODOT TripCheck (I-84)',    'url': 'https://www.tripcheck.com/'},
+                {'label': 'Idaho 511',                'url': 'https://511.idaho.gov/'},
+                {'label': 'Nampa weather',            'url': 'https://forecast.weather.gov/MapClick.php?lat=43.6013&lon=-116.5645'},
             ]
-        elif is_may2_staging_travel:
+        elif d['type'] == 'overland':
             quick_links = [
-                {'label': 'Green River weather',      'url': 'https://forecast.weather.gov/MapClick.php?lat=38.9953&lon=-110.1599'},
-                {'label': 'UDOT I-70',                'url': 'https://www.udottraffic.utah.gov/'},
-                {'label': 'SLC active warnings',      'url': 'https://www.weather.gov/slc/WWA'},
-            ]
-        elif is_may1_travel:
-            quick_links = [
-                {'label': 'Wendover / Bonneville wx', 'url': 'https://forecast.weather.gov/MapClick.php?lat=40.7472&lon=-114.0378'},
-                {'label': 'UDOT I-80 corridor',       'url': 'https://www.udottraffic.utah.gov/'},
-                {'label': 'NWS Boise (start)',        'url': 'https://forecast.weather.gov/MapClick.php?lat=43.6150&lon=-116.2343'},
+                {'label': 'GPNF alerts & closures',   'url': 'https://www.fs.usda.gov/r06/giffordpinchot/alerts'},
+                {'label': 'GPNF road conditions',     'url': 'https://www.fs.usda.gov/r06/giffordpinchot/conditions'},
+                {'label': 'InciWeb active fires',     'url': 'https://inciweb.wildfire.gov/'},
+                {'label': 'AirNow fire & smoke',      'url': 'https://fire.airnow.gov/'},
+                {'label': 'WSDOT mountain passes',    'url': 'https://wsdot.com/travel/real-time/mountainpasses'},
+                {'label': 'Fire & closures page',     'url': 'fire-and-closures.html'},
             ]
 
         ql_html = ''
@@ -1811,7 +1679,6 @@ def build_itinerary_html(variant=None):
             f'<div class="muted">{esc(d.get("descr", ""))}</div>'
             f'<div class="summary-grid">{stat_html}</div>'
             f'{weather_day_section_html(d["id"])}'
-            f'{moab_trail_card_html(d, variant)}'
             f'{hike_warn}'
             f'{sched_html}'
             f'{map_html}'
@@ -1969,9 +1836,9 @@ def build_itinerary_html(variant=None):
 <div class="tabs" role="tablist">{''.join(tabs)}</div>
 {''.join(panes)}
 <section class="card" style="margin-top:24px">
-<h2>Live NWS Utah alerts</h2>
+<h2>{cfg.NWS_ALERT_LABEL}</h2>
 <div class="muted" style="margin-bottom:8px">Fetched live when online; ignore if viewing offline. Use <strong>Menu → Weather</strong> or the per-day weather blocks when connectivity is available.</div>
-<div id="live-alerts" class="alerts-banner alerts-loading">Checking live NWS Utah alerts...</div>
+<div id="live-alerts" class="alerts-banner alerts-loading">Checking {cfg.NWS_ALERT_LABEL}...</div>
 </section>
 {POI_DESC_DIALOG_HTML}
 </main>
@@ -2014,8 +1881,8 @@ const MAPS = {{}};
 // dayId -> {{ schedPoiId: Leaflet layer }} for backup stops toggled by row checkboxes.
 const BACKUP_MARKER_REGISTRY = {{}};
 // Optional GPS dot per map (never used for initial fitBounds).
-let __SRS_LAST_GPS = null;
-const __SRS_MY_LOC_BY_DAY = {{}};
+let __{cfg.JS_PREFIX}_LAST_GPS = null;
+const __{cfg.JS_PREFIX}_MY_LOC_BY_DAY = {{}};
 
 function esriLayer(name) {{
   // Online Esri tile sources; we mark failed tiles transparent so the
@@ -2106,7 +1973,7 @@ function ensureMap(dayId) {{
   if (bounds.isValid()) {{
     m.fitBounds(bounds, {{padding:[30,30], maxZoom: 14}});
   }} else {{
-    m.setView([38.93, -110.42], 12);  // Black Dragon fallback
+    m.setView([{cfg.MAP_FALLBACK_CENTER[0]}, {cfg.MAP_FALLBACK_CENTER[1]}], {cfg.MAP_FALLBACK_ZOOM});  // trip-area fallback
   }}
   addLegend(m);
   MAPS[dayId] = m;
@@ -2115,10 +1982,10 @@ function ensureMap(dayId) {{
 
 function syncMyLocationForDay(dayId) {{
   const map = MAPS[dayId];
-  if (!map || __SRS_LAST_GPS == null) return;
-  const lat = __SRS_LAST_GPS.lat;
-  const lon = __SRS_LAST_GPS.lon;
-  let layer = __SRS_MY_LOC_BY_DAY[dayId];
+  if (!map || __{cfg.JS_PREFIX}_LAST_GPS == null) return;
+  const lat = __{cfg.JS_PREFIX}_LAST_GPS.lat;
+  const lon = __{cfg.JS_PREFIX}_LAST_GPS.lon;
+  let layer = __{cfg.JS_PREFIX}_MY_LOC_BY_DAY[dayId];
   if (!layer) {{
     layer = L.circleMarker([lat, lon], {{
       radius: 9,
@@ -2130,7 +1997,7 @@ function syncMyLocationForDay(dayId) {{
       pane: 'markerPane',
     }}).addTo(map);
     layer.bindPopup('Your location (GPS, approximate)');
-    __SRS_MY_LOC_BY_DAY[dayId] = layer;
+    __{cfg.JS_PREFIX}_MY_LOC_BY_DAY[dayId] = layer;
   }} else {{
     layer.setLatLng([lat, lon]);
   }}
@@ -2149,7 +2016,7 @@ function startMyLocationWatch() {{
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
         if (lat == null || lon == null || !Number.isFinite(lat) || !Number.isFinite(lon)) return;
-        __SRS_LAST_GPS = {{ lat, lon }};
+        __{cfg.JS_PREFIX}_LAST_GPS = {{ lat, lon }};
         syncMyLocationAllMaps();
       }},
       () => {{}},
@@ -2192,8 +2059,8 @@ function _svgDiamond(color, size) {{
 }}
 const MARKER_STYLE = {{
   poi:             {{kind: 'circle',  color: '#238636', radius: 6, label: 'Stop'}},
-  trailhead:       {{kind: 'circle',  color: '#f0883e', radius: 8, label: 'Trailhead (RR4W)'}},
-  trail_poi:       {{kind: 'circle',  color: '#1f6feb', radius: 6, label: 'Trail landmark (RR4W)'}},
+  trailhead:       {{kind: 'circle',  color: '#f0883e', radius: 8, label: 'Trailhead'}},
+  trail_poi:       {{kind: 'circle',  color: '#1f6feb', radius: 6, label: 'Trail landmark'}},
   camp_primary:    {{kind: 'tri',     color: '#a371f7', size: 20,  label: 'Camp (primary)'}},
   camp_secondary:  {{kind: 'tri',     color: '#e3a008', size: 18,  label: 'Camp (backup)'}},
   camp_tertiary:   {{kind: 'tri',     color: '#8b949e', size: 16,  label: 'Camp (last-resort)'}},
@@ -2228,8 +2095,8 @@ function addLegend(m) {{
       '<span>' + text + '</span></div>';
     div.innerHTML =
       row('<span class="legend-dot" style="background:#238636"></span>', 'Primary stop / hike') +
-      row('<span class="legend-dot" style="background:#f0883e;width:11px;height:11px;border-radius:2px;display:inline-block"></span>', 'Trailhead (RR4W)') +
-      row('<span class="legend-dot" style="background:#1f6feb"></span>', 'Trail landmark (RR4W)') +
+      row('<span class="legend-dot" style="background:#f0883e;width:11px;height:11px;border-radius:2px;display:inline-block"></span>', 'Trailhead') +
+      row('<span class="legend-dot" style="background:#1f6feb"></span>', 'Trail landmark') +
       row(_svgTriangle('#a371f7', 14), 'Camp (primary)') +
       row(_svgTriangle('#e3a008', 14), 'Camp (backup)') +
       row(_svgTriangle('#8b949e', 14), 'Camp (last-resort)') +
@@ -2333,13 +2200,13 @@ document.addEventListener('fullscreenchange', _fsChange);
 document.addEventListener('webkitfullscreenchange', _fsChange);
 document.addEventListener('msfullscreenchange', _fsChange);
 
-// ----- Live NWS Utah alerts (CORS-enabled public API) -----
+// ----- Live NWS alerts for {cfg.NWS_ALERT_AREA} (CORS-enabled public API) -----
 function escHTML(s){{return String(s==null?'':s).replace(/[&<>"']/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[c]));}}
 async function loadAlerts() {{
   const el = document.getElementById('live-alerts');
   if (!el) return;
   try {{
-    const r = await fetch('https://api.weather.gov/alerts/active?area=UT', {{
+    const r = await fetch('https://api.weather.gov/alerts/active?area={cfg.NWS_ALERT_AREA}', {{
       headers: {{'Accept': 'application/geo+json'}}
     }});
     if (!r.ok) throw new Error('NWS HTTP ' + r.status);
@@ -2349,7 +2216,7 @@ async function loadAlerts() {{
     if (!feats.length) {{
       el.classList.remove('alerts-loading');
       el.classList.add('alerts-ok');
-      el.innerHTML = '<strong>No active NWS alerts for Utah.</strong> <span class="muted">Checked ' + escHTML(now) + '. <a href="https://www.weather.gov/slc/WWA" target="_blank" rel="noopener">Full alert feed</a></span>';
+      el.innerHTML = '<strong>No active NWS alerts for {cfg.NWS_ALERT_AREA}.</strong> <span class="muted">Checked ' + escHTML(now) + '. <a href="https://www.weather.gov/alerts" target="_blank" rel="noopener">Full alert feed</a></span>';
       return;
     }}
     const rank = e => /Flash Flood Warning/i.test(e)?0:/Flood Warning/i.test(e)?1:/Severe Thunderstorm Warning/i.test(e)?2:/Warning/i.test(e)?3:/Red Flag/i.test(e)?4:/Watch/i.test(e)?5:/Advisory/i.test(e)?6:7;
@@ -2362,7 +2229,7 @@ async function loadAlerts() {{
     }}).join('');
     el.classList.remove('alerts-loading');
     el.classList.add('alerts-active');
-    el.innerHTML = '<strong>' + feats.length + ' active NWS Utah alert' + (feats.length===1?'':'s') + '.</strong> <span class="muted">Fetched ' + escHTML(now) + '. <a href="#" id="alerts-toggle">show/hide</a> &middot; <a href="https://www.weather.gov/slc/WWA" target="_blank" rel="noopener">full feed</a></span><ul class="alert-list" id="alerts-list">' + rows + '</ul>';
+    el.innerHTML = '<strong>' + feats.length + ' active NWS {cfg.NWS_ALERT_AREA} alert' + (feats.length===1?'':'s') + '.</strong> <span class="muted">Fetched ' + escHTML(now) + '. <a href="#" id="alerts-toggle">show/hide</a> &middot; <a href="https://www.weather.gov/alerts" target="_blank" rel="noopener">full feed</a></span><ul class="alert-list" id="alerts-list">' + rows + '</ul>';
     const tog = document.getElementById('alerts-toggle');
     if (tog) tog.addEventListener('click', function(e){{e.preventDefault();const ul=document.getElementById('alerts-list');if(ul)ul.style.display=ul.style.display==='none'?'':'none';}});
   }} catch (err) {{
@@ -2596,18 +2463,31 @@ def build_reference_html():
         stations_html += f'<tr><td>{esc(s["name"])}</td><td>{esc(s["role"])}</td><td>{esc(s["brands"])}</td></tr>'
     stations_html += '</tbody></table>'
 
+    gaps_html = '<table><thead><tr><th>Gap</th><th>Miles</th><th>What it means</th></tr></thead><tbody>'
+    for g in fp.get('critical_gaps', []):
+        gaps_html += (
+            f'<tr><td><strong>{esc(g["label"])}</strong><div class="muted" style="font-size:12px">'
+            f'mile {g["from_mi"]} &rarr; {g["to_mi"]}</div></td>'
+            f'<td class="num"><strong>{g["gap_mi"]}</strong></td>'
+            f'<td>{esc(g["note"])}</td></tr>'
+        )
+    gaps_html += '</tbody></table>'
+
+    _notes_lis = ''.join(f'<li>{esc(n)}</li>' for n in fp.get('notes', []))
     surface_html = f"""
 <table>
 <thead><tr><th>Surface</th><th>Miles</th><th>MPG factor</th></tr></thead>
 <tbody>
 <tr><td>Paved highway</td><td class="num">{sb["paved_hwy_mi"]}</td><td class="num">{fp["mpg_factors"]["paved_hwy_65mph"]:.2f}</td></tr>
-<tr><td>Graded dirt</td><td class="num">{sb["graded_dirt_mi"]}</td><td class="num">{fp["mpg_factors"]["graded_dirt"]:.2f}</td></tr>
-<tr><td>Rocky 2-track</td><td class="num">{sb["rocky_2track_mi"]}</td><td class="num">{fp["mpg_factors"]["rocky_2track"]:.2f}</td></tr>
+<tr><td>Graded gravel</td><td class="num">{sb["graded_gravel_mi"]}</td><td class="num">{fp["mpg_factors"]["graded_gravel"]:.2f}</td></tr>
+<tr><td>Rough 2-track / narrow spur</td><td class="num">{sb["rough_2track_mi"]}</td><td class="num">{fp["mpg_factors"]["rough_2track"]:.2f}</td></tr>
 <tr><td>Technical low-range</td><td class="num">{sb["technical_mi"]}</td><td class="num">{fp["mpg_factors"]["technical_low_range"]:.2f}</td></tr>
 <tr><td><strong>Total route</strong></td><td class="num"><strong>{sb["total_mi"]}</strong></td><td></td></tr>
 </tbody>
 </table>
-<p>Estimated Swell fuel burn (baseline 16 MPG): <strong>~{fp["estimated_swell_gallons_16mpg_baseline"]} gallons</strong>. Plan aux fuel or detours accordingly; see the <a href="fuel-plan.html"><strong>Fuel plan</strong></a> (offline PWA; source <code>planning/fuel_plan.md</code>).</p>
+<h3>Fuel gaps that matter</h3>
+{gaps_html}
+<ul class="clean">{_notes_lis}</ul>
 """
 
     # Day-by-day full dump (no tabs here)
@@ -2635,81 +2515,87 @@ def build_reference_html():
             '</div>'
         )
 
-    # Day 3 hike detail (critical reference)
-    hike_detail = """
-<div class="card" id="day3-hikes">
-<h2>Day 3 Hikes (Tactical)</h2>
-<p class="muted">Full write-up: <a href="slot-canyon-guide.html"><strong>Slot canyon guide</strong></a> (same offline PWA). <strong>Wild Horse Window</strong>, <strong>Chute</strong>, and <strong>Crack</strong> are tactical hikes (checked by default on the itinerary; uncheck skips). <strong>LWH / Bell</strong> remains a backup bonus unless the full group wants the loop.</p>
+    # Hikes and activities, collected from the day data rather than hardcoded.
+    hike_rows = []
+    for d in data['days']:
+        for pp in (d.get('pois') or []):
+            if pp.get('status') != 'hike_candidate':
+                continue
+            mins = pp.get('default_minutes')
+            spur = pp.get('spur_mi') or 0
+            extra = []
+            if mins:
+                extra.append(f'~{int(mins)} min budgeted')
+            if spur:
+                extra.append(f'~{spur:g} mi round-trip spur off route')
+            off = pp.get('true_off_track_m') or 0
+            if off > 400:
+                extra.append(f'{off / 1609.344:.1f} mi from the main track')
+            hike_rows.append(
+                '<tr><td><strong>' + esc(pp['name']) + '</strong></td>'
+                '<td>' + esc(d['label'].split(' - ')[0]) + '</td>'
+                '<td>' + esc(', '.join(extra) or '\u2014') + '</td>'
+                '<td>' + esc(pp.get('note') or '') + '</td></tr>'
+            )
+    hike_detail = ''
+    if hike_rows:
+        hike_detail = (
+            '<div class="card" id="hikes">'
+            '<h2>Hikes &amp; Activities</h2>'
+            '<p class="muted">Every one of these starts <strong>unchecked</strong> in the itinerary '
+            'scheduler so each day\'s arrival estimate reflects driving only. Tick the ones the group '
+            'wants and watch the ETA move. Times below are the default stop budgets baked into the '
+            'scheduler, not hard estimates.</p>'
+            '<table><thead><tr><th>Hike / activity</th><th>Day</th><th>Budget</th><th>Notes</th></tr></thead>'
+            '<tbody>' + ''.join(hike_rows) + '</tbody></table>'
+            '<h3>Gear notes</h3>'
+            '<ul class="clean">'
+            '<li><strong>Falls Creek Lava Caves:</strong> a real lava tube. One headlamp per person '
+            '<em>plus</em> a backup light and spare batteries. Pitch dark, uneven basalt floor, cold '
+            'year round. Boots and gloves recommended; a helmet or at minimum a beanie saves scalps. '
+            'Check for seasonal bat closures before entering.</li>'
+            '<li><strong>High Rock Lookout:</strong> the lookout sits on a cliff edge with a serious '
+            'drop. Fine for careful adults, worth thinking about with kids or dogs.</li>'
+            '<li><strong>Northwest Forest Pass</strong> is required to park at most of these '
+            'trailheads. Every vehicle needs its own displayed.</li>'
+            '<li><strong>September daylight:</strong> sunset runs about 7:30 PM early in the month and '
+            'drops fast in timbered country. Start long hikes before mid-afternoon.</li>'
+            '</ul>'
+            '</div>'
+        )
 
-<div class="two-col">
-<div>
-<h3>Wild Horse Window (a.k.a. "Eye of Sinbad")</h3>
-<table>
-<tr><th>Type</th><td>Natural bridge with 35x22 ft skylight (cave-style)</td></tr>
-<tr><th>Trailhead</th><td>38.6475, -110.6628</td></tr>
-<tr><th>Arch</th><td>38.6533, -110.6764 (hike west from TH)</td></tr>
-<tr><th>Distance</th><td>~2 mi round trip</td></tr>
-<tr><th>Elevation</th><td>200-335 ft</td></tr>
-<tr><th>Time</th><td>1-2 hrs</td></tr>
-<tr><th>Difficulty</th><td>Easy</td></tr>
-<tr><th>Trail</th><td>None - cross-country slickrock with cairns</td></tr>
-<tr><th>Shade</th><td>Zero; carry >=1 L water/person</td></tr>
-<tr><th>Dogs</th><td>Allowed (leash recommended)</td></tr>
-<tr><th>Access / fees</th><td><strong>BLM</strong> — not inside Goblin Valley State Park gate (no park fee for this hike unless you enter GSVP separately)</td></tr>
-<tr><th>Links</th><td><a href="https://www.alltrails.com/trail/us/utah/wild-horse-window" target="_blank" rel="noopener">AllTrails</a> &middot; <a href="https://www.hikinginutah.com/wildhorsewindow.htm" target="_blank" rel="noopener">HikingInUtah</a> &middot; <a href="https://utah.com/destinations/natural-areas/san-rafael-swell/hiking/wild-horse-window/" target="_blank" rel="noopener">Utah.com</a></td></tr>
-<tr><th>Why go</th><td>Route author's explicit "#1 geological site"; unique cave-bridge hybrid; petroglyphs on R wall (some fake)</td></tr>
-<tr><th>Hazards</th><td>Heat/no shade; loose slickrock; faint trail -> carry GPS</td></tr>
-</table>
-</div>
-
-<div>
-<h3>Tactical slots: Chute &amp; Crack (plus backup: Little Wild Horse / Bell)</h3>
-<table>
-<tr><th>Chute Canyon</th><td><strong>Tactical hike</strong> on itinerary (same badge as WHW). Easier wash; stays wide ~first mile; flexible turnaround. Area: <a href="https://www.alltrails.com/parks/us/utah/crack-canyon-wilderness" target="_blank" rel="noopener">AllTrails Crack Canyon Wilderness</a></td></tr>
-<tr><th>Crack Canyon</th><td><strong>Tactical hike</strong> on itinerary. Stronger slot; ~<strong>10 ft drop</strong> ~1 mi in (~38.6255, -110.7382 WGS84) — down and back up on OAB; camping may exist past trailhead</td></tr>
-<tr><th>Little Wild Horse / Bell</th><td><strong>Backup / bonus</strong> — <strong>default skip</strong> OAB when coming from Behind-the-Reef (long approach before tightest narrows). Consider only <strong>full ~8 mi loop</strong> if whole party accepts scrambling</td></tr>
-<tr><th>Wild Horse Canyon</th><td>Separate AllTrails trail near Goblin Valley area; lower priority for this trip</td></tr>
-<tr><th>All slots</th><td><span class="badge badge-hike">FLASH FLOOD RISK</span> — no entry if rain on the Reef. See <a href="slot-canyon-guide.html">Slot canyon guide</a> for BLM + Grand Canyon Trust links</td></tr>
-</table>
-</div>
-</div>
-
-<h3>Field decision matrix</h3>
-<table>
-<thead><tr><th>Condition</th><th>Recommendation</th></tr></thead>
-<tbody>
-<tr><td>Default / mixed abilities</td><td><strong>Wild Horse Window</strong></td></tr>
-<tr><td>Want easiest canyon walk</td><td><strong>Chute Canyon</strong> (tactical; uncheck if not doing)</td></tr>
-<tr><td>Want slot; party OK with ~10 ft obstacle</td><td><strong>Crack Canyon</strong> (tactical; uncheck if not doing)</td></tr>
-<tr><td>Rain / flood risk</td><td>WHW only; skip slots</td></tr>
-<tr><td>Whole group wants LWH + scrambling + time</td><td>Full <strong>LWH/Bell loop</strong> from signed trailhead (backup waypoints)</td></tr>
-<tr><td>Behind schedule</td><td>Skip optional hikes; Temple Mtn camp</td></tr>
-</tbody>
-</table>
-</div>
-"""
-
-    # Final emergency card
-    emerg_html = """
-<div class="card" id="emergency">
-<h2>Emergency Contacts & Cell Coverage</h2>
-<ul class="clean">
-<li><strong>911</strong> - works where cell exists; via satellite messengers where it does not</li>
-<li><strong>Emery County Sheriff / SAR (Swell)</strong>: <a href="tel:+14353812404">(435) 381-2404</a></li>
-<li><strong>Grand County Sheriff (Moab)</strong>: <a href="tel:+14352598115">(435) 259-8115</a></li>
-<li><strong>Utah Highway Patrol (I-70)</strong>: <a href="tel:+18018873800">(801) 887-3800</a></li>
-<li><strong>BLM Price Field Office</strong>: <a href="tel:+14356363600">(435) 636-3600</a></li>
-<li><strong>BLM Moab Field Office</strong>: <a href="tel:+14352592100">(435) 259-2100</a></li>
-</ul>
-<h3>Cell coverage realities</h3>
-<ul class="clean">
-<li>No coverage: Black Dragon Canyon interior, Buckhorn Draw, Reds Canyon, Behind-the-Reef, most canyon bottoms</li>
-<li>Partial (Verizon/AT&T): top of Buckhorn Draw, Wedge Overlook (sometimes), Temple Mountain</li>
-<li>Full: Green River, Moab, major I-70 / Hwy 191</li>
-<li><strong>At least one satellite messenger (InReach/Zoleo/SPOT) required</strong> shared to a non-traveling contact</li>
-</ul>
-</div>
-"""
+    # Emergency card, driven from trip_config.
+    _contact_lis = ''.join(
+        f'<li><strong>{esc(c["label"])}</strong>: '
+        f'<a href="{esc(c["tel"])}">{esc(c["value"])}</a></li>'
+        for c in cfg.EMERGENCY_CONTACTS
+    )
+    _hosp_lis = ''.join(
+        f'<li><strong>{esc(h["name"])}</strong>: '
+        f'<a href="{esc(h["tel"])}">{esc(h["value"])}</a>'
+        f'<div class="muted" style="font-size:12px">{esc(h["detail"])}</div></li>'
+        for h in cfg.HOSPITALS
+    )
+    _cell_lis = ''.join(f'<li>{esc(z)}</li>' for z in cfg.CELL_DEAD_ZONES)
+    _permit_lis = ''.join(
+        f'<li><strong>{esc(t)}</strong>: {esc(b)}</li>' for t, b in cfg.PERMITS_NOTE
+    )
+    emerg_html = (
+        '<div class="card" id="emergency">'
+        '<h2>Emergency Contacts &amp; Cell Coverage</h2>'
+        '<ul class="clean">' + _contact_lis + '</ul>'
+        '<h3>Nearest medical</h3>'
+        '<ul class="clean">' + _hosp_lis + '</ul>'
+        '<h3>Cell coverage realities</h3>'
+        '<ul class="clean">' + _cell_lis + '</ul>'
+        '<div class="warn" style="margin-top:12px"><strong>Satellite:</strong> '
+        + esc(cfg.SATELLITE_COMMS_NOTE) + '</div>'
+        '</div>'
+        '<div class="card" id="permits">'
+        '<h2>Permits &amp; Passes</h2>'
+        '<ul class="clean">' + _permit_lis + '</ul>'
+        '</div>'
+    )
 
     # POI description dialog: shared with itinerary (see build_itinerary_html)
     ref_poi_desc_map = collect_poi_descriptions(data)
@@ -2717,14 +2603,14 @@ def build_reference_html():
     ref_poi_desc_dialog_js = POI_DESC_DIALOG_JS.format(desc_json=ref_poi_desc_json)
 
     ref_brand_html = (
-        '<h1>2026 San Rafael Swell Adventure + Moab - Reference</h1>'
-        '<div class="meta">May 1 - May 10, 2026 &middot; Full knowledge dump</div>'
+        f'<h1>{cfg.TRIP_TITLE} - Reference</h1>'
+        f'<div class="meta">{cfg.TRIP_DATES_HUMAN} &middot; Full knowledge dump</div>'
     )
     ref_nav_block = _top_nav_html('reference', brand_html=ref_brand_html)
     html_out = f"""<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
-<title>2026 San Rafael Swell + Moab - Reference</title>
+<title>{cfg.TRIP_TITLE} - Reference</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {PWA_HEAD}
 <style>{CSS}</style>
@@ -2735,30 +2621,36 @@ def build_reference_html():
 <div class="card">
 <h2>Trip Overview</h2>
 <div class="summary-grid">
-<div class="summary-stat"><div class="val">{data["trip"]["route_total_miles"]:.0f}</div><div class="lab">Swell route miles</div></div>
-<div class="summary-stat"><div class="val">10</div><div class="lab">Days on trip</div></div>
-<div class="summary-stat"><div class="val">11</div><div class="lab">Overlanders</div></div>
-<div class="summary-stat"><div class="val">7</div><div class="lab">Moab group</div></div>
-<div class="summary-stat"><div class="val">4</div><div class="lab">Swell nights</div></div>
-<div class="summary-stat"><div class="val">4</div><div class="lab">Moab nights</div></div>
+<div class="summary-stat"><div class="val">{data["trip"]["route_total_miles"]:.0f}</div><div class="lab">Route miles</div></div>
+<div class="summary-stat"><div class="val">{len(data["days"])}</div><div class="lab">Days on trip</div></div>
+<div class="summary-stat"><div class="val">4</div><div class="lab">Days on route</div></div>
+<div class="summary-stat"><div class="val">{cfg.GROUP_COUNTS["vehicles"]}</div><div class="lab">Vehicles</div></div>
+<div class="summary-stat"><div class="val">5</div><div class="lab">Nights out</div></div>
+<div class="summary-stat"><div class="val">745</div><div class="lab">Highway miles r/t</div></div>
 </div>
-<p><strong>Adventure rating:</strong> Epic. Peak technical rating: 4. Expect graded dirt with stretches of moderate jeep trails (Eva Conover, Behind the Reef, Eagle Canyon).</p>
+<p>{esc(data["trip"].get("subtitle") or "")} &mdash; a loop starting and ending in the Columbia River Gorge at Carson, WA.
+Surface is mostly graded Forest Service gravel with paved stretches on US 12, FS 23 and FS 90, plus rough
+narrow spurs to High Rock Lookout, Burley Mountain and Walupt Lake. No water crossings and no technical
+obstacles; the challenges here are distance, fuel range, weather and fire closures rather than terrain.</p>
+<div class="warn"><strong>Reservations:</strong> {esc(data["trip"].get("reservations_status") or "")}</div>
 </div>
 
 <div class="card">
 <h2>Real-Time Info Sources</h2>
-<p class="muted">Bookmark all of these. Check weather / flash-flood alerts daily morning when connectivity is available. Full detail: <code>planning/realtime_info_sources.md</code> (repo source).</p>
+<p class="muted">Bookmark all of these. Check the fire and closure links every morning you have signal &mdash; for a September trip in Gifford Pinchot those matter more than the weather. Packwood and Randle are the only reliable coverage on route.</p>
 {rt_html}
 </div>
 
 <div class="card">
 <h2>Fuel Plan</h2>
-<p>Route author: <em>"Be prepared to travel 250+ miles if you do the entire route without refueling."</em></p>
+<p>Only three stations sit on or near the route, and the binding constraint is the
+<strong>154-mile stretch from Carson (mile 2) to Packwood (mile 156)</strong> with no fuel at all.
+Top off in Carson without exception.</p>
 <h3>Fuel stations</h3>
 {stations_html}
 <h3>Route surface breakdown & MPG factors</h3>
 {surface_html}
-<p>Per-vehicle worksheet: <a href="fuel-plan.html">Fuel plan</a> (same offline PWA). Source file for editors: <code>planning/fuel_plan.md</code>.</p>
+<p>Per-vehicle worksheet and the full gap analysis: <a href="fuel-plan.html">Fuel plan</a> (same offline PWA). Source file for editors: <code>planning/fuel_plan.md</code>.</p>
 </div>
 
 {''.join(day_sections)}
@@ -2770,24 +2662,21 @@ def build_reference_html():
 <div class="card">
 <h2>Source Files</h2>
 <ul class="clean">
-<li><a href="san-rafael-swell-adv-route-2025.gpx">Original route GPX (OTG Crew)</a></li>
-<li><code>Utah_Destinations_In_San_Rafael_Area.md</code> (raw POI list)</li>
-<li><code>planning/poi_decisions.md</code> (locked POI triage)</li>
-<li><a href="slot-canyon-guide.html">Slot canyon guide</a> (Day 3 hikes + links; offline) &mdash; source <code>planning/slot-canyon-guide.md</code></li>
-<li><a href="moab-camping.html">Moab camping</a> (BLM / Sand Flats / nearby options + map; offline) — edited as <code>moab-camping.html</code> in repo root</li>
-<li><a href="moab-trails.html">Moab trails</a> (BOH + RR4W ≤6 reference, links, rig notes; offline) — <code>moab-trails.html</code> in repo root</li>
-<li><code>planning/campsite_plan.md</code> (camps + live availability check)</li>
-<li><a href="fuel-plan.html">Fuel plan</a> (full worksheet; offline) &mdash; source <code>planning/fuel_plan.md</code></li>
-<li><code>planning/realtime_info_sources.md</code></li>
-<li><a href="trip-plan.gpx" download>trip-plan.gpx</a> (derived route with day splits + camps labeled)</li>
-<li><a href="overland-alternates.html">Alternate Swell routes (overview)</a> (offline) — source <code>planning/overland_alternates.md</code>; daily alt markdown <code>planning/trip-itinerary-alt-a.md</code>, <code>planning/trip-itinerary-alt-b.md</code>, <code>planning/trip-itinerary-alt-d.md</code></li>
+<li><a href="{cfg.ROUTE_GPX_FILENAME}">Original route GPX</a> &mdash; 106 waypoints and the 325-mile main track</li>
+<li><a href="trip-plan.gpx" download>trip-plan.gpx</a> &mdash; derived route with day splits and labeled camps, for Gaia / onX / CalTopo / Garmin</li>
+<li><a href="camping-plan.html">Camping plan</a> (offline) &mdash; source <code>planning/camping_plan.md</code></li>
+<li><a href="fuel-plan.html">Fuel plan</a> (offline) &mdash; source <code>planning/fuel_plan.md</code></li>
+<li><a href="fire-and-closures.html">Fire &amp; closures</a> (offline) &mdash; source <code>planning/fire_and_closures.md</code></li>
+<li><code>scripts/trip_config.py</code> &mdash; trip identity: title, dates, contacts, map bbox</li>
+<li><code>scripts/build_trip_data.py</code> &mdash; day split, campground plan, fuel plan, live links</li>
+<li><code>scripts/trip_core.py</code> &mdash; POI catalog and scheduler stop-time defaults</li>
 </ul>
 </div>
 
 <div class="card">
-<h2>Live NWS Utah alerts</h2>
+<h2>{cfg.NWS_ALERT_LABEL}</h2>
 <p class="muted">Fetched live when online; ignore if viewing offline. Use <strong>Menu → Weather</strong> or the per-day weather blocks when connectivity is available.</p>
-<div id="live-alerts" class="alerts-banner alerts-loading">Checking live NWS Utah alerts...</div>
+<div id="live-alerts" class="alerts-banner alerts-loading">Checking {cfg.NWS_ALERT_LABEL}...</div>
 </div>
 {POI_DESC_DIALOG_HTML}
 </main>
@@ -2796,17 +2685,17 @@ function escHTML(s){{return String(s==null?'':s).replace(/[&<>"']/g,c=>({{'&':'&
 async function loadAlerts(){{
   const el=document.getElementById('live-alerts'); if(!el) return;
   try{{
-    const r=await fetch('https://api.weather.gov/alerts/active?area=UT',{{headers:{{'Accept':'application/geo+json'}}}});
+    const r=await fetch('https://api.weather.gov/alerts/active?area={cfg.NWS_ALERT_AREA}',{{headers:{{'Accept':'application/geo+json'}}}});
     if(!r.ok) throw new Error('NWS HTTP '+r.status);
     const j=await r.json(); const feats=j.features||[]; const now=new Date().toLocaleString();
     if(!feats.length){{ el.classList.remove('alerts-loading'); el.classList.add('alerts-ok');
-      el.innerHTML='<strong>No active NWS alerts for Utah.</strong> <span class="muted">Checked '+escHTML(now)+'. <a href="https://www.weather.gov/slc/WWA" target="_blank" rel="noopener">Full feed</a></span>'; return; }}
+      el.innerHTML='<strong>No active NWS alerts for {cfg.NWS_ALERT_AREA}.</strong> <span class="muted">Checked '+escHTML(now)+'. <a href="https://www.weather.gov/alerts" target="_blank" rel="noopener">Full feed</a></span>'; return; }}
     const rank=e=>/Flash Flood Warning/i.test(e)?0:/Flood Warning/i.test(e)?1:/Severe Thunderstorm Warning/i.test(e)?2:/Warning/i.test(e)?3:/Red Flag/i.test(e)?4:/Watch/i.test(e)?5:/Advisory/i.test(e)?6:7;
     feats.sort((a,b)=>rank(a.properties.event||'')-rank(b.properties.event||''));
     const rows=feats.map(f=>{{const p=f.properties||{{}};const exp=p.expires?new Date(p.expires).toLocaleString():'';
       return '<li><strong>'+escHTML(p.event)+'</strong> &middot; <span class="muted">'+escHTML(p.severity||'')+'</span> &middot; '+escHTML(p.areaDesc||'')+(exp?' &middot; <em>expires '+escHTML(exp)+'</em>':'')+(p.headline?'<div class="alert-desc">'+escHTML(p.headline)+'</div>':'')+'</li>';}}).join('');
     el.classList.remove('alerts-loading'); el.classList.add('alerts-active');
-    el.innerHTML='<strong>'+feats.length+' active NWS Utah alert'+(feats.length===1?'':'s')+'.</strong> <span class="muted">Fetched '+escHTML(now)+'. <a href="https://www.weather.gov/slc/WWA" target="_blank" rel="noopener">Full feed</a></span><ul class="alert-list">'+rows+'</ul>';
+    el.innerHTML='<strong>'+feats.length+' active NWS {cfg.NWS_ALERT_AREA} alert'+(feats.length===1?'':'s')+'.</strong> <span class="muted">Fetched '+escHTML(now)+'. <a href="https://www.weather.gov/alerts" target="_blank" rel="noopener">Full feed</a></span><ul class="alert-list">'+rows+'</ul>';
   }}catch(err){{ el.classList.remove('alerts-loading'); el.classList.add('alerts-offline');
     el.innerHTML='<strong>Live alert check unavailable</strong> <span class="muted">('+escHTML(err.message)+'). See links above when online.</span>'; }}
 }}
@@ -2829,22 +2718,22 @@ def _gpx_esc(s):
 def build_gpx(variant=None):
     """Build a GPX file matching the current module-level `data`.
 
-    `variant` only affects the <metadata> <name>/<desc> strings so each
-    alternate's GPX download self-documents its variant. Defaults to
-    VARIANT_MAIN strings for backwards compatibility."""
+    `variant` only affects the <metadata> <name>/<desc> strings. Defaults to
+    VARIANT_MAIN."""
     variant = variant or VARIANT_MAIN
-    gpx_name = variant.get('gpx_metadata_name', '2026 San Rafael Swell Trip Plan')
-    gpx_desc = variant.get('gpx_metadata_desc',
-                           'Day-split tracks, primary POIs, and primary/backup campsites for the May 1-10, 2026 trip.')
+    gpx_name = variant.get('gpx_metadata_name', f'{cfg.TRIP_TITLE} Trip Plan')
+    gpx_desc = variant.get(
+        'gpx_metadata_desc',
+        f'Day-split tracks, POIs, and primary/backup campgrounds for the {cfg.TRIP_DATES_HUMAN} trip.')
     out = []
     out.append('<?xml version="1.0" encoding="UTF-8"?>')
     out.append('<gpx version="1.1" creator="build_deliverables.py" xmlns="http://www.topografix.com/GPX/1/1">')
     out.append(f'<metadata><name>{_gpx_esc(gpx_name)}</name>'
                f'<desc>{_gpx_esc(gpx_desc)}</desc>'
-               f'<time>2026-04-16T00:00:00Z</time></metadata>')
+               f'<time>{data.get("generated_at", cfg.TRIP_DATE_START)}T00:00:00Z</time></metadata>')
 
     # Waypoints: POIs (primary / hike) + campsites (primary/secondary tagged).
-    # Dedupe camps by (lat, lon) so Moab days that share camps don't repeat.
+    # Dedupe camps by (lat, lon) so days that reuse a camp don't repeat it.
     seen_camps = set()
     for d in data['days']:
         for p in (d.get('pois') or []):
@@ -2912,7 +2801,7 @@ def build_gpx(variant=None):
                         '</wpt>',
                     ]))
 
-    # Tracks: one <trk> per Swell day
+    # Tracks: one <trk> per day
     for d in data['days']:
         pts = d.get('track_points') or []
         if not pts:
@@ -2922,11 +2811,14 @@ def build_gpx(variant=None):
             out.append(f'<trkpt lat="{lat}" lon="{lon}"></trkpt>')
         out.append('</trkseg></trk>')
 
-    # Freeway Access alternate track
-    alt = data.get('alternate_tracks', {}).get('freeway_access')
-    if alt and alt.get('points'):
-        out.append('<trk><name>[ALT] Freeway Access (bypass tunnel for tall rigs)</name><trkseg>')
-        for lat, lon in alt['points']:
+    # Extra polyline for days that also cover a highway leg (e.g. the final
+    # day closes the loop and then drives home).
+    for d in data['days']:
+        extra = d.get('extra_track_points') or []
+        if not extra:
+            continue
+        out.append(f'<trk><name>{_gpx_esc(d["label"] + " - highway leg")}</name><trkseg>')
+        for lat, lon in extra:
             out.append(f'<trkpt lat="{lat}" lon="{lon}"></trkpt>')
         out.append('</trkseg></trk>')
 
@@ -2938,17 +2830,17 @@ def build_gpx(variant=None):
 # Render driver: one variant = one HTML itinerary + one GPX file.
 # -----------------------------------------------------------------------------
 def render_variant(variant):
-    """Render a single variant's itinerary HTML + GPX from its trip_data JSON.
+    """Render a variant's itinerary HTML + GPX from its trip_data JSON.
 
     Reassigns the module-level `data` and `overview_track` globals so the
     existing build_itinerary_html / build_gpx helpers (which read from them)
-    operate on the new variant without having to thread `data` through every
+    operate on the loaded payload without threading `data` through every
     nested call."""
     global data, overview_track
     payload_path = variant['data_path']
     if not payload_path.exists():
         print(f'Skipping {variant["key"]}: {payload_path.relative_to(BASE)} missing '
-              f'(run scripts/alts/alt_*.py first)')
+              f'(run scripts/build_trip_data.py first)')
         return
     data = json.loads(payload_path.read_text(encoding='utf-8'))
     overview_track = prepare_variant_context(data)
@@ -2963,19 +2855,14 @@ def render_variant(variant):
 
 
 def main():
-    # Main itinerary + reference (reference only for main, since POI catalog,
-    # fuel plan, and emergency info are shared across variants).
-    render_variant(VARIANT_MAIN)
+    for variant in ALL_VARIANTS:
+        render_variant(variant)
 
     ref = build_reference_html()
     (OUT_DIR / 'trip-reference.html').write_text(ref, encoding='utf-8')
     print(f'Wrote trip-reference.html ({len(ref) / 1024:.1f} KB)')
 
-    # Alternates: HTML + GPX per variant.
-    for variant in (VARIANT_ALT_A, VARIANT_ALT_B, VARIANT_ALT_D):
-        render_variant(variant)
-
-    # Standalone markdown -> HTML PWA pages (slot guide, fuel plan, alt overview).
+    # Standalone markdown -> HTML PWA pages (fuel, fire & closures, camping).
     write_planning_markdown_pages()
     write_weather_html()
 
