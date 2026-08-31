@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
-<title>Trip weather — WA Cascades</title>
+<title>Camping plan - WA Cascades</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0d1117">
 <meta name="description" content="Offline-first trip app for the September 8-13, 2026 Washington Cascades Adventure Route: a 325-mile Gifford Pinchot National Forest loop with daily itinerary, maps, campgrounds, fuel planning, weather and fire/closure tracking.">
@@ -149,15 +149,8 @@ article.md-page hr { border: none; border-top: 1px solid #30363d; margin: 22px 0
   article.md-page table { display: block; overflow-x: auto; max-width: 100vw; }
 }
 </style>
-<style>
-.weather-page-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
-#weather-refresh{background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:8px 14px;border-radius:6px;cursor:pointer;font:inherit}
-#weather-refresh:hover{border-color:#58a6ff}
-.weather-trip-table{width:100%;font-size:14px}
-.weather-concerns,.weather-concerns-tight{margin:6px 0;padding-left:1.2em;font-size:13px}
-</style>
 </head><body>
-<header class="trip-chrome" data-trip-nav aria-label="Trip pages"><div class="trip-chrome-row1"><div class="trip-chrome-brand"><h1>Washington Cascades Adventure Route</h1><div class="meta">September 8-13, 2026 &middot; 6 vehicles &middot; Route: ~325 mi loop</div></div><button type="button" class="top-nav-menu-btn" aria-expanded="false" aria-controls="top-nav-list">Menu</button></div><div class="top-nav-backdrop" hidden aria-hidden="true"></div><ul class="top-nav-list" id="top-nav-list"><li><a href="trip-itinerary.html">Daily itinerary</a></li><li><a href="fuel-plan.html">Fuel plan</a></li><li class="top-nav-li-active"><span class="top-nav-current" aria-current="page">Weather</span></li><li><a href="fire-and-closures.html">Fire &amp; closures</a></li><li><a href="camping-plan.html">Camping plan</a></li><li><a href="trip-reference.html">Full reference</a></li><li><a href="trip-plan.gpx" download>GPX</a></li></ul></header>
+<header class="trip-chrome" data-trip-nav aria-label="Trip pages"><div class="trip-chrome-row1"><div class="trip-chrome-brand"><h1>Washington Cascades Adventure Route</h1><div class="meta">September 8-13, 2026 &middot; 6 vehicles &middot; Route: ~325 mi loop</div></div><button type="button" class="top-nav-menu-btn" aria-expanded="false" aria-controls="top-nav-list">Menu</button></div><div class="top-nav-backdrop" hidden aria-hidden="true"></div><ul class="top-nav-list" id="top-nav-list"><li><a href="trip-itinerary.html">Daily itinerary</a></li><li><a href="fuel-plan.html">Fuel plan</a></li><li><a href="weather.html">Weather</a></li><li><a href="fire-and-closures.html">Fire &amp; closures</a></li><li class="top-nav-li-active"><span class="top-nav-current" aria-current="page">Camping plan</span></li><li><a href="trip-reference.html">Full reference</a></li><li><a href="trip-plan.gpx" download>GPX</a></li></ul></header>
 <script>
 (function(){
 function init(){
@@ -223,22 +216,243 @@ else init();
 </script>
 
 <article class="md-page">
-<h1>Trip weather — dual forecast</h1>
-<p class="muted">NWS (NOAA) grid forecast and Open-Meteo, matched to each itinerary day and its camp location. Fetched when online and cached in this browser for offline use (about a 90-minute window). This does not replace the <a href="trip-itinerary.html">live NWS Washington alerts</a> strip on the itinerary, or the <a href="fire-and-closures.html">fire and closures</a> checks before departure.</p>
-<p class="muted"><strong>September in the Cascades:</strong> the camps on this route sit between 3,900 and 4,400 ft and the passes go higher. Expect large day/night swings, real rain potential on the west side, and an outside chance of an early snow event at elevation. Freezing overnight temperatures at Takhlakh and Walupt are normal in mid-September.</p>
-<div class="weather-page-toolbar">
-<button type="button" id="weather-refresh">Refresh forecasts</button>
-</div>
-<p id="weather-status" class="muted"></p>
-<table class="weather-trip-table" id="weather-trip-table">
-<thead><tr><th>Day</th><th>NWS summary</th><th>Open-Meteo (daily)</th><th>Notable concerns</th></tr></thead>
-<tbody id="weather-trip-tbody"></tbody>
+<h1>Camping plan</h1>
+<p><strong>Nothing is reserved.</strong> Every availability figure below is a Recreation.gov snapshot taken on
+<strong>2026-08-31</strong> and it will drift. This page exists so whoever does the booking has the whole
+picture on one screen.</p>
+<p>Two facts drive the entire plan:</p>
+<ol>
+<li><strong>Friday Sep 11 and Saturday Sep 12 are a weekend</strong>, and Gifford Pinchot campgrounds are
+   largely booked out on those nights. Availability on Tuesday through Thursday is comfortable;
+   on the weekend it collapses.</li>
+<li><strong>Ordinary Forest Service sites hold one or two vehicles.</strong> Six rigs need either a reservable
+   group site or several adjacent numbered sites.</li>
+</ol>
+<hr />
+<h2>Book in this order</h2>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Night</th>
+<th>Campground</th>
+<th>Why it is urgent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td>Fri Sep 11 <strong>and</strong> Sat Sep 12</td>
+<td><a href="https://www.recreation.gov/camping/campgrounds/232898">North Fork <strong>Elk Group Camp</strong></a></td>
+<td>A single group site that covers the whole party, and it was open on <strong>both</strong> weekend nights when almost nothing else was. One booking solves the two hardest nights. If this goes, everything gets harder.</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Wed Sep 9</td>
+<td><a href="https://www.recreation.gov/camping/campgrounds/232861">Takhlakh Lake</a></td>
+<td>The signature camp of the route — Mount Adams reflected in the lake. 22 sites open Wednesday, <strong>zero</strong> on Fri or Sat. The whole day split is arranged around getting here midweek.</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Tue Sep 8 <strong>and</strong> Sat Sep 12</td>
+<td><a href="https://www.recreation.gov/camping/campgrounds/233103">Panther Creek</a></td>
+<td>First and last night. 19 sites open Tuesday but only 5 on Saturday, so book both at once.</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Thu Sep 10</td>
+<td><a href="https://www.recreation.gov/camping/campgrounds/232860">Walupt Lake</a></td>
+<td>Only 7 sites open Thursday — thinner than Takhlakh. Goat Rocks trailheads leave from the campground.</td>
+</tr>
+</tbody>
 </table>
-<p class="muted" style="margin-top:16px"><strong>Sources:</strong> <a href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noopener">api.weather.gov</a> · <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Offices: <a href="https://www.weather.gov/pqr" target="_blank" rel="noopener">NWS Portland</a> · <a href="https://www.weather.gov/sew" target="_blank" rel="noopener">NWS Seattle</a></p>
+<p>If the Elk Group site is already gone, fall back to
+<a href="https://www.recreation.gov/camping/campgrounds/232855">Tower Rock</a> for Friday. It had the best
+weekend availability found anywhere on the route (10 sites Friday, 8 Saturday) and sits only two
+miles further along at route mile 228.6.</p>
+<hr />
+<h2>Availability snapshot, 2026-08-31</h2>
+<p>Reservable sites showing as available, by night. Watch the cliff between Thursday and Friday.</p>
+<table>
+<thead>
+<tr>
+<th>Campground</th>
+<th>Route mi</th>
+<th>Sep 8</th>
+<th>Sep 9</th>
+<th>Sep 10</th>
+<th>Sep 11</th>
+<th>Sep 12</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Peterson Prairie</td>
+<td>36.0</td>
+<td>17</td>
+<td>17</td>
+<td>18</td>
+<td>12</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Takhlakh Lake</td>
+<td>83.5</td>
+<td>16</td>
+<td><strong>22</strong></td>
+<td>18</td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>Adams Fork</td>
+<td>99.6</td>
+<td>15</td>
+<td>16</td>
+<td>16</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Walupt Lake</td>
+<td>132.8</td>
+<td>17</td>
+<td>16</td>
+<td><strong>7</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>North Fork</td>
+<td>226.2</td>
+<td>10</td>
+<td>9</td>
+<td>7</td>
+<td><strong>1</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>North Fork <strong>Bear Group</strong></td>
+<td>226</td>
+<td>open</td>
+<td>open</td>
+<td>open</td>
+<td><strong>taken</strong></td>
+<td><strong>taken</strong></td>
+</tr>
+<tr>
+<td>North Fork <strong>Elk Group</strong></td>
+<td>226</td>
+<td>open</td>
+<td>taken</td>
+<td>taken</td>
+<td><strong>open</strong></td>
+<td><strong>open</strong></td>
+</tr>
+<tr>
+<td>Tower Rock</td>
+<td>228.6</td>
+<td>14</td>
+<td>14</td>
+<td>14</td>
+<td><strong>10</strong></td>
+<td><strong>8</strong></td>
+</tr>
+<tr>
+<td>Iron Creek</td>
+<td>230.8</td>
+<td><strong>closed all week</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Panther Creek</td>
+<td>308.4</td>
+<td><strong>19</strong></td>
+<td>17</td>
+<td>18</td>
+<td><strong>5</strong></td>
+<td><strong>5</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Two things worth flagging beyond the numbers:</p>
+<ul>
+<li><strong>Iron Creek is closed</strong> for the entire trip window. It is a well-known campground on this stretch
+  and it is not available, so do not plan around it.</li>
+<li>Most of these campgrounds also hold <strong>first-come sites</strong> that never appear in the reservable
+  counts: Takhlakh has 18, Walupt 14, Panther Creek 9, Peterson Prairie 9, North Fork 7, Adams Fork
+  7, Tower Rock 6. That is real backup capacity for a rig or two, but it is not something to rely on
+  for six vehicles arriving together on a Friday.</li>
+</ul>
+<hr />
+<h2>The plan, night by night</h2>
+<h3>Tue Sep 8 — Panther Creek Campground (route mile 308.4)</h3>
+<p>Arriving from Nampa around 3:30 to 4:30 PM Pacific. Panther Creek is a forest campground about
+11 miles up Wind River Road from Carson, which means a short backtrack to route mile 0 in the
+morning. Worth it: it is the same camp as the final night, so the group only learns one site, and
+it had the best Tuesday availability of anything nearby.</p>
+<p><strong>Alternative:</strong> Home Valley Campground, a Skamania County park directly on the Columbia and only
+2.9 miles from route mile 0. It is the first campground you reach driving in from the east and it
+has the only showers near the route. The trade-off is that it sits between WA-14 and the BNSF main
+line, so expect highway and train noise. Booked through Skamania County, not Recreation.gov.</p>
+<p><strong>Not recommended:</strong> pushing 35 miles onto the route Tuesday evening to bank miles. It does not
+shorten the days that are actually long, and it puts camp setup at dusk after a nine-hour travel day.</p>
+<h3>Wed Sep 9 — Takhlakh Lake Campground (route mile 83.5)</h3>
+<p>The best camp on the route and the reason Day 1 is 85 miles. Mount Adams sits directly across the
+lake. Non-motorised boating only, which keeps it quiet. Sites in the 30s and 40s showed the most
+availability; book adjacent ones.</p>
+<p>Backups nearby, all first-come and all small: Council Lake (mile 79.2), Olallie Lake (82.8), Chain
+of Lakes (83.2), Horseshoe Lake (89.5). Any of them can absorb an overflow rig but none can take
+six.</p>
+<h3>Thu Sep 10 — Walupt Lake Campground (route mile 132.8)</h3>
+<p>Second-largest lake in the forest and the deepest in the county, at the end of a long rough access
+road — budget for the drive in. Goat Rocks Wilderness trailheads leave from the campground, so this
+is the camp to pick if anyone wants to walk further than the day's POIs.</p>
+<p><strong>Backup:</strong> Chambers Lake at mile 140.5 is first-come and not on Recreation.gov, so availability
+cannot be checked in advance. It is a reasonable Plan B on arrival.</p>
+<p><strong>Alternative shape:</strong> camping at Adams Fork (mile 99.6) instead shortens Thursday to 15 miles and
+lengthens Friday to 127. Only do this if the group wants a very easy Thursday, or if Walupt falls
+through entirely.</p>
+<h3>Fri Sep 11 — North Fork Elk Group Camp (route mile 226.2)</h3>
+<p>The most important reservation of the trip. A single reservable group site on the Cispus with a
+group shelter area, which is exactly the right shape for six vehicles, and it was open on both
+Friday and Saturday when the rest of the forest was not.</p>
+<p><strong>Backup:</strong> Tower Rock at mile 228.6, booking several adjacent numbered sites.</p>
+<p><strong>Do not plan on:</strong> North Fork Bear Group (already taken both weekend nights) or North Fork
+Campground proper (1 site Friday, 0 Saturday).</p>
+<h3>Sat Sep 12 — Panther Creek Campground (route mile 308.4)</h3>
+<p>Right after Panther Creek Falls, and it leaves only 16 miles of loop to close on Sunday morning.
+Only 5 reservable sites showed open, so book it early alongside the Tuesday night.</p>
+<p><strong>Worth considering instead:</strong> run the full loop to Triangle Pass on Saturday and drop 21 miles down
+to Home Valley Campground. That makes Saturday about 117 miles instead of 82, but it buys hot
+showers before a 368-mile drive and leaves nothing to do Sunday but leave. This is a real trade,
+not a fallback — decide as a group.</p>
+<p><strong>Bail-out only:</strong> Crest Camp at mile 302.7 is free, primitive, and fits a couple of rigs at most.</p>
+<hr />
+<h2>Practical notes</h2>
+<ul>
+<li><strong>Water.</strong> Takhlakh, Walupt, North Fork, Tower Rock and Panther Creek all have potable water.
+  The primitive High Lakes sites (Council, Olallie, Chain of Lakes, Horseshoe, Cat Creek, Chambers)
+  do <strong>not</strong>. Carry enough that a dry camp is survivable.</li>
+<li><strong>Fees.</strong> Reservable sites are paid at booking. First-come sites use a fee tube — bring small
+  bills. Home Valley is a county park with its own fee structure.</li>
+<li><strong>Elevation and cold.</strong> Takhlakh sits at 4,390 ft and Walupt at 3,927 ft. Frost and near-freezing
+  overnight lows are normal in mid-September. Plan bedding for the low 30s even if the forecast
+  looks mild.</li>
+<li><strong>Fire rings.</strong> Every planned camp is a developed campground with a ring, which is the best case
+  under a Stage 1 fire restriction. A Stage 2 order removes fires everywhere, so bring a gas stove
+  regardless. See <a href="fire-and-closures.html">fire and closures</a>.</li>
+<li><strong>Northwest Forest Pass.</strong> Not needed for camping, but required to park at most trailheads on
+  this route. Every vehicle that parks at a trailhead needs its own.</li>
+<li><strong>Trailers.</strong> Small adventure trailers are fine at all of these. The rough access roads to Walupt
+  Lake and the High Rock spur are the places to be careful.</li>
+<li><strong>Arrival discipline.</strong> On the weekend nights especially, send one vehicle ahead to claim and
+  confirm the site while the rest of the group finishes the day's POIs.</li>
+</ul>
 </article>
-<script>window.__WCA_WEATHER_ALL__={"main": [{"day_id": "sep8_travel", "date_iso": "2026-09-08", "lat": 45.8197, "lon": -121.8797, "location_label": "Panther Creek camp, Wind River (1,000 ft)", "trip_label": "Sep 8 (Tue) - Travel to the Gorge", "trip_title": "Nampa, ID -> Carson, WA (Panther Creek camp)"}, {"day_id": "day1_cascades", "date_iso": "2026-09-09", "lat": 46.2808, "lon": -121.5986, "location_label": "Takhlakh Lake camp (4,390 ft)", "trip_label": "Sep 9 (Wed) - Day 1: Carson -> Takhlakh Lake", "trip_title": "Day 1: Columbia Gorge -> Indian Heaven -> Takhlakh Lake"}, {"day_id": "day2_cascades", "date_iso": "2026-09-10", "lat": 46.4231, "lon": -121.4736, "location_label": "Walupt Lake camp (3,927 ft)", "trip_label": "Sep 10 (Thu) - Day 2: Takhlakh -> Walupt Lake", "trip_title": "Day 2: Takh Takh lava -> Upper Cispus -> Walupt Lake"}, {"day_id": "day3_cascades", "date_iso": "2026-09-11", "lat": 46.4525, "lon": -121.7889, "location_label": "North Fork camp, Cispus River (1,500 ft)", "trip_label": "Sep 11 (Fri) - Day 3: Walupt -> North Fork", "trip_title": "Day 3: Packwood fuel -> High Rock Lookout -> Randle -> North Fork"}, {"day_id": "day4_cascades", "date_iso": "2026-09-12", "lat": 45.8197, "lon": -121.8797, "location_label": "Panther Creek camp, Wind River (1,000 ft)", "trip_label": "Sep 12 (Sat) - Day 4: North Fork -> Panther Creek", "trip_title": "Day 4: Burley Mountain -> Elk Pass -> lava caves -> Panther Creek"}, {"day_id": "sep13_return", "date_iso": "2026-09-13", "lat": 45.7411, "lon": -121.8214, "location_label": "Carson / Columbia Gorge (departure)", "trip_label": "Sep 13 (Sun) - Close the loop + drive home", "trip_title": "Panther Creek -> Triangle Pass (loop close) -> Nampa, ID"}]};</script>
-<script src="weather-client.js"></script>
-<script>(function(){var q=new URLSearchParams(location.search);var v=q.get('variant')||'main';var all=window.__WCA_WEATHER_ALL__||{};var days=all[v]||all.main||[];if(window.TripWeather)TripWeather.init({variantKey:v,days:days,mode:'weather_page',allVariants:all});})();</script>
 <script>
 (function(){
   if (!('serviceWorker' in navigator)) return;

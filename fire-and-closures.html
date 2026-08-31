@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
-<title>Trip weather — WA Cascades</title>
+<title>Fire & closures - WA Cascades</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0d1117">
 <meta name="description" content="Offline-first trip app for the September 8-13, 2026 Washington Cascades Adventure Route: a 325-mile Gifford Pinchot National Forest loop with daily itinerary, maps, campgrounds, fuel planning, weather and fire/closure tracking.">
@@ -149,15 +149,8 @@ article.md-page hr { border: none; border-top: 1px solid #30363d; margin: 22px 0
   article.md-page table { display: block; overflow-x: auto; max-width: 100vw; }
 }
 </style>
-<style>
-.weather-page-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
-#weather-refresh{background:#21262d;color:#e6edf3;border:1px solid #30363d;padding:8px 14px;border-radius:6px;cursor:pointer;font:inherit}
-#weather-refresh:hover{border-color:#58a6ff}
-.weather-trip-table{width:100%;font-size:14px}
-.weather-concerns,.weather-concerns-tight{margin:6px 0;padding-left:1.2em;font-size:13px}
-</style>
 </head><body>
-<header class="trip-chrome" data-trip-nav aria-label="Trip pages"><div class="trip-chrome-row1"><div class="trip-chrome-brand"><h1>Washington Cascades Adventure Route</h1><div class="meta">September 8-13, 2026 &middot; 6 vehicles &middot; Route: ~325 mi loop</div></div><button type="button" class="top-nav-menu-btn" aria-expanded="false" aria-controls="top-nav-list">Menu</button></div><div class="top-nav-backdrop" hidden aria-hidden="true"></div><ul class="top-nav-list" id="top-nav-list"><li><a href="trip-itinerary.html">Daily itinerary</a></li><li><a href="fuel-plan.html">Fuel plan</a></li><li class="top-nav-li-active"><span class="top-nav-current" aria-current="page">Weather</span></li><li><a href="fire-and-closures.html">Fire &amp; closures</a></li><li><a href="camping-plan.html">Camping plan</a></li><li><a href="trip-reference.html">Full reference</a></li><li><a href="trip-plan.gpx" download>GPX</a></li></ul></header>
+<header class="trip-chrome" data-trip-nav aria-label="Trip pages"><div class="trip-chrome-row1"><div class="trip-chrome-brand"><h1>Washington Cascades Adventure Route</h1><div class="meta">September 8-13, 2026 &middot; 6 vehicles &middot; Route: ~325 mi loop</div></div><button type="button" class="top-nav-menu-btn" aria-expanded="false" aria-controls="top-nav-list">Menu</button></div><div class="top-nav-backdrop" hidden aria-hidden="true"></div><ul class="top-nav-list" id="top-nav-list"><li><a href="trip-itinerary.html">Daily itinerary</a></li><li><a href="fuel-plan.html">Fuel plan</a></li><li><a href="weather.html">Weather</a></li><li class="top-nav-li-active"><span class="top-nav-current" aria-current="page">Fire &amp; closures</span></li><li><a href="camping-plan.html">Camping plan</a></li><li><a href="trip-reference.html">Full reference</a></li><li><a href="trip-plan.gpx" download>GPX</a></li></ul></header>
 <script>
 (function(){
 function init(){
@@ -223,22 +216,175 @@ else init();
 </script>
 
 <article class="md-page">
-<h1>Trip weather — dual forecast</h1>
-<p class="muted">NWS (NOAA) grid forecast and Open-Meteo, matched to each itinerary day and its camp location. Fetched when online and cached in this browser for offline use (about a 90-minute window). This does not replace the <a href="trip-itinerary.html">live NWS Washington alerts</a> strip on the itinerary, or the <a href="fire-and-closures.html">fire and closures</a> checks before departure.</p>
-<p class="muted"><strong>September in the Cascades:</strong> the camps on this route sit between 3,900 and 4,400 ft and the passes go higher. Expect large day/night swings, real rain potential on the west side, and an outside chance of an early snow event at elevation. Freezing overnight temperatures at Takhlakh and Walupt are normal in mid-September.</p>
-<div class="weather-page-toolbar">
-<button type="button" id="weather-refresh">Refresh forecasts</button>
-</div>
-<p id="weather-status" class="muted"></p>
-<table class="weather-trip-table" id="weather-trip-table">
-<thead><tr><th>Day</th><th>NWS summary</th><th>Open-Meteo (daily)</th><th>Notable concerns</th></tr></thead>
-<tbody id="weather-trip-tbody"></tbody>
+<h1>Fire, smoke and closures</h1>
+<p><strong>This is the go/no-go page for this trip.</strong> Mid-September is the tail of fire season in the
+Washington Cascades. On a route made almost entirely of Forest Service roads inside one national
+forest, a single incident can close a road, a campground, or an entire area with little notice.
+Terrain is not the risk on this trip. Fire, smoke and closures are.</p>
+<p>Check these the week before departure, the morning you leave, and every morning you have signal
+(realistically Packwood and Randle, plus Carson at the start).</p>
+<hr />
+<h2>Check these first</h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>What it tells you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.fs.usda.gov/r06/giffordpinchot/alerts">Gifford Pinchot NF alerts &amp; closures</a></td>
+<td>The authoritative list of forest orders, road closures and area closures. <strong>Start here.</strong></td>
+</tr>
+<tr>
+<td><a href="https://www.fs.usda.gov/detail/giffordpinchot/fire">Gifford Pinchot NF fire restrictions</a></td>
+<td>Whether campfires are allowed at all, and where</td>
+</tr>
+<tr>
+<td><a href="https://www.fs.usda.gov/r06/giffordpinchot/conditions">Gifford Pinchot road conditions</a></td>
+<td>Road-specific status, including seasonal and storm closures</td>
+</tr>
+<tr>
+<td><a href="https://inciweb.wildfire.gov/">InciWeb</a></td>
+<td>Every active incident nationally, with perimeter maps</td>
+</tr>
+<tr>
+<td><a href="https://fire.airnow.gov/">AirNow Fire &amp; Smoke map</a></td>
+<td>Live smoke plus ground-level air quality. The best single smoke picture</td>
+</tr>
+<tr>
+<td><a href="https://www.dnr.wa.gov/Wildfires">WA DNR wildfires</a></td>
+<td>State-lands fires and statewide burn restrictions</td>
+</tr>
+<tr>
+<td><a href="https://wasmoke.blogspot.com/">WA Smoke Information blog</a></td>
+<td>Plain-language smoke forecast discussion from state agencies</td>
+</tr>
+<tr>
+<td><a href="https://gacc.nifc.gov/nwcc/">Northwest Interagency Coordination Center</a></td>
+<td>Regional situation report and preparedness level</td>
+</tr>
+</tbody>
 </table>
-<p class="muted" style="margin-top:16px"><strong>Sources:</strong> <a href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noopener">api.weather.gov</a> · <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Offices: <a href="https://www.weather.gov/pqr" target="_blank" rel="noopener">NWS Portland</a> · <a href="https://www.weather.gov/sew" target="_blank" rel="noopener">NWS Seattle</a></p>
+<p>Phone, when the web is ambiguous:</p>
+<ul>
+<li><strong>Mt Adams Ranger District (Trout Lake)</strong> — (509) 395-3402. Covers roughly route miles 0 to 95.</li>
+<li><strong>Cowlitz Valley Ranger District (Randle)</strong> — (360) 497-1103. Covers roughly route miles 95 to 325.</li>
+</ul>
+<p>Ranger district offices keep limited hours and are often closed Tuesday, Thursday and weekends.
+Call early in the week before departure, not the day before.</p>
+<hr />
+<h2>What a closure actually does to this route</h2>
+<p>The loop has few alternates. Most of it is a single road corridor, so a closure usually means
+skipping a segment rather than routing around it.</p>
+<table>
+<thead>
+<tr>
+<th>If this closes</th>
+<th>Effect</th>
+<th>Workaround</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FS 23 over Babyshoe Pass (mi 60–92)</td>
+<td>Cuts Day 1 from Indian Heaven to Takhlakh</td>
+<td>Back out to Trout Lake and approach Takhlakh from the east via FS 88 / FS 23 north</td>
+</tr>
+<tr>
+<td>Walupt Lake Rd (mi 133)</td>
+<td>Loses the Day 2 camp</td>
+<td>Camp Chambers Lake or Adams Fork instead</td>
+</tr>
+<tr>
+<td>High Rock spur (mi 177)</td>
+<td>Loses the best viewpoint</td>
+<td>Skip it; the day gets 2 hours shorter</td>
+</tr>
+<tr>
+<td>FS 25 / Elk Pass (mi 250)</td>
+<td>Breaks the Day 4 return</td>
+<td>Exit north to US 12 at Randle and run the highway to Carson, abandoning miles 250–325</td>
+</tr>
+<tr>
+<td>Wind River Rd (mi 0–20)</td>
+<td>Blocks the start</td>
+<td>Enter the loop from Trout Lake and run it backwards</td>
+</tr>
+<tr>
+<td>Whole-forest closure</td>
+<td>Trip is off</td>
+<td>Decide by the Friday before and pick a different area</td>
+</tr>
+</tbody>
+</table>
+<p>If the forest goes into an area closure or Industrial Fire Precaution Level 4, assume the trip is
+cancelled rather than trying to salvage a partial route.</p>
+<hr />
+<h2>Fire restriction levels and what they mean for camp</h2>
+<p>Gifford Pinchot typically runs a tiered restriction scheme in late summer. Read the current order
+rather than assuming, but in general:</p>
+<ul>
+<li><strong>No restrictions</strong> — campfires allowed in fire rings at developed campgrounds and at existing
+  dispersed sites.</li>
+<li><strong>Stage 1</strong> — campfires only inside metal fire rings at designated developed campgrounds. This
+  is the most likely state for early September, and it means the developed campgrounds on this
+  itinerary are fine but dispersed campfires are not.</li>
+<li><strong>Stage 2</strong> — no campfires anywhere, including developed campgrounds. Gas stoves with a shutoff
+  valve are usually still permitted.</li>
+<li><strong>Area or forest closure</strong> — no entry.</li>
+</ul>
+<p><strong>Bring a gas stove regardless.</strong> Do not plan any meal that depends on a campfire. Every camp on
+this itinerary is a developed campground with a fire ring, which is the best case, but a Stage 2
+order in a dry year would still take fires away.</p>
+<p>Also worth carrying: a shovel and a fire extinguisher or a few gallons of water per vehicle. Some
+forest orders require them for anyone operating off pavement during fire season.</p>
+<hr />
+<h2>Smoke</h2>
+<p>Smoke is more likely to affect this trip than flame. September smoke in the south Cascades often
+drifts in from fires in Oregon, the eastern Cascades, or British Columbia rather than from
+anything nearby.</p>
+<p>What it costs you: the entire point of High Rock Lookout, Burley Mountain, Council Bluff, Steamboat
+Mountain and Takhlakh Lake is the view. Heavy smoke turns all of them into a grey wall. It is not
+dangerous at moderate levels, but it can make the scenic core of the route pointless.</p>
+<p>Judgement calls:</p>
+<ul>
+<li><strong>AQI under 100</strong> — go, expect hazy photos.</li>
+<li><strong>AQI 100 to 150</strong> — go, but consider dropping the lookout hikes and spending the time at the
+  lakes instead. Anyone with asthma should be cautious.</li>
+<li><strong>AQI over 150</strong> — seriously reconsider. Views are gone and prolonged exertion outdoors is
+  genuinely unhealthy.</li>
+</ul>
+<p>Check <a href="https://fire.airnow.gov/">AirNow</a> for the forecast, not just the current reading. Smoke can
+clear or arrive in a day with a wind shift.</p>
+<hr />
+<h2>Weather that closes roads</h2>
+<p>Fire is not the only closure risk in September.</p>
+<ul>
+<li><strong>Early snow</strong> at elevation. Babyshoe Pass is around 4,350 ft and the High Rock spur climbs
+  higher. An early-season storm can make gravel switchbacks genuinely bad. Check
+  <a href="https://wsdot.com/travel/real-time/mountainpasses">WSDOT mountain passes</a> and the
+  <a href="https://wsdot.com/travel/real-time/mountainpasses/white">White Pass corridor</a>.</li>
+<li><strong>Heavy rain</strong> on the west side. It does not usually close roads, but it makes clay and pumice
+  surfaces slick and can wash out the rough spurs.</li>
+<li><strong>Wind</strong> in timber. Blowdown across a Forest Service road is common and the forest may not clear
+  a minor road quickly. Carry a saw.</li>
+</ul>
+<p>See the <a href="weather.html">weather page</a> for the dual NWS and Open-Meteo forecast for each camp.</p>
+<hr />
+<h2>Before you leave the pavement each morning</h2>
+<p>A short discipline that costs five minutes:</p>
+<ol>
+<li>Refresh the forest alerts page while you still have signal at Carson, Packwood or Randle.</li>
+<li>Note the current fire restriction stage and say it out loud to the group.</li>
+<li>Confirm the day's camp is still open, and that its access road is not on a closure list.</li>
+<li>Check the smoke forecast if views are the reason you are going somewhere.</li>
+<li>Tell the satellite check-in contact where the group intends to sleep.</li>
+</ol>
+<p>Once you leave Randle on Day 4 you have roughly 108 miles with no coverage and no fuel. Anything
+you did not check at Randle, you are not going to know.</p>
 </article>
-<script>window.__WCA_WEATHER_ALL__={"main": [{"day_id": "sep8_travel", "date_iso": "2026-09-08", "lat": 45.8197, "lon": -121.8797, "location_label": "Panther Creek camp, Wind River (1,000 ft)", "trip_label": "Sep 8 (Tue) - Travel to the Gorge", "trip_title": "Nampa, ID -> Carson, WA (Panther Creek camp)"}, {"day_id": "day1_cascades", "date_iso": "2026-09-09", "lat": 46.2808, "lon": -121.5986, "location_label": "Takhlakh Lake camp (4,390 ft)", "trip_label": "Sep 9 (Wed) - Day 1: Carson -> Takhlakh Lake", "trip_title": "Day 1: Columbia Gorge -> Indian Heaven -> Takhlakh Lake"}, {"day_id": "day2_cascades", "date_iso": "2026-09-10", "lat": 46.4231, "lon": -121.4736, "location_label": "Walupt Lake camp (3,927 ft)", "trip_label": "Sep 10 (Thu) - Day 2: Takhlakh -> Walupt Lake", "trip_title": "Day 2: Takh Takh lava -> Upper Cispus -> Walupt Lake"}, {"day_id": "day3_cascades", "date_iso": "2026-09-11", "lat": 46.4525, "lon": -121.7889, "location_label": "North Fork camp, Cispus River (1,500 ft)", "trip_label": "Sep 11 (Fri) - Day 3: Walupt -> North Fork", "trip_title": "Day 3: Packwood fuel -> High Rock Lookout -> Randle -> North Fork"}, {"day_id": "day4_cascades", "date_iso": "2026-09-12", "lat": 45.8197, "lon": -121.8797, "location_label": "Panther Creek camp, Wind River (1,000 ft)", "trip_label": "Sep 12 (Sat) - Day 4: North Fork -> Panther Creek", "trip_title": "Day 4: Burley Mountain -> Elk Pass -> lava caves -> Panther Creek"}, {"day_id": "sep13_return", "date_iso": "2026-09-13", "lat": 45.7411, "lon": -121.8214, "location_label": "Carson / Columbia Gorge (departure)", "trip_label": "Sep 13 (Sun) - Close the loop + drive home", "trip_title": "Panther Creek -> Triangle Pass (loop close) -> Nampa, ID"}]};</script>
-<script src="weather-client.js"></script>
-<script>(function(){var q=new URLSearchParams(location.search);var v=q.get('variant')||'main';var all=window.__WCA_WEATHER_ALL__||{};var days=all[v]||all.main||[];if(window.TripWeather)TripWeather.init({variantKey:v,days:days,mode:'weather_page',allVariants:all});})();</script>
 <script>
 (function(){
   if (!('serviceWorker' in navigator)) return;
