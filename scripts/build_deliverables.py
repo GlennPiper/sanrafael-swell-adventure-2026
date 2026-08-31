@@ -1906,8 +1906,10 @@ function esriLayer(name) {{
 // ----- Offline low-res tile layer -----
 // OFFLINE_TILES is a dict of {{ "z/x/y" : "data:image/png;base64,..." }} built at
 // HTML-generation time from planning/offline_tiles/. It covers the full trip
-// bbox at zoom 7-9 so the map still has a recognizable background when viewed
-// offline. Higher zooms auto-stretch the z=9 tiles via maxNativeZoom.
+// bbox at zoom {min(cfg.TILE_ZOOMS)}-{max(cfg.TILE_ZOOMS)} so the map still has a recognizable background when
+// viewed offline. Zooming past {max(cfg.TILE_ZOOMS)} auto-stretches the deepest cached tiles via
+// maxNativeZoom, which must stay equal to the deepest zoom actually cached --
+// set any lower and the deeper tiles are downloaded but never requested.
 const OFFLINE_TILES = {offline_tiles_json};
 const TRANSPARENT_PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
 const OfflineTileLayer = L.TileLayer.extend({{
@@ -1936,7 +1938,7 @@ function ensureMap(dayId) {{
   m.createPane('offlinePane');
   m.getPane('offlinePane').style.zIndex = 150;
   const offline = new OfflineTileLayer('', {{
-    pane: 'offlinePane', minZoom: 0, maxZoom: 19, maxNativeZoom: 9,
+    pane: 'offlinePane', minZoom: 0, maxZoom: 19, maxNativeZoom: {max(cfg.TILE_ZOOMS)},
     attribution: 'Offline baseline: &copy; OpenStreetMap contributors (cached)',
   }}).addTo(m);
   const topo = esriLayer('World_Topo_Map');

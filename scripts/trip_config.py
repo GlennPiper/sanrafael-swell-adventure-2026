@@ -57,7 +57,10 @@ TILE_BBOX = {
     'lon_min': -122.45,
     'lon_max': -121.20,
 }
-TILE_ZOOMS = [7, 8, 9]
+# z7 gives a state-level overview, z10 resolves the main forest-road network.
+# Tile count grows fast: z10 costs 35 tiles here, z11 would cost 104 and push
+# the base64-embedded payload in trip-itinerary.html past 5 MB.
+TILE_ZOOMS = [7, 8, 9, 10]
 TILE_USER_AGENT = (
     'WashingtonCascadesTripBuilder/1.0 '
     '(personal trip planning; https://openstreetmap.org/copyright)'

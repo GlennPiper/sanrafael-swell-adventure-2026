@@ -219,10 +219,13 @@ then rerun `download_offline_tiles.py`.
   scheduler's mileage.
 - **The secret scan runs on the published output, not the source.** A new phone
   number in `trip_config.py` that is not in the allow-list fails the deploy.
-- **Offline tiles are coarse on purpose.** Zooms 7–9 only, about 420 KB, because
-  they get base64-embedded into the HTML. They are for orientation. Real
-  navigation is the GPX in a proper mapping app. Adding zoom 10 roughly quadruples
-  the page weight.
+- **Offline tiles are deliberately shallow.** Zooms 7–10, 52 tiles, about 985 KB,
+  which base64-embeds into `trip-itinerary.html` and takes it to roughly 1.8 MB.
+  They are for orientation; real navigation is the GPX in a proper mapping app.
+  Tile count grows fast — for this bbox z11 would cost 104 tiles and push the page
+  past 5 MB. If you change `TILE_ZOOMS`, the `maxNativeZoom` on the offline Leaflet
+  layer follows it automatically; hardcoding it lower silently wastes every tile
+  deeper than the cap, which is a mistake this repo has already made once.
 - **`generated_at` in `build_trip_data.py`** feeds the service-worker cache
   version. Bump it when shipping changes to the group.
 
